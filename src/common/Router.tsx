@@ -6,10 +6,8 @@ const Router = () => {
       <BrowserRouter>
           <Routes>
             <Route path="/posts" element={<BlogList />} >
+            <Route path=":cardId" element={<BlogList />} />
             </Route>
-            {/* <Route path="/gallery" element={<DetailCardPage />}>
-              <Route path=":cardId" element={<DetailCard />} />
-            </Route> */}
           </Routes>
       </BrowserRouter>
     );
