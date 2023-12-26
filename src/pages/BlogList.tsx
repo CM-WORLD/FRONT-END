@@ -1,5 +1,7 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { RequestGet } from '../apis/Request';
+import './BlogList.scss';
+import Footer from '../common/Footer';
 
 interface Post {
     id: number;
@@ -16,21 +18,34 @@ const BlogList = () => {
 
     useEffect(() => {
         RequestGet("/post/list").then(resp => {
-            if(resp.data) setData(resp.data)
+            if (resp.data) setData(resp.data)
         });
 
     }, []);
 
     const renderList = () => {
-        return data.map((post: Post, idx)=> {
-            return <div key={idx}>
-                <div>{post.id}</div>
-                <div>{post.title}</div>
-                <img src={post.img_URL} />
+        return data.map((post: Post, idx) => {
+            return <div key={idx} className="post-item">
+                <a href={"posts?id=" + post.id}>
+                    <img src={post.img_URL} />
+                </a>
+                <div className="title">{post.title}</div>
+                <div className="content">{post.content}</div>
+
             </div>;
         })
     };
-    return <>{renderList()}</>;
+    return <>
+    <div className="gallery">
+        <div className="header">
+            COMMISSIONS
+        </div>
+        <div className="works">
+            {renderList()}
+        </div>
+    </div>
+    <Footer />
+    </>;
 }
 
 export default BlogList;
