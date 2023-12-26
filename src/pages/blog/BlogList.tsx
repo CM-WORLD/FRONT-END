@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { RequestGet } from "../apis/Request";
+import { RequestGet } from "../../apis/Request";
 import "./BlogList.scss";
-import Footer from "../common/Footer";
+import Footer from "../../common/Footer";
 
 interface Post {
   id: number;
@@ -13,6 +13,7 @@ interface Post {
   regDate: string; //등록 날짜
 }
 
+/* 커미션 일러스트 블로그 */
 const BlogList = () => {
   const [data, setData] = useState([]);
   const [currentTab, setCurrentTab] = useState("TY01");

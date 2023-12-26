@@ -1,13 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import BlogList from '../pages/BlogList';
+import BlogList from '../pages/blog/BlogList';
 
 const Router = () => {
     return (
       <BrowserRouter>
           <Routes>
-            <Route path="/posts" element={<BlogList />} >
-            <Route path=":cardId" element={<BlogList />} />
-            </Route>
+            <Route path="/posts" element={<BlogList />} />
           </Routes>
       </BrowserRouter>
     );
