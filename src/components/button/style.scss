@@ -1,0 +1,29 @@
+$primary: rgb(0, 153, 255);
+$light: #ffffff;
+$disabled: rgb(155, 155, 155);
+
+
+.button {
+
+
+    border: 1px solid blue;
+    background: none;
+    border-radius : 4px;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 10px 15px;
+
+
+    &.disabled {
+        color: white;
+        background-color: $disabled;
+    }
+
+    &.primary {
+        color: white;
+        background-color: $primary;
+    }
+
+}
+
+
