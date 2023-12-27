@@ -1,4 +1,3 @@
-import {useState, useEffect} from "react";
 import ApplyBbs from "./components/bbs";
 import CmsItems from "./components/cmsItem";
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { RequestGet } from "../../apis/Request";
 import "./BlogList.scss";
-import Footer from "../../common/Footer";
+import Footer from "../../common/footer/Footer";
 
 interface Post {
   id: number;
