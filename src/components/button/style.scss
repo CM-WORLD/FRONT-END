@@ -1,17 +1,17 @@
 $primary: rgb(0, 153, 255);
 $light: #ffffff;
+$font-dark: #333;
 $disabled: rgb(155, 155, 155);
 
 
 .button {
-
-
-    border: 1px solid blue;
-    background: none;
+    border-color: transparent;
     border-radius : 4px;
+    padding: 10px 15px;
     font-size: 17px;
     font-weight: bold;
-    padding: 10px 15px;
+    color: $font-dark;
+    background: none;
 
 
     &.disabled {

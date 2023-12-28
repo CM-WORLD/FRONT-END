@@ -75,7 +75,6 @@ const BlogList = () => {
         </div>
         <div className="works">{renderList()}</div>
       </div>
-      <Footer />
     </>
   );
 };
