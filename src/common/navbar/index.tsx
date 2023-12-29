@@ -11,7 +11,7 @@ const NavBar = () => {
               <a href="/mypage">내 커미션 정보</a>
             </li>
             <li>
-              <a href="/signin">로그인</a>
+              <a href="/sign/in">로그인</a>
             </li>
           </ul>
         </div>
