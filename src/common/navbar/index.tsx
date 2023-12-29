@@ -8,7 +8,7 @@ const NavBar = () => {
         <div className="nav-auth">
           <ul>
             <li>
-              <a href="/mypage">마이페이지</a>
+              <a href="/mypage">내 커미션 정보</a>
             </li>
             <li>
               <a href="/signin">로그인</a>
