@@ -4,4 +4,17 @@
   margin: 0 auto;
 
   padding: 60px 0; //navbar padding...
+
+  h1.info-header {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+
+  .center-text {
+    text-align: center;
+
+    div {
+      padding-top: 10px;
+    }
+  }
 }
