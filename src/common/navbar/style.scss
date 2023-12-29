@@ -33,4 +33,19 @@
       }
     }
   }
+
+  .nav-auth {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 50px;
+
+    li {
+      padding: 0 15px;
+      font-size: 12px;
+      a {
+        padding: 10px 0;
+        color: #6f6f6f;
+      }
+    }
+  }
 }
