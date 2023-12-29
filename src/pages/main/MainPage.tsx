@@ -14,7 +14,7 @@ const MainPage = () => {
             있습니다.
           </div>
         </div>
-        <h1 className="info-header mt-4">CONTACT</h1>
+        <h1 className="info-header contact">CONTACT</h1>
         <div className="center-text">
           <h3>Developer</h3>
           <div>Github / Velog / Notion</div>
