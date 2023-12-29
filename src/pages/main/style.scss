@@ -3,11 +3,15 @@
   width: 80%;
   margin: 0 auto;
 
-  padding: 60px 0; //navbar padding...
+  padding: 60px 0 100px 0; //navbar padding...
 
   h1.info-header {
     text-align: center;
     padding-bottom: 30px;
+
+    &.mt-4 {
+      margin-top: 40px;
+    }
   }
 
   .center-text {
@@ -15,6 +19,9 @@
 
     div {
       padding-top: 10px;
+    }
+    &.mt-4 {
+      margin-top: 40px;
     }
   }
 }
