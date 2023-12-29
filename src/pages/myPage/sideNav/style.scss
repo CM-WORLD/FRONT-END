@@ -1,0 +1,15 @@
+.side-nav {
+  position: fixed;
+  border: 1px solid red;
+
+  li {
+    list-style-type: none;
+    padding: 40px;
+
+    a {
+      text-decoration: none;
+      font-size: 20px;
+      color: #333;
+    }
+  }
+}

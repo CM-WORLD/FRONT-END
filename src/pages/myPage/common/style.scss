@@ -1,0 +1,11 @@
+.my-content {
+  padding: 93px 0 100px 0; //navbar padding...
+  min-height: 560px; // common min-height;
+
+  display: flex;
+
+  .base-content {
+    margin-left: 170px; //sideNav effect padding
+    padding: 30px;
+  }
+}
