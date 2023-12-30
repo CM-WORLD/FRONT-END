@@ -7,7 +7,18 @@ import { useState } from "react";
 
 const CmsList = () => {
   //로그인 모달 display 처리
-  const [isModalHidden, setIsModalHidden] = useState(true);
+  const [isModalHidden, setIsModalHidden] = useState(false);
+
+  const countList = (
+    <div className="list-cnt">
+      <div>
+        현재 신청자 <b>10</b>명
+      </div>
+      <div>
+        예약 대기자 <b>5</b>명
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -17,6 +28,7 @@ const CmsList = () => {
       />
       <div className="base-padding">
         <ApplyNoticeBbs />
+        {countList}
         <CmsItems />
       </div>
     </>

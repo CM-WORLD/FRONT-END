@@ -26,20 +26,26 @@ const CmsItems = () => {
   const renderItems = () => {
     return data.map((item: cmsItem, idx) => {
       return (
-        <a className="cms-item" key={idx}>
-          <div>
-            <img src={item.profileImg} alt="profile" className="" />
-          </div>
-          <div className="cms-desc">
-            <div className="cms-name">{item.name}</div>
+        <>
+          <div className="line" />
+          <a className="cms-item" key={idx}>
             <div>
-              <span>#Ld</span>
-              <span>#걍진커미션</span>
-              <span>#커미션</span>
+              <img src={item.profileImg} alt="profile" className="" />
             </div>
-            <div className="cms-content">{item.content}</div>
-          </div>
-        </a>
+            <div className="cms-desc">
+              <div className="cms-name">{item.name}</div>
+              <div>
+                <span>#Ld</span>
+                <span>#걍진커미션</span>
+                <span>#커미션</span>
+              </div>
+              <div className="cms-content">{item.content}</div>
+              <div className="cms-apply-box">
+                <button>신청 & 예약하기</button>
+              </div>
+            </div>
+          </a>
+        </>
       );
     });
   };

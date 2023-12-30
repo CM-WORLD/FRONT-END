@@ -40,4 +40,14 @@
       }
     }
   }
+
+  .list-cnt {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+
+    div {
+      font-size: 20px;
+    }
+  }
 }

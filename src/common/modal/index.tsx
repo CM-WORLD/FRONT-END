@@ -18,6 +18,9 @@ const Modal = (props: ModalProps) => {
         <div className="modal-content">
           <div className="title">{props.title}</div>
           <div className="content">{props.content}</div>
+          {/* <div className="btn-box">
+            <button>고민중</button>
+          </div> */}
         </div>
       </div>
     </>
