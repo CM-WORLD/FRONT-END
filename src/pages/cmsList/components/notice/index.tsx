@@ -1,4 +1,50 @@
+import { useEffect, useState } from "react";
+import qs from "qs";
+
+import axios from "axios";
+
+axios.defaults.paramsSerializer = (params) => {
+  return qs.stringify(params);
+};
+
+interface bbsItem {
+  id: number;
+  title: string;
+  regDate: string;
+  viewCnt: number;
+}
 const ApplyNoticeBbs = () => {
+  const [data, setData] = useState([]);
+  // 페이징 처리
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(10);
+  const params = { page: page, size: size };
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/bbs/aply/cms", { params }).then((resp) => {
+      if (resp.data) {
+        setData(resp.data.content);
+        console.log(resp.data.content);
+      }
+    });
+  }, []);
+
+  const noticeList = () => {
+    if (data.length === 0) {
+      return <div>등록된 공지가 없습니다.</div>;
+    }
+
+    return data.map((item: bbsItem, idx) => (
+      <>
+        <tr key={idx}>
+          <td>{item.id}</td>
+          <td className="contents">{item.title}</td>
+          <td>{item.viewCnt}</td>
+          <td>{item.regDate}</td>
+        </tr>
+      </>
+    ));
+  };
   return (
     <>
       <h1>커미션 필독 공지</h1>
@@ -7,28 +53,17 @@ const ApplyNoticeBbs = () => {
           <col width="15%" />
           <col width="*" />
           <col width="15%" />
+          <col width="15%" />
         </colgroup>
         <thead>
           <tr>
             <th scope="col">번호</th>
             <th scope="col">제목</th>
+            <th scope="col">조회수</th>
             <th scope="col">등록 날짜</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td className="contents">겨울철 포장용 테이프 사용 변경 안내 </td>
-            <td>2023-12-08</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td className="contents">
-              전자증권 전환대상 주권 등의 권리자 보호 안내
-            </td>
-            <td>2023-12-08</td>
-          </tr>
-        </tbody>
+        <tbody>{noticeList()}</tbody>
       </table>
     </>
   );
