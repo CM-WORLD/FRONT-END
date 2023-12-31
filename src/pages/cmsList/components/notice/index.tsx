@@ -3,6 +3,8 @@ import qs from "qs";
 
 import axios from "axios";
 
+import "./style.scss";
+
 axios.defaults.paramsSerializer = (params) => {
   return qs.stringify(params);
 };
@@ -31,18 +33,20 @@ const ApplyNoticeBbs = () => {
 
   const noticeList = () => {
     if (data.length === 0) {
-      return <div>등록된 공지가 없습니다.</div>;
+      return (
+        <tr>
+          <td colSpan={4}>등록된 공지가 없습니다.</td>
+        </tr>
+      );
     }
 
     return data.map((item: bbsItem, idx) => (
-      <>
-        <tr key={idx}>
-          <td>{item.id}</td>
-          <td className="contents">{item.title}</td>
-          <td>{item.viewCnt}</td>
-          <td>{item.regDate}</td>
-        </tr>
-      </>
+      <tr key={idx}>
+        <td>{item.id}</td>
+        <td className="contents">{item.title}</td>
+        <td>{item.viewCnt}</td>
+        <td>{item.regDate}</td>
+      </tr>
     ));
   };
   return (

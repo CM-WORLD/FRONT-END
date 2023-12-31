@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { RequestGet } from "../../../../apis/Request";
-import Button from "../../../../components/button";
 
 import "./style.scss";
 
-interface cmsItem {
+interface CmsItem {
+  id: number;
   name: string;
   profileImg: string;
   status: string; //이 status라는 걸 백에서 반환을 해서 주어야 하는 건가????
@@ -24,28 +24,23 @@ const CmsItems = () => {
   const [data, setData] = useState([]);
 
   const renderItems = () => {
-    return data.map((item: cmsItem, idx) => {
+    return data.map((item: CmsItem, idx) => {
       return (
-        <>
+        <div key={`${item.id}-${idx}`}>
           <div className="line" />
-          <a className="cms-item" key={idx}>
+          <a className="cms-item" href="/" target="_blank">
             <div>
               <img src={item.profileImg} alt="profile" className="" />
             </div>
             <div className="cms-desc">
               <div className="cms-name">{item.name}</div>
-              <div>
-                <span>#Ld</span>
-                <span>#걍진커미션</span>
-                <span>#커미션</span>
-              </div>
               <div className="cms-content">{item.content}</div>
               <div className="cms-apply-box">
                 <button>신청 & 예약하기</button>
               </div>
             </div>
           </a>
-        </>
+        </div>
       );
     });
   };
