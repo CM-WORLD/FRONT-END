@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+a,
+button {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+textarea {
+  resize: none;
+}
