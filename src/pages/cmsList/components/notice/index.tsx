@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import qs from "qs";
 
-import axios from "axios";
-
+import { HOST_URL } from "../../../../apis/Request";
 import "./style.scss";
 
 axios.defaults.paramsSerializer = (params) => {
@@ -23,10 +23,9 @@ const ApplyNoticeBbs = () => {
   const params = { page: page, size: size };
 
   useEffect(() => {
-    axios.get("http://localhost:8080/bbs/aply/cms", { params }).then((resp) => {
+    axios.get(HOST_URL + "/bbs/aply/cms", { params }).then((resp) => {
       if (resp.data) {
         setData(resp.data.content);
-        console.log(resp.data.content);
       }
     });
   }, []);

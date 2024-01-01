@@ -1,0 +1,29 @@
+.bbs-table {
+  width: 100%;
+  margin: 40px 0;
+  border-collapse: collapse;
+
+  clear: both;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: #fff;
+  text-align: center;
+
+  tr {
+    border: 1px solid #ddd;
+
+    td,
+    th {
+      line-height: 16.8px;
+      padding: 10px 0;
+    }
+
+    td {
+      font-size: 14px;
+    }
+
+    td.contents {
+      color: #999;
+      text-align: left;
+    }
+  }
+}

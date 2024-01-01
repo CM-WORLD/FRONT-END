@@ -32,3 +32,5 @@ export const RequestGet = async (
     throw error; // 오류를 다시 throw하여 상위 레벨에서 처리할 수 있도록 함
   }
 };
+
+export const HOST_URL = "http://localhost:8080";

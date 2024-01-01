@@ -5,10 +5,10 @@ const SideNav = () => {
     <>
       <ul className="side-nav">
         <li>
-          <a href="">1:1 문의</a>
+          <a href="/mypage/inquiry">1:1 문의</a>
         </li>
         <li>
-          <a href="">커미션 신청</a>
+          <a href="/mypage/commissions">커미션 신청</a>
         </li>
       </ul>
     </>
