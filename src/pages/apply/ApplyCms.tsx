@@ -1,10 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
+import LoginModal from "../signIn/modal";
 
 const ApplyCms = () => {
   const [data, setData] = useState({});
+  const [display, setDisplay] = useState(false);
+
+  useEffect(() => {
+    /**
+     * 1. 최초 랜더링 시 쿠키 등에서 세션을 확인한다.
+     * 2. 비로그인 상태일 경우 <LoginModal />를 setDisplay(true)로 해서 띄운다.
+     * 3. 로그인 버튼 누르면 소셜 페이지로 가고, 비회원 신청을 눌렀을 경우 setDisplay(false)를 하고, 작성자 value에 익명_uuid를 넣는다.
+     *
+     *
+     */
+  }, []);
   return (
     <>
+      <LoginModal
+        display={!display}
+        onClick={() => {
+          setDisplay(!display);
+        }}
+      />
       <div className="apply-cms-form">
         <h1>커미션 신청서</h1>
         <div className="form-box">
