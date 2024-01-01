@@ -6,7 +6,23 @@
 
   .base-content {
     margin-left: 170px; //sideNav effect padding
-    padding: 30px;
+    padding: 30px 60px;
     width: 100%;
+
+    .my-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      a {
+        border-radius: 6px;
+        padding: 12px 25px;
+        font-weight: bold;
+        color: white;
+
+        background-color: #f57b7b;
+        text-decoration: none;
+      }
+    }
   }
 }
