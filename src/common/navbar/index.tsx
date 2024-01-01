@@ -26,7 +26,7 @@ const NavBar = () => {
             <a href="/commissions">Commission</a>
           </li>
           <li>
-            <a href="">Ask</a>
+            <a href="/reviews">Review</a>
           </li>
         </ul>
       </nav>
