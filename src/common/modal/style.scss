@@ -22,14 +22,19 @@
   .modal-content {
     box-sizing: border-box;
     position: relative;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-    background-color: #fff;
-    border-radius: 10px;
-    width: 360px;
     max-width: 480px;
+    width: 360px;
     top: 50%;
     transform: translateY(-50%);
     margin: 0 auto;
+    border-radius: 10px;
     padding: 40px 20px;
+
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+
+    .title {
+      text-align: center;
+    }
   }
 }
