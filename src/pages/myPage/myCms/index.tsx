@@ -1,7 +1,17 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import MyCommonContent from "../common";
 import "./style.scss";
+import { HOST_URL } from "../../../apis/Request";
 
 const MyCmsList = () => {
+  const [data, setData] = useState([]);
+  /* 세션과 회원 때문에 추후 개발 */
+  useEffect(() => {
+    axios.get(HOST_URL + "/apply/list/1").then((resp) => {
+      console.log(resp);
+    });
+  }, []);
   const content = (
     <>
       <div className="my-cms-history">
@@ -42,7 +52,12 @@ const MyCmsList = () => {
   );
   return (
     <>
-      <MyCommonContent title="커미션 신청 내역" content={content} />
+      <MyCommonContent
+        title="커미션 신청 내역"
+        content={content}
+        btnLink="/cms/form"
+        btnTxt="커미션 신청하기"
+      />
     </>
   );
 };

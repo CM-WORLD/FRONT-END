@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { HOST_URL } from "../../../apis/Request";
-import MyCommonContent from "../common";
+import MyCommonContent from "../../myPage/common";
 
 import "./style.scss";
 
@@ -69,7 +69,12 @@ const MyInquiryList = () => {
 
   return (
     <>
-      <MyCommonContent title="1:1 문의" content={content} />
+      <MyCommonContent
+        title="1:1 문의"
+        content={content}
+        btnLink="/inquiry/form"
+        btnTxt="신규 문의하기"
+      />
     </>
   );
 };

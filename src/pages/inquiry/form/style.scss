@@ -1,0 +1,23 @@
+@import "../../../common/Variable.scss";
+
+.inquiry-form {
+  padding-top: $nav-padding-top;
+  min-height: $default-min-height;
+
+  input[type="file"] {
+    display: none;
+  }
+
+  h1 {
+    padding: 30px;
+    text-align: center;
+  }
+
+  .form-box {
+    .input-line {
+      .astrik {
+        color: red;
+      }
+    }
+  }
+}

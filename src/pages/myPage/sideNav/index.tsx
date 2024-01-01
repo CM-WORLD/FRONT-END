@@ -8,7 +8,7 @@ const SideNav = () => {
           <a href="/mypage/inquiry">1:1 문의</a>
         </li>
         <li>
-          <a href="/mypage/commissions">커미션 신청</a>
+          <a href="/mypage/cms">커미션 신청</a>
         </li>
       </ul>
     </>
