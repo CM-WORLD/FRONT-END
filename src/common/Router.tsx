@@ -4,8 +4,9 @@ import BlogList from "../pages/blog/BlogList";
 import CmsList from "../pages/cmsList/CmsList";
 import MainPage from "../pages/main/MainPage";
 import SignInPage from "../pages/signIn/page";
-import MyInquiryList from "../pages/myPage/inquiry";
+import MyInquiryList from "../pages/inquiry/list";
 import MyCmsList from "../pages/myPage/myCms";
+import InquiryForm from "../pages/inquiry/form";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
         <Route path="/sign/in" element={<SignInPage />} />
         <Route path="/mypage/inquiry" element={<MyInquiryList />} />
         <Route path="/mypage/cms" element={<MyCmsList />} />
+        <Route path="/inquiry/form" element={<InquiryForm />} />
       </Routes>
     </BrowserRouter>
   );
