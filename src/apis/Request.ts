@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import qs from 'qs'
 
 function convertToQueryString(searchParams: Object) {
   // 검색 조건이 빈 객체일 경우 빈 문자열 반환
@@ -34,3 +35,7 @@ export const RequestGet = async (
 };
 
 export const HOST_URL = "http://localhost:8080";
+
+export default axios.defaults.paramsSerializer = (params) => {
+  return qs.stringify(params);
+};

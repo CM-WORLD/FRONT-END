@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import qs from "qs";
 
 import { HOST_URL } from "../../../../apis/Request";
 import "./style.scss";
-
-axios.defaults.paramsSerializer = (params) => {
-  return qs.stringify(params);
-};
 
 interface bbsItem {
   id: number;
