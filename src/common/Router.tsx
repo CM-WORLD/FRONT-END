@@ -7,6 +7,7 @@ import SignInPage from "../pages/signIn/page";
 import MyInquiryList from "../pages/inquiry/list";
 import MyCmsList from "../pages/myPage/myCms";
 import InquiryForm from "../pages/inquiry/form";
+import ApplyCms from "../pages/apply/ApplyCms";
 
 const Router = () => {
   return (
@@ -19,6 +20,7 @@ const Router = () => {
         <Route path="/mypage/inquiry" element={<MyInquiryList />} />
         <Route path="/mypage/cms" element={<MyCmsList />} />
         <Route path="/inquiry/form" element={<InquiryForm />} />
+        <Route path="/cms/form" element={<ApplyCms />} />
       </Routes>
     </BrowserRouter>
   );

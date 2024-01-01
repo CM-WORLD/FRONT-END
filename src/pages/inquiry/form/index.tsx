@@ -1,5 +1,4 @@
 import MyCommonContent from "../../myPage/common";
-import SideNav from "../../myPage/sideNav";
 import "./style.scss";
 
 const InquiryForm = () => {
