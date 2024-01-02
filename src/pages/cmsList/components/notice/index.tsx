@@ -7,6 +7,8 @@ import "./style.scss";
 interface bbsItem {
   id: number;
   title: string;
+  content: string;
+  nickName: string;
   regDate: string;
   viewCnt: number;
 }
@@ -36,7 +38,7 @@ const ApplyNoticeBbs = () => {
 
     return data.map((item: bbsItem, idx) => (
       <tr key={idx}>
-        <td>{item.id}</td>
+        <td>{idx}</td>
         <td className="contents">{item.title}</td>
         <td>{item.viewCnt}</td>
         <td>{item.regDate}</td>

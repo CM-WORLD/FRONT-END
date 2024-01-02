@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { HOST_URL } from "../../../apis/Request";
-import MyCommonContent from "../../myPage/common";
+import { HOST_URL } from "../../../../apis/Request";
+import MyCommonContent from "../../../myPage/common";
 
 import "./style.scss";
 
 interface bbsItem {
   id: number;
   title: string;
+  content: string;
   regDate: string;
 }
 
@@ -22,9 +23,10 @@ const MyInquiryList = () => {
     page: page,
     size: size,
   };
-  //게시판의 경우 page, size 값 전달 필요
+  
+  // 회원별 문의라서 테스트 계정 user_011007 닉네임 추가 TODO:: 추후 변경
   useEffect(() => {
-    axios.get(HOST_URL + "/bbs/inquiry", { params }).then((resp) => {
+    axios.get(HOST_URL + "/bbs/inquiry/user_011007", { params }).then((resp) => {
       if (resp.data) {
         setData(resp.data.content);
       }
@@ -43,7 +45,7 @@ const MyInquiryList = () => {
 
     return data.map((item: bbsItem, idx) => (
       <tr key={idx}>
-        <td>{item.id}</td>
+        <td>{idx + 1}</td>
         <td className="contents">{item.title}</td>
         <td>{item.regDate}</td>
       </tr>

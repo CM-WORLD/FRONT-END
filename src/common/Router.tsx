@@ -4,7 +4,7 @@ import BlogList from "../pages/blog/BlogList";
 import CmsList from "../pages/cmsList/CmsList";
 import MainPage from "../pages/main/MainPage";
 import SignInPage from "../pages/signIn/page";
-import MyInquiryList from "../pages/inquiry/list";
+import MyInquiryList from "../pages/inquiry/list/user";
 import MyCmsList from "../pages/myPage/myCms";
 import InquiryForm from "../pages/inquiry/form";
 import ApplyCms from "../pages/apply/ApplyCms";
