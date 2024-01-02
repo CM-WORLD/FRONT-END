@@ -5,6 +5,19 @@ const NavBar = () => {
   return (
     <>
       <nav className="nav">
+        <div className="nav-auth">
+          <ul>
+            <li>
+              <a href="/mypage/cms">내 커미션 정보</a>
+            </li>
+            <li>
+              <a href="/sign/in">로그인</a>
+            </li>
+            <li>
+              <a href="/sign/out">로그아웃</a>
+            </li>
+          </ul>
+        </div>
         <ul>
           <li>
             <a href="/posts">Illust</a>
@@ -13,7 +26,7 @@ const NavBar = () => {
             <a href="/commissions">Commission</a>
           </li>
           <li>
-            <a href="">Ask</a>
+            <a href="/reviews">Review</a>
           </li>
         </ul>
       </nav>

@@ -1,7 +1,27 @@
 .main-wrapper {
   position: relative;
-  display: inline-block;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
 
-  padding-top: 68px;
+  padding: 93px 0 100px 0; //navbar padding...
+
+  h1.info-header {
+    text-align: center;
+    padding-bottom: 30px;
+
+    &.contact {
+      margin-top: 60px;
+    }
+  }
+
+  .center-text {
+    text-align: center;
+
+    div {
+      padding-top: 10px;
+    }
+    &.mt-4 {
+      margin-top: 40px;
+    }
+  }
 }

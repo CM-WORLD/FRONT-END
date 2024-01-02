@@ -1,7 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import BlogList from "../pages/blog/BlogList";
 import CmsList from "../pages/cmsList/CmsList";
 import MainPage from "../pages/main/MainPage";
+import SignInPage from "../pages/signIn/page";
+import MyInquiryList from "../pages/inquiry/list";
+import MyCmsList from "../pages/myPage/myCms";
+import InquiryForm from "../pages/inquiry/form";
+import ApplyCms from "../pages/apply/ApplyCms";
+import ReviewPage from "../pages/review/page";
 
 const Router = () => {
   return (
@@ -10,6 +17,12 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/posts" element={<BlogList />} />
         <Route path="/commissions" element={<CmsList />} />
+        <Route path="/reviews" element={<ReviewPage />} />
+        <Route path="/sign/in" element={<SignInPage />} />
+        <Route path="/mypage/inquiry" element={<MyInquiryList />} />
+        <Route path="/mypage/cms" element={<MyCmsList />} />
+        <Route path="/inquiry/form" element={<InquiryForm />} />
+        <Route path="/cms/form" element={<ApplyCms />} />
       </Routes>
     </BrowserRouter>
   );
