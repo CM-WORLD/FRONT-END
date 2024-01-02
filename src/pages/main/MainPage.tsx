@@ -17,6 +17,11 @@ const MainPage = () => {
         <h1 className="info-header contact">CONTACT</h1>
         <div className="center-text">
           <h3>Developer</h3>
+          <h4>jinvicky</h4>
+          <div>
+            <a href="https://github.com/jinvicky">Github</a> /<a href="https://velog.io/@jinvicky/posts"> Velog</a> /<a href=""> Notion</a>
+          </div>
+          <h4>wkdu0723</h4>
           <div>Github / Velog / Notion</div>
         </div>
         <div className="center-text mt-4">
