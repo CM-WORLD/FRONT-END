@@ -9,6 +9,7 @@ import MyCmsList from "../pages/myPage/myCms";
 import InquiryForm from "../pages/inquiry/form";
 import ApplyCms from "../pages/apply/ApplyCms";
 import ReviewPage from "../pages/review/page";
+import InquiryDetail from "../pages/inquiry/detail";
 
 const Router = () => {
   return (
@@ -19,10 +20,12 @@ const Router = () => {
         <Route path="/commissions" element={<CmsList />} />
         <Route path="/reviews" element={<ReviewPage />} />
         <Route path="/sign/in" element={<SignInPage />} />
-        <Route path="/mypage/inquiry" element={<MyInquiryList />} />
-        <Route path="/mypage/cms" element={<MyCmsList />} />
-        <Route path="/inquiry/form" element={<InquiryForm />} />
         <Route path="/cms/form" element={<ApplyCms />} />
+        <Route path="/mypage/cms" element={<MyCmsList />} />
+        <Route path="/mypage/inquiry" element={<MyInquiryList />} />
+        <Route path="/inquiry/form" element={<InquiryForm />} />
+        <Route path="/inquiry/:inqId" element={<InquiryDetail />}
+        />
       </Routes>
     </BrowserRouter>
   );
