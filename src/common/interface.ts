@@ -5,3 +5,9 @@ export interface BbsDetail {
     nickName: string;
     imgList: []
 }
+
+export interface ReplyDetail {
+    content: string;
+    nickName: string;
+    regDate: string;
+}
