@@ -11,3 +11,15 @@ export interface ReplyDetail {
     nickName: string;
     regDate: string;
 }
+
+/* 커미션 신청 상세 */ 
+export interface CmsApplyDetail {
+    bankOwner: string;
+    cmsType: string | null;
+    title: string;
+    content: string;
+    depositYn: string;
+    id: string;
+    regDate: string;
+    status: string;
+}

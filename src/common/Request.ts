@@ -36,6 +36,7 @@ export const RequestGet = async (
 
 export const HOST_URL = "http://localhost:8080";
 
+/** 파라미터 기본 직렬화 설정 */
 export default axios.defaults.paramsSerializer = (params) => {
   return qs.stringify(params);
 };

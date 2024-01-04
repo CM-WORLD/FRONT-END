@@ -1,6 +1,9 @@
+@import "../../../common/CommonStyle.scss";
+@import "../../../common/Variable.scss";
+
 .my-content {
-  padding: 93px 0 100px 0; //navbar padding...
-  min-height: 560px; // common min-height;
+  padding-top: $nav-padding-top;
+  min-height: $default-min-height;
 
   display: flex;
 
