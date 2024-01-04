@@ -23,3 +23,9 @@ export interface CmsApplyDetail {
     regDate: string;
     status: string;
 }
+
+export interface ImgDetail {
+    imgUrl: string;
+    uuid: string;
+    regDate?: string;
+}
