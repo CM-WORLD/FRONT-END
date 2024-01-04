@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { RequestGet } from "../../../../apis/Request";
+import { API, RequestGet } from "../../../../apis/Request";
 
 import "./style.scss";
 
@@ -13,22 +13,22 @@ interface CmsItem {
 }
 
 const CmsItems = () => {
+  const [data, setData] = useState([]);
+
   useEffect(() => {
-    RequestGet("/cms/list").then((resp) => {
+    API.get("/cms/list").then((resp) => {
       if (resp.data) {
         setData(resp.data);
       }
     });
   }, []);
 
-  const [data, setData] = useState([]);
-
   const renderItems = () => {
     return data.map((item: CmsItem, idx) => {
       return (
         <div key={`${item.id}-${idx}`}>
           <div className="line" />
-          <a className="cms-item" href="/" target="_blank">
+          <a className="cms-item" href={`/apply/${item.id}`}>
             <div>
               <img src={item.profileImg} alt="profile" className="" />
             </div>

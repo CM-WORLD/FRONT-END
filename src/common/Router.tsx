@@ -20,7 +20,7 @@ const Router = () => {
         <Route path="/commissions" element={<CmsList />} />
         <Route path="/reviews" element={<ReviewPage />} />
         <Route path="/sign/in" element={<SignInPage />} />
-        <Route path="/cms/form" element={<ApplyCms />} />
+        <Route path="/apply/:cmsId" element={<ApplyCms />} />
         <Route path="/mypage/cms" element={<MyCmsList />} />
         <Route path="/mypage/inquiry" element={<MyInquiryList />} />
         <Route path="/inquiry/form" element={<InquiryForm />} />

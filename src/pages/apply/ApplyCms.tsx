@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./style.scss";
+import { useParams } from "react-router-dom";
+
 import LoginModal from "../signIn/modal";
+import "./style.scss";
 
 const ApplyCms = () => {
+  const idx = useParams().cmsId;
   const [data, setData] = useState({});
   const [display, setDisplay] = useState(false);
 
@@ -21,6 +24,7 @@ const ApplyCms = () => {
         display={!display}
         onClick={() => {
           setDisplay(!display);
+          //비회원 닉네임 input value에 자동 추가
         }}
       />
       <div className="apply-cms-form">
