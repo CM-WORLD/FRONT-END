@@ -71,16 +71,7 @@ const ApplyCms = () => {
   }, []);
   return (
     <>
-      <LoginModal
-        display={!display}
-        onClick={() => {
-          setDisplay(!display);
-          setApplyForm({
-            ...applyForm,
-            nickName: "unknown_" + uuid().slice(0, 8),
-          });
-        }}
-      />
+      <LoginModal display={!display} />
       {isComplete ? (
         <CmsApplyComplete cmsId={newCmsId} />
       ) : (

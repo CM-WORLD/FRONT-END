@@ -4,4 +4,13 @@
 .review-page {
   padding-top: $nav-padding-top;
   min-height: $default-min-height;
+  text-align: center;
+
+  h1.header {
+  }
+
+  .empty-review {
+    padding: 30px 0;
+    font-size: 20px;
+  }
 }

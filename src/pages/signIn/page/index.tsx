@@ -4,7 +4,7 @@ const SignInPage = () => {
   return (
     <>
       <div className="sign-in-base">
-        <div className="sign-in-wrapper">
+        {/* <div className="sign-in-wrapper">
           <h1>비회원 조회</h1>
           <div className="search-cms">
             <input
@@ -15,7 +15,7 @@ const SignInPage = () => {
             <button className="search-btn">조회</button>
           </div>
           <p>*해당 커미션 1건에 대해서만 조회가 가능합니다.</p>
-        </div>
+        </div> */}
         <div className="sign-in-wrapper">
           <h1>로그인</h1>
 
