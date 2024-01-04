@@ -29,3 +29,9 @@ export interface ImgDetail {
     uuid: string;
     regDate?: string;
 }
+
+export interface CmsPayDetail {
+    comment: string;
+    payAmt: number;
+    regDate: string;
+}

@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import MyCommonContent from "../../common";
+import { CmsApplyDetail, ImgDetail, CmsPayDetail } from "../../../../common/interface";
 import { API } from "../../../../common/Request";
+import MyCommonContent from "../../common";
 import "./style.scss";
-import { CmsApplyDetail, ImgDetail } from "../../../../common/interface";
+
 
 const MyCmsApplyDetail = () => {
+  const applyId = useParams().cmsApplyId || "";
   const [data, setData] = useState<CmsApplyDetail | null>(null);
   const [imgList, setImgList] = useState([]);
-  const applyId = useParams().cmsApplyId || "";
+  const [payment, setPayment] = useState<CmsPayDetail | null>(null);
 
   useEffect(() => {
     API.get(`/apply/detail/${applyId}`).then((resp) => {
       if (resp.data.status === 200) {
         setData(resp.data.data);
         setImgList(resp.data.imgList);
+        setPayment(resp.data.payment);
       }
     });
   }, []);
@@ -28,12 +31,23 @@ const MyCmsApplyDetail = () => {
       return imgList.map((item: ImgDetail, idx) => {
         return (
           <>
-          <div>
-            <img src={item.imgUrl} alt="img" />
-          </div>
+            <div key={`cms-apply-img-${idx}`}>
+              <img src={item.imgUrl} alt="img" />
+            </div>
           </>
         );
       });
+    };
+
+    const payReceipt = () => {
+      if (!payment) return <></>;
+      return <>
+        <div>
+            <div>결제 요청 금액: {payment.payAmt}</div>
+            <div>결제 코멘트: {payment.comment}</div>
+            <div>결제 요청 날짜: {payment.regDate}</div>
+        </div>
+      </>;
     };
 
     return (
@@ -55,6 +69,9 @@ const MyCmsApplyDetail = () => {
         <div>
           <h1>결제 영수증</h1>
         </div>
+        {payReceipt()}
+
+        {/* TODO:: 추후 타임라인을 최상단 또는 최하단에 추가해야 함. */}
       </>
     );
   };
