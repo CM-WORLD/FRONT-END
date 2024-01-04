@@ -6,7 +6,7 @@ import ApplyNoticeBbs from "./components/notice";
 import LoginModal from "../signIn/modal";
 
 import "./CmsList.scss";
-import { HOST_URL } from "../../apis/Request";
+import { HOST_URL } from "../../common/Request";
 
 const CmsList = () => {
   const [isModalHidden, setIsModalHidden] = useState(false);

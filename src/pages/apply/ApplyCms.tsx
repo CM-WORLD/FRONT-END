@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from "react";
+import uuid from "react-uuid";
 import { useParams } from "react-router-dom";
 
 import LoginModal from "../signIn/modal";
 import "./style.scss";
 
+interface ApplyForm {
+  status: string;
+  title: string;
+  content: string;
+  imgList: [];
+  nickName: string;
+  accOwner: string;
+}
+
 const ApplyCms = () => {
-  const idx = useParams().cmsId;
-  const [data, setData] = useState({});
+  const idx = useParams().cmsId; //참조할 커미션 타입 id
   const [display, setDisplay] = useState(false);
+  const [applyForm, setApplyForm] = useState<ApplyForm>({
+    status: "", 
+    title: "", 
+    content: "", 
+    imgList: [], 
+    nickName: "", 
+    accOwner: ""
+  });
 
   useEffect(() => {
     /**
@@ -24,6 +41,7 @@ const ApplyCms = () => {
         display={!display}
         onClick={() => {
           setDisplay(!display);
+          setApplyForm({...applyForm, nickName: "unknown_" + uuid().slice(0,8)})
           //비회원 닉네임 input value에 자동 추가
         }}
       />
@@ -35,8 +53,8 @@ const ApplyCms = () => {
               상태 선택<span className="astrik">*</span>
             </label>
             <select className="input">
-              <option value="">신청</option>
-              <option value="">예약</option>
+              <option value="CM00" selected>신청</option>
+              <option value="CM02">예약</option>
             </select>
           </div>
           <div className="input-line">
@@ -71,7 +89,7 @@ const ApplyCms = () => {
             </label>
             <input
               readOnly
-              value="회원이면 jinvicky@naver.com, 비회원이면 익명_232323"
+              value={applyForm.nickName}
               className="input"
               type="text"
             />

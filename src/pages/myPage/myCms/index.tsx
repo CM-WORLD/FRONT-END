@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import MyCommonContent from "../common";
 import "./style.scss";
-import { HOST_URL } from "../../../apis/Request";
+import { HOST_URL } from "../../../common/Request";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);

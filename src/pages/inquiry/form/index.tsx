@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import MyCommonContent from "../../myPage/common";
-import { API } from "../../../apis/Request";
+import { API } from "../../../common/Request";
 import "./style.scss";
 const InquiryForm = () => {
 

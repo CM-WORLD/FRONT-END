@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 
 import { API } from "../../../apis/Request";
 import { BbsDetail, ReplyDetail } from "../../../common/interface";
-
 import MyCommonContent from "../../myPage/common";
+
 import "./style.scss";
 
 

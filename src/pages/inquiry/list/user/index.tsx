@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { HOST_URL } from "../../../../apis/Request";
+import { HOST_URL } from "../../../../common/Request";
 import MyCommonContent from "../../../myPage/common";
 
 import "./style.scss";

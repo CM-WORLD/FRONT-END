@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { HOST_URL } from "../../../../apis/Request";
+import { HOST_URL } from "../../../../common/Request";
 import "./style.scss";
 
 interface BannerItem {

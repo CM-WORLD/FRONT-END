@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RequestGet } from "../../apis/Request";
+import { RequestGet } from "../../common/Request";
 import "./BlogList.scss";
 import Footer from "../../common/footer/Footer";
 
