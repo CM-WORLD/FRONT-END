@@ -24,6 +24,7 @@ const CmsItems = () => {
   }, []);
 
   const renderItems = () => {
+    if(data.length < 1) return <div className="no-cms">현재 등록된 커미션이 없습니다.</div>;
     return data.map((item: CmsItem, idx) => {
       return (
         <div key={`${item.id}-${idx}`}>
