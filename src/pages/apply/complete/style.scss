@@ -1,0 +1,29 @@
+@import "../../../common/CommonStyle.scss";
+@import "../../../common/Variable.scss";
+
+.apply-cms-complete {
+  padding-top: $nav-padding-top;
+  min-height: $default-min-height;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+
+  .title {
+    padding: 40px 0;;
+  }
+
+  h4 {
+    font-size: 20px;
+      .id-active {
+          padding-left: 10px;
+          color: rgb(18, 181, 202);
+        }
+    }
+
+    .info {
+        padding: 40px 0;
+        font-weight: bold;
+        color: rgb(255, 60, 76);
+    }
+}
