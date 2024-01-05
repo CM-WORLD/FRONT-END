@@ -23,7 +23,32 @@
       }
 
       td {
+        padding: 20px;
         font-size: 14px;
+        min-height: 50px;
+
+        .status-btn-box {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .pay-link, .rvw-link {
+          display: inline-block;
+          margin-top: 15px;
+          border-radius: 6px;
+          padding: 10px;
+          font-size: 15px;
+          font-weight: bold;
+          color: white;
+                                                                                                                                                                                                  
+          background-color: $primary-color;
+        }
+
+        .rvw-link {
+
+          background-color: $primary-green;
+        }
       }
 
       td.contents {
