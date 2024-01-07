@@ -5,6 +5,7 @@ import { HOST_URL } from "../../../../common/Request";
 import MyCommonContent from "../../../myPage/common";
 
 import "./style.scss";
+import { getAtk, getRtk } from "../../../../apis/Request";
 
 interface bbsItem {
   id: number;
@@ -20,17 +21,25 @@ const MyInquiryList = () => {
 
   //useMemo hook으로 감싸라는데 당체 무슨 소리인지...
   const params = {
-    page: page,
-    size: size,
+    page: 0,
+    size: 10,
   };
-  
+
   // 회원별 문의라서 테스트 계정 user_011007 닉네임 추가 TODO:: 추후 변경
   useEffect(() => {
-    axios.get(HOST_URL + "/bbs/inquiry/user_011007", { params }).then((resp) => {
-      if (resp.data) {
-        setData(resp.data.content);
-      }
-    });
+    axios
+      .get("/bbs/auth/inquiry/by/member", {
+        params,
+        headers: {
+          Authorization: `Bearer ${getAtk()}`,
+          RefreshToken: getRtk(),
+        },
+      })
+      .then((resp) => {
+        if (resp.data) {
+          setData(resp.data.content);
+        }
+      });
   }, []);
   //params 넣으니 무한 호출..
 

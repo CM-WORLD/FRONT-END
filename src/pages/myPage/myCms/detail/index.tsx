@@ -19,14 +19,6 @@ const MyCmsApplyDetail = () => {
   const [payment, setPayment] = useState<CmsPayDetail | null>(null);
 
   useEffect(() => {
-    // API.get(`/apply/auth/detail/${applyId}`).then((resp) => {
-    //   if (resp.data.status === 200) {
-    //     setData(resp.data.data);
-    //     setImgList(resp.data.imgList);
-    //     setPayment(resp.data.payment);
-    //   }
-    // });
-
     axios
       .get(`/apply/auth/detail`, {
         params: {

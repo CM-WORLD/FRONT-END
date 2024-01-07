@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import { CmsApplyDetail } from "../../../common/interface";
-import { API, HOST_URL } from "../../../common/Request";
 import MyCommonContent from "../common";
 
 import "./style.scss";
@@ -11,11 +10,6 @@ import axios from "axios";
 const MyCmsList = () => {
   const [data, setData] = useState([]);
 
-  const params = {
-    page: 0,
-    size: 10,
-  };
-  /* 세션과 회원 때문에 추후 개발 */
   useEffect(() => {
     const atk = getAtk();
     const rtk = getRtk();
@@ -29,7 +23,7 @@ const MyCmsList = () => {
       size: 10,
     };
 
-    // API 사용 말고 axios.get()을 쓰기... cors issue.
+    // API 사용 말고 HOST_URL도 붙이지 않기... axios.get()을 쓰기... cors issue.
     axios
       .get("/apply/auth/list", {
         params,
