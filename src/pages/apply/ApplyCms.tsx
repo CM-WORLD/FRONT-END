@@ -47,7 +47,7 @@ const ApplyCms = () => {
       formData.append("imgList", imgList[i]);
     }
 
-    const data = await API.post("/apply/form", formData);
+    const data = await API.post("/apply/auth/form", formData);
     if (data.data.status === "200") {
       setNewCmsId(data.data.cmsId);
       setIsComplete(true);
@@ -61,17 +61,22 @@ const ApplyCms = () => {
   };
 
   useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    console.log(refreshToken);
+
+    if (refreshToken === null) {
+      //로그인 안 한경우
+      // setDisplay(true);
+      window.location.href = "/sign/in";
+    }
     /**
-     * 1. 최초 랜더링 시 쿠키 등에서 세션을 확인한다.
-     * 2. 비로그인 상태일 경우 <LoginModal />를 setDisplay(true)로 해서 띄운다.
-     * 3. 로그인 버튼 누르면 소셜 페이지로 가고, 비회원 신청을 눌렀을 경우 setDisplay(false)를 하고, 작성자 value에 익명_uuid를 넣는다.
-     *
      *
      */
   }, []);
   return (
     <>
-      <LoginModal display={!display} />
+      <LoginModal display={display} />
       {isComplete ? (
         <CmsApplyComplete cmsId={newCmsId} />
       ) : (

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-import { CmsApplyDetail, ImgDetail, CmsPayDetail } from "../../../../common/interface";
+import {
+  CmsApplyDetail,
+  ImgDetail,
+  CmsPayDetail,
+} from "../../../../common/interface";
 import { API } from "../../../../common/Request";
 import MyCommonContent from "../../common";
 import "./style.scss";
-
 
 const MyCmsApplyDetail = () => {
   const applyId = useParams().cmsApplyId || "";
@@ -14,7 +17,7 @@ const MyCmsApplyDetail = () => {
   const [payment, setPayment] = useState<CmsPayDetail | null>(null);
 
   useEffect(() => {
-    API.get(`/apply/detail/${applyId}`).then((resp) => {
+    API.get(`/apply/auth/detail/${applyId}`).then((resp) => {
       if (resp.data.status === 200) {
         setData(resp.data.data);
         setImgList(resp.data.imgList);
@@ -41,13 +44,15 @@ const MyCmsApplyDetail = () => {
 
     const payReceipt = () => {
       if (!payment) return <></>;
-      return <>
-        <div>
+      return (
+        <>
+          <div>
             <div>결제 요청 금액: {payment.payAmt}</div>
             <div>결제 코멘트: {payment.comment}</div>
             <div>결제 요청 날짜: {payment.regDate}</div>
-        </div>
-      </>;
+          </div>
+        </>
+      );
     };
 
     return (
