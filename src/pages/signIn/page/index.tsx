@@ -1,6 +1,14 @@
+import { useEffect } from "react";
 import "./style.scss";
 
 const SignInPage = () => {
+  useEffect(() => {
+    const atk = localStorage.getItem("atk");
+    const rtk = localStorage.getItem("rtk");
+    if (atk !== null || rtk != null) {
+      window.location.href = "/";
+    }
+  }, []);
   return (
     <>
       <div className="sign-in-base">
