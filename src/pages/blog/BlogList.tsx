@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { RequestGet } from "../../common/Request";
 import "./BlogList.scss";
-import Footer from "../../common/footer/Footer";
+import axios from "axios";
 
 interface Post {
   id: number;
@@ -19,11 +18,11 @@ const BlogList = () => {
   const [currentTab, setCurrentTab] = useState("TY01");
 
   useEffect(() => {
-    fetchPostList("TY01");
+    fetchPostList(currentTab);
   }, []);
 
   const fetchPostList = (type: string) => {
-    RequestGet("/post/list", { type: type }).then((resp) => {
+    axios.get("/post/list", { params: { type: type } }).then((resp) => {
       if (resp.data) setData(resp.data);
     });
   };
