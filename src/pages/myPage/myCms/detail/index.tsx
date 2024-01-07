@@ -9,6 +9,8 @@ import {
 import { API } from "../../../../common/Request";
 import MyCommonContent from "../../common";
 import "./style.scss";
+import axios from "axios";
+import { getRtk, getAtk } from "../../../../apis/Request";
 
 const MyCmsApplyDetail = () => {
   const applyId = useParams().cmsApplyId || "";
@@ -17,13 +19,35 @@ const MyCmsApplyDetail = () => {
   const [payment, setPayment] = useState<CmsPayDetail | null>(null);
 
   useEffect(() => {
-    API.get(`/apply/auth/detail/${applyId}`).then((resp) => {
-      if (resp.data.status === 200) {
+    // API.get(`/apply/auth/detail/${applyId}`).then((resp) => {
+    //   if (resp.data.status === 200) {
+    //     setData(resp.data.data);
+    //     setImgList(resp.data.imgList);
+    //     setPayment(resp.data.payment);
+    //   }
+    // });
+
+    axios
+      .get(`/apply/auth/detail`, {
+        params: {
+          cmsApplyId: applyId,
+        },
+        headers: {
+          Authorization: `Bearer ${getAtk()}`,
+          RefreshToken: getRtk(),
+        },
+      })
+      .then((resp) => {
         setData(resp.data.data);
-        setImgList(resp.data.imgList);
-        setPayment(resp.data.payment);
-      }
-    });
+
+        if (resp.data.imgList) {
+          setImgList(resp.data.imgList);
+        }
+
+        if (resp.data.payment) {
+          setPayment(resp.data.payment);
+        }
+      });
   }, []);
 
   const content = () => {
