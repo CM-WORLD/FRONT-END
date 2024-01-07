@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 
 import { CmsApplyDetail } from "../../../common/interface";
-import { API } from "../../../common/Request";
+import { API, HOST_URL } from "../../../common/Request";
 import MyCommonContent from "../common";
 
 import "./style.scss";
+import { getAtk, getRtk } from "../../../apis/Request";
+import axios from "axios";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);
@@ -15,25 +17,30 @@ const MyCmsList = () => {
   };
   /* 세션과 회원 때문에 추후 개발 */
   useEffect(() => {
-    const atk = localStorage.getItem("atk");
-    const rtk = localStorage.getItem("rtk");
+    const atk = getAtk();
+    const rtk = getRtk();
 
     if (atk === null || rtk === null) {
       window.location.href = "/sign/in";
     }
 
-    API.get("/apply/auth/list", {
-      headers: {
-        Authorization: `Bearer ${atk}`,
-        refreshTokean: rtk,
-      },
-      params,
-    }).then((resp) => {
-      if (resp.data.status === 200) {
-        const cmsList = resp.data.data.content;
-        setData(cmsList);
-      }
-    });
+    const params = {
+      page: 0,
+      size: 10,
+    };
+
+    // API 사용 말고 axios.get()을 쓰기... cors issue.
+    axios
+      .get("/apply/auth/list", {
+        params,
+        headers: {
+          Authorization: `Bearer ${getAtk()}`,
+          RefreshToken: getRtk(),
+        },
+      })
+      .then((resp) => {
+        setData(resp.data.data.content);
+      });
   }, []);
 
   const cmsApplyList = () => {

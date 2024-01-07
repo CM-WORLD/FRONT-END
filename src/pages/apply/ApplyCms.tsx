@@ -51,6 +51,7 @@ const ApplyCms = () => {
     const headers = {
       // 다른 헤더 설정들 추가 가능
       Authorization: `Bearer ${getAtk()}`, // Access Token 추가
+      RefreshToken: getRtk(),
     };
 
     const data = await API.post("/apply/auth/form", formData, { headers });
