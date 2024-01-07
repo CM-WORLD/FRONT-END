@@ -15,13 +15,24 @@ const MyCmsList = () => {
   };
   /* 세션과 회원 때문에 추후 개발 */
   useEffect(() => {
-    API.get("/apply/list/" + "unknown_baf18dad", { params }).then((resp) => {
+    const atk = localStorage.getItem("atk");
+    const rtk = localStorage.getItem("rtk");
+
+    if (atk === null || rtk === null) {
+      window.location.href = "/sign/in";
+    }
+
+    API.get("/apply/auth/list", {
+      headers: {
+        Authorization: `Bearer ${atk}`,
+        refreshTokean: rtk,
+      },
+      params,
+    }).then((resp) => {
       if (resp.data.status === 200) {
         const cmsList = resp.data.data.content;
         setData(cmsList);
       }
-
-      
     });
   }, []);
 

@@ -12,11 +12,11 @@ const LoginLoading = () => {
 
       // 토큰들을 받아서 로컬 스토리지에 저장한다.
 
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("atk", accessToken);
+      localStorage.setItem("rtk", refreshToken);
       //
 
-      window.location.href = "/";
+      //   window.location.href = "/";
     });
   }, []);
   return <>지금 로그인 중입니다. 잠시만 기다려 주세요... </>;
