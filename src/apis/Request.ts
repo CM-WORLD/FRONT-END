@@ -54,3 +54,11 @@ export const API = axios.create({
   baseURL: "http://localhost:8080",  
   withCredentials: true, 
 });
+
+export const getAtk = () => {
+  return localStorage.getItem("atk");
+}
+
+export const getRtk = () => {
+  return localStorage.getItem("rtk");
+}

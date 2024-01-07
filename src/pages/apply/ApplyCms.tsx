@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import uuid from "react-uuid";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { API } from "../../common/Request";
+import { getRtk, getAtk } from "../../apis/Request";
+
 import LoginModal from "../signIn/modal";
+import CmsApplyComplete from "./complete";
 
 import "./style.scss";
-import CmsApplyComplete from "./complete";
 
 interface ApplyForm {
   status: string;
@@ -47,7 +48,12 @@ const ApplyCms = () => {
       formData.append("imgList", imgList[i]);
     }
 
-    const data = await API.post("/apply/auth/form", formData);
+    const headers = {
+      // 다른 헤더 설정들 추가 가능
+      Authorization: `Bearer ${getAtk()}`, // Access Token 추가
+    };
+
+    const data = await API.post("/apply/auth/form", formData, { headers });
     if (data.data.status === "200") {
       setNewCmsId(data.data.cmsId);
       setIsComplete(true);
@@ -61,22 +67,19 @@ const ApplyCms = () => {
   };
 
   useEffect(() => {
-    const refreshToken = localStorage.getItem("refreshToken");
-
-    console.log(refreshToken);
-
-    if (refreshToken === null) {
-      //로그인 안 한경우
-      // setDisplay(true);
+    // token이 없는 경우 로그인페이지로 이동.
+    if (getRtk() === null || getAtk() === null) {
       window.location.href = "/sign/in";
     }
-    /**
-     *
-     */
+
+    //param으로 들어온 커미션 아이디가 실제인지 확인
+    if (false) {
+      alert("올바른 커미션 아이디가 아닙니다.");
+    }
   }, []);
   return (
     <>
-      <LoginModal display={display} />
+      {/* <LoginModal display={display} /> */}
       {isComplete ? (
         <CmsApplyComplete cmsId={newCmsId} />
       ) : (

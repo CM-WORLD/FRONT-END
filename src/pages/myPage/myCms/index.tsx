@@ -96,7 +96,7 @@ const MyCmsList = () => {
       <MyCommonContent
         title="커미션 신청 내역"
         content={content}
-        btnLink="/cms/form"
+        btnLink="/commissions"
         btnTxt="커미션 신청하기"
       />
     </>
