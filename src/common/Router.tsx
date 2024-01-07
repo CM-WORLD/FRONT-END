@@ -11,6 +11,7 @@ import ApplyCms from "../pages/apply/ApplyCms";
 import ReviewPage from "../pages/review/page";
 import InquiryDetail from "../pages/inquiry/detail";
 import MyCmsApplyDetail from "../pages/myPage/myCms/detail";
+import LoginLoading from "../pages/signIn/loading";
 
 const Router = () => {
   return (
@@ -26,8 +27,8 @@ const Router = () => {
         <Route path="/mypage/cms" element={<MyCmsList />} />
         <Route path="/mypage/inquiry" element={<MyInquiryList />} />
         <Route path="/inquiry/form" element={<InquiryForm />} />
-        <Route path="/inquiry/:inqId" element={<InquiryDetail />}
-        />
+        <Route path="/inquiry/:inqId" element={<InquiryDetail />} />
+        <Route path="/login/kakao" element={<LoginLoading />} />
       </Routes>
     </BrowserRouter>
   );
