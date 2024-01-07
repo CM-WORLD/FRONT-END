@@ -2,6 +2,8 @@ import { useEffect } from "react";
 
 import { API } from "../../../common/Request";
 
+import "./style.scss";
+
 const LoginLoading = () => {
   /** 카카오 인가 코드 */
   const code = new URL(window.location.href).searchParams.get("code");
@@ -10,16 +12,19 @@ const LoginLoading = () => {
     API.post("/process/kakao", { code: code }).then((resp) => {
       const { accessToken, refreshToken, grantType } = resp.data.tokens;
 
-      // 토큰들을 받아서 로컬 스토리지에 저장한다.
-
       localStorage.setItem("atk", accessToken);
       localStorage.setItem("rtk", refreshToken);
-      //
 
-      //   window.location.href = "/";
+      window.location.href = "/";
     });
   }, []);
-  return <>지금 로그인 중입니다. 잠시만 기다려 주세요... </>;
+  return (
+    <div className="login-loading-content">
+      <h1 className="login-loading-title">
+        지금 로그인 중입니다. 잠시만 기다려 주세요...
+      </h1>
+    </div>
+  );
 };
 
 export default LoginLoading;
