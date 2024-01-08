@@ -7,11 +7,25 @@ import axios from "axios";
 import "./style.scss";
 
 const SignOutLoading = () => {
-
   useEffect(() => {
-    axios.post("/invalidate/token", JSON.stringify({rtk: getRtk()})).then((resp) => {
-      console.log("invalidate", resp);
-    });
+    axios
+      .post("/invalidate/token", null, {
+        headers: {
+          WithCredentials: true,
+          RefreshToken: getRtk(),
+        },
+      })
+      .then((resp) => {
+        console.log("invalidate", resp);
+        if(resp.data.status === 200) {
+            localStorage.removeItem("atk")
+            localStorage.removeItem("rtk")
+            localStorage.removeItem("referer")
+            localStorage.removeItem("nick")
+
+            window.location.href = "/"; //최종적으로 메인으로 이동
+        }
+      });
   }, []);
 
   return (
