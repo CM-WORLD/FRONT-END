@@ -11,11 +11,6 @@ const CmsApplyComplete = (props: ApplyCompleteProps) => {
         <h4>커미션 ID : 
             <span className="id-active">{props.cmsId}</span>
         </h4>
-        {/* DESC:: 비회원 삭제로 임시 주석 처리, 추후 논의 */}
-        {/* <div className="info">
-            <p>*ID는 페이지를 나가면 다시 볼 수 없으니 기록해 주세요.</p>
-            <p>*비회원은 커미션 ID를 통해서만 커미션 상태를 조회할 수 있습니다.</p>
-        </div> */}
         <div className="link-box">
             <a href="/">메인으로 이동</a>
         </div>
