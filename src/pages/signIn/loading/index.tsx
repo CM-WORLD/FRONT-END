@@ -10,10 +10,11 @@ const LoginLoading = () => {
 
   useEffect(() => {
     API.post("/process/kakao", { code: code }).then((resp) => {
-      const { accessToken, refreshToken, grantType } = resp.data.tokens;
+      const { accessToken, refreshToken, grantType, nick } = resp.data.tokens;
 
       localStorage.setItem("atk", accessToken);
       localStorage.setItem("rtk", refreshToken);
+      localStorage.setItem("nick", nick);
 
       window.location.href = "/";
     });
