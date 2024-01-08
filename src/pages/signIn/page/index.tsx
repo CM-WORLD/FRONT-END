@@ -25,16 +25,16 @@ const SignInPage = () => {
         if (status === 205) {
           localStorage.setItem("atk", resp.data.newAtk);
           setDisplay(false);
-        } else if (status === 200) {
+        } else if (status === 200) { // 유효한 액세스 토큰
           setDisplay(false);
-        } else if (status === 500) {
+        } else if (status === 500) { // 서버 에러 
           setDisplay(true);
-        } else {
-          setDisplay(false);
+        } else if (status === 415) { //로그인 필요
+          setDisplay(true);
         }
       })
       .catch((error) => setDisplay(false));
-      
+
   }, []);
   return display ? (
     <>
@@ -48,7 +48,7 @@ const SignInPage = () => {
               onClick={() => {
                 localStorage.setItem("referer", window.location.href); //다시 돌아가기 위한 이전 경로 저장
                 const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
-                const redUrl = process.env.REACT_APP_KAKAO_REDIRECT_URL_LOCAL;
+                const redUrl = process.env.REACT_APP_KAKAO_LOGIN_REDIRECT_URL_LOCAL;
                 const url = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redUrl}&response_type=code&scope=talk_message&email`;
                 window.location.href = url;
               }}
