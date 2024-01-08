@@ -7,9 +7,7 @@ const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
 
   const validateTk = () => {
-    if (getAtk() === null || getRtk() === null) setIsLogined(false);
-
-    axios
+      axios
       .create({
         headers: {
           withCredentials: true,
@@ -19,12 +17,20 @@ const NavBar = () => {
       })
       .get("/validate/token")
       .then((resp) => {
-        console.log(resp.data.status);
-        if (resp.data.status === 200) {
+        console.log(resp.data);
+        const status = resp.data.status;
+        if (status === 205) {
+          localStorage.setItem("atk", resp.data.newAtk);
+          setIsLogined(true);
+        } else if (status === 200) {
           setIsLogined(true);
         } else setIsLogined(false);
-      });
+      })
+      .catch((error) => setIsLogined(false));
   };
+
+  const redirectUrl = process.env.REACT_APP_KAKAO_LOGOUT_URL_LOCAL;
+  const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
 
   useEffect(() => {
     validateTk();
@@ -43,7 +49,9 @@ const NavBar = () => {
                   <a href="/mypage/cms">내 커미션 정보</a>
                 </li>
                 <li>
-                  <a href="/sign/out">로그아웃</a>
+                  <a href={`https://kauth.kakao.com/oauth/logout?client_id=${clientId}&logout_redirect_uri=${redirectUrl}`}>
+                    로그아웃
+                  </a>
                 </li>
               </>
             ) : (
