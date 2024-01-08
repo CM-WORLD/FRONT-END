@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import axios from "axios";
 
 import {
   CmsApplyDetail,
   ImgDetail,
   CmsPayDetail,
 } from "../../../../common/interface";
-import { API } from "../../../../common/Request";
+import { getRtk, getAtk } from "../../../../common/Request";
 import MyCommonContent from "../../common";
+
 import "./style.scss";
-import axios from "axios";
-import { getRtk, getAtk } from "../../../../apis/Request";
 
 const MyCmsApplyDetail = () => {
   const applyId = useParams().cmsApplyId || "";

@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { API } from "../../common/Request";
-import { getRtk, getAtk } from "../../apis/Request";
-
-import LoginModal from "../signIn/modal";
+import { API, getRtk, getAtk } from "../../common/Request";
 import CmsApplyComplete from "./complete";
 
 import "./style.scss";

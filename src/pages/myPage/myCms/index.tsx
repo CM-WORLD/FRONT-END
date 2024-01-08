@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import { CmsApplyDetail } from "../../../common/interface";
 import MyCommonContent from "../common";
+import { getRtk, getAtk } from "../../../common/Request";
 
 import "./style.scss";
-import { getAtk, getRtk } from "../../../apis/Request";
-import axios from "axios";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);

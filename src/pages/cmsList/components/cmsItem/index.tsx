@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { API, RequestGet } from "../../../../apis/Request";
+import { API } from "../../../../common/Request";
 
 import "./style.scss";
 

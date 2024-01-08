@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { HOST_URL } from "../../../../common/Request";
+import { getAtk, getRtk } from "../../../../common/Request";
 import MyCommonContent from "../../../myPage/common";
 
 import "./style.scss";
-import { getAtk, getRtk } from "../../../../apis/Request";
+
 
 interface bbsItem {
   id: number;
@@ -25,7 +25,6 @@ const MyInquiryList = () => {
     size: 10,
   };
 
-  // 회원별 문의라서 테스트 계정 user_011007 닉네임 추가 TODO:: 추후 변경
   useEffect(() => {
     axios
       .get("/bbs/auth/inquiry/by/member", {

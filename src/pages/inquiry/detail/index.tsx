@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { API } from "../../../apis/Request";
 import { BbsDetail, ReplyDetail } from "../../../common/interface";
+import { API } from "../../../common/Request";
 import MyCommonContent from "../../myPage/common";
 
 import "./style.scss";
