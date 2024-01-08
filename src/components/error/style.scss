@@ -1,0 +1,25 @@
+@import "../../common/CommonStyle.scss";
+@import "../../common/Variable.scss";
+
+.err-content {
+    min-height: $default-min-height;
+
+
+    .err-img {
+        width: 60%;
+        display: block;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .err-txt {
+        padding: 40px 0;
+        font-size: 25px;
+        font-weight: bold;
+        color: $text-dark;
+        text-align: center;
+    }
+
+
+    
+}

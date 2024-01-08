@@ -1,3 +1,5 @@
+@import "/src/common/Variable.scss";
+
 .wrapper {
-  padding-top: 68px;
+  padding-top: $nav-padding-top;
 }
