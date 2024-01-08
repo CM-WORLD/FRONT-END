@@ -31,9 +31,12 @@ export const getRtk = () => {
   return localStorage.getItem("rtk");
 }
 
+export const getNick = () => {
+  return localStorage.getItem("nick");
+}
 
 /* test용 인증 interceptor */
-export const authInterceptor = axios.create({
+export const AUTH_ITC = axios.create({
   baseURL: "http://localhost:8080/auth",  //모든 요청에 처리하면 안되므로 추후 백엔드 인증 ept는 맨 앞에 /auth 추가하기. 
   headers: {
     withCredentials: true, 
