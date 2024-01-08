@@ -51,7 +51,7 @@ const ApplyCms = () => {
       RefreshToken: getRtk(),
     };
 
-    const data = await API.post("/apply/auth/form", formData, { headers });
+    const data = await API.post("/auth/apply/form", formData, { headers });
     if (data.data.status === "200") {
       setNewCmsId(data.data.cmsId);
       setIsComplete(true);

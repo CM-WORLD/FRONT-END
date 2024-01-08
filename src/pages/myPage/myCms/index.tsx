@@ -25,7 +25,7 @@ const MyCmsList = () => {
 
     // API 사용 말고 HOST_URL도 붙이지 않기... axios.get()을 쓰기... cors issue.
     axios
-      .get("/apply/auth/list", {
+      .get("/auth/apply/list", {
         params,
         headers: {
           Authorization: `Bearer ${getAtk()}`,

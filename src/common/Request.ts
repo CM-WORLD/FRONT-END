@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import qs from 'qs'
 
 export const HOST_URL = "http://localhost:8080";
@@ -22,6 +22,7 @@ export const API = axios.create({
   withCredentials: true, 
 });
 
+/* 토큰 조회 */
 export const getAtk = () => {
   return localStorage.getItem("atk");
 }
@@ -29,3 +30,14 @@ export const getAtk = () => {
 export const getRtk = () => {
   return localStorage.getItem("rtk");
 }
+
+
+/* test용 인증 interceptor */
+export const authInterceptor = axios.create({
+  baseURL: "http://localhost:8080/auth",  //모든 요청에 처리하면 안되므로 추후 백엔드 인증 ept는 맨 앞에 /auth 추가하기. 
+  headers: {
+    withCredentials: true, 
+    Authorization: `Bearer ${getAtk()}`,
+    RefreshToken: getRtk(),
+  }
+});
