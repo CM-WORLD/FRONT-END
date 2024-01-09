@@ -8,7 +8,6 @@ export default axios.defaults.paramsSerializer = (params) => {
 };
 
 /** axios 생성 공통 메서드,  */
-
 export const API_JSON = axios.create({
   baseURL: "http://localhost:8080", 
   headers: {
@@ -37,10 +36,10 @@ export const getNick = () => {
 
 /* test용 인증 interceptor */
 export const AUTH_ITC = axios.create({
-  baseURL: "http://localhost:8080/auth",  //모든 요청에 처리하면 안되므로 추후 백엔드 인증 ept는 맨 앞에 /auth 추가하기. 
+  baseURL: "http://localhost:8080",  //모든 요청에 처리하면 안되므로 추후 백엔드 인증 ept는 맨 앞에 /auth 추가하기. 
   headers: {
     withCredentials: true, 
     Authorization: `Bearer ${getAtk()}`,
     RefreshToken: getRtk(),
   }
-});
+}).get("/validate/token");
