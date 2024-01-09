@@ -12,7 +12,7 @@ const SignOutLoading = () => {
   const [isLogOut, setIsLogOut] = useState(true);
 
   useEffect(() => {
-    AUTH_ITC.then((resp) => {
+    AUTH_ITC.get("/validate/token").then((resp) => {
       if (!(resp.data.status === 200 || resp.data.status === 205)) {
         //유효하거나 재발급일때만 로그아웃 가능
         setIsLogOut(false);
@@ -25,7 +25,6 @@ const SignOutLoading = () => {
             },
           })
           .then((resp) => {
-            console.log("invalidate", resp);
             if (resp.data.status === 200) {
               localStorage.removeItem("atk");
               localStorage.removeItem("rtk");
