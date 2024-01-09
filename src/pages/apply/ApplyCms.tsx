@@ -1,13 +1,14 @@
-import { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import { API, getRtk, getAtk, AUTH_ITC } from "../../common/Request";
-import BadRequest from "../../components/error/badRequest";
 import CommonLoading from "../../components/loading";
-import CmsApplyComplete from "./complete";
 
 import "./style.scss";
+
+const CmsApplyComplete = React.lazy(()=> import("../apply/complete"));
+const BadRequest = React.lazy(() => import("../../components/error/badRequest"));
 
 interface ApplyForm {
   status: string;

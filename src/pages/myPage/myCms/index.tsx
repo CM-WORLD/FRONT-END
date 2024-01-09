@@ -2,43 +2,43 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { CmsApplyDetail } from "../../../common/interface";
+import { getRtk, getAtk, AUTH_ITC } from "../../../common/Request";
+import WriteRvwModal from "../../review/modal";
 import MyCommonContent from "../common";
-import { getRtk, getAtk } from "../../../common/Request";
 
 import "./style.scss";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);
+  const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
 
   useEffect(() => {
-    const atk = getAtk();
-    const rtk = getRtk();
-
-    if (atk === null || rtk === null) {
-      window.location.href = "/sign/in";
-    }
-
     const params = {
       page: 0,
       size: 10,
     };
 
-    // API 사용 말고 HOST_URL도 붙이지 않기... axios.get()을 쓰기... cors issue.
-    axios
-      .get("/auth/apply/list", {
-        params,
-        headers: {
-          Authorization: `Bearer ${getAtk()}`,
-          RefreshToken: getRtk(),
-        },
-      })
-      .then((resp) => {
-        setData(resp.data.data.content);
-      });
+    AUTH_ITC.get("/validate/token").then((resp) => {
+      if (resp.data.status === 200 || resp.data.staus === 205) {
+        axios
+          .get("/apply/history", {
+            params,
+            headers: {
+              Authorization: `Bearer ${getAtk()}`,
+              RefreshToken: getRtk(),
+            },
+          })
+          .then((resp) => {
+            if (resp.data.data.content) {
+              setData(resp.data.data.content);
+            }
+          });
+      }
+    });
   }, []);
 
   const cmsApplyList = () => {
-    if (data.length < 1) return <>현재 신청한 내역이 없습니다.</>;
+    if (data.length < 1) return <td colSpan={4}>현재 신청한 내역이 없습니다.</td>;
 
     return data.map((item: CmsApplyDetail, idx) => {
       return (
@@ -58,6 +58,7 @@ const MyCmsList = () => {
                 className="rvw-link"
                 onClick={(e) => {
                   e.preventDefault();
+                  serRvwMdDisplay(!rvwMdDisplay);
                 }}
               >
                 리뷰 작성
@@ -69,6 +70,11 @@ const MyCmsList = () => {
       );
     });
   };
+
+  /** 리뷰 작성 제출 */
+  const submitForm  = () => {
+
+  }
   const content = (
     <>
       <div className="my-cms-history">
@@ -94,6 +100,11 @@ const MyCmsList = () => {
   );
   return (
     <>
+      <WriteRvwModal
+        display={rvwMdDisplay}
+        onClick={() => serRvwMdDisplay(!rvwMdDisplay)}
+        onSubmit={submitForm}
+      />
       <MyCommonContent
         title="커미션 신청 내역"
         content={content}

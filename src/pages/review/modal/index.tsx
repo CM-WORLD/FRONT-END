@@ -4,6 +4,7 @@ import "./style.scss";
 interface ReviewModalProps {
   display: boolean;
   onClick: () => void;
+  onSubmit: () => void;
 }
 
 const WriteRvwModal = (props: ReviewModalProps) => {
@@ -26,7 +27,7 @@ const WriteRvwModal = (props: ReviewModalProps) => {
           </label>
         </div>
         <div className="btn-box">
-          <button className="confirm-btn">리뷰 등록</button>
+          <button className="confirm-btn" onClick={props.onSubmit}>리뷰 등록</button>
           <button className="cancel-btn" onClick={props.onClick}>
             닫기
           </button>
