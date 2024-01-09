@@ -1,0 +1,20 @@
+import { ErrorContentProps } from "./interface";
+
+const CommonErrContent = (props: ErrorContentProps) => {
+  const defaultTitle = "요청 중 문제가 발생했습니다.";
+  return (
+    <>
+      <div className="err-content">
+        <img
+          className="err-img"
+          src={process.env.PUBLIC_URL + "/bnr_test.jpg"}
+          alt="error-msg"
+        />
+        <div className="err-txt">{props.title || defaultTitle}</div>
+        {props.desc && <div className="err-desc">{props.desc}</div>}
+      </div>
+    </>
+  );
+};
+
+export default CommonErrContent;
