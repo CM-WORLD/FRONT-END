@@ -14,14 +14,26 @@ export interface ReplyDetail {
 
 /* 커미션 신청 상세 */ 
 export interface CmsApplyDetail {
-    bankOwner: string;
-    cmsType: string | null;
+    cmsDto: CommissionDetail;
+    id: string;
     title: string;
     content: string;
+    cmsType: string | null;
+    bankOwner: string;
     depositYn: string;
-    id: string;
-    regDate: string;
     status: string;
+    regDate: string;
+}
+
+export interface CommissionDetail {
+    id: string;
+    name: string;
+    content: string;
+    profileImg: string;
+    status: string;
+    delYn: string;
+    regDate: string;
+    uptDate: string;
 }
 
 export interface ImgDetail {
