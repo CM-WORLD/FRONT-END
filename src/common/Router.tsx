@@ -11,7 +11,7 @@ import ApplyCms from "../pages/apply/ApplyCms";
 import ReviewPage from "../pages/review/page";
 import InquiryDetail from "../pages/inquiry/detail";
 import MyCmsApplyDetail from "../pages/myPage/myCms/detail";
-import LoginLoading from "../pages/signIn/loading";
+import KakaoLoginLoading from "../pages/signIn/loading";
 import SignOutLoading from "../pages/signIn/signOut";
 import NotFound from "../components/error/notFound";
 
@@ -30,7 +30,7 @@ const Router = () => {
         <Route path="/mypage/inquiry" element={<MyInquiryList />} />
         <Route path="/inquiry/form" element={<InquiryForm />} />
         <Route path="/inquiry/:inqId" element={<InquiryDetail />} />
-        <Route path="/login/kakao" element={<LoginLoading />} />
+        <Route path="/login/kakao" element={<KakaoLoginLoading />} />
         <Route path="/logout/kakao" element={<SignOutLoading />} />
         {/* 404 error page */}
         <Route path="/*" element={<NotFound />} />
