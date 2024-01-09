@@ -16,14 +16,6 @@ const LoginModal = (props: LoginModalProps) => {
         <a className="social-link kakao" href="/auth/kakao">
           카카오로 로그인
         </a>
-        {/* <div className="btn-box">
-          <button
-            className="not-login-btn"
-            onClick={() => props.onClick(!props.display)}
-          >
-            비회원으로 신청하기
-          </button>
-        </div> */}
       </div>
     </>
   );
