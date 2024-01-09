@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 
+import CommonLoading from "../../../components/loading";
 import { API } from "../../../common/Request";
 
 import "./style.scss";
 
-const LoginLoading = () => {
+const KakaoLoginLoading = () => {
   /** 카카오 인가 코드 */
   const code = new URL(window.location.href).searchParams.get("code");
 
@@ -13,20 +14,21 @@ const LoginLoading = () => {
       const {nick} = resp.data;
       const { accessToken, refreshToken, grantType } = resp.data.tokens;
 
-      localStorage.setItem("atk", accessToken);
-      localStorage.setItem("rtk", refreshToken);
-      localStorage.setItem("nick", nick);
+      if (accessToken && refreshToken && nick) {
+        localStorage.setItem("atk", accessToken);
+        localStorage.setItem("rtk", refreshToken);
+        localStorage.setItem("nick", nick);
+      }
 
-      window.location.href = localStorage.getItem("referer") ||  "/";
+      const referer = localStorage.getItem("referer");
+      //포트 제외 url
+      const prevUrl = window.location.pathname;
+
+      if(referer === null || prevUrl === "/login/kakao" || prevUrl === "/sign/in") window.location.href = "/";
+      else window.location.href = referer;
     });
   }, []);
-  return (
-    <div className="login-loading-content">
-      <h1 className="login-loading-title">
-        지금 로그인 중입니다. 잠시만 기다려 주세요...
-      </h1>
-    </div>
-  );
+  return <CommonLoading desc="로그인 처리 중입니다." />;
 };
 
-export default LoginLoading;
+export default KakaoLoginLoading;

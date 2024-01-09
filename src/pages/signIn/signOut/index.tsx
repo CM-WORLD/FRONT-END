@@ -1,37 +1,50 @@
-import { useEffect } from "react";
-
-import { getRtk } from "../../../common/Request";
-
+import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
+
+import CommonLoading from "../../../components/loading";
+import BadRequest from "../../../components/error/badRequest";
+
+import { AUTH_ITC, getRtk } from "../../../common/Request";
 
 import "./style.scss";
 
 const SignOutLoading = () => {
-  useEffect(() => {
-    axios
-      .post("/invalidate/token", null, {
-        headers: {
-          WithCredentials: true,
-          RefreshToken: getRtk(),
-        },
-      })
-      .then((resp) => {
-        console.log("invalidate", resp);
-        if(resp.data.status === 200) {
-            localStorage.removeItem("atk")
-            localStorage.removeItem("rtk")
-            localStorage.removeItem("referer")
-            localStorage.removeItem("nick")
+  const [isLogOut, setIsLogOut] = useState(true);
 
-            window.location.href = "/"; //최종적으로 메인으로 이동
-        }
-      });
+  useEffect(() => {
+    AUTH_ITC.then((resp) => {
+      if (!(resp.data.status === 200 || resp.data.status === 205)) {
+        //유효하거나 재발급일때만 로그아웃 가능
+        setIsLogOut(false);
+      } else {
+        axios
+          .post("/invalidate/token", null, {
+            headers: {
+              WithCredentials: true,
+              RefreshToken: getRtk(),
+            },
+          })
+          .then((resp) => {
+            console.log("invalidate", resp);
+            if (resp.data.status === 200) {
+              localStorage.removeItem("atk");
+              localStorage.removeItem("rtk");
+              localStorage.removeItem("referer");
+              localStorage.removeItem("nick");
+
+              window.location.href = "/"; //최종적으로 메인으로 이동
+            }
+          });
+      }
+    });
   }, []);
 
   return (
-    <>
-      <div>로그아웃 중입니다... 잠시만 기다려 주세요</div>
-    </>
+    <Suspense fallback={<CommonLoading />}>
+      {isLogOut 
+      ? <CommonLoading desc="로그아웃 처리 중입니다." />
+      : <BadRequest desc="이미 로그아웃 되어 있습니다" />}
+    </Suspense>
   );
 };
 
