@@ -21,10 +21,9 @@ const KakaoLoginLoading = () => {
       }
 
       const referer = localStorage.getItem("referer");
-      //포트 제외 url
-      const prevUrl = window.location.pathname;
-
-      if(referer === null || prevUrl === "/login/kakao" || prevUrl === "/sign/in") window.location.href = "/";
+      if(referer === null || referer === "/login/kakao" || referer === "/sign/in"){
+        window.location.href = "/";
+      }
       else window.location.href = referer;
     });
   }, []);
