@@ -32,25 +32,15 @@
        margin: 0 auto;
        margin-top: 40px;
 
+       font-size: 16px;
        background-color: rgb(211, 211, 211);
     }
   }
 
-  .btn-box {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
+  .bnk-info {
+    padding-top: 20px;
+    text-align: center;
+    color: gray;
 
-    .not-login-btn {
-      display: block;
-      position: relative;
-      border: 1px solid $primary-color;
-      border-radius: 6px;
-      padding: 12px 20px;
-
-      color: $primary-color;
-      text-align: center;
-      background-color: white;
-    }
   }
 }

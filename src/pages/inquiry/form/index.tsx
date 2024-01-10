@@ -75,17 +75,6 @@ const InquiryForm = () => {
             이미지 선택
           </label>
         </div>
-        <div className="input-line">
-          <label htmlFor="">
-            작성자<span className="astrik">*</span>
-          </label>
-          <input 
-              readOnly 
-              value={inqForm.nickName} 
-              className="input" 
-              type="text" 
-          />
-        </div>
       </div>
       <button className="reg-btn" onClick={submitForm}>등록하기</button>
     </div>

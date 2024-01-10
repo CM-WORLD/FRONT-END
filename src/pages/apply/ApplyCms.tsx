@@ -7,8 +7,10 @@ import CommonLoading from "../../components/loading";
 
 import "./style.scss";
 
-const CmsApplyComplete = React.lazy(()=> import("../apply/complete"));
-const BadRequest = React.lazy(() => import("../../components/error/badRequest"));
+const CmsApplyComplete = React.lazy(() => import("../apply/complete"));
+const BadRequest = React.lazy(
+  () => import("../../components/error/badRequest")
+);
 
 interface ApplyForm {
   status: string;
@@ -36,26 +38,23 @@ const ApplyCms = () => {
   const submitForm = async () => {
     let formData = new FormData();
 
-    const { status, title, content, nickName, accOwner, imgList } = applyForm;
+    const { status, title, content, imgList } = applyForm;
 
     formData.append("cmsId", cmsId || "");
     formData.append("status", status);
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("nickName", nickName);
-    formData.append("bankOwner", accOwner);
 
     for (let i = 0; i < imgList.length; i++) {
       formData.append("imgList", imgList[i]);
     }
 
-    const headers = {
-      // 다른 헤더 설정들 추가 가능
-      Authorization: `Bearer ${getAtk()}`, // Access Token 추가
-      RefreshToken: getRtk(),
-    };
-
-    const data = await API.post("/auth/apply/form", formData, { headers });
+    const data = await API.post("/auth/apply/form", formData, {
+      headers: {
+        Authorization: `Bearer ${getAtk()}`,
+        RefreshToken: getRtk(),
+      },
+    });
     if (data.data.status === "200") {
       setNewCmsId(data.data.cmsId);
       setIsComplete(true);
@@ -72,7 +71,7 @@ const ApplyCms = () => {
     AUTH_ITC.get("/validate/token").then((resp) => {
       if (resp.data.status === 200) {
         // 파라미터로 온 신청 아이디가 없을 경우 400
-        axios.get("/cms/check/id", {params: {id: cmsId}}).then((resp) => {
+        axios.get("/cms/check/id", { params: { id: cmsId } }).then((resp) => {
           if (resp.data) {
             if (resp.data.status === 404) {
               setIsError(true);
@@ -145,31 +144,6 @@ const ApplyCms = () => {
             이미지 선택
           </label>
         </div>
-        <div className="input-line">
-          <label htmlFor="">
-            작성자<span className="astrik">*</span>
-          </label>
-          <input
-            readOnly
-            value={applyForm.nickName}
-            className="input"
-            type="text"
-          />
-        </div>
-        <div className="input-line">
-          <label htmlFor="">
-            계좌주(실명)<span className="astrik">*</span>
-          </label>
-          <input
-            value={applyForm.accOwner}
-            className="input"
-            type="text"
-            placeholder="꼭 계좌주와 일치하는 실명 3~4글자여야 합니다.(입금 확인용)"
-            onChange={(e) =>
-              setApplyForm({ ...applyForm, accOwner: e.target.value })
-            }
-          />
-        </div>
       </div>
       <div className="btn-box">
         <button className="reg-btn" onClick={submitForm}>
@@ -181,14 +155,16 @@ const ApplyCms = () => {
 
   const renderPage = () => {
     if (isComplete) return <CmsApplyComplete cmsId={newCmsId} />;
-      return form;
+    return form;
   };
   return (
     <>
       <Suspense fallback={<CommonLoading />}>
-        {isError 
-        ? <BadRequest desc="해당 커미션 아이디는 존재하지 않습니다." /> 
-        : renderPage()}
+        {isError ? (
+          <BadRequest desc="해당 커미션 아이디는 존재하지 않습니다." />
+        ) : (
+          renderPage()
+        )}
       </Suspense>
     </>
   );
