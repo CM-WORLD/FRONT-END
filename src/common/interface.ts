@@ -22,6 +22,7 @@ export interface CmsApplyDetail {
     bankOwner: string;
     depositYn: string;
     status: string;
+    statusNm: string;
     regDate: string;
 }
 

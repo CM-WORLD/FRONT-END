@@ -38,7 +38,8 @@ const MyCmsList = () => {
   }, []);
 
   const cmsApplyList = () => {
-    if (data.length < 1) return <td colSpan={4}>현재 신청한 내역이 없습니다.</td>;
+    if (data.length < 1)
+      return <td colSpan={4}>현재 신청한 내역이 없습니다.</td>;
 
     return data.map((item: CmsApplyDetail, idx) => {
       return (
@@ -48,21 +49,24 @@ const MyCmsList = () => {
           </td>
           <td className="contents">{item.title}</td>
           <td>
-            <span>{item.status}</span>
-            {/* TODO:: 분기처리 */}
+            <span>{item.statusNm}</span>
             <div className="status-btn-box">
-              <a href="/payment" className="pay-link">
-                결제
-              </a>
-              <a
-                className="rvw-link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  serRvwMdDisplay(!rvwMdDisplay);
-                }}
-              >
-                리뷰 작성
-              </a>
+              {item.status === "CM02" && (
+                <a href="/payment" className="pay-link">
+                  결제
+                </a>
+              )}
+              {item.status === "CM08" && (
+                <a
+                  className="rvw-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    serRvwMdDisplay(!rvwMdDisplay);
+                  }}
+                >
+                  리뷰 작성
+                </a>
+              )}
             </div>
           </td>
           <td>{item.regDate}</td>
@@ -72,9 +76,7 @@ const MyCmsList = () => {
   };
 
   /** 리뷰 작성 제출 */
-  const submitForm  = () => {
-
-  }
+  const submitForm = () => {};
   const content = (
     <>
       <div className="my-cms-history">
