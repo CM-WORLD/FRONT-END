@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import axios from "axios";
 
 import MyCommonContent from "../../common";
-import { AUTH_ITC } from "../../../../common/Request";
+import { AUTH_ITC, HOST_URL } from "../../../../common/Request";
 import {
   CmsApplyDetail,
   ImgDetail,
@@ -24,13 +24,13 @@ const MyCmsApplyDetail = () => {
     AUTH_ITC.get("/validate/token").then((resp) => {
       if (resp.data.status === 200) {
         axios
-          .get(`/apply/detail`, {
+          .get(HOST_URL + "/apply/detail", {
             params: {
               cmsApplyId: applyId,
             },
           })
           .then((resp) => {
-            if(resp.data) {
+            if (resp.data) {
               setData(resp.data.data);
             }
 
@@ -42,7 +42,7 @@ const MyCmsApplyDetail = () => {
               setPayment(resp.data.payment);
             }
           });
-      } else  {
+      } else {
         //404page
       }
     });

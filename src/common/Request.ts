@@ -6,12 +6,6 @@ export default axios.defaults.paramsSerializer = (params) => {
   return qs.stringify(params);
 };
 
-/** axios 생성 공통 메서드,  */
-export const API = axios.create({
-  baseURL: "http://localhost:8080/api",
-  withCredentials: true,
-});
-
 /* 토큰 조회 */
 export const getAtk = () => {
   return localStorage.getItem("atk");

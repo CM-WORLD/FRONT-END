@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { CmsApplyDetail } from "../../../common/interface";
-import { getRtk, getAtk, AUTH_ITC } from "../../../common/Request";
+import { CmsApplyDetail, CmsPayDetail } from "../../../common/interface";
+import { getRtk, getAtk, AUTH_ITC, HOST_URL } from "../../../common/Request";
 import WriteRvwModal from "../../review/modal";
 import PaymentModal from "../../payment/modal";
 import MyCommonContent from "../common";
@@ -11,6 +11,7 @@ import "./style.scss";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);
+  const [paymentData, setPaymentData] = useState<CmsPayDetail>();
   const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
   const [payMdDisplay, setPayMdDisplay] = useState(false);
 
@@ -23,7 +24,7 @@ const MyCmsList = () => {
     AUTH_ITC.get("/validate/token").then((resp) => {
       if (resp.data.status === 200 || resp.data.staus === 205) {
         axios
-          .get("/apply/history", {
+          .get(HOST_URL + "/apply/history", {
             params,
             headers: {
               Authorization: `Bearer ${getAtk()}`,
@@ -31,6 +32,7 @@ const MyCmsList = () => {
             },
           })
           .then((resp) => {
+            console.log(resp.data.data);
             if (resp.data.data.content) {
               setData(resp.data.data.content);
             }
@@ -54,10 +56,14 @@ const MyCmsList = () => {
             <span>{item.statusNm}</span>
             <div className="status-btn-box">
               {item.status === "CM02" && (
-                <button className="pay-link" onClick={(e)=> {
-                  e.preventDefault();
-                  setPayMdDisplay(!payMdDisplay);
-                }}>
+                <button
+                  className="pay-link"
+                  onClick={(e) => {
+                    setPaymentData(item.cmsPayDto);
+                    e.preventDefault();
+                    setPayMdDisplay(!payMdDisplay);
+                  }}
+                >
                   결제
                 </button>
               )}
@@ -105,9 +111,27 @@ const MyCmsList = () => {
       </div>
     </>
   );
+
+  const payData = () => {
+    if (!paymentData) return <></>;
+    else
+      return (
+        <>
+          <div>
+            <div>결제 금액: </div>
+            <div>{paymentData.payAmt}</div>
+          </div>
+          <div>
+            <div>코멘트: </div>
+            <div>{paymentData.comment}</div>
+          </div>
+        </>
+      );
+  };
   return (
     <>
       <PaymentModal
+        paymentData={payData()}
         display={payMdDisplay}
         onClick={() => setPayMdDisplay(!payMdDisplay)}
       />

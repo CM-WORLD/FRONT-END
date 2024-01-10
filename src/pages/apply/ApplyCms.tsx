@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import { API, getRtk, getAtk, AUTH_ITC, HOST_URL } from "../../common/Request";
+import { getRtk, getAtk, AUTH_ITC, HOST_URL } from "../../common/Request";
 import CommonLoading from "../../components/loading";
 
 import "./style.scss";
@@ -49,7 +49,7 @@ const ApplyCms = () => {
       formData.append("imgList", imgList[i]);
     }
 
-    const data = await API.post("/auth/apply/form", formData, {
+    const data = await axios.post("/auth/apply/form", formData, {
       headers: {
         Authorization: `Bearer ${getAtk()}`,
         RefreshToken: getRtk(),
@@ -71,13 +71,15 @@ const ApplyCms = () => {
     AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
       if (resp.data.status === 200) {
         // 파라미터로 온 신청 아이디가 없을 경우 400
-        axios.get(HOST_URL + "/cms/check/id", { params: { id: cmsId } }).then((resp) => {
-          if (resp.data) {
-            if (resp.data.status === 404) {
-              setIsError(true);
+        axios
+          .get(HOST_URL + "/cms/check/id", { params: { id: cmsId } })
+          .then((resp) => {
+            if (resp.data) {
+              if (resp.data.status === 404) {
+                setIsError(true);
+              }
             }
-          }
-        });
+          });
       }
     });
   }, []);

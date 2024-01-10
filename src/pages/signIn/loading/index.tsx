@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 
 import CommonLoading from "../../../components/loading";
-import { API } from "../../../common/Request";
 
 import "./style.scss";
+import axios from "axios";
 
 const KakaoLoginLoading = () => {
   /** 카카오 인가 코드 */
   const code = new URL(window.location.href).searchParams.get("code");
 
   useEffect(() => {
-    API.post("/api/process/kakao", { code: code }).then((resp) => {
-      const {nick} = resp.data;
+    axios.post("/process/kakao", { code: code }).then((resp) => {
+      const { nick } = resp.data;
       const { accessToken, refreshToken, grantType } = resp.data.tokens;
 
       if (accessToken && refreshToken && nick) {
@@ -21,10 +21,13 @@ const KakaoLoginLoading = () => {
       }
 
       const referer = localStorage.getItem("referer");
-      if(referer === null || referer === "/login/kakao" || referer === "/sign/in"){
+      if (
+        referer === null ||
+        referer === "/login/kakao" ||
+        referer === "/sign/in"
+      ) {
         window.location.href = "/";
-      }
-      else window.location.href = referer;
+      } else window.location.href = referer;
     });
   }, []);
   return <CommonLoading desc="로그인 처리 중입니다." />;

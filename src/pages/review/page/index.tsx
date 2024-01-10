@@ -19,7 +19,6 @@ const ReviewPage = () => {
   useEffect(() => {
     axios.get(HOST_URL + "/review/list").then((resp) => {
       if (resp.data.status === 200) {
-        console.log(resp.data.data);
         setData(resp.data.data);
       }
     });
@@ -38,7 +37,8 @@ const ReviewPage = () => {
           </h4>
           <div className="rvw-item-content">{item.content}</div>
           <div className="wrt-info-box">
-            <div className="nick">{item.nickName}</div> |<div>{item.regDate}</div>
+            <div className="nick">{item.nickName}</div> |
+            <div>{item.regDate}</div>
           </div>
         </div>
       </>

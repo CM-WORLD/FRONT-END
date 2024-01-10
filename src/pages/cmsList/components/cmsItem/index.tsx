@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { API } from "../../../../common/Request";
+import { HOST_URL } from "../../../../common/Request";
 
 import "./style.scss";
+import axios from "axios";
 
 interface CmsItem {
   id: number;
@@ -16,7 +17,7 @@ const CmsItems = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    API.get("/cms/list").then((resp) => {
+    axios.get(HOST_URL + "/cms/list").then((resp) => {
       if (resp.data) {
         setData(resp.data);
       }
@@ -24,7 +25,8 @@ const CmsItems = () => {
   }, []);
 
   const renderItems = () => {
-    if(data.length < 1) return <div className="no-cms">현재 등록된 커미션이 없습니다.</div>;
+    if (data.length < 1)
+      return <div className="no-cms">현재 등록된 커미션이 없습니다.</div>;
     return data.map((item: CmsItem, idx) => {
       return (
         <div key={`${item.id}-${idx}`}>

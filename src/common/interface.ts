@@ -15,6 +15,7 @@ export interface ReplyDetail {
 /* 커미션 신청 상세 */ 
 export interface CmsApplyDetail {
     cmsDto: CommissionDetail;
+    cmsPayDto: CmsPayDetail;
     id: string;
     title: string;
     content: string;
