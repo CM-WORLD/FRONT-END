@@ -4,6 +4,7 @@ import axios from "axios";
 import { CmsApplyDetail } from "../../../common/interface";
 import { getRtk, getAtk, AUTH_ITC } from "../../../common/Request";
 import WriteRvwModal from "../../review/modal";
+import PaymentModal from "../../payment/modal";
 import MyCommonContent from "../common";
 
 import "./style.scss";
@@ -11,6 +12,7 @@ import "./style.scss";
 const MyCmsList = () => {
   const [data, setData] = useState([]);
   const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
+  const [payMdDisplay, setPayMdDisplay] = useState(false);
 
   useEffect(() => {
     const params = {
@@ -52,12 +54,15 @@ const MyCmsList = () => {
             <span>{item.statusNm}</span>
             <div className="status-btn-box">
               {item.status === "CM02" && (
-                <a href="/payment" className="pay-link">
+                <button className="pay-link" onClick={(e)=> {
+                  e.preventDefault();
+                  setPayMdDisplay(!payMdDisplay);
+                }}>
                   결제
-                </a>
+                </button>
               )}
               {item.status === "CM08" && (
-                <a
+                <button
                   className="rvw-link"
                   onClick={(e) => {
                     e.preventDefault();
@@ -65,7 +70,7 @@ const MyCmsList = () => {
                   }}
                 >
                   리뷰 작성
-                </a>
+                </button>
               )}
             </div>
           </td>
@@ -102,6 +107,10 @@ const MyCmsList = () => {
   );
   return (
     <>
+      <PaymentModal
+        display={payMdDisplay}
+        onClick={() => setPayMdDisplay(!payMdDisplay)}
+      />
       <WriteRvwModal
         display={rvwMdDisplay}
         onClick={() => serRvwMdDisplay(!rvwMdDisplay)}

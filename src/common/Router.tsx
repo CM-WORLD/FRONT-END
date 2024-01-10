@@ -14,6 +14,7 @@ import MyCmsApplyDetail from "../pages/myPage/myCms/detail";
 import KakaoLoginLoading from "../pages/signIn/loading";
 import SignOutLoading from "../pages/signIn/signOut";
 import NotFound from "../components/error/notFound";
+import PaymentIntro from "../pages/payment/intro";
 
 const Router = () => {
   return (
@@ -34,6 +35,8 @@ const Router = () => {
         <Route path="/logout/kakao" element={<SignOutLoading />} />
         {/* 404 error page */}
         <Route path="/*" element={<NotFound />} />
+
+        <Route path="/payment" element={<PaymentIntro />} />
       </Routes>
     </BrowserRouter>
   );
