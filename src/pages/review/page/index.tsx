@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import "./style.scss";
 import { CmsApplyDetail } from "../../../common/interface";
+import { HOST_URL } from "../../../common/Request";
+import "./style.scss";
 
 interface ReviewItem {
   id: number;
@@ -17,7 +17,7 @@ const ReviewPage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("/review/list").then((resp) => {
+    axios.get(HOST_URL + "/review/list").then((resp) => {
       if (resp.data.status === 200) {
         console.log(resp.data.data);
         setData(resp.data.data);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./BlogList.scss";
 import axios from "axios";
+import { HOST_URL } from "../../common/Request";
 
 interface Post {
   id: number;
@@ -22,7 +23,7 @@ const BlogList = () => {
   }, []);
 
   const fetchPostList = (type: string) => {
-    axios.get("/post/list", { params: { type: type } }).then((resp) => {
+    axios.get(HOST_URL + "/post/list", { params: { type: type } }).then((resp) => {
       if (resp.data) setData(resp.data);
     });
   };

@@ -10,7 +10,7 @@ const KakaoLoginLoading = () => {
   const code = new URL(window.location.href).searchParams.get("code");
 
   useEffect(() => {
-    API.post("/process/kakao", { code: code }).then((resp) => {
+    API.post("/api/process/kakao", { code: code }).then((resp) => {
       const {nick} = resp.data;
       const { accessToken, refreshToken, grantType } = resp.data.tokens;
 

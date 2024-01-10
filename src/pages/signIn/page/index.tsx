@@ -2,7 +2,7 @@ import React, { useEffect, useState, Suspense } from "react";
 import axios from "axios";
 
 import CommonLoading from "../../../components/loading";
-import { getAtk, getRtk } from "../../../common/Request";
+import { HOST_URL, getAtk, getRtk } from "../../../common/Request";
 
 
 const LoginBtnsComponent = React.lazy(() => import('../../signIn/page/component'))
@@ -20,7 +20,7 @@ const SignInPage = () => {
           RefreshToken: getRtk(),
         },
       })
-      .get("/validate/token")
+      .get(HOST_URL + "/validate/token")
       .then((resp) => {
         const status = resp.data.status;
         if (status === 205) {

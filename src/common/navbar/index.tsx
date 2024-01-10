@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAtk, getRtk } from "../Request";
+import { HOST_URL, getAtk, getRtk } from "../Request";
 import "./style.scss";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ const NavBar = () => {
           RefreshToken: getRtk(),
         },
       })
-      .get("/validate/token")
+      .get(HOST_URL + "/validate/token")
       .then((resp) => {
         console.log(resp.data);
         const status = resp.data.status;
