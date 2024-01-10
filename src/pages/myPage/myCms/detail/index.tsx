@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 
+import MyCommonContent from "../../common";
+import { AUTH_ITC } from "../../../../common/Request";
 import {
   CmsApplyDetail,
   ImgDetail,
   CmsPayDetail,
 } from "../../../../common/interface";
-import { getRtk, getAtk } from "../../../../common/Request";
-import MyCommonContent from "../../common";
 
 import "./style.scss";
 
@@ -19,27 +19,33 @@ const MyCmsApplyDetail = () => {
   const [payment, setPayment] = useState<CmsPayDetail | null>(null);
 
   useEffect(() => {
-    axios
-      .get(`/apply/auth/detail`, {
-        params: {
-          cmsApplyId: applyId,
-        },
-        headers: {
-          Authorization: `Bearer ${getAtk()}`,
-          RefreshToken: getRtk(),
-        },
-      })
-      .then((resp) => {
-        setData(resp.data.data);
+    console.log(applyId);
 
-        if (resp.data.imgList) {
-          setImgList(resp.data.imgList);
-        }
+    AUTH_ITC.get("/validate/token").then((resp) => {
+      if (resp.data.status === 200) {
+        axios
+          .get(`/apply/detail`, {
+            params: {
+              cmsApplyId: applyId,
+            },
+          })
+          .then((resp) => {
+            if(resp.data) {
+              setData(resp.data.data);
+            }
 
-        if (resp.data.payment) {
-          setPayment(resp.data.payment);
-        }
-      });
+            if (resp.data.imgList) {
+              setImgList(resp.data.imgList);
+            }
+
+            if (resp.data.payment) {
+              setPayment(resp.data.payment);
+            }
+          });
+      } else  {
+        //404page
+      }
+    });
   }, []);
 
   const content = () => {
@@ -76,11 +82,9 @@ const MyCmsApplyDetail = () => {
         <div>Id: {data.id}</div>
         <div>제목: {data.title}</div>
         <div>내용: {data.content}</div>
-        <div>상태: {data.status}</div>
-        <div>커미션 이름: ~~~~ 저가고퀄 나와야 하지 않나~~~~ </div>
-        <div>커미션 타입: {data.cmsType && data.cmsType}</div>
-        <div>입금 여부: {data.depositYn}</div>
-
+        <div>상태: {data.statusNm}</div>
+        <div>커미션 이름: {data.cmsDto.name} </div>
+        <div>커미션 타입: {data.cmsTypeNm && data.cmsTypeNm}</div>
         <div>등록날짜: {data.regDate}</div>
         {images()}
         <div>

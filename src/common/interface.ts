@@ -19,8 +19,7 @@ export interface CmsApplyDetail {
     title: string;
     content: string;
     cmsType: string | null;
-    bankOwner: string;
-    depositYn: string;
+    cmsTypeNm: string | null;
     status: string;
     statusNm: string;
     regDate: string;
