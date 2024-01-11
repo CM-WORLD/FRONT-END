@@ -20,7 +20,7 @@ const MyCommonContent = (props: ContentProps) => {
         </div>
         <div className="base-content">
           <div className="flex justify-between align-center mt-1 mb-10">
-            <div className="font-bold text-lg">{props.title}</div>
+            <div className="font-bold">{props.title}</div>
             {props.btnLink && (
               <Button
                 value={props.btnTxt ? props.btnTxt : "신규 바로 가기"}
