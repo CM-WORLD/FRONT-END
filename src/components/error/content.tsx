@@ -7,7 +7,7 @@ const CommonErrContent = (props: ErrorContentProps) => {
       <div className="err-content">
         <img
           className="err-img"
-          src={process.env.PUBLIC_URL + "/bnr_test.jpg"}
+          src={import.meta.env.PUBLIC_URL + "/bnr_test.jpg"}
           alt="error-msg"
         />
         <div className="err-txt">{props.title || defaultTitle}</div>

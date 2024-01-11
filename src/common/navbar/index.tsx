@@ -7,7 +7,7 @@ const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
 
   const validateTk = () => {
-      axios
+    axios
       .create({
         headers: {
           withCredentials: true,
@@ -29,8 +29,8 @@ const NavBar = () => {
       .catch((error) => setIsLogined(false));
   };
 
-  const redirectUrl = process.env.REACT_APP_KAKAO_LOGOUT_URL_LOCAL;
-  const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
+  const redirectUrl = import.meta.env.VITE_REACT_APP_KAKAO_LOGOUT_URL_LOCAL;
+  const clientId = import.meta.env.VITE_REACT_APP_KAKAO_CLIENT_ID;
 
   useEffect(() => {
     validateTk();

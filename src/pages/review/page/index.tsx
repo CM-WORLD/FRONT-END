@@ -30,7 +30,7 @@ const ReviewPage = () => {
     return data.map((item: ReviewItem, idx) => (
       <>
         <div key={`rvw-item-${idx}`} className="rvw-item">
-          <img src={`${process.env.PUBLIC_URL + "/bnr_test.jpg"}`} alt="" />
+          <img src={`${import.meta.env.PUBLIC_URL + "/bnr_test.jpg"}`} alt="" />
           <h4 className="cms-type-info">
             <span>{item.applyDto.cmsDto.name}</span>
             <span> - {item.applyDto.cmsType}</span>
