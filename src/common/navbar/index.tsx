@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { HOST_URL, getAtk, getRtk } from "../Request";
-import "./style.scss";
 import axios from "axios";
 
+import { HOST_URL, getAtk, getRtk } from "../Request";
+import "./style.scss";
 const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
 

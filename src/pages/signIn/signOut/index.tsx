@@ -4,7 +4,7 @@ import axios from "axios";
 import CommonLoading from "../../../components/loading";
 import BadRequest from "../../../components/error/badRequest";
 
-import { AUTH_ITC, getRtk } from "../../../common/Request";
+import { AUTH_ITC, HOST_URL, getRtk } from "../../../common/Request";
 
 import "./style.scss";
 
@@ -18,7 +18,7 @@ const SignOutLoading = () => {
         setIsLogOut(false);
       } else {
         axios
-          .post("/invalidate/token", null, {
+          .post(HOST_URL + "/invalidate/token", null, {
             headers: {
               WithCredentials: true,
               RefreshToken: getRtk(),
