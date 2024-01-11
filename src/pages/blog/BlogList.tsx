@@ -44,7 +44,7 @@ const BlogList = () => {
   return (
     <>
       <div className="gallery">
-        <div className="header">COMMISSIONS</div>
+        <div className="header">ILLUSTRATIONS</div>
         <div className="tabList">
           <div
             className={"tab" + (currentTab === "TY01" ? " active" : "")}

@@ -2,6 +2,7 @@ import SideNav from "../sideNav";
 import { ReactNode } from "react";
 
 import "./style.scss";
+import Button from "../../../components/button";
 
 interface ContentProps {
   title: string;
@@ -15,15 +16,19 @@ const MyCommonContent = (props: ContentProps) => {
     <>
       <div className="my-content">
         <div className="lg:w-2/6">
-        <SideNav />
+          <SideNav />
         </div>
         <div className="base-content">
           <div className="flex justify-between align-center mt-1 mb-10">
             <div className="font-bold text-lg">{props.title}</div>
             {props.btnLink && (
-              <a href={props.btnLink} className="font-bold text-white bg-rose-500 py-2 px-3 rounded">
-                {props.btnTxt ? props.btnTxt : "신규 바로 가기"}
-              </a>
+              <Button
+                value={props.btnTxt ? props.btnTxt : "신규 바로 가기"}
+                color="rose"
+                onClick={() => {
+                  if (props.btnLink) window.location.href = props.btnLink;
+                }}
+              />
             )}
           </div>
 

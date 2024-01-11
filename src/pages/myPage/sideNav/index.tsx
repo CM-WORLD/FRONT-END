@@ -1,6 +1,12 @@
+import { useEffect, useState } from "react";
 import "./style.scss";
 
 const SideNav = () => {
+  
+  useEffect(()  => {  
+    const currentPath = window.location.pathname;
+  }
+  ,[]);
   return (
     <>
       <aside className="sticky-top hidden py-4 md:block m-5 sticky">
@@ -13,15 +19,15 @@ const SideNav = () => {
           </a>
           <hr />
           <a
-            href=""
+            href="/mypage/inquiry"
             className="px-3 py-1 font-semibold opacity-90 hover:bg-indigo-50 rounded-md"
           >
             1 : 1 문의
           </a>
-          <div className="inline-flex items-center pl-1">
+          <div className={ `inline-flex items-center pl-1 ${"fill-rose-500"}`}>
             <svg
-              className="w-6 h-6 text-gray-800"
-              fill="currentColor"
+              className={`w-6 h-6 text-gray-800 ${"fill-rose-500"}`}
+              fill="current-color"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -32,7 +38,7 @@ const SideNav = () => {
               ></path>
             </svg>
             <a
-              href=""
+              href="/mypage/cms"
               className="py-1 font-semibold hover:bg-indigo-50 rounded-md"
             >
               커미션 신청 내역
