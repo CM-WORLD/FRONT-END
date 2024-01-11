@@ -3,10 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
-
-  theme: {
-    extend: {},
-  },
+  // themes를 정의했더니 기존 스타일이 적용안됨
   plugins: [],
 }
 

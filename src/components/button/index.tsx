@@ -1,4 +1,6 @@
 import { MouseEventHandler } from "react";
+import {  buildClass, getColorByType } from "../twColors";
+
 import "./style.scss";
 
 // export const Button = function <T extends string | number>({
@@ -43,7 +45,7 @@ export interface ButtonProps {
     | "popup"
     | "icon"
     | "none";
-  color?: string;
+  color: string;
   radius: "round" | "square" | "pill" | "circle";
   disabled?: boolean;
   value?: string | number;
@@ -52,18 +54,44 @@ export interface ButtonProps {
 }
 
 export const Button = (props: ButtonProps) => {
-  return <button
-        className="button"
-        disabled={props.disabled}
-  >
-    {props.value}
-  </button>;
+  const getRoundType = (radius: string) => {
+    switch (radius) {
+      case "round":
+        return "rounded";
+      case "square":
+        return "rounded-none";
+      case "pill":
+        return "rounded-3xl";
+      case "circle":
+        return "rounded-full";
+      default:
+        return "rounded";
+    }
+  }
+
+  return (
+    <button
+      className={
+        buildClass(
+          getColorByType(props.color, "bg"),
+          getColorByType(props.color, "bgHover"),
+          getRoundType(props.radius),
+          props.disabled ? "cursor-not-allowed" : "",
+          "text-white font-bold py-2 px-4",
+          props.className ? props.className : "",
+        )}
+      onClick={props.onClick}
+    >
+      {props.value}
+    </button>
+  );
 };
 
 Button.defaultProps = {
   type: "button",
   size: "sm",
-  color: "primary",
+  color: "blue",
   radius: "round",
+  className: "",
 };
 export default Button;

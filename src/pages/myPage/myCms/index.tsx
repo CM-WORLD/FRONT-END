@@ -6,6 +6,8 @@ import { getRtk, getAtk, AUTH_ITC, HOST_URL } from "../../../common/Request";
 import WriteRvwModal from "../../review/modal";
 import PaymentModal from "../../payment/modal";
 import MyCommonContent from "../common";
+import Pagination from "../../../components/pagnation";
+import Button from "../../../components/button";
 
 import "./style.scss";
 
@@ -21,7 +23,7 @@ const MyCmsList = () => {
       size: 10,
     };
 
-    AUTH_ITC.get("/validate/token").then((resp) => {
+    AUTH_ITC.get(HOST_URL + "/validate/token").then((resp: any) => {
       if (resp.data.status === 200 || resp.data.staus === 205) {
         axios
           .get(HOST_URL + "/apply/history", {
@@ -41,74 +43,67 @@ const MyCmsList = () => {
     });
   }, []);
 
-  const cmsApplyList = () => {
-    if (data.length < 1)
-      return <td colSpan={4}>현재 신청한 내역이 없습니다.</td>;
-
-    return data.map((item: CmsApplyDetail, idx) => {
-      return (
-        <tr key={`my-cms-apply-${idx}`}>
-          <td>
-            <a href={`/mypage/cms/${item.id}`}>{item.id}</a>
-          </td>
-          <td className="contents">{item.title}</td>
-          <td>
-            <span>{item.statusNm}</span>
-            <div className="status-btn-box">
-              {item.status === "CM02" && (
-                <button
-                  className="pay-link"
-                  onClick={(e) => {
-                    setPaymentData(item.cmsPayDto);
-                    e.preventDefault();
-                    setPayMdDisplay(!payMdDisplay);
-                  }}
-                >
-                  결제
-                </button>
-              )}
-              {item.status === "CM08" && (
-                <button
-                  className="rvw-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    serRvwMdDisplay(!rvwMdDisplay);
-                  }}
-                >
-                  리뷰 작성
-                </button>
-              )}
-            </div>
-          </td>
-          <td>{item.regDate}</td>
-        </tr>
-      );
-    });
-  };
-
   /** 리뷰 작성 제출 */
   const submitForm = () => {};
   const content = (
     <>
       <div className="my-cms-history">
-        <table className="bbs-table">
-          <colgroup>
-            <col width="20%" />
-            <col width="*" />
-            <col width="30%" />
-            <col width="15%" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th scope="col">커미션 번호</th>
-              <th scope="col">제목</th>
-              <th scope="col">상태</th>
-              <th scope="col">등록 날짜</th>
-            </tr>
-          </thead>
-          <tbody>{cmsApplyList()}</tbody>
-        </table>
+        {
+          <ul className="bg-white shadow overflow-hidden sm:rounded-md mx-auto w-xl">
+            {data.map((item: CmsApplyDetail, idx) => {
+              return (
+                <>
+                  <li className="border-t border-gray-200" key={`cms-history-${idx}`}>
+                    <div className="px-4 py-5 sm:px-6">
+                      <div className="flex items-center justify-between pb-5">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">
+                          {item.title}
+                        </h3>
+                        <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                          {item.regDate}
+                        </p>
+                      </div>
+                      <div className="mt-4 flex items-center justify-between">
+                        <p className="text-md font-medium text-gray-500">
+                          Status:
+                          <span className="pl-1 text-yellow-600">
+                            {item.statusNm}
+                          </span>
+                        </p>
+                        <div>
+                          {item.status === "CM02" && (
+                            <Button
+                              value="결제"
+                              color="blue"
+                              onClick={(e) => {
+                                setPaymentData(item.cmsPayDto);
+                                e.preventDefault();
+                                setPayMdDisplay(!payMdDisplay);
+                              }}
+                            />
+                          )}
+                          {item.status === "CM08" && (
+                            <Button
+                              value="리뷰"
+                              color="rose"
+                              className="ml-3"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                serRvwMdDisplay(!rvwMdDisplay);
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </>
+              );
+            })}
+          </ul>
+        }
       </div>
+      <Pagination />
     </>
   );
 
