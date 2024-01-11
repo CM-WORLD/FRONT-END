@@ -12,6 +12,7 @@ const KakaoLoginLoading = () => {
 
   useEffect(() => {
     axios.post(HOST_URL +"/process/kakao", { code: code }).then((resp) => {
+      console.log("??? resp:", resp);
       const { nick } = resp.data;
       const { accessToken, refreshToken, grantType } = resp.data.tokens;
 
