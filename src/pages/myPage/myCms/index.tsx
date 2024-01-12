@@ -53,11 +53,14 @@ const MyCmsList = () => {
             {data.map((item: CmsApplyDetail, idx) => {
               return (
                 <>
-                  <li className="border-t border-gray-200" key={`cms-history-${idx}`}>
+                  <li
+                    className="border-t border-gray-200"
+                    key={`cms-history-${idx}`}
+                  >
                     <div className="px-4 py-5 sm:px-6">
                       <div className="flex items-center justify-between pb-5">
                         <h3 className="text-lg leading-6 font-medium text-gray-900">
-                          {item.title}
+                          <a href={`/mypage/cms/${item.id}`}>{item.title}</a>
                         </h3>
                         <p className="mt-1 max-w-2xl text-sm text-gray-500">
                           {item.regDate}

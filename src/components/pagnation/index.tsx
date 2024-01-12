@@ -1,6 +1,7 @@
 const Pagination = () => {
   return (
-    <nav aria-label="Page navigation example">
+    <div className="flex items-center justify-center space-x-2 my-8">
+    <nav aria-label="Page navigation">
       <ul className="inline-flex -space-x-px text-md">
         <li>
           <a
@@ -89,6 +90,7 @@ const Pagination = () => {
         </li>
       </ul>
     </nav>
+    </div>
   );
 };
 

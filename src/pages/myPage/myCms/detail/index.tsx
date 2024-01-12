@@ -19,8 +19,6 @@ const MyCmsApplyDetail = () => {
   const [payment, setPayment] = useState<CmsPayDetail | null>(null);
 
   useEffect(() => {
-    console.log(applyId);
-
     AUTH_ITC.get("/validate/token").then((resp) => {
       if (resp.data.status === 200) {
         axios
@@ -30,6 +28,7 @@ const MyCmsApplyDetail = () => {
             },
           })
           .then((resp) => {
+            console.log(resp.data);
             if (resp.data) {
               setData(resp.data.data);
             }
@@ -52,6 +51,7 @@ const MyCmsApplyDetail = () => {
     if (!data) return <>존재하지 않는 커미션 id입니다.</>;
 
     const images = () => {
+      
       if (imgList.length < 1) return <></>;
       return imgList.map((item: ImgDetail, idx) => {
         return (
@@ -79,31 +79,35 @@ const MyCmsApplyDetail = () => {
 
     return (
       <>
-        <div>Id: {data.id}</div>
-        <div>제목: {data.title}</div>
-        <div>내용: {data.content}</div>
+      <div className="py-4">
+        <div className="font-bold text-lg text-rose-400">{data.cmsDto.name} </div>
+        <div className="font-bold text-2xl">{data.title}</div>
+      </div>
+        <div className="px-4 py-8 bg-gray-100 rounded-sm">{data.content}</div>
+
+        <div className="mt-5 px-4 py-4 bg-teal-100 rounded-sm">상태: {data.statusNm}</div>
+      {data.id}
         <div>상태: {data.statusNm}</div>
-        <div>커미션 이름: {data.cmsDto.name} </div>
         <div>커미션 타입: {data.cmsTypeNm && data.cmsTypeNm}</div>
         <div>등록날짜: {data.regDate}</div>
-        {images()}
-        <div>
-          <hr />
-        </div>
-
-        <div>
-          <h1>결제 영수증</h1>
-        </div>
-        {payReceipt()}
-
-        {/* TODO:: 추후 타임라인을 최상단 또는 최하단에 추가해야 함. */}
-      </>
+      
+         {images()}
+         <div>
+           <hr />
+         </div>
+         <div>
+           <h1>결제 영수증</h1>
+         </div>
+         {payReceipt()}
+         {/* TODO:: 추후 타임라인을 최상단 또는 최하단에 추가해야 함. */}
+       </>
     );
   };
 
+
   return (
-    <>
-      <MyCommonContent title="커미션 신청 상세" content={content()} />
+<>
+    <MyCommonContent content={content()} />
     </>
   );
 };
