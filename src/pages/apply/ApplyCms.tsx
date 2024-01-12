@@ -18,7 +18,7 @@ interface ApplyForm {
   content: string;
   imgList: [];
   nickName: string;
-  accOwner: string;
+  bankOwner: string;
 }
 
 const ApplyCms = () => {
@@ -32,7 +32,7 @@ const ApplyCms = () => {
     content: "",
     imgList: [],
     nickName: "",
-    accOwner: "",
+    bankOwner: "",
   });
 
   const submitForm = async () => {
@@ -44,12 +44,13 @@ const ApplyCms = () => {
     formData.append("status", status);
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("bankOwner", applyForm.bankOwner);
 
     for (let i = 0; i < imgList.length; i++) {
       formData.append("imgList", imgList[i]);
     }
 
-    const data = await axios.post("/auth/apply/form", formData, {
+    const data = await axios.post(HOST_URL+ "/auth/apply/form", formData, {
       headers: {
         Authorization: `Bearer ${getAtk()}`,
         RefreshToken: getRtk(),
@@ -130,7 +131,20 @@ const ApplyCms = () => {
               setApplyForm({ ...applyForm, content: e.target.value })
             }
           />
-          <p>*최소 30자 이상 적어주세요.</p>
+          <div className="input-line">
+          <label htmlFor="">
+            계좌주<span className="astrik">*</span>
+          </label>
+          <input
+            value={applyForm.bankOwner}
+            className="input"
+            type="text"
+            placeholder="계좌주 실명을 입력해 주세요. (초성만 입력 안됩니다.)"
+            onChange={(e) =>
+              setApplyForm({ ...applyForm, bankOwner: e.target.value })
+            }
+          />
+        </div>
         </div>
         <div className="input-line">
           <label htmlFor="">
