@@ -53,9 +53,11 @@ const MyCmsDetailComponent = () => {
       if (imgList.length < 1) return <></>;
       return imgList.map((item: ImgDetail, idx) => {
         return (
+          <a href={item.imgUrl} target="_blank">
             <div className="w-1/3" key={`cms-apply-img-${idx}`}>
               <img src={item.imgUrl} alt="img" />
             </div>
+          </a>
         );
       });
     };
@@ -75,7 +77,7 @@ const MyCmsDetailComponent = () => {
           <p className="pt-3 text-gray-500">신청 ID: {data.id}</p>
           <p className="pt-1 text-gray-500">신청일: {data.regDate}</p>
         </div>
-        <div className="pb-3 font-bold text-md">요청사항</div>
+        <div className="pt-3 pb-3 font-bold text-md">요청사항</div>
         <div className="px-4 py-8 bg-gray-100 rounded-sm">
           <div className="pb-8">{data.content}</div>
           {images()}
