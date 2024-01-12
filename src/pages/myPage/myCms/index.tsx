@@ -17,31 +17,65 @@ const MyCmsList = () => {
   const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
   const [payMdDisplay, setPayMdDisplay] = useState(false);
 
+  //pageable object state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
+  const [pageObj, setPageObj] = useState({
+    number: 0,
+    first: true,
+    last: true,
+    size: 10,
+    totalPages: 1,
+    totalElements: 1,
+    empty: true,
+  });
+
   useEffect(() => {
-    const params = {
-      page: 0,
-      size: 10,
-    };
 
     AUTH_ITC.get(HOST_URL + "/validate/token").then((resp: any) => {
       if (resp.data.status === 200 || resp.data.staus === 205) {
         axios
           .get(HOST_URL + "/apply/history", {
-            params,
+            params: {
+              page: currentPage,
+              size: 10, 
+            },
             headers: {
               Authorization: `Bearer ${getAtk()}`,
               RefreshToken: getRtk(),
             },
           })
           .then((resp) => {
-            console.log(resp.data.data);
+
+            console.log(3, resp.data.data);
+            /**
+             * const obj = resp.data.data;
+             * 
+             * number (현재 페이지 번호, number)
+             * obj.first(첫 페이지 여부, boolean)
+             * obj.last (마지막 페이지 여부, boolean)
+             * size (페이지당 데이터 개수, number)
+             * totalPages (전체 페이지 개수, number)
+             * totalElements (전체 데이터 개수, number)
+             * empty (데이터 존재 여부, boolean)
+             * 
+             */
+
+            if (resp.data.data.totalPages) {
+              setTotalPage(resp.data.data.totalPages);
+            }
             if (resp.data.data.content) {
               setData(resp.data.data.content);
             }
           });
       }
     });
-  }, []);
+  }, [currentPage]);
+
+  const updatePage = (page: number) => {  
+    setCurrentPage(page);
+  }
 
   /** 리뷰 작성 제출 */
   const submitForm = () => {};
@@ -108,7 +142,11 @@ const MyCmsList = () => {
           </ul>
         }
       </div>
-      <Pagination />
+      <Pagination
+        totalPage={totalPage}
+        currentPage={currentPage}
+        onClick={(page: number) => updatePage(page)}
+      />
     </>
   );
 
