@@ -33,37 +33,10 @@
       color: #333;
 
       img {
-        width: 200px;
+        width: 300px;
         height: 200px;
         border: 1px solid #c9cbcf;
         border-radius: 4px;
-      }
-      .cms-desc {
-        width: 100%;
-        padding: 40px;
-        .cms-name {
-          font-weight: bold;
-          font-size: 24px;
-        }
-
-        .cms-content {
-          color: #18181b;
-          padding: 20px 0;
-          font-size: 20px;
-        }
-
-        .cms-apply-box {
-          button {
-            border: none;
-            border-radius: 6px;
-            padding: 12px 20px;
-
-            font-size: 14px;
-            font-weight: bold;
-            color: white;
-            background-color: #f57b7b;
-          }
-        }
       }
     }
   }

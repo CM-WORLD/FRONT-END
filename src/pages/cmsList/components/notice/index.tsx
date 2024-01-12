@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { HOST_URL } from "../../../../common/Request";
 import "./style.scss";
+import Pagination from "../../../../components/pagnation";
 
 interface bbsItem {
   id: number;
@@ -37,32 +38,43 @@ const ApplyNoticeBbs = () => {
     }
 
     return data.map((item: bbsItem, idx) => (
-      <tr key={idx}>
-        <td>{idx}</td>
-        <td className="contents">{item.title}</td>
-        <td>{item.viewCnt}</td>
-        <td>{item.regDate}</td>
-      </tr>
+      <>
+      <tr key={`cms-notice-${idx}`}>
+      <td className="">
+        <span className="px-6 py-2 rounded border-red-500 font-bold text-red-600 bg-rose-200">
+          필독
+        </span>
+      </td>
+      <td>
+        <div className="py-3 font-bold text-red-600 text-left">{item.title}</div>
+      </td>
+      <td>
+        <div className="py-3">jinvicky</div>
+      </td>
+      <td>
+        <div className="py-3">{item.regDate}</div>
+      </td>
+      <td>
+        <div className="py-3">{item.viewCnt}</div>
+      </td>
+    </tr>
+
+    {/* <Pagination onClick={() => {}}/> */}
+    </>
+
     ));
   };
   return (
     <>
-      <h1>커미션 필독 공지</h1>
+      <h1 className="font-bold text-2xl">공지사항</h1>
       <table className="bbs-table">
         <colgroup>
           <col width="15%" />
           <col width="*" />
           <col width="15%" />
           <col width="15%" />
+          <col width="10%" />
         </colgroup>
-        <thead>
-          <tr>
-            <th scope="col">번호</th>
-            <th scope="col">제목</th>
-            <th scope="col">조회수</th>
-            <th scope="col">등록 날짜</th>
-          </tr>
-        </thead>
         <tbody>{noticeList()}</tbody>
       </table>
     </>
