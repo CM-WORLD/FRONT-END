@@ -12,7 +12,7 @@ const CmsApplyComplete = (props: ApplyCompleteProps) => {
             <span className="id-active">{props.cmsId}</span>
         </h4>
         <div className="link-box">
-            <a href="/">메인으로 이동</a>
+            <a href="/mypage/cms">마이페이지로 이동</a>
         </div>
     </div>
     </>;

@@ -50,7 +50,7 @@ const ApplyCms = () => {
       formData.append("imgList", imgList[i]);
     }
 
-    const data = await axios.post(HOST_URL+ "/auth/apply/form", formData, {
+    const data = await axios.post(HOST_URL+ "/apply/form", formData, {
       headers: {
         Authorization: `Bearer ${getAtk()}`,
         RefreshToken: getRtk(),
