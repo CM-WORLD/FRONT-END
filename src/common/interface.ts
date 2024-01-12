@@ -48,3 +48,13 @@ export interface CmsPayDetail {
     payAmt: number;
     regDate: string;
 }
+
+export interface PageObj {
+    first: boolean;
+    last: boolean;
+    size: number;
+    totalPages: number;
+    totalElements: number;
+    empty: boolean;
+    number: number;
+}

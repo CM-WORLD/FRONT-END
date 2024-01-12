@@ -18,9 +18,6 @@ const MyCmsList = () => {
   const [payMdDisplay, setPayMdDisplay] = useState(false);
 
   //pageable object state
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
-
   const [pageObj, setPageObj] = useState({
     number: 0,
     first: true,
@@ -32,14 +29,13 @@ const MyCmsList = () => {
   });
 
   useEffect(() => {
-
     AUTH_ITC.get(HOST_URL + "/validate/token").then((resp: any) => {
       if (resp.data.status === 200 || resp.data.staus === 205) {
         axios
           .get(HOST_URL + "/apply/history", {
             params: {
-              page: currentPage,
-              size: 10, 
+              page: pageObj.number,
+              size: 10,
             },
             headers: {
               Authorization: `Bearer ${getAtk()}`,
@@ -47,35 +43,32 @@ const MyCmsList = () => {
             },
           })
           .then((resp) => {
-
             console.log(3, resp.data.data);
-            /**
-             * const obj = resp.data.data;
-             * 
-             * number (현재 페이지 번호, number)
-             * obj.first(첫 페이지 여부, boolean)
-             * obj.last (마지막 페이지 여부, boolean)
-             * size (페이지당 데이터 개수, number)
-             * totalPages (전체 페이지 개수, number)
-             * totalElements (전체 데이터 개수, number)
-             * empty (데이터 존재 여부, boolean)
-             * 
-             */
+            const respData = resp.data.data;
 
-            if (resp.data.data.totalPages) {
-              setTotalPage(resp.data.data.totalPages);
+            if (respData) {
+              setPageObj({
+                first: respData.first,
+                last: respData.last,
+                number: respData.number,
+                size: respData.size,
+                totalPages: respData.totalPages,
+                totalElements: respData.totalElements,
+                empty: respData.empty,
+              });
             }
-            if (resp.data.data.content) {
+
+            if (respData.content) {
               setData(resp.data.data.content);
             }
           });
       }
     });
-  }, [currentPage]);
+  }, [pageObj.number]);
 
-  const updatePage = (page: number) => {  
-    setCurrentPage(page);
-  }
+  const updatePage = (page: number) => {
+    setPageObj({ ...pageObj, number: page });
+  };
 
   /** 리뷰 작성 제출 */
   const submitForm = () => {};
@@ -143,8 +136,7 @@ const MyCmsList = () => {
         }
       </div>
       <Pagination
-        totalPage={totalPage}
-        currentPage={currentPage}
+        pageObj={pageObj}
         onClick={(page: number) => updatePage(page)}
       />
     </>
