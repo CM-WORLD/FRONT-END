@@ -10,10 +10,10 @@ import InquiryForm from "../pages/inquiry/form";
 import ApplyCms from "../pages/apply/ApplyCms";
 import ReviewPage from "../pages/review/page";
 import InquiryDetail from "../pages/inquiry/detail";
-import MyCmsApplyDetail from "../pages/myPage/myCms/detail";
 import KakaoLoginLoading from "../pages/signIn/loading";
 import SignOutLoading from "../pages/signIn/signOut";
 import NotFound from "../components/error/notFound";
+import MyCmsApplyDetail from "../pages/myPage/myCms/detail";
 
 const Router = () => {
   return (

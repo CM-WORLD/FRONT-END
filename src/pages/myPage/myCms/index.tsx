@@ -57,48 +57,50 @@ const MyCmsList = () => {
                     className="border-t border-gray-200"
                     key={`cms-history-${idx}`}
                   >
-                    <div className="px-4 py-5 sm:px-6">
-                      <div className="flex items-center justify-between pb-5">
-                        <h3 className="text-lg leading-6 font-medium text-gray-900">
-                          <a href={`/mypage/cms/${item.id}`}>{item.title}</a>
-                        </h3>
-                        <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                          {item.regDate}
-                        </p>
-                      </div>
-                      <div className="mt-4 flex items-center justify-between">
-                        <p className="text-md font-medium text-gray-500">
-                          Status:
-                          <span className="pl-1 text-yellow-600">
-                            {item.statusNm}
-                          </span>
-                        </p>
-                        <div>
-                          {item.status === "CM02" && (
-                            <Button
-                              value="결제"
-                              color="blue"
-                              onClick={(e) => {
-                                setPaymentData(item.cmsPayDto);
-                                e.preventDefault();
-                                setPayMdDisplay(!payMdDisplay);
-                              }}
-                            />
-                          )}
-                          {item.status === "CM08" && (
-                            <Button
-                              value="리뷰"
-                              color="rose"
-                              className="ml-3"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                serRvwMdDisplay(!rvwMdDisplay);
-                              }}
-                            />
-                          )}
+                    <a href={`/mypage/cms/${item.id}`}>
+                      <div className="px-4 sm:px-6">
+                        <div className="flex items-center justify-between pb-5">
+                          <h3 className="text-lg leading-6 font-medium text-gray-900">
+                            {item.title}
+                          </h3>
+                          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                            {item.regDate}
+                          </p>
+                        </div>
+                        <div className="mt-1 flex items-center justify-between">
+                          <p className="text-md font-medium text-gray-500">
+                            Status:
+                            <span className="pl-1 text-yellow-600">
+                              {item.statusNm}
+                            </span>
+                          </p>
+                          <div>
+                            {item.status === "CM02" && (
+                              <Button
+                                value="결제"
+                                color="blue"
+                                onClick={(e) => {
+                                  setPaymentData(item.cmsPayDto);
+                                  e.preventDefault();
+                                  setPayMdDisplay(!payMdDisplay);
+                                }}
+                              />
+                            )}
+                            {item.status === "CM08" && (
+                              <Button
+                                value="리뷰"
+                                color="rose"
+                                className="ml-3"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  serRvwMdDisplay(!rvwMdDisplay);
+                                }}
+                              />
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   </li>
                 </>
               );
