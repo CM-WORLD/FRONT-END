@@ -28,8 +28,8 @@ const Router = () => {
         <Route path="/mypage/cms/:cmsApplyId" element={<MyCmsApplyDetail />} />
         <Route path="/mypage/cms" element={<MyCmsList />} />
         <Route path="/mypage/inquiry" element={<MyInquiryList />} />
-        <Route path="/inquiry/form" element={<InquiryForm />} />
-        <Route path="/inquiry/:inqId" element={<InquiryDetail />} />
+        <Route path="/mypage/inquiry/form" element={<InquiryForm />} />
+        <Route path="/mypage/inquiry/:inqId" element={<InquiryDetail />} />
         <Route path="/login/kakao" element={<KakaoLoginLoading />} />
         <Route path="/logout/kakao" element={<SignOutLoading />} />
         {/* 404 error page */}

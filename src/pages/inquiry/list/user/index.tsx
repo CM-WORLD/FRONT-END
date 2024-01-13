@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { getAtk, getRtk } from "../../../../common/Request";
+import { AUTH_ITC, HOST_URL, getAtk, getRtk } from "../../../../common/Request";
 import MyCommonContent from "../../../myPage/common";
 
-import "./style.scss";
-
+// import "./style.scss";
 
 interface bbsItem {
   id: number;
@@ -26,62 +25,62 @@ const MyInquiryList = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("/bbs/auth/inquiry/by/member", {
-        params,
-        headers: {
-          Authorization: `Bearer ${getAtk()}`,
-          RefreshToken: getRtk(),
-        },
-      })
-      .then((resp) => {
-        if (resp.data) {
-          setData(resp.data.content);
-        }
-      });
+    AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
+      if (resp.data.status === 200) {
+        axios
+          .get(HOST_URL + "/bbs/inquiry/member", {
+            params,
+            headers: {
+              Authorization: `Bearer ${getAtk()}`,
+              RefreshToken: getRtk(),
+            },
+          })
+          .then((resp) => {
+            if (resp.data.data) {
+              setData(resp.data.data.content);
+            }
+          });
+      }
+    });
   }, []);
-  //params 넣으니 무한 호출..
 
-  const inquiryList = () => {
-    if (data.length === 0) {
-      return (
-        <tr>
-          <td colSpan={4}>등록된 문의가 없습니다.</td>
-        </tr>
-      );
-    }
-
-    return data.map((item: bbsItem, idx) => (
-      <tr key={idx}>
-        <td>{idx + 1}</td>
-        <td className="contents">{item.title}</td>
-        <td>{item.regDate}</td>
-      </tr>
-    ));
-  };
   const content = (
-    <table className="bbs-table">
-      <colgroup>
-        <col width="15%" />
-        <col width="*" />
-        <col width="15%" />
-      </colgroup>
-      <thead>
-        <tr>
-          <th scope="col">번호</th>
-          <th scope="col">제목</th>
-          <th scope="col">등록 날짜</th>
-        </tr>
-      </thead>
-      <tbody>{inquiryList()}</tbody>
-    </table>
+    <div className="">
+      {data.length < 1 ? (
+        <div className="p-2 py-5 text-center">등록된 문의가 없습니다.</div>
+      ) : (
+        data.map((item: bbsItem, idx) => (
+          <a href={`/mypage/inquiry/${item.id}`} className="block">
+            <div
+              key={`my-inquiry-${idx}`}
+              className="flex justify-around px-4 py-4 border border-b-gray-200 border-x-0 border-t-0 border-collapse"
+            >
+              <p className="w-2/3 ">{item.title}</p>
+              <p className="w-1/3 text-center">{item.regDate}</p>
+            </div>
+          </a>
+        ))
+      )}
+    </div>
   );
+  const inquiryList = () => {
+    return (
+      <>
+        <div className="flex justify-around p-2 border-y border-t-2 border-black">
+          <div className="text-md p-2 w-2/3 text-center">제목</div>
+          <div className="p-2 w-1/3 text-center">작성일</div>
+        </div>
+        <div>{content}</div>
+      </>
+    );
+    // change table tag into div tag
+  };
 
   return (
     <>
       <MyCommonContent
         title="1:1 문의"
-        content={content}
+        content={inquiryList()}
         btnLink="/inquiry/form"
         btnTxt="신규 문의하기"
       />
