@@ -2,8 +2,16 @@ export interface BbsDetail {
     title: string;
     content: string;
     bbsCode: string;
-    nickName: string;
+    memberDto: MemberDetail;
+    regDate: string;
     imgList: []
+}
+
+export interface MemberDetail { 
+    id: string;
+    nickName: string;
+    email: string;
+    regDate: string;
 }
 
 export interface ReplyDetail {
@@ -58,3 +66,4 @@ export interface PageObj {
     empty: boolean;
     number: number;
 }
+
