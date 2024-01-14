@@ -17,8 +17,6 @@ const Pagination = (props: PaginationProps) => {
   } = props.pageObj;
 
   const renderPageList = () => {
-    console.log(first);
-
     return Array.from({ length: totalPages }, (_, index) => (
       <li key={index + 1}>
         <a
@@ -28,8 +26,8 @@ const Pagination = (props: PaginationProps) => {
             props.onClick(index);
           }}
           className={
-            "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" +
-            ` ${pageNum === index ? "bg-blue-300 text-blue-800" : ""}`
+            `flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`
+             + ` ${pageNum === index ? "text-primary bg-red-50" : "false"}`
           }
         >
           {index + 1}
@@ -54,7 +52,7 @@ const Pagination = (props: PaginationProps) => {
                 "flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" +
                 ` ${
                   first
-                    ? "pointer-events-none cursor-not-allowed bg-gray-200"
+                    ? "text-gray-300 pointer-events-none cursor-not-allowed bg-gray-200"
                     : ""
                 }`
               }
@@ -88,7 +86,7 @@ const Pagination = (props: PaginationProps) => {
                 "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover.bg-gray-100 hover.text-gray-700 dark.bg-gray-800 dark.border-gray-700 dark.text-gray-400 dark.hover.bg-gray-700 dark.hover.text-white" +
                 ` ${
                   last
-                    ? "pointer-events-none cursor-not-allowed bg-gray-200"
+                    ? "text-gray-300 pointer-events-none cursor-not-allowed bg-gray-200"
                     : ""
                 }`
               }
