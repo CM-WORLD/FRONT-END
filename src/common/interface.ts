@@ -16,7 +16,8 @@ export interface MemberDetail {
 
 export interface ReplyDetail {
     content: string;
-    nickName: string;
+    parentId: number;
+    boardDto: BbsDetail;
     regDate: string;
 }
 

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import { BbsDetail, ReplyDetail } from "../../../common/interface";
 import { AUTH_ITC, HOST_URL } from "../../../common/Request";
 import MyCommonContent from "../../myPage/common";
+
 import "./style.scss";
-import axios from "axios";
+import ReplyForm from "../../bbs/reply/ReplyForm";
+import ReplyList from "../../bbs/reply/ReplyList";
 
 const InquiryDetail = () => {
   const idx = useParams().inqId;
@@ -30,42 +33,34 @@ const InquiryDetail = () => {
     });
   }, []);
 
-  const replies = () => {
-    if (!replyList) return <>댓글이 존재하지 않습니다.</>;
-    return (
-      <>
-        {replyList.map((item: ReplyDetail, idx) => {
-          return (
-            <>
-              <div key={`inq-reply-${idx}`}>
-                <div>{item.content}</div>
-                <div>{item.nickName}</div>
-                <div>{item.regDate}</div>
-              </div>
-            </>
-          );
-        })}
-      </>
-    );
-  };
-
   const page = () => {
     if (!data) return <>존재하지 않는 게시글입니다.</>;
     return (
       <>
-        <div className="border border-gray-200 rounded p-5">
-          <div className="font-bold text-2xl">{data.title}</div>
-          <div className="flex">
-            <div className=" ">
-              <img src={import.meta.env.PUBLIC_URL + "/bnr_test.jpg"} />
+        <div className="border border-gray-200 rounded p-7">
+          <div className="text-2xl mb-3">{data.title}</div>
+          <div className="flex items-center gap-4">
+            <div className="">
+              <img
+                className="w-10 h-10 rounded-full"
+                src={
+                  "https://jvk-world.s3.ap-northeast-2.amazonaws.com/apply/1705024099133_test_01.jpg"
+                }
+              />
             </div>
             <div className="">
-              <div>{data.memberDto.nickName}</div>
-              <div className="text-gray-500">{data.regDate}</div>
+              <div className="font-bold text-gray-900">
+                {data.memberDto.nickName}
+              </div>
+              <div className="text-gray-500 text-sm">{data.regDate}</div>
             </div>
           </div>
-          <div className="py-5">{data.content}</div>
-          {replies()}
+          <div className="min-h-80 py-5">{data.content}</div>
+          <ReplyForm />
+          <div className="">
+            <div className="font-bold">댓글</div>
+            <ReplyList replyList={replyList} />
+          </div>
         </div>
       </>
     );
