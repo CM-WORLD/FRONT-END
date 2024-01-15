@@ -1,14 +1,13 @@
-import { ReplyDetail } from "../../../common/interface";
-import { getMlByVal } from "../../../components/tailwind/margin";
+import { ReplyDetail } from "../../../../common/interface";
+import { getMlByVal } from "../../../../components/tailwind/margin";
 
 interface ReplyListProps {
   replyList: ReplyDetail[];
 }
 
 const ReplyList = (props: ReplyListProps) => {
-
   const getInlineDepth = (depthPath: string) => {
-    const pathLength = depthPath.split('/').length;
+    const pathLength = depthPath.split("/").length;
     return pathLength === 1 ? "" : getMlByVal(pathLength);
   };
 
@@ -16,8 +15,13 @@ const ReplyList = (props: ReplyListProps) => {
   return props.replyList.map((item: ReplyDetail, idx) => {
     return (
       <>
-      
-        <div key={`inq-reply-${idx}`} className={"border-b border-gray-200 py-2" + ` ${getInlineDepth(item.depthPath) }`}>
+        <div
+          key={`inq-reply-${idx}`}
+          className={
+            "border-b border-gray-200 py-2" +
+            ` ${getInlineDepth(item.depthPath)}`
+          }
+        >
           <div className="flex items-center gap-3">
             <div className="">
               <div>{item.id}</div>
@@ -33,9 +37,13 @@ const ReplyList = (props: ReplyListProps) => {
             </div>
           </div>
           <div className="pt-3">{item.content}</div>
-          <div className="flex gap-5 pt-1 text-gray-500 text-sm">
+          <div className="flex gap-3 pt-1 text-gray-500 text-sm">
             <div>{item.regDate}</div>
             <button>답글 쓰기</button>
+            <div>
+              <button className="text-blue-600">수정</button>
+              <button className="ml-2 text-rose-600">삭제</button>
+            </div>
           </div>
         </div>
       </>

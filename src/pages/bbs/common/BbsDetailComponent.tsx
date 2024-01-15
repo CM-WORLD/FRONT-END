@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import { BbsDetail, ReplyDetail } from "../../../common/interface";
 import { AUTH_ITC, HOST_URL } from "../../../common/Request";
 import MyCommonContent from "../../myPage/common";
 
-import "./style.scss";
 import ReplyForm from "../../bbs/common/reply/ReplyForm";
 import ReplyList from "../../bbs/common/reply/ReplyList";
 
-const InquiryDetail = () => {
-  const idx = useParams().inqId;
+interface BbsDetailProps {
+   bbsId: string; // 게시글 번호
+   bbsCode: string; // 게시판 코드
+}
+
+const BbsDetailComponent = (props: BbsDetailProps) => {
+  const idx = props.bbsId;
 
   const [data, setData] = useState<BbsDetail>();
   const [replyList, setReplyList] = useState<ReplyDetail[]>();
@@ -19,7 +22,7 @@ const InquiryDetail = () => {
   useEffect(() => {
     AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
       if (resp.data.status === 200 || resp.data.staus === 205) {
-        axios.get(HOST_URL + "/bbs/BS02/" + idx).then((resp) => {
+        axios.get(HOST_URL + `/bbs/${props.bbsCode}/` + idx).then((resp) => {
           if (resp.status === 200 && resp.data) {
             setData(resp.data.data);
           }
@@ -73,4 +76,4 @@ const InquiryDetail = () => {
   );
 };
 
-export default InquiryDetail;
+export default BbsDetailComponent;

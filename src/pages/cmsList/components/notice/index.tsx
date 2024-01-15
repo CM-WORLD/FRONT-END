@@ -46,7 +46,9 @@ const ApplyNoticeBbs = () => {
         </span>
       </td>
       <td>
+        <a href={`/notice/${item.id}`}>
         <div className="py-3 font-bold text-red-600 text-left">{item.title}</div>
+        </a>
       </td>
       <td>
         <div className="py-3">jinvicky</div>
