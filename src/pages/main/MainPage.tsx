@@ -1,9 +1,12 @@
+import Locale from "../../components/locale";
 import SlideShow from "./components/slides";
 import "./style.scss";
 
 const MainPage = () => {
+
   return (
     <>
+      {/* <Locale k="locale_test" /> */}
       <div className="main-wrapper">
         <SlideShow />
         <h1 className="info-header">INFORMATION</h1>

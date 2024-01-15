@@ -18,14 +18,12 @@ interface BannerItem {
 
 const SlideShow = () => {
   const [data, setData] = useState([]);
-  useEffect(()=> {
-      axios.get(HOST_URL + "/bnr/list").then(resp => {
-        if(resp.data) {
-          setData(resp.data);
-        }
-      })
+  useEffect(() => {
+    axios.get(HOST_URL + "/bnr/list").then(resp => {
+      if (resp.data) setData(resp.data);
+    })
   }, []);
-  
+
   const settings = {
     dots: false,
     infinite: true,
@@ -37,7 +35,7 @@ const SlideShow = () => {
     pauseOnHover: true,
   };
 
-  const imgList = data.map((item: BannerItem, idx)=> {
+  const imgList = data.map((item: BannerItem, idx) => {
     return <a key={`banner-${idx}`} href={`${item.hrefUrl}`}>
       <img src={item.imgUrl} alt="banner_img" />
     </a>
@@ -46,7 +44,7 @@ const SlideShow = () => {
   return (
     <div className="slide-gallery">
       <Slider {...settings}>
-      {imgList}
+        {imgList}
       </Slider>
     </div>
   );

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { AUTH_ITC, HOST_URL, getAtk, getRtk } from "../../../common/Request";
+import { AUTH_ITC, getAtk, getRtk } from "../../../common/Request";
 import MyCommonContent from "../../myPage/common";
+import { HOST_URL } from "../../../libs/Const";
 
 // import "./style.scss";
 
