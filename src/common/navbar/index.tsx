@@ -17,7 +17,6 @@ const NavBar = () => {
       })
       .get(HOST_URL + "/validate/token")
       .then((resp) => {
-        console.log(resp.data);
         const status = resp.data.status;
         if (status === 205) {
           localStorage.setItem("atk", resp.data.newAtk);

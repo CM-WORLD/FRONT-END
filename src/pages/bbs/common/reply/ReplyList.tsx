@@ -12,6 +12,7 @@ interface ReplyListProps {
 const ReplyList = (props: ReplyListProps) => {
   const [replyList, setReplyList] = useState<ReplyDetail[]>();
 
+
   const getInlineDepth = (depthPath: string) => {
     const pathLength = depthPath.split("/").length;
     return pathLength === 1 ? "" : getMlByVal(pathLength);
@@ -38,7 +39,6 @@ const ReplyList = (props: ReplyListProps) => {
       axios
         .delete(HOST_URL + `/reply/${id}`, { data: { replyId: id } })
         .then((resp) => {
-          console.log("delete", resp);
           if(resp.data.status === 200) {
             alert("댓글이 삭제되었습니다");
             fetchReplyList();
@@ -51,6 +51,7 @@ const ReplyList = (props: ReplyListProps) => {
   return replyList.map((item: ReplyDetail, idx) => {
     return (
       <>
+     
         <div
           key={`inq-reply-${idx}`}
           className={

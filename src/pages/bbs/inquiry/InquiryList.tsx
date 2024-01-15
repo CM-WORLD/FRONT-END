@@ -73,7 +73,6 @@ const MyInquiryList = () => {
         <div>{content}</div>
       </>
     );
-    // change table tag into div tag
   };
 
   return (

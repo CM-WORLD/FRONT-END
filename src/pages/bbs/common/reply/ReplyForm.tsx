@@ -1,22 +1,45 @@
 import { useState } from "react";
 import Button from "../../../../components/button";
-import { HOST_URL, getAtk, getRtk } from "../../../../common/Request";
+import { AUTH_ITC, HOST_URL, getAtk, getRtk } from "../../../../common/Request";
 import axios from "axios";
 
-const ReplyForm = () => {
-  const [form, setForm] = useState({ content: "reply test...", bbsId: 1 });
+interface ReplyFormProps {
+  bbsId: string;
+}
+
+const ReplyForm = (props: ReplyFormProps) => {
+  const [form, setForm] = useState({
+    content: "reply test...",
+    bbsId: props.bbsId,
+    parentId: 0,
+    parentPath: "",
+  });
 
   const submitForm = () => {
     const formData = new FormData();
+    formData.append("bbsId", form.bbsId);
     formData.append("content", form.content);
-    formData.append("bbsId", form.bbsId.toString());
+    formData.append("parentId", String(form.parentId));
+    formData.append("parentPath", form.parentPath);
 
-    axios.post(HOST_URL + "/reply/insert", form, {
-      headers: {
-        withCredentials: true,
-        Authorization: `Bearer ${getAtk()}`,
-        RefreshToken: getRtk(),
-      },
+    AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
+      console.log("token check... ", resp.data.status);
+      if (resp.data.status === 200 || resp.data.staus === 205) {
+        axios
+          .post(HOST_URL + "/reply/", formData, {
+            headers: {
+              withCredentials: true,
+              Authorization: `Bearer ${getAtk()}`,
+              RefreshToken: getRtk(),
+            },
+          })
+          .then((resp) => {
+            console.log("post... ", resp);
+          });
+      } else {
+        alert("로그인이 필요합니다.");
+        // 로그인 페이지로 이동
+      }
     });
   };
 
@@ -28,8 +51,14 @@ const ReplyForm = () => {
           <textarea
             className="w-full outline-none resize-none"
             placeholder="댓글을 작성해주세요."
+            onChange={(e) => setForm({ ...form, content: e.target.value })}
           ></textarea>
-          <Button className="w-20" color="Primary" value="등록" />
+          <Button
+            className="w-20"
+            color="Primary"
+            value="등록"
+            onClick={submitForm}
+          />
         </div>
       </div>
     </div>
