@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { HOST_URL, getAtk, getRtk } from "../Request";
+import { HOST_URL, getAtk, getNick, getRtk } from "../Request";
 import "./style.scss";
 const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
@@ -44,7 +44,7 @@ const NavBar = () => {
               <>
                 <li>
                   <a href="/mypage/cms">
-                    안녕하세요! {localStorage.getItem("nick")}님
+                    안녕하세요! {getNick()}님
                   </a>
                 </li>
                 <li>
