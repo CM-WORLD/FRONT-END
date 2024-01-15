@@ -4,9 +4,8 @@ import axios from "axios";
 import CmsItems from "./components/cmsItem";
 import ApplyNoticeBbs from "./components/notice";
 import LoginModal from "../signIn/modal";
-
 import "./CmsList.scss";
-import { HOST_URL } from "../../common/Request";
+import { HOST_URL } from "../../libs/Const";
 
 const CmsList = () => {
   const [isModalHidden, setIsModalHidden] = useState(false);

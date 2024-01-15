@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-
-import { HOST_URL } from "../../../../common/Request";
-
 import "./style.scss";
 import axios from "axios";
 import Button from "../../../../components/button";
+import { HOST_URL } from "../../../../libs/Const";
 
 interface CmsItem {
   id: number;

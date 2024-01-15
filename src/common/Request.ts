@@ -1,6 +1,6 @@
 import axios from "axios";
 import qs from "qs";
-export const HOST_URL = "http://localhost:8080/api";
+import { HOST_URL } from "../libs/Const";
 
 export default axios.defaults.paramsSerializer = (params) => {
   return qs.stringify(params);
@@ -21,7 +21,7 @@ export const getNick = () => {
 
 /* test용 인증 interceptor */
 export const AUTH_ITC = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: HOST_URL,
   headers: {
     withCredentials: true,
     Authorization: `Bearer ${getAtk()}`,

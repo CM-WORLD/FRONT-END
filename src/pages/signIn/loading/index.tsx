@@ -1,10 +1,8 @@
 import { useEffect } from "react";
-
 import CommonLoading from "../../../components/loading";
-
 import "./style.scss";
 import axios from "axios";
-import { HOST_URL } from "../../../common/Request";
+import { HOST_URL } from "../../../libs/Const";
 
 const KakaoLoginLoading = () => {
   /** 카카오 인가 코드 */
@@ -12,7 +10,6 @@ const KakaoLoginLoading = () => {
 
   useEffect(() => {
     axios.post(HOST_URL +"/process/kakao", { code: code }).then((resp) => {
-      console.log("??? resp:", resp);
       const { nick } = resp.data;
       const { accessToken, refreshToken, grantType } = resp.data.tokens;
 

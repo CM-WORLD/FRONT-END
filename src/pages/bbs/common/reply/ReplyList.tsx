@@ -3,7 +3,8 @@ import axios from "axios";
 
 import { ReplyDetail } from "../../../../common/interface";
 import { getMlByVal } from "../../../../components/tailwind/margin";
-import { AUTH_ITC, HOST_URL } from "../../../../common/Request";
+import { AUTH_ITC } from "../../../../common/Request";
+import { HOST_URL } from "../../../../libs/Const";
 
 interface ReplyListProps {
   idx: string;

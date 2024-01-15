@@ -2,10 +2,11 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import { getRtk, getAtk, AUTH_ITC, HOST_URL } from "../../common/Request";
+import { getRtk, getAtk, AUTH_ITC } from "../../common/Request";
 import CommonLoading from "../../components/loading";
 
 import "./style.scss";
+import { HOST_URL } from "../../libs/Const";
 
 const CmsApplyComplete = React.lazy(() => import("../apply/complete"));
 const BadRequest = React.lazy(

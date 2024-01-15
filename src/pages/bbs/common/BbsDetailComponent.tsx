@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { BbsDetail, ReplyDetail } from "../../../common/interface";
-import { AUTH_ITC, HOST_URL } from "../../../common/Request";
+import { BbsDetail } from "../../../common/interface";
+import { AUTH_ITC } from "../../../common/Request";
 import MyCommonContent from "../../myPage/common";
 
 import ReplyForm from "../../bbs/common/reply/ReplyForm";
 import ReplyList from "../../bbs/common/reply/ReplyList";
+import { HOST_URL } from "../../../libs/Const";
 
 interface BbsDetailProps {
    bbsId: string; // 게시글 번호

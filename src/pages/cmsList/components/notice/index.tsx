@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import { HOST_URL } from "../../../../common/Request";
 import "./style.scss";
 import Pagination from "../../../../components/pagnation";
+import { HOST_URL } from "../../../../libs/Const";
 
 interface bbsItem {
   id: number;

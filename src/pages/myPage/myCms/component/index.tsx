@@ -3,13 +3,14 @@ import { useParams } from "react-router";
 import axios from "axios";
 
 import MyCommonContent from "../../common";
-import { AUTH_ITC, HOST_URL } from "../../../../common/Request";
+import { AUTH_ITC } from "../../../../common/Request";
 import {
   CmsApplyDetail,
   ImgDetail,
   CmsPayDetail,
 } from "../../../../common/interface";
 import Button from "../../../../components/button";
+import { HOST_URL } from "../../../../libs/Const";
 
 
 const MyCmsDetailComponent = () => {

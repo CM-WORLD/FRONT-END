@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import { CmsApplyDetail, CmsPayDetail } from "../../../common/interface";
-import { getRtk, getAtk, AUTH_ITC, HOST_URL } from "../../../common/Request";
+import { getRtk, getAtk, AUTH_ITC } from "../../../common/Request";
 import WriteRvwModal from "../../review/modal";
 import PaymentModal from "../../payment/modal";
 import MyCommonContent from "../common";
@@ -10,6 +9,7 @@ import Pagination from "../../../components/pagnation";
 import Button from "../../../components/button";
 
 import "./style.scss";
+import { HOST_URL } from "../../../libs/Const";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);

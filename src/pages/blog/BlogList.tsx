@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { HOST_URL } from "../../common/Request";
-
 import "./BlogList.scss";
+import { HOST_URL } from "../../libs/Const";
 
 interface Post {
   id: number;

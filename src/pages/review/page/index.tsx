@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { CmsApplyDetail } from "../../../common/interface";
-import { HOST_URL } from "../../../common/Request";
 import "./style.scss";
+import { HOST_URL } from "../../../libs/Const";
 
 interface ReviewItem {
   id: number;

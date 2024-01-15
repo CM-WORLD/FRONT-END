@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-
-import { HOST_URL } from "../../../common/Request";
 import MyCommonContent from "../../myPage/common";
+import { HOST_URL } from "../../../libs/Const";
 const InquiryForm = () => {
   const [inqForm, setInqForm] = useState({
     title: "",

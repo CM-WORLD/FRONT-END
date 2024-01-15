@@ -2,7 +2,8 @@ import React, { useEffect, useState, Suspense } from "react";
 import axios from "axios";
 
 import CommonLoading from "../../../components/loading";
-import { HOST_URL, getAtk, getRtk } from "../../../common/Request";
+import { getAtk, getRtk } from "../../../common/Request";
+import { HOST_URL } from "../../../libs/Const";
 
 
 const LoginBtnsComponent = React.lazy(() => import('../../signIn/page/component'))

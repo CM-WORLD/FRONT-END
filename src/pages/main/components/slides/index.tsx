@@ -3,9 +3,8 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import { HOST_URL } from "../../../../common/Request";
 import "./style.scss";
+import { HOST_URL } from "../../../../libs/Const";
 
 interface BannerItem {
   id: number;
