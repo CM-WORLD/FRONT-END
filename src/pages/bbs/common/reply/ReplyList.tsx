@@ -35,12 +35,14 @@ const ReplyList = (props: ReplyListProps) => {
 
   const deleteReply = (id: number) => {
     if (confirm("삭제 후에는 되돌릴 수 없습니다. 정말 삭제하시겠습니까?")) {
-      console.log("taret", id);
       axios
         .delete(HOST_URL + `/reply/${id}`, { data: { replyId: id } })
         .then((resp) => {
           console.log("delete", resp);
-          fetchReplyList();
+          if(resp.data.status === 200) {
+            alert("댓글이 삭제되었습니다");
+            fetchReplyList();
+          }
         });
     }
   };

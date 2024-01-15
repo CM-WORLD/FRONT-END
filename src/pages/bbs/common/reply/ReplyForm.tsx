@@ -29,7 +29,7 @@ const ReplyForm = () => {
             className="w-full outline-none resize-none"
             placeholder="댓글을 작성해주세요."
           ></textarea>
-          <Button className="w-20" color="Rose" value="등록" />
+          <Button className="w-20" color="Primary" value="등록" />
         </div>
       </div>
     </div>

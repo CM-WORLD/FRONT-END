@@ -5,6 +5,7 @@ type ClassType = {
 export const BgColors: ClassType ={
   Rose: "bg-rose-500",
   Blue: "bg-blue-500",
+  Primary: "bg-primary"
 }
 
 export const BgHoverColors: ClassType ={
