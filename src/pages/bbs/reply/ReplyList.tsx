@@ -1,17 +1,26 @@
 import { ReplyDetail } from "../../../common/interface";
+import { getMlByVal } from "../../../components/tailwind/margin";
 
 interface ReplyListProps {
   replyList: ReplyDetail[];
 }
 
 const ReplyList = (props: ReplyListProps) => {
+
+  const getInlineDepth = (depthPath: string) => {
+    const pathLength = depthPath.split('/').length;
+    return pathLength === 1 ? "" : getMlByVal(pathLength);
+  };
+
   if (!props.replyList) return <>댓글이 존재하지 않습니다.</>;
   return props.replyList.map((item: ReplyDetail, idx) => {
     return (
       <>
-        <div key={`inq-reply-${idx}`} className="border-b border-gray-200 py-2">
+      
+        <div key={`inq-reply-${idx}`} className={"border-b border-gray-200 py-2" + ` ${getInlineDepth(item.depthPath) }`}>
           <div className="flex items-center gap-3">
-            <div className=" ">
+            <div className="">
+              <div>{item.id}</div>
               <img
                 className="w-10 h-10 rounded-full"
                 src={

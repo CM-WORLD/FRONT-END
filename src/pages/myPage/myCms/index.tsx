@@ -43,7 +43,6 @@ const MyCmsList = () => {
             },
           })
           .then((resp) => {
-            console.log(3, resp.data.data);
             const respData = resp.data.data;
 
             if (respData) {

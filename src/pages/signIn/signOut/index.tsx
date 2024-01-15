@@ -14,7 +14,6 @@ const SignOutLoading = () => {
   useEffect(() => {
     AUTH_ITC.get("/validate/token").then((resp) => {
       if (!(resp.data.status === 200 || resp.data.status === 205)) {
-        //유효하거나 재발급일때만 로그아웃 가능
         setIsLogOut(false);
       } else {
         axios
