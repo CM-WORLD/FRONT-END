@@ -12,16 +12,17 @@ interface ReplyListProps {
 const ReplyList = (props: ReplyListProps) => {
   const [replyList, setReplyList] = useState<ReplyDetail[]>();
 
-
   const getInlineDepth = (depthPath: string) => {
-    const pathLength = depthPath.split("/").length;
-    return pathLength === 1 ? "" : getMlByVal(pathLength);
+    // const pathLength = depthPath.split("/").length;
+    // return pathLength === 1 ? "" : getMlByVal(pathLength);
+    return "";
   };
 
   const fetchReplyList = () => {
     axios.get(HOST_URL + "/reply/list/" + props.idx).then((resp) => {
       if (resp.status === 200 && resp.data) {
         setReplyList(resp.data.data);
+        console.log(resp.data.data);
       }
     });
   };
@@ -39,7 +40,7 @@ const ReplyList = (props: ReplyListProps) => {
       axios
         .delete(HOST_URL + `/reply/${id}`, { data: { replyId: id } })
         .then((resp) => {
-          if(resp.data.status === 200) {
+          if (resp.data.status === 200) {
             alert("댓글이 삭제되었습니다");
             fetchReplyList();
           }
@@ -51,7 +52,6 @@ const ReplyList = (props: ReplyListProps) => {
   return replyList.map((item: ReplyDetail, idx) => {
     return (
       <>
-     
         <div
           key={`inq-reply-${idx}`}
           className={
