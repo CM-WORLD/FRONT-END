@@ -18,7 +18,7 @@ const InquiryDetail = () => {
 
   useEffect(() => {
     AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
-      if (resp.data.status === 200) {
+      if (resp.data.status === 200 || resp.data.staus === 205) {
         axios.get(HOST_URL + "/bbs/BS02/" + idx).then((resp) => {
           if (resp.status === 200 && resp.data) {
             setData(resp.data.data);
@@ -37,7 +37,7 @@ const InquiryDetail = () => {
     if (!data) return <>존재하지 않는 게시글입니다.</>;
     return (
       <>
-        <div className="border border-gray-200 rounded p-7">
+        <div className={"border border-gray-200 rounded p-7"}>
           <div className="text-2xl mb-3">{data.title}</div>
           <div className="flex items-center gap-4">
             <div className="">

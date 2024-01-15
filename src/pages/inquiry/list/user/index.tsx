@@ -26,7 +26,7 @@ const MyInquiryList = () => {
 
   useEffect(() => {
     AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
-      if (resp.data.status === 200) {
+      if (resp.data.status === 200 || resp.data.staus === 205) {
         axios
           .get(HOST_URL + "/bbs/inquiry/member", {
             params,
