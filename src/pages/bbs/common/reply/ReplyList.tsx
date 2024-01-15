@@ -1,18 +1,52 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import { ReplyDetail } from "../../../../common/interface";
 import { getMlByVal } from "../../../../components/tailwind/margin";
+import { AUTH_ITC, HOST_URL } from "../../../../common/Request";
 
 interface ReplyListProps {
-  replyList: ReplyDetail[];
+  idx: string;
 }
 
 const ReplyList = (props: ReplyListProps) => {
+  const [replyList, setReplyList] = useState<ReplyDetail[]>();
+
   const getInlineDepth = (depthPath: string) => {
     const pathLength = depthPath.split("/").length;
     return pathLength === 1 ? "" : getMlByVal(pathLength);
   };
 
-  if (!props.replyList) return <>댓글이 존재하지 않습니다.</>;
-  return props.replyList.map((item: ReplyDetail, idx) => {
+  const fetchReplyList = () => {
+    axios.get(HOST_URL + "/reply/list/" + props.idx).then((resp) => {
+      if (resp.status === 200 && resp.data) {
+        setReplyList(resp.data.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
+      if (resp.data.status === 200 || resp.data.staus === 205) {
+        fetchReplyList();
+      }
+    });
+  }, []);
+
+  const deleteReply = (id: number) => {
+    if (confirm("삭제 후에는 되돌릴 수 없습니다. 정말 삭제하시겠습니까?")) {
+      console.log("taret", id);
+      axios
+        .delete(HOST_URL + `/reply/${id}`, { data: { replyId: id } })
+        .then((resp) => {
+          console.log("delete", resp);
+          fetchReplyList();
+        });
+    }
+  };
+
+  if (!replyList) return <div className="py-4">댓글이 존재하지 않습니다.</div>;
+  return replyList.map((item: ReplyDetail, idx) => {
     return (
       <>
         <div
@@ -42,7 +76,12 @@ const ReplyList = (props: ReplyListProps) => {
             <button>답글 쓰기</button>
             <div>
               <button className="text-blue-600">수정</button>
-              <button className="ml-2 text-rose-600">삭제</button>
+              <button
+                className="ml-2 text-rose-600"
+                onClick={() => deleteReply(item.id)}
+              >
+                삭제
+              </button>
             </div>
           </div>
         </div>

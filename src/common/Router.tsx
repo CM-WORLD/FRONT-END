@@ -9,12 +9,12 @@ import MyCmsList from "../pages/myPage/myCms";
 import InquiryForm from "../pages/bbs/inquiry/InquiryForm";
 import ApplyCms from "../pages/apply/ApplyCms";
 import ReviewPage from "../pages/review/page";
-import InquiryDetail from "../pages/inquiry/detail";
 import KakaoLoginLoading from "../pages/signIn/loading";
 import SignOutLoading from "../pages/signIn/signOut";
 import NotFound from "../components/error/notFound";
 import MyCmsApplyDetail from "../pages/myPage/myCms/detail";
 import NoticeDetail from "../pages/bbs/notice/NoticeDetail";
+import InquiryDetail from "../pages/bbs/inquiry/InquiryDetail";
 
 const Router = () => {
   return (

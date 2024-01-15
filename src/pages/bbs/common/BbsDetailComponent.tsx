@@ -17,7 +17,6 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
   const idx = props.bbsId;
 
   const [data, setData] = useState<BbsDetail>();
-  const [replyList, setReplyList] = useState<ReplyDetail[]>();
 
   useEffect(() => {
     AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
@@ -25,11 +24,6 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
         axios.get(HOST_URL + `/bbs/${props.bbsCode}/` + idx).then((resp) => {
           if (resp.status === 200 && resp.data) {
             setData(resp.data.data);
-          }
-        });
-        axios.get(HOST_URL + "/reply/list/" + idx).then((resp) => {
-          if (resp.status === 200 && resp.data) {
-            setReplyList(resp.data.data);
           }
         });
       }
@@ -62,7 +56,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
           <ReplyForm />
           <div className="">
             <div className="font-bold">댓글</div>
-            <ReplyList replyList={replyList} />
+            <ReplyList idx={idx} />
           </div>
         </div>
       </>
