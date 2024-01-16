@@ -1,59 +1,59 @@
-@import "../../../common/CommonStyle.scss";
-@import "../../../Variable.scss";
+// // @import "../../../common/CommonStyle.scss";
+// // @import "../../../Variable.scss";
 
-.my-cms-history {
-  .bbs-table {
-    width: 100%;
-    margin: 40px 0;
-    border-collapse: collapse;
+// .my-cms-history {
+//   .bbs-table {
+//     width: 100%;
+//     margin: 40px 0;
+//     border-collapse: collapse;
 
-    clear: both;
-    font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-    background: #fff;
-    text-align: center;
+//     clear: both;
+//     font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+//     background: #fff;
+//     text-align: center;
 
-    tr {
-      border: 1px solid #ddd;
+//     tr {
+//       border: 1px solid #ddd;
 
-      td,
-      th {
-        line-height: 16.8px;
-        padding: 10px 0;
-      }
+//       td,
+//       th {
+//         line-height: 16.8px;
+//         padding: 10px 0;
+//       }
 
-      td {
-        padding: 20px;
-        font-size: 14px;
-        min-height: 50px;
+//       td {
+//         padding: 20px;
+//         font-size: 14px;
+//         min-height: 50px;
 
-        .status-btn-box {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-        }
+//         .status-btn-box {
+//           display: flex;
+//           justify-content: center;
+//           gap: 10px;
+//         }
 
-        .pay-link,
-        .rvw-link {
-          display: inline-block;
-          margin-top: 15px;
-          border-radius: 6px;
-          padding: 10px;
-          font-size: 15px;
-          font-weight: bold;
-          color: white;
+//         .pay-link,
+//         .rvw-link {
+//           display: inline-block;
+//           margin-top: 15px;
+//           border-radius: 6px;
+//           padding: 10px;
+//           font-size: 15px;
+//           font-weight: bold;
+//           color: white;
 
-          background-color: $primary-color;
-        }
+//           background-color: $primary-color;
+//         }
 
-        .rvw-link {
-          background-color: $primary-green;
-        }
-      }
+//         .rvw-link {
+//           background-color: $primary-green;
+//         }
+//       }
 
-      td.contents {
-        color: #999;
-        text-align: left;
-      }
-    }
-  }
-}
+//       td.contents {
+//         color: #999;
+//         text-align: left;
+//       }
+//     }
+//   }
+// }

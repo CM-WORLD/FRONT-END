@@ -1,6 +1,6 @@
 import axios from "axios";
 import qs from "qs";
-import { HOST_URL } from "./const";
+import { HOST_URL } from "./Const";
 
 export default axios.defaults.paramsSerializer = (params) => {
   return qs.stringify(params);

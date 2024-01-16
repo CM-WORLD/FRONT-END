@@ -1,53 +1,51 @@
-@import "../../../common/CommonStyle.scss";
-@import "../../../Variable.scss";
+// // @import "../../../common/CommonStyle.scss";
+// // @import "../../../Variable.scss";
 
-.review-page {
-  min-height: $default-min-height;
-  text-align: center;
+// .review-page {
+//   min-height: $default-min-height;
+//   text-align: center;
 
-  h1.header {
-    padding: 30px 0;
-  }
+//   h1.header {
+//     padding: 30px 0;
+//   }
 
-  .empty-review {
-    padding: 30px 0;
-    font-size: 20px;
-  }
+//   .empty-review {
+//     padding: 30px 0;
+//     font-size: 20px;
+//   }
 
-  .review-content {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    
-    .rvw-item{
-      width: 300px;
-      padding: 20px;
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      border-radius: 6px;
+//   .review-content {
+//     padding: 20px;
+//     display: flex;
+//     justify-content: center;
+//     flex-wrap: wrap;
 
-      h4.cms-type-info {
-        padding-top: 7px;
+//     .rvw-item {
+//       width: 300px;
+//       padding: 20px;
+//       border: 1px solid rgba(0, 0, 0, 0.3);
+//       border-radius: 6px;
 
-      }
+//       h4.cms-type-info {
+//         padding-top: 7px;
+//       }
 
-      img {
-        max-width: 100%;;
-      }
+//       img {
+//         max-width: 100%;
+//       }
 
-      .rvw-item-content {
-        padding: 25px 0;
-        color: $text-dark;
-      }
+//       .rvw-item-content {
+//         padding: 25px 0;
+//         color: $text-dark;
+//       }
 
-      .wrt-info-box {
-        display: flex;
-        justify-content: flex-end;
-        gap: 5px;
+//       .wrt-info-box {
+//         display: flex;
+//         justify-content: flex-end;
+//         gap: 5px;
 
-        color: #71717A;
-      }
-    }
-
-  }
-}
+//         color: #71717a;
+//       }
+//     }
+//   }
+// }
