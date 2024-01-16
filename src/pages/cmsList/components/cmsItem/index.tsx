@@ -14,8 +14,8 @@ interface CmsItem {
 const CmsItems = () => {
   const [data, setData] = useState([]);
 
-  const initData = (resp) => {
-    if (resp.data) setData(resp.data);
+  const initData = (data) => {
+     setData(data.data);
   };
 
   useEffect(() => {
@@ -23,11 +23,19 @@ const CmsItems = () => {
   }, []);
 
   const renderItems = () => {
-    if (data.length < 1) return <div className="py-20 text-dark text-center">현재 등록된 커미션이 없습니다.</div>;
+    if (data.length < 1)
+      return (
+        <div className="py-20 text-dark text-center">
+          현재 등록된 커미션이 없습니다.
+        </div>
+      );
     return data.map((item: CmsItem, idx) => {
       return (
         <div key={`${item.id}-${idx}`}>
-          <a className="cms-item flex items-center py-7 text-dark" href={`/apply/${item.id}`}>
+          <a
+            className="cms-item flex items-center py-7 text-dark"
+            href={`/apply/${item.id}`}
+          >
             <div>
               <img
                 src={item.profileImg}
@@ -38,6 +46,16 @@ const CmsItems = () => {
             <div className="ml-6">
               <div className="text-2xl font-bold">{item.name}</div>
               <div className="min-h-16 py-3">{item.content}</div>
+              <div>
+                <div className="list-cnt">
+                  <div>
+                    현재 신청자 <b>{0}</b>명
+                  </div>
+                  <div>
+                    예약 대기자 <b>{0}</b>명
+                  </div>
+                </div>
+              </div>
               <Button color="Primary" value="신청 & 예약하기" />
             </div>
           </a>

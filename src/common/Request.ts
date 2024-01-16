@@ -79,7 +79,7 @@ export const GET_AJAX = (url: string , callback: Function, authRequired: boolean
       ...(authRequired ? AUTH_HEADER : {})
     },
   }).get(url).then(resp => {
-    if(resp.data.status === 200) {
+    if(resp.data.status === 200 && resp.data) {
       callback(resp.data);
     }
   });
