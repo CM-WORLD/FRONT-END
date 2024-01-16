@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./style.scss";
-import { HOST_URL } from "../../../libs/const";
 import { CmsApplyDetail } from "../../../defines/api";
+import { HOST_URL } from "../../../libs/Const";
 
 interface ReviewItem {
   id: number;
@@ -78,7 +78,7 @@ const ReviewPage = () => {
   return (
     <>
       {/* <WriteRvwModal display={true} onClick={() => {}} /> */}
-      <div className="review-page">
+      <div className="review-page h-full">
         {/* <h1 className="header">커미션 후기</h1> */}
         <div className="review-content">
           <div className="grid mb-8 dark:border-gray-700 md:mb-12 md:grid-cols-3 bg-white dark:bg-gray-800 m-10 gap-10">
