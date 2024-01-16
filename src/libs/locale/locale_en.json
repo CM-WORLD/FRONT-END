@@ -1,4 +1,5 @@
 {
     "locale_test": "언어선택",
-    "locale_button": "확인"
+    "confirm": "confirm", 
+    "cancel": "cancel"
 }
