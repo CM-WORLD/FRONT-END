@@ -46,7 +46,10 @@ const SignInPage = () => {
   return (
     <>
     <Suspense fallback={<CommonLoading />}>
-      {notLogined ? <LoginBtnsComponent /> : <BadRequest desc="이미 로그인 되어 있습니다." />}
+      {notLogined ? 
+      <><LoginBtnsComponent /></> 
+      : <BadRequest desc="이미 로그인 되어 있습니다." />
+      }
     </Suspense>
     </>
   );

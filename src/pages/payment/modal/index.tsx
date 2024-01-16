@@ -31,11 +31,11 @@ const PaymentModal = (props: PaymentModalProps) => {
   );
   return (
     <>
-      <Modal
+      {/* <Modal
         title="결제 정보"
         display={props.display}
         content={paymentContent}
-      />
+      /> */}
     </>
   );
 };

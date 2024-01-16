@@ -21,7 +21,7 @@ const LoginModal = (props: LoginModalProps) => {
   );
   return (
     <>
-      <Modal title="로그인" display={props.display} content={loginContent} />
+      {/* <Modal title="로그인" display={props.display} content={loginContent} /> */}
     </>
   );
 };

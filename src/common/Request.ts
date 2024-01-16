@@ -43,3 +43,29 @@ AUTH_ITC.interceptors.response.use((resp) => {
 
   return resp;
 });
+
+// refactoring 
+const AUTH_HEADER = {
+  Authorization: `Bearer ${getAtk()}`,
+  RefreshToken: getRtk(),
+}
+
+export const AUTH_AJAX = () => axios.create({
+  baseURL: HOST_URL,
+  headers: {
+    withCredentials: true,
+    ...AUTH_HEADER,
+  },
+}).get("/validate/token").then((resp) => {
+  const status = resp.data.status;
+  if (status === 200) return resp;
+  else if (status === 205) { // atk 재발급
+    if (resp.data.newAtk) {
+      localStorage.setItem("atk", resp.data.newAtk);
+    }
+    return resp;
+  } else { //415, 500, ::login required
+    localStorage.setItem("referer", window.location.pathname);
+    window.location.href = "/sign/in";
+  }
+});

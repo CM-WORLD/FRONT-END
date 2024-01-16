@@ -37,7 +37,7 @@ const WriteRvwModal = (props: ReviewModalProps) => {
   );
   return (
     <>
-      <Modal title="리뷰 작성하기" display={props.display} content={content} />
+      {/* <Modal title="리뷰 작성하기" display={props.display} content={content} /> */}
     </>
   );
 };

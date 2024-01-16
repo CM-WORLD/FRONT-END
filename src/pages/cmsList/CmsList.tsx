@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { HOST_URL } from "../../libs/Const";
 import CmsItems from "./components/cmsItem";
 import ApplyNoticeBbs from "./components/notice";
+import Modal from "../../common/modal";
 import LoginModal from "../signIn/modal";
+
 import "./CmsList.scss";
-import { HOST_URL } from "../../libs/Const";
 
 const CmsList = () => {
   const [isModalHidden, setIsModalHidden] = useState(false);
@@ -39,6 +41,7 @@ const CmsList = () => {
         display={isModalHidden}
         onClick={() => setIsModalHidden(false)}
       />
+      <Modal title="결제 확인" content={<>인보이스 날라간다...</>} display={false}/>
       <div className="base-padding">
         <ApplyNoticeBbs />
         {countList}
