@@ -46,6 +46,8 @@ export interface CommissionDetail {
   delYn: string;
   regDate: string;
   uptDate: string;
+  prsCnt: number;
+  rsvCnt: number;
 }
 
 export interface ImgDetail {
