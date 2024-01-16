@@ -1,7 +1,6 @@
 import { MouseEventHandler } from "react";
-import {  buildClass, getColorByType } from "../twColors";
-
 import "./style.scss";
+import { buildClass, getColorByType } from "../../defines/twColors";
 
 // export const Button = function <T extends string | number>({
 //   type,

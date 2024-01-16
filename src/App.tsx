@@ -1,8 +1,7 @@
-import Router from "./common/Router";
-import Footer from "./common/footer/Footer";
-import NavBar from "./common/navbar";
-
 import "./App.scss";
+import Footer from "./components/footer/Footer";
+import NavBar from "./components/navbar";
+import Router from "./routers/Router";
 
 function App() {
   return (

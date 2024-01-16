@@ -1,4 +1,4 @@
-import { ErrorContentProps } from "./interface";
+import { ErrorContentProps } from "../../defines/Error";
 
 const CommonErrContent = (props: ErrorContentProps) => {
   const defaultTitle = "요청 중 문제가 발생했습니다.";

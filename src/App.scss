@@ -1,4 +1,5 @@
-@import "/src/common/Variable.scss";
+@import "./Variable.scss";
+@import "./routers/Variable.scss";
 
 .wrapper {
   padding-top: $nav-padding-top;

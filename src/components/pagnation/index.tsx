@@ -1,4 +1,4 @@
-import { PageObj } from "../../common/interface";
+import { PageObj } from "../../defines/api";
 
 interface PaginationProps {
   pageObj: PageObj;

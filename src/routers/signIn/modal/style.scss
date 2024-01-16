@@ -1,0 +1,47 @@
+@import "../../../Variable.scss";
+@import "../../../common/CommonStyle.scss";
+
+.login-modal-content {
+  p {
+    padding-top: 4px;
+    padding-bottom: 30px;
+    color: gray;
+    text-align: center;
+  }
+
+  .social-link {
+    display: block;
+    margin-top: 20px;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-weight: bold;
+    color: $text-dark;
+    text-align: center;
+
+    &.naver {
+      background-color: $naver-color;
+      color: white;
+    }
+    &.kakao {
+      background-color: $kakao-color;
+    }
+  }
+
+  .btn-box {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+
+    .not-login-btn {
+      display: block;
+      position: relative;
+      border: 1px solid $primary-color;
+      border-radius: 6px;
+      padding: 12px 20px;
+
+      color: $primary-color;
+      text-align: center;
+      background-color: white;
+    }
+  }
+}

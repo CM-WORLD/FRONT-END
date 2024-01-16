@@ -1,0 +1,15 @@
+@import "../../../common/CommonStyle.scss";
+@import "../../../Variable.scss";
+
+.my-content {
+  min-height: $default-min-height;
+
+  display: flex;
+
+  .base-content {
+    padding-top: $nav-padding-top;
+    padding: 30px 60px;
+    width: 100%;
+
+  }
+}
