@@ -44,7 +44,7 @@ AUTH_ITC.interceptors.response.use((resp) => {
   return resp;
 });
 
-// refactoring 
+// refactoring .....
 const AUTH_HEADER = {
   Authorization: `Bearer ${getAtk()}`,
   RefreshToken: getRtk(),
@@ -69,3 +69,18 @@ export const AUTH_AJAX = () => axios.create({
     window.location.href = "/sign/in";
   }
 });
+
+/** get axios 중복 제거 테스트용 */
+export const GET_AJAX = (url: string , callback: Function, authRequired: boolean) => {
+  return axios.create({
+    baseURL: HOST_URL,
+    headers: {
+      withCredentials: true,
+      ...(authRequired ? AUTH_HEADER : {})
+    },
+  }).get(url).then(resp => {
+    if(resp.data.status === 200) {
+      callback(resp.data);
+    }
+  });
+}
