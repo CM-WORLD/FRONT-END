@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./style.scss";
 import Pagination from "../../../../components/pagnation";
 import { HOST_URL } from "../../../../libs/Const";
 
@@ -46,7 +45,7 @@ const ApplyNoticeBbs = () => {
       </td>
       <td>
         <a href={`/notice/${item.id}`}>
-        <div className="py-3 font-bold text-red-600 text-left">{item.title}</div>
+        <div className="py-1 font-bold text-red-600 text-left">{item.title}</div>
         </a>
       </td>
       <td>
@@ -54,9 +53,6 @@ const ApplyNoticeBbs = () => {
       </td>
       <td>
         <div className="py-3">{item.regDate}</div>
-      </td>
-      <td>
-        <div className="py-3">{item.viewCnt}</div>
       </td>
     </tr>
 
@@ -74,7 +70,6 @@ const ApplyNoticeBbs = () => {
           <col width="*" />
           <col width="15%" />
           <col width="15%" />
-          <col width="10%" />
         </colgroup>
         <tbody>{noticeList()}</tbody>
       </table>

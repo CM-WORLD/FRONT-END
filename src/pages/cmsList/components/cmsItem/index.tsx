@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Button from "../../../../components/button";
 import { GET_AJAX } from "../../../../common/Request";
 
-import "./style.scss";
 interface CmsItem {
   id: number;
   name: string;
@@ -24,16 +23,16 @@ const CmsItems = () => {
   }, []);
 
   const renderItems = () => {
-    if (data.length < 1) return <div className="no-cms">현재 등록된 커미션이 없습니다.</div>;
+    if (data.length < 1) return <div className="py-20 text-dark text-center">현재 등록된 커미션이 없습니다.</div>;
     return data.map((item: CmsItem, idx) => {
       return (
         <div key={`${item.id}-${idx}`}>
-          <a className="cms-item" href={`/apply/${item.id}`}>
+          <a className="cms-item flex items-center py-7 text-dark" href={`/apply/${item.id}`}>
             <div>
               <img
                 src={item.profileImg}
                 alt="profile"
-                className="w-48 h-44 border border-gray-300"
+                className="w-48 h-44 border border-gray-300 rounded"
               />
             </div>
             <div className="ml-6">
