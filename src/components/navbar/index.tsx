@@ -4,8 +4,6 @@ import axios from "axios";
 import { HOST_URL } from "../../libs/Const";
 import { getAtk, getNick, getRtk } from "../../libs/request";
 
-// import "./style.scss";
-
 const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
 
@@ -39,44 +37,6 @@ const NavBar = () => {
   }, []);
   return (
     <>
-      {/* <nav className="nav">
-        <div className="nav-auth">
-          <ul>
-            {isLogined ? (
-              <>
-                <li>
-                  <a href="/mypage/cms">안녕하세요! {getNick()}님</a>
-                </li>
-                <li>
-                  <a href="/mypage/cms">내 커미션 정보</a>
-                </li>
-                <li>
-                  <a
-                    href={`https://kauth.kakao.com/oauth/logout?client_id=${clientId}&logout_redirect_uri=${redirectUrl}`}
-                  >
-                    로그아웃
-                  </a>
-                </li>
-              </>
-            ) : (
-              <li>
-                <a href="/sign/in">로그인</a>
-              </li>
-            )}
-          </ul>
-        </div>
-        <ul>
-          <li>
-            <a href="/posts">Illust</a>
-          </li>
-          <li>
-            <a href="/commissions">Commission</a>
-          </li>
-          <li>
-            <a href="/reviews">Review</a>
-          </li>
-        </ul>
-      </nav> */}
       <nav className="h-24"></nav>
       <nav className="bg-white dark:bg-gray-900 fixed w-full h-24 z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2 px-4">
@@ -86,7 +46,7 @@ const NavBar = () => {
                 <li>
                   <a href="/mypage/cms">안녕하세요! {getNick()}님</a>
                 </li>
-                <li>
+                <li className="ml-5">
                   <a href="/mypage/cms">내 커미션 정보</a>
                 </li>
                 <li className="ml-5">
@@ -106,7 +66,7 @@ const NavBar = () => {
         </div>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
           <a
-            href="https://flowbite.com/"
+            href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
