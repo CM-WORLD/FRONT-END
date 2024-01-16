@@ -2,16 +2,16 @@ import { useEffect } from "react";
 import CommonLoading from "../../../components/loading";
 import "./style.scss";
 import axios from "axios";
-import { HOST_URL } from "../../../libs/const";
+import { HOST_URL } from "../../../libs/Const";
 
 const KakaoLoginLoading = () => {
   /** 카카오 인가 코드 */
   const code = new URL(window.location.href).searchParams.get("code");
 
   useEffect(() => {
-    axios.post(HOST_URL +"/process/kakao", { code: code }).then((resp) => {
+    axios.post(HOST_URL + "/process/kakao", { code: code }).then((resp) => {
       const { nick } = resp.data;
-      const { accessToken, refreshToken, grantType } = resp.data.tokens;
+      const { accessToken, refreshToken } = resp.data.tokens;
 
       if (accessToken && refreshToken && nick) {
         localStorage.setItem("atk", accessToken);

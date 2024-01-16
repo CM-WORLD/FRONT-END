@@ -76,9 +76,23 @@ export const GET_AJAX = (url: string , callback: Function, authRequired: boolean
     baseURL: HOST_URL,
     headers: {
       withCredentials: true,
-      ...(authRequired ? AUTH_HEADER : {})
+...(authRequired ? AUTH_HEADER : {})
     },
   }).get(url).then(resp => {
+    if(resp.data.status === 200 && resp.data) {
+      callback(resp.data);
+    }
+  });
+}
+
+export const POST_AJAX = (url: string, data: any, callback: Function) => {
+  return axios.create({
+    baseURL: HOST_URL,
+    headers: {
+      withCredentials: true,
+      ...AUTH_HEADER
+    },
+  }).post(url, data).then(resp => {
     if(resp.data.status === 200 && resp.data) {
       callback(resp.data);
     }

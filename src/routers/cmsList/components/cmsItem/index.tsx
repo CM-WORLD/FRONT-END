@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react";
+
 import Button from "../../../../components/button";
 import { GET_AJAX } from "../../../../libs/request";
 import { CommissionDetail } from "../../../../defines/api";
-
-interface CmsItem {
-  id: number;
-  name: string;
-  profileImg: string;
-  status: string;
-  content: string;
-}
 
 const CmsItems = () => {
   const [data, setData] = useState([]);
@@ -42,7 +35,7 @@ const CmsItems = () => {
             <div className="ml-6">
               <div className="text-2xl font-bold">{item.name}</div>
               <div className="py-2">{item.content}</div>
-              <div className="flex gap-5 py-2 font-bold">
+              <div className="flex gap-5 py-3 font-bold">
                 <div>
                   현재 신청자 <b className="text-blue-500">{item.prsCnt}</b>명
                 </div>

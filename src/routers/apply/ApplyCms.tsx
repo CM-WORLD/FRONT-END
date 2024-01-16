@@ -2,10 +2,10 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import CommonLoading from "../../components/loading";
-import "./style.scss";
-import { HOST_URL } from "../../libs/const";
 import { AUTH_ITC, getAtk, getRtk } from "../../libs/request";
+import { HOST_URL } from "../../libs/Const";
 
+import "./style.scss";
 const CmsApplyComplete = React.lazy(() => import("../apply/complete"));
 const BadRequest = React.lazy(
   () => import("../../components/error/badRequest")
@@ -49,7 +49,7 @@ const ApplyCms = () => {
       formData.append("imgList", imgList[i]);
     }
 
-    const data = await axios.post(HOST_URL+ "/apply/form", formData, {
+    const data = await axios.post(HOST_URL + "/apply/form", formData, {
       headers: {
         Authorization: `Bearer ${getAtk()}`,
         RefreshToken: getRtk(),
@@ -131,19 +131,19 @@ const ApplyCms = () => {
             }
           />
           <div className="input-line">
-          <label htmlFor="">
-            계좌주<span className="astrik">*</span>
-          </label>
-          <input
-            value={applyForm.bankOwner}
-            className="input"
-            type="text"
-            placeholder="계좌주 실명을 입력해 주세요. (초성만 입력 안됩니다.)"
-            onChange={(e) =>
-              setApplyForm({ ...applyForm, bankOwner: e.target.value })
-            }
-          />
-        </div>
+            <label htmlFor="">
+              계좌주<span className="astrik">*</span>
+            </label>
+            <input
+              value={applyForm.bankOwner}
+              className="input"
+              type="text"
+              placeholder="계좌주 실명을 입력해 주세요. (초성만 입력 안됩니다.)"
+              onChange={(e) =>
+                setApplyForm({ ...applyForm, bankOwner: e.target.value })
+              }
+            />
+          </div>
         </div>
         <div className="input-line">
           <label htmlFor="">
