@@ -41,7 +41,7 @@
 //    * 타겟 input에서 `input` 이벤트가 감지되면 발생하는 이벤트입니다.
 //    * @param value 현재 `input`의 `value` 값
 //    * @param target 받은 `EventTarget` 초점
-//    * @returns 
+//    * @returns
 //    */
 //   onInput?: (value: string, target?: HTMLElement) => void;
 
@@ -49,7 +49,7 @@
 //    * 타겟 input에서 `enter` 키가 눌릴 경우 발생하는 이벤트입니다.
 //    * @param value 현재 `input`의 `value` 값
 //    * @param target 받은 `EventTarget` 초점
-//    * @returns 
+//    * @returns
 //    */
 //   onEnter?: (value: string, target?: HTMLElement) => void;
 
@@ -58,7 +58,7 @@
 //    * @param value 현재 `input`의 `value` 값
 //    * @param target 받은 `EventTarget` 초점
 //    * @param relatedTarget 읽어버린 `EventTarget` 초점
-//    * @returns 
+//    * @returns
 //    */
 //   onFocus?: (value: string, target?: HTMLElement, relatedTarget?: HTMLElement | null) => void;
 
@@ -67,7 +67,7 @@
 //    * @param value 현재 `input`의 `value` 값
 //    * @param target 잃어버린 `EventTarget` 초점
 //    * @param relatedTarget 수신 `EventTarget` 포커스
-//    * @returns 
+//    * @returns
 //    */
 //   onBlur?: (value: string, target?: HTMLElement, relatedTarget?: HTMLElement | null) => void;
 // }
@@ -137,7 +137,7 @@
 //   const keyboardHandler = (e: KeyboardEvent) => {
 //     const target = e.target as HTMLInputElement;
 //     const value = target.value.slice(0, maxLength) as T;
-    
+
 //     if (!isFirstInput) setIsFirstInput(true);
 //     if (document.activeElement === target) {
 //       if (e.key === "Enter" || e.keyCode === 13) onEnter(value);
@@ -201,8 +201,30 @@
 // };
 
 // export * from "./search";
-
-export const Input = () => {
-    return <></>;
+interface InputProps {
+  value: string;
+  placeholder: string;
+  onChange: () => void;
+  type?: string;
+  readonly?: boolean;
+  disabled?: boolean;
 }
+
+export const Input = (props: InputProps) => {
+  return (
+    <input
+      className="border border-gray-400 rounded py-2 px-2"
+      type={props.type}
+      placeholder={props.placeholder}
+      value={props.value}
+      onChange={props.onChange}
+    />
+  );
+};
 export default Input;
+
+Input.defaultProps = {
+  type: "text",
+  disabled: false,
+  readonly: false,
+};

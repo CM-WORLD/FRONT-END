@@ -1,4 +1,3 @@
-import "./style.scss";
 
 interface ApplyCompleteProps {
     cmsId: string;
