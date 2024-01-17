@@ -10,7 +10,7 @@ interface InputLineProps {
 export const InputLine = (props: InputLineProps) => {
   return (
     <>
-      <div className="p-2">
+      <div className="p-2 flex">
         <label htmlFor="" className="mr-5 text-dark">
           {props.label} {props.required && <span className="text-red-500">*</span>}
         </label>

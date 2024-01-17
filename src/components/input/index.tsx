@@ -212,13 +212,17 @@ interface InputProps {
 
 export const Input = (props: InputProps) => {
   return (
+    <div>
+
     <input
       className="border border-gray-400 rounded py-2 px-2"
       type={props.type}
       placeholder={props.placeholder}
       value={props.value}
       onChange={props.onChange}
-    />
+      />
+      <div>*에러메세지입니다. 이거 왜 안했어요..</div>
+      </div>
   );
 };
 export default Input;
