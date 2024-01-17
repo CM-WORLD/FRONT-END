@@ -6,12 +6,12 @@ import { AUTH_ITC, getAtk, getRtk } from "../../libs/request";
 import { HOST_URL } from "../../libs/Const";
 
 import "./style.scss";
-const CmsApplyComplete = React.lazy(() => import("../apply/complete"));
+import CmsApplyComplete from "./complete";
 const BadRequest = React.lazy(
   () => import("../../components/error/badRequest")
 );
 
-interface ApplyForm {
+interface ApplyCmsForm {
   status: string;
   title: string;
   content: string;
@@ -20,12 +20,12 @@ interface ApplyForm {
   bankOwner: string;
 }
 
-const ApplyCms = () => {
+const ApplyForm = () => {
   const cmsId = useParams().cmsId; //참조할 커미션 타입 id
   const [isComplete, setIsComplete] = useState(false);
   const [isError, setIsError] = useState(false);
   const [newCmsId, setNewCmsId] = useState("");
-  const [applyForm, setApplyForm] = useState<ApplyForm>({
+  const [applyForm, setApplyForm] = useState<ApplyCmsForm>({
     status: "",
     title: "",
     content: "",
@@ -185,4 +185,4 @@ const ApplyCms = () => {
   );
 };
 
-export default ApplyCms;
+export default ApplyForm;

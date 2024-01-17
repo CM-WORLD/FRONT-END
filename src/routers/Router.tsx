@@ -6,7 +6,7 @@ import SignInPage from ".//signIn/page";
 import MyInquiryList from ".//bbs/inquiry/InquiryList";
 import MyCmsList from ".//myPage/myCms";
 import InquiryForm from ".//bbs/inquiry/InquiryForm";
-import ApplyCms from ".//apply/ApplyCms";
+import ApplyCms from "./apply/ApplyForm";
 import ReviewPage from ".//review/page";
 import KakaoLoginLoading from ".//signIn/loading";
 import SignOutLoading from ".//signIn/signOut";
