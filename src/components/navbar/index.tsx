@@ -33,7 +33,7 @@ const NavBar = () => {
   const clientId = import.meta.env.VITE_REACT_APP_KAKAO_CLIENT_ID;
 
   useEffect(() => {
-    validateTk();
+    // validateTk();
   }, []);
   return (
     <>
