@@ -60,7 +60,7 @@ const MyCmsDetailComponent = () => {
       <>
         <div className="py-4">
           <div className="font-bold text-lg text-rose-400">
-            {data.cmsDto.name}
+            {data.cmsName} 
           </div>
           <div className="mt-1 flex items-center">
             <div className="font-bold text-2xl">{data.title}</div>
