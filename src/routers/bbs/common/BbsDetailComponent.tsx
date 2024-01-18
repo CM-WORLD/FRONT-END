@@ -11,6 +11,7 @@ interface BbsDetailProps {
   style?: string;
   bbsId: string; // 게시글 번호
   bbsCode: string; // 게시판 코드
+  isPublic: boolean; // 전체공개인지 회원공개인지
 }
 
 const BbsDetailComponent = (props: BbsDetailProps) => {
@@ -77,7 +78,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
           <ReplyForm bbsId={idx} />
           <div className="">
             <div className="font-bold">댓글</div>
-            <ReplyList idx={idx} />
+            <ReplyList idx={idx} isPublic={props.isPublic} />
           </div>
         </div>
       </>

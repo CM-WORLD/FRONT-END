@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+
 import WriteRvwModal from "../../review/modal";
 import PaymentModal from "../../payment/modal";
 import MyCommonContent from "../common";
 import Pagination from "../../../components/pagnation";
 import Button from "../../../components/button";
 
-import "./style.scss";
 import { CmsApplyDetail, CmsPayDetail } from "../../../defines/api";
-import { AUTH_ITC, REQUEST_GET, getAtk, getRtk } from "../../../libs/request";
-import { HOST_URL } from "../../../libs/Const";
+import { REQUEST_GET} from "../../../libs/request";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);
@@ -17,7 +15,6 @@ const MyCmsList = () => {
   const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
   const [payMdDisplay, setPayMdDisplay] = useState(false);
 
-  //pageable object state
   const [pageObj, setPageObj] = useState({
     number: 0,
     first: true,
@@ -50,40 +47,6 @@ const MyCmsList = () => {
       page: pageObj.number,
       size: 10,
     }}, (data) => {cmsHistoryCallback(data)}, "private", true);
-    // AUTH_ITC.get(HOST_URL + "/validate/token").then((resp: any) => {
-    //   if (resp.data.status === 200 || resp.data.staus === 205) {
-    //     axios
-    //       .get(HOST_URL + "/apply/history", {
-    //         params: {
-    //           page: pageObj.number,
-    //           size: 10,
-    //         },
-    //         headers: {
-    //           Authorization: `Bearer ${getAtk()}`,
-    //           RefreshToken: getRtk(),
-    //         },
-    //       })
-    //       .then((resp) => {
-    //         const respData = resp.data.data;
-
-    //         if (respData) {
-    //           setPageObj({
-    //             first: respData.first,
-    //             last: respData.last,
-    //             number: respData.number,
-    //             size: respData.size,
-    //             totalPages: respData.totalPages,
-    //             totalElements: respData.totalElements,
-    //             empty: respData.empty,
-    //           });
-    //         }
-
-    //         if (respData.content) {
-    //           setData(resp.data.data.content);
-    //         }
-    //       });
-    //   }
-    // });
   }, [pageObj.number]);
 
   const updatePage = (page: number) => {

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import axios from "axios";
 import MyCommonContent from "../../common";
 import Button from "../../../../components/button";
 import { CmsApplyDetail, ImgDetail } from "../../../../defines/api";
-import { AUTH_ITC, REQUEST_GET } from "../../../../libs/request";
+import { REQUEST_GET } from "../../../../libs/request";
 
 const MyCmsDetailComponent = () => {
   const applyId = useParams().cmsApplyId || "";
@@ -92,7 +91,7 @@ const MyCmsDetailComponent = () => {
             <div className="my-10">
               <div className="font-bold text-2xl">결제 요청서 </div>
               <div className="py-5">
-                <div className="pb-3 font-bold text-md">결제 수단</div>
+                <div className="pb-3 font-bold text-md">결제 정보</div>
                 <div className="px-4 py-8 bg-gray-100 rounded-sm">
                   <div>
                     총 결제 금액:{" "}

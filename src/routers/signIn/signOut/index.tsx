@@ -3,8 +3,8 @@ import axios from "axios";
 import CommonLoading from "../../../components/loading";
 import BadRequest from "../../../components/error/badRequest";
 import "./style.scss";
-import { HOST_URL } from "../../../libs/const";
 import { AUTH_ITC, getRtk } from "../../../libs/request";
+import { HOST_URL } from "../../../libs/Const";
 
 const SignOutLoading = () => {
   const [isLogOut, setIsLogOut] = useState(true);
