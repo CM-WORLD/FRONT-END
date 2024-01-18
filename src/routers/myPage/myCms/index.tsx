@@ -7,9 +7,9 @@ import Pagination from "../../../components/pagnation";
 import Button from "../../../components/button";
 
 import "./style.scss";
-import { HOST_URL } from "../../../libs/const";
 import { CmsApplyDetail, CmsPayDetail } from "../../../defines/api";
 import { AUTH_ITC, getAtk, getRtk } from "../../../libs/request";
+import { HOST_URL } from "../../../libs/Const";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);

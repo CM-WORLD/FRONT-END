@@ -2,38 +2,43 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { HOST_URL } from "../../libs/Const";
-import { getAtk, getNick, getRtk } from "../../libs/request";
+import { REQUEST_GET, getAtk, getNick, getRtk } from "../../libs/request";
 
 const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
 
-  const validateTk = () => {
-    axios
-      .create({
-        headers: {
-          withCredentials: true,
-          Authorization: `Bearer ${getAtk()}`,
-          RefreshToken: getRtk(),
-        },
-      })
-      .get(HOST_URL + "/validate/token")
-      .then((resp) => {
-        const status = resp.data.status;
-        if (status === 205) {
-          localStorage.setItem("atk", resp.data.newAtk);
-          setIsLogined(true);
-        } else if (status === 200) {
-          setIsLogined(true);
-        } else setIsLogined(false);
-      })
-      .catch((error) => setIsLogined(false));
-  };
+  // const validateTk = () => {
+  //   axios
+  //     .create({
+  //       headers: {
+  //         withCredentials: true,
+  //         Authorization: `Bearer ${getAtk()}`,
+  //         RefreshToken: getRtk(),
+  //       },
+  //     })
+  //     .get(HOST_URL + "/validate/token")
+  //     .then((resp) => {
+  //       const status = resp.data.status;
+  //       if (status === 205) {
+  //         localStorage.setItem("atk", resp.data.newAtk);
+  //         setIsLogined(true);
+  //       } else if (status === 200) {
+  //         setIsLogined(true);
+  //       } else setIsLogined(false);
+  //     })
+  //     .catch((error) => setIsLogined(false));
+  // };
 
   const redirectUrl = import.meta.env.VITE_REACT_APP_KAKAO_LOGOUT_URL_LOCAL;
   const clientId = import.meta.env.VITE_REACT_APP_KAKAO_CLIENT_ID;
 
+  const loginCheck = (status) => {
+    if (status === 200 || status === 205) setIsLogined(true);
+    else setIsLogined(false);
+  }
+
   useEffect(() => {
-    // validateTk();
+    REQUEST_GET("/login/check", {}, (data) => {loginCheck(data.status)}, "private", false);
   }, []);
   return (
     <>
@@ -79,9 +84,6 @@ const NavBar = () => {
             </span>
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            {/* <button type="button" className="text-white">
-              Login
-            </button> */}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -112,15 +114,6 @@ const NavBar = () => {
             id="navbar-sticky"
           >
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              {/* <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                  aria-current="page"
-                >
-                  Home
-                </a>
-              </li> */}
               <li>
                 <a
                   href="/posts"

@@ -106,7 +106,7 @@ export const GET_AJAX = (
     });
 };
 
-export const REQUEST_GET = async (url: string, params: {}, callback: Function, type: string) => {
+export const REQUEST_GET = async (url: string, params: {}, callback: Function, type: string, redirect?: boolean) => {
   const resp = await axios
     .create({
       baseURL: HOST_URL,
@@ -118,14 +118,15 @@ export const REQUEST_GET = async (url: string, params: {}, callback: Function, t
     })
     .get(url, params);
 
-    console.log(resp.data);
   if (resp.data.status === 200) {
     if (resp.data) callback(resp.data);
     if (resp.data.newAtk) setAccessToken(`${resp.data.newAtk}`); // atk 재발급
   } else {
-    // 테스트 오케이
-    // localStorage.setItem("referer", window.location.pathname);
-    // window.location.href = "/sign/in";
+    if (redirect)  {
+      localStorage.setItem("referer", window.location.pathname);
+      alert("로그인이 필요합니다.");
+      window.location.href = "/sign/in";
+    }
     // 415, 500, 505 ::login required
   }
 };

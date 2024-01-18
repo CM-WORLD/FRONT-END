@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 
-import Button from "../../../../components/button";
-import { GET_AJAX } from "../../../../libs/request";
+import { REQUEST_GET } from "../../../../libs/request";
 import { CommissionDetail } from "../../../../defines/api";
+
+import Button from "../../../../components/button";
 
 const CmsItems = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    GET_AJAX("/cms/list", (data) => setData(data.data), false);
+    REQUEST_GET("/cms/list", {}, (data) => setData(data.data), "public", false);
   }, []);
 
   const renderItems = () => {
