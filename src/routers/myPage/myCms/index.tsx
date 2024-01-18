@@ -8,7 +8,7 @@ import Button from "../../../components/button";
 
 import "./style.scss";
 import { CmsApplyDetail, CmsPayDetail } from "../../../defines/api";
-import { AUTH_ITC, getAtk, getRtk } from "../../../libs/request";
+import { AUTH_ITC, REQUEST_GET, getAtk, getRtk } from "../../../libs/request";
 import { HOST_URL } from "../../../libs/Const";
 
 const MyCmsList = () => {
@@ -28,41 +28,62 @@ const MyCmsList = () => {
     empty: true,
   });
 
+  const cmsHistoryCallback = (data: any) => {
+    const respData = data.data;
+
+    if (respData) {
+      setData(respData.content);
+      setPageObj({
+        first: respData.first,
+        last: respData.last,
+        number: respData.number,
+        size: respData.size,
+        totalPages: respData.totalPages,
+        totalElements: respData.totalElements,
+        empty: respData.empty,
+      });
+    }
+  }
+
   useEffect(() => {
-    AUTH_ITC.get(HOST_URL + "/validate/token").then((resp: any) => {
-      if (resp.data.status === 200 || resp.data.staus === 205) {
-        axios
-          .get(HOST_URL + "/apply/history", {
-            params: {
-              page: pageObj.number,
-              size: 10,
-            },
-            headers: {
-              Authorization: `Bearer ${getAtk()}`,
-              RefreshToken: getRtk(),
-            },
-          })
-          .then((resp) => {
-            const respData = resp.data.data;
+    REQUEST_GET("/apply/history",  {params: {
+      page: pageObj.number,
+      size: 10,
+    }}, (data) => {cmsHistoryCallback(data)}, "private", true);
+    // AUTH_ITC.get(HOST_URL + "/validate/token").then((resp: any) => {
+    //   if (resp.data.status === 200 || resp.data.staus === 205) {
+    //     axios
+    //       .get(HOST_URL + "/apply/history", {
+    //         params: {
+    //           page: pageObj.number,
+    //           size: 10,
+    //         },
+    //         headers: {
+    //           Authorization: `Bearer ${getAtk()}`,
+    //           RefreshToken: getRtk(),
+    //         },
+    //       })
+    //       .then((resp) => {
+    //         const respData = resp.data.data;
 
-            if (respData) {
-              setPageObj({
-                first: respData.first,
-                last: respData.last,
-                number: respData.number,
-                size: respData.size,
-                totalPages: respData.totalPages,
-                totalElements: respData.totalElements,
-                empty: respData.empty,
-              });
-            }
+    //         if (respData) {
+    //           setPageObj({
+    //             first: respData.first,
+    //             last: respData.last,
+    //             number: respData.number,
+    //             size: respData.size,
+    //             totalPages: respData.totalPages,
+    //             totalElements: respData.totalElements,
+    //             empty: respData.empty,
+    //           });
+    //         }
 
-            if (respData.content) {
-              setData(resp.data.data.content);
-            }
-          });
-      }
-    });
+    //         if (respData.content) {
+    //           setData(resp.data.data.content);
+    //         }
+    //       });
+    //   }
+    // });
   }, [pageObj.number]);
 
   const updatePage = (page: number) => {
@@ -73,7 +94,7 @@ const MyCmsList = () => {
   const submitForm = () => {};
   const content = (
     <>
-      <div className="my-cms-history">
+      <div className="">
         {
           <ul className="bg-white shadow overflow-hidden sm:rounded-md mx-auto w-xl">
             {data.map((item: CmsApplyDetail, idx) => {
@@ -84,8 +105,8 @@ const MyCmsList = () => {
                     key={`cms-history-${idx}`}
                   >
                     <a href={`/mypage/cms/${item.id}`}>
-                      <div className="px-4 sm:px-6">
-                        <div className="flex items-center justify-between pb-5">
+                      <div className="p-3 sm:px-6">
+                        <div className="flex items-center justify-between py-2">
                           <h3 className="text-lg leading-6 font-medium text-gray-900">
                             {item.title}
                           </h3>
@@ -93,7 +114,7 @@ const MyCmsList = () => {
                             {item.regDate}
                           </p>
                         </div>
-                        <div className="mt-1 flex items-center justify-between">
+                        <div className="flex items-center justify-between">
                           <p className="text-md font-medium text-gray-500">
                             Status:
                             <span className="pl-1 text-yellow-600">

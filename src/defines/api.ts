@@ -27,6 +27,7 @@ export interface ReplyDetail {
 export interface CmsApplyDetail {
   cmsDto: CommissionDetail;
   cmsPayDto: CmsPayDetail;
+  cmsImgDtoList: ImgDetail[];
   id: string;
   title: string;
   content: string;

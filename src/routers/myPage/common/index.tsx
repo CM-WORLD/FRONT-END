@@ -1,7 +1,6 @@
 import SideNav from "../sideNav";
 import { ReactNode } from "react";
 
-import "./style.scss";
 import Button from "../../../components/button";
 
 interface ContentProps {
@@ -14,11 +13,11 @@ interface ContentProps {
 const MyCommonContent = (props: ContentProps) => {
   return (
     <>
-      <div className="my-content">
-        <div className="lg:w-2/6">
+      <div className="flex">
+        <div className="">
           <SideNav />
         </div>
-        <div className="base-content">
+        <div className="p-3">
           {props.title && (
             <div className="flex justify-between align-center mt-5 mb-12">
               <div className="text-3xl font-bold">{props.title}</div>

@@ -3,54 +3,52 @@ import { useParams } from "react-router";
 import axios from "axios";
 import MyCommonContent from "../../common";
 import Button from "../../../../components/button";
-import { HOST_URL } from "../../../../libs/const";
-import { CmsApplyDetail, CmsPayDetail, ImgDetail } from "../../../../defines/api";
-import { AUTH_ITC } from "../../../../libs/request";
-
+import { CmsApplyDetail, ImgDetail } from "../../../../defines/api";
+import { AUTH_ITC, REQUEST_GET } from "../../../../libs/request";
 
 const MyCmsDetailComponent = () => {
   const applyId = useParams().cmsApplyId || "";
   const [data, setData] = useState<CmsApplyDetail | null>(null);
-  const [imgList, setImgList] = useState([]);
-  const [payment, setPayment] = useState<CmsPayDetail | null>(null);
+
+  const [completImgList, setCompleteImgList] = useState([]);
+  const [applyImgList, setApplyImgList] = useState([]);
+
+  const applyHistoryCallback = (data: any) => {
+    if (data) {
+      console.log(data, "test");
+      setData(data.data);
+      setCompleteImgList(data.completeImgList);
+      setApplyImgList(data.applyImgList);
+    }
+  };
 
   useEffect(() => {
-    AUTH_ITC.get("/validate/token").then((resp) => {
-      if (resp.data.status === 200 || resp.data.staus === 205) {
-        axios
-          .get(HOST_URL + "/apply/detail", {
-            params: {
-              cmsApplyId: applyId,
-            },
-          })
-          .then((resp) => {
-            if (resp.data) {
-              setData(resp.data.data);
-            }
-
-            if (resp.data.imgList) {
-              setImgList(resp.data.imgList);
-            }
-
-            if (resp.data.payment) {
-              setPayment(resp.data.payment);
-            }
-          });
-      } else {
-        //404page
-      }
-    });
+    REQUEST_GET(
+      "/apply/detail",
+      {
+        params: {
+          cmsApplyId: applyId,
+        },
+      },
+      (data) => {
+        applyHistoryCallback(data);
+      },
+      "private",
+      true
+    );
   }, []);
 
   const content = () => {
     if (!data) return <></>;
 
-    const images = () => {
+    const { cmsPayDto } = data;
+
+    const renderImgList = (imgList) => {
       if (imgList.length < 1) return <></>;
       return imgList.map((item: ImgDetail, idx) => {
         return (
-          <a href={item.imgUrl} target="_blank">
-            <div className="w-1/3" key={`cms-apply-img-${idx}`}>
+          <a href={item.imgUrl} target="_blank" className="w-1/3">
+            <div key={`cms-apply-img-${idx}`}>
               <img src={item.imgUrl} alt="img" />
             </div>
           </a>
@@ -73,13 +71,23 @@ const MyCmsDetailComponent = () => {
           <p className="pt-3 text-gray-500">신청 ID: {data.id}</p>
           <p className="pt-1 text-gray-500">신청일: {data.regDate}</p>
         </div>
+        {completImgList.length > 0 && (
+          <div className="my-5 mb-8">
+            <div className="pt-3 pb-3 font-bold text-md">완성 이미지</div>
+            <div className="px-4 py-8 bg-gray-100 rounded-sm">
+              <div className="pb-8"></div>
+
+              <div className="flex gap-3">{renderImgList(completImgList)}</div>
+            </div>
+          </div>
+        )}
         <div className="pt-3 pb-3 font-bold text-md">요청사항</div>
         <div className="px-4 py-8 bg-gray-100 rounded-sm">
           <div className="pb-8">{data.content}</div>
-          {images()}
+
+          <div className="flex gap-3">{renderImgList(applyImgList)}</div>
         </div>
-        {/* <div>커미션 타입: {data.cmsTypeNm && data.cmsTypeNm}</div> */}
-        {payment && (
+        {cmsPayDto && (
           <>
             <div className="my-10">
               <div className="font-bold text-2xl">결제 요청서 </div>
@@ -89,7 +97,7 @@ const MyCmsDetailComponent = () => {
                   <div>
                     총 결제 금액:{" "}
                     <span className="font-bold text-rose-600">
-                      {payment.payAmt}원
+                      {cmsPayDto.payAmt}원
                     </span>
                   </div>
                   <div className="py-5">
@@ -111,7 +119,7 @@ const MyCmsDetailComponent = () => {
               </div>
               <div className="pb-3 font-bold text-md">작가 코멘트</div>
               <div className="px-4 py-8 bg-gray-100 rounded-sm">
-                {payment.comment} ({payment.regDate})
+                {cmsPayDto.comment} ({cmsPayDto.regDate})
               </div>
             </div>
           </>

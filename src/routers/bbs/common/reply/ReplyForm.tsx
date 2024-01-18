@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "../../../../components/button";
 import axios from "axios";
-import { HOST_URL } from "../../../../libs/const";
 import { AUTH_ITC, getAtk, getRtk } from "../../../../libs/request";
+import { HOST_URL } from "../../../../libs/Const";
 
 interface ReplyFormProps {
   bbsId: string;
