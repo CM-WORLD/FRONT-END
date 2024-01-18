@@ -1,5 +1,5 @@
 import { PageObj } from "../../defines/api";
-import { disabledStyle, getStyleByStatus } from "../../defines/twColors";
+import { getStyleByStatus } from "../../defines/twColors";
 
 interface PaginationProps {
   pageObj: PageObj;
@@ -9,6 +9,7 @@ interface PaginationProps {
 const Pagination = (props: PaginationProps) => {
 
   const darkStyle = "dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white";
+ 
   const {
     number: pageNum,
     first,
@@ -38,6 +39,8 @@ const Pagination = (props: PaginationProps) => {
       </li>
     ));
   };
+
+  if(empty) return <></>;
 
   return (
     <div className="flex items-center justify-center space-x-2 my-8">
