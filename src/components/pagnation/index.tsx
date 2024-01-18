@@ -1,4 +1,5 @@
 import { PageObj } from "../../defines/api";
+import { disabledStyle, getStyleByStatus } from "../../defines/twColors";
 
 interface PaginationProps {
   pageObj: PageObj;
@@ -6,6 +7,8 @@ interface PaginationProps {
 }
 
 const Pagination = (props: PaginationProps) => {
+
+  const darkStyle = "dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white";
   const {
     number: pageNum,
     first,
@@ -26,8 +29,8 @@ const Pagination = (props: PaginationProps) => {
             props.onClick(index);
           }}
           className={
-            `flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`
-             + ` ${pageNum === index ? "text-primary bg-red-50" : "false"}`
+            `flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-rose-50 hover:text-primary dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white` +
+            ` ${pageNum === index ? "text-primary bg-red-50" : ""}`
           }
         >
           {index + 1}
@@ -42,19 +45,15 @@ const Pagination = (props: PaginationProps) => {
       <nav aria-label="Page navigation">
         <ul className="inline-flex -space-x-px text-md">
           <li>
-            <a
+          <a
               href="#"
               onClick={(e) => {
                 e.preventDefault();
                 if (!first) props.onClick(pageNum - 1);
               }}
               className={
-                "flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" +
-                ` ${
-                  first
-                    ? "text-gray-300 pointer-events-none cursor-not-allowed bg-gray-200"
-                    : ""
-                }`
+                "flex items-center justify-center px-3 h-8 ms-0 leading-tight border border-e-0 border-gray-300 rounded-s-lg" +
+                ` ${getStyleByStatus(first ? "disabled" : "active")}`
               }
             >
               <svg
@@ -83,12 +82,8 @@ const Pagination = (props: PaginationProps) => {
                 if (!last) props.onClick(pageNum + 1);
               }}
               className={
-                "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover.bg-gray-100 hover.text-gray-700 dark.bg-gray-800 dark.border-gray-700 dark.text-gray-400 dark.hover.bg-gray-700 dark.hover.text-white" +
-                ` ${
-                  last
-                    ? "text-gray-300 pointer-events-none cursor-not-allowed bg-gray-200"
-                    : ""
-                }`
+                "flex items-center justify-center px-3 h-8 ms-0 leading-tight border border-gray-300 rounded-e-lg hover:bg-gray-100" +
+                ` ${getStyleByStatus(last ? "disabled" : "active")}`
               }
             >
               <svg

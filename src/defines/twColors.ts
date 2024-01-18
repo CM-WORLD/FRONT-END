@@ -35,3 +35,13 @@ export const buildClass = (...args: string[]) => {
   const classes = args.filter(Boolean); 
   return classes.join(" ");
 }
+
+
+// get style by type disabled and active
+export const getStyleByStatus = (disabled: string) => {
+  const disabledStyle = "pointer-events-none cursor-not-allowed bg-gray-100 text-gray-300";
+  const activeStyle = "bg-white hover:bg-gray-100 text-gray-500 hover:text-gray-600 ";
+
+  if(disabled === "disabled") return disabledStyle;
+  return activeStyle;
+}
