@@ -44,7 +44,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
               <div className="text-gray-500 text-sm">{data.regDate}</div>
             </div>
           </div>
-          <div className="min-h-80 py-5">{data.content}</div>
+          <div className="min-h-60 py-5">{data.content}</div>
           <ReplyForm bbsId={idx} />
           <div className="">
             <div className="font-bold">댓글</div>
