@@ -23,7 +23,7 @@ const CmsItems = () => {
       return (
         <div key={`${item.id}-${idx}`}>
           <a
-            className="cms-item flex items-center py-7 text-dark"
+            className="cms-item flex items-center my-16 text-dark"
             href={`/apply/${item.id}`}
           >
             <div>

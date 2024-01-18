@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import MyCommonContent from "../../myPage/common";
-import ReplyForm from "../../bbs/common/reply/ReplyForm";
-import ReplyList from "../../bbs/common/reply/ReplyList";
-import { HOST_URL } from "../../../libs/const";
+
 import { BbsDetail } from "../../../defines/api";
-import { AUTH_ITC } from "../../../libs/request";
+import ReplyForm from "../../bbs/common/reply/ReplyForm";
+
+import ReplyList from "../../bbs/common/reply/ReplyList";
+import {  REQUEST_GET } from "../../../libs/request";
 
 interface BbsDetailProps {
+   style?: string;
    bbsId: string; // 게시글 번호
    bbsCode: string; // 게시판 코드
 }
@@ -18,22 +18,15 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
   const [data, setData] = useState<BbsDetail>();
 
   useEffect(() => {
-    AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
-      if (resp.data.status === 200 || resp.data.staus === 205) {
-        axios.get(HOST_URL + `/bbs/${props.bbsCode}/` + idx).then((resp) => {
-          if (resp.status === 200 && resp.data) {
-            setData(resp.data.data);
-          }
-        });
-      }
-    });
+    REQUEST_GET(`/bbs/${props.bbsCode}/`+ idx, {}, (data) => setData(data.data), "public", false);
   }, []);
 
   const page = () => {
     if (!data) return <>존재하지 않는 게시글입니다.</>;
     return (
       <>
-        <div className={"border border-gray-200 rounded p-7"}>
+        <div className={"border border-gray-200 rounded p-7 relative m-auto max-w-2xl my-10"}>
+        <div className="text-mint font-bold">신청 공지</div>
           <div className="text-2xl mb-3">{data.title}</div>
           <div className="flex items-center gap-4">
             <div className="">
@@ -64,7 +57,8 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
 
   return (
     <>
-      <MyCommonContent title="" content={page()} />
+    {page()}
+      {/* <MyCommonContent title="" content={page()} /> */}
     </>
   );
 };
