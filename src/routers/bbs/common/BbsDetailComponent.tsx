@@ -4,12 +4,13 @@ import { BbsDetail } from "../../../defines/api";
 import ReplyForm from "../../bbs/common/reply/ReplyForm";
 
 import ReplyList from "../../bbs/common/reply/ReplyList";
-import {  REQUEST_GET } from "../../../libs/request";
+import { REQUEST_GET } from "../../../libs/request";
 
 interface BbsDetailProps {
-   style?: string;
-   bbsId: string; // 게시글 번호
-   bbsCode: string; // 게시판 코드
+  breadCrumb: string;
+  style?: string;
+  bbsId: string; // 게시글 번호
+  bbsCode: string; // 게시판 코드
 }
 
 const BbsDetailComponent = (props: BbsDetailProps) => {
@@ -18,15 +19,43 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
   const [data, setData] = useState<BbsDetail>();
 
   useEffect(() => {
-    REQUEST_GET(`/bbs/${props.bbsCode}/`+ idx, {}, (data) => setData(data.data), "public", false);
+    REQUEST_GET(
+      `/bbs/${props.bbsCode}/` + idx,
+      {},
+      (data) => setData(data.data),
+      "public",
+      false
+    );
   }, []);
 
   const page = () => {
     if (!data) return <>존재하지 않는 게시글입니다.</>;
     return (
       <>
-        <div className={"border border-gray-200 rounded p-7 relative m-auto max-w-2xl my-10"}>
-        <div className="text-mint font-bold">신청 공지</div>
+        <div
+          className={
+            "border border-gray-200 rounded p-7 relative m-auto max-w-2xl my-10"
+          }
+        >
+          <div className="flex items-center gap-2 text-mint font-bold">
+            게시판
+            <svg
+              className={`w-3 h-3 rtl:rotate-180`}
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"
+                />
+            </svg>
+            {props.breadCrumb}
+          </div>
           <div className="text-2xl mb-3">{data.title}</div>
           <div className="flex items-center gap-4">
             <div className="">
@@ -57,7 +86,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
 
   return (
     <>
-    {page()}
+      {page()}
       {/* <MyCommonContent title="" content={page()} /> */}
     </>
   );

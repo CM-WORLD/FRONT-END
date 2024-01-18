@@ -3,7 +3,7 @@ import BbsDetailComponent from "../common/BbsDetailComponent";
 
 const NoticeDetail = () => {
     const idx = useParams().noticeId;
-    return <><BbsDetailComponent bbsCode="BS01" bbsId={idx} /></>;
+    return <><BbsDetailComponent bbsCode="BS01" bbsId={idx} breadCrumb="신청 공지" /></>;
 }
 
 export default NoticeDetail;

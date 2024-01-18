@@ -4,7 +4,7 @@ import MyCommonContent from "../../myPage/common";
 
 const InquiryDetail = () => {
     const idx = useParams().inqId;
-    return <MyCommonContent content={<BbsDetailComponent bbsCode="BS02" bbsId={idx} />}></MyCommonContent>;
+    return <MyCommonContent content={<BbsDetailComponent bbsCode="BS02" bbsId={idx} breadCrumb="문의 상세"/>}></MyCommonContent>;
 }
 
 export default InquiryDetail;
