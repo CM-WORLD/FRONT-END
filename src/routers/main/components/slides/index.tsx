@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Slider from "react-slick";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ApiClient } from "../../../../libs/ApiClient";
+
 import "./style.scss";
-import { HOST_URL } from "../../../../libs/Const";
-import { ApiClient } from "../../../../libs/apiClient";
 
 interface BannerItem {
   id: number;
@@ -19,12 +19,18 @@ interface BannerItem {
 
 const SlideShow = () => {
   const [data, setData] = useState([]);
+
+  const callback = (data: any)=> {
+    console.log("test/token", data);
+
+  }
   
   useEffect(() => {
-  ApiClient.getInstance().get("/bnr/list", {}, (data) => {setData(data.data)}, "public", false);
+  ApiClient.getInstance().get("/test/token", {}, (data) => {callback(data)}, "public", false);
     // axios.get(HOST_URL + "/bnr/list").then(resp => {
     //   if (resp.data) setData(resp.data);
     // })
+
   }, []);
 
   const settings = {

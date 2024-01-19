@@ -1,9 +1,12 @@
 import axios from "axios";
-import { getAtk, getRtk, setAccessToken } from "./request";
 import { HOST_URL } from "./Const";
+
+import Cookies from "js-cookie";
 
 export class ApiClient {
   private static instance: ApiClient;
+  private accessToken: string = localStorage.getItem("atk") || "";
+  private refreshToken: string = localStorage.getItem("rtk") || "";
 
   constructor() {}
 
@@ -12,6 +15,10 @@ export class ApiClient {
       ApiClient.instance = new ApiClient();
     }
     return ApiClient.instance;
+  }
+
+  private setAccessToken(atk: string) {
+    localStorage.setItem("atk", atk);
   }
 
   public async request(
@@ -25,8 +32,8 @@ export class ApiClient {
     const initAxios = axios.create({
       baseURL: HOST_URL,
       headers: {
-        Authorization: `Bearer ${getAtk()}`,
-        RefreshToken: getRtk(),
+        Authorization: `Bearer ${this.accessToken}`,
+        RefreshToken: this.refreshToken,
         type: type,
       },
     });
@@ -51,12 +58,18 @@ export class ApiClient {
         break;
     }
 
-    console.log(resp, "??? resp?")
+
+    // const testCookie = Cookies.get("test");
+    // const test2 = Cookies.get("myCookie");
+    // console.log("test2", test2)
+    // console.log("쿠키!!!!", testCookie); // 쿠키 'test'의 값 출력
+
+    console.log("???", resp);
 
     if (resp.data.status === 200) {
-      console.log("redirect??", redirect);
+      // console.log("redirect??", redirect);
       if (resp.data) callback(resp.data);
-      if (resp.data.newAtk) setAccessToken(`${resp.data.newAtk}`); // atk 재발급
+      if (resp.data.newAtk) this.setAccessToken(`${resp.data.newAccessToken}`); // atk 재발급
     } else {
       // if (redirect) {
       // localStorage.setItem("referer", window.location.pathname);
