@@ -83,3 +83,28 @@ export const REQUEST_GET = async (url: string, params: {}, callback: Function, t
     // 415, 500, 505 ::login required
   }
 };
+
+export const REQUEST = async (url: string, params: {}, callback: Function, type: string, redirect?: boolean) => {
+  const resp = await axios
+    .create({
+      baseURL: HOST_URL,
+      headers: {
+        Authorization: `Bearer ${getAtk()}`,
+        RefreshToken: getRtk(),
+        type: type,
+      },
+    })
+    .get(url, params);
+
+  if (resp.data.status === 200) {
+    if (resp.data) callback(resp.data);
+    if (resp.data.newAtk) setAccessToken(`${resp.data.newAtk}`); // atk 재발급
+  } else {
+    if (redirect)  {
+      localStorage.setItem("referer", window.location.pathname);
+      alert("로그인이 필요합니다.");
+      window.location.href = "/sign/in";
+    }
+    // 415, 500, 505 ::login required
+  }
+};

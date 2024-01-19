@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getMlByVal } from "../../../../components/tailwind/margin";
 import { HOST_URL } from "../../../../libs/const";
 import { ReplyDetail } from "../../../../defines/api";
 import { AUTH_ITC } from "../../../../libs/request";
