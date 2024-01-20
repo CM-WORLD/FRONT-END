@@ -9,6 +9,7 @@ import "./style.scss";
 import CmsApplyComplete from "./complete";
 import Input from "../../components/input";
 import InputLine from "../../components/inputLine";
+import Button from "../../components/button";
 const BadRequest = React.lazy(
   () => import("../../components/error/badRequest")
 );
@@ -87,9 +88,9 @@ const ApplyForm = () => {
   }, []);
 
   const form = (
-    <div className="apply-cms-form">
+    <div className="w-9/12 relative m-auto my-5 border border-gray-300 rounded p-5">
       <h1 className="py-5 text-2xl font-bold text-center">커미션 신청서</h1>
-      <div className="form-box">
+      <div className="flex items-center flex-col">
         <div className="input-line">
           <label htmlFor="">
             상태 선택<span className="astrik">*</span>
@@ -105,27 +106,22 @@ const ApplyForm = () => {
             <option value="CM02">예약</option>
           </select>
         </div>
-          <InputLine
-            label="이름"
-            required={true}
-            placeholder="이름을 입력해 주세요"
-            onChange={() => {}}
-            value={""}
-          />
-        <div className="input-line">
-          <label htmlFor="" className="mr-5">
-            제목<span className="astrik">*</span>
-          </label>
-          <input
-            value={applyForm.title}
-            className="input"
-            type="text"
-            placeholder="제목을 입력해 주세요."
-            onChange={(e) =>
-              setApplyForm({ ...applyForm, title: e.target.value })
-            }
-          />
-        </div>
+        <InputLine
+          label="이름"
+          required={true}
+          placeholder="이름을 입력해 주세요"
+          onChange={() => {}}
+          value={""}
+        />
+        <InputLine
+          label="제목"
+          required={true}
+          placeholder="제목을 입력해 주세요"
+          onChange={(value) => {
+            setApplyForm({ ...applyForm, title: value });
+          }}
+          value={applyForm.title}
+        />
         <div className="input-line">
           <label htmlFor="">
             내용<span className="astrik">*</span>
@@ -138,20 +134,15 @@ const ApplyForm = () => {
               setApplyForm({ ...applyForm, content: e.target.value })
             }
           />
-          <div className="input-line">
-            <label htmlFor="">
-              계좌주<span className="astrik">*</span>
-            </label>
-            <input
-              value={applyForm.bankOwner}
-              className="input"
-              type="text"
-              placeholder="계좌주 실명을 입력해 주세요. (초성만 입력 안됩니다.)"
-              onChange={(e) =>
-                setApplyForm({ ...applyForm, bankOwner: e.target.value })
-              }
-            />
-          </div>
+          <InputLine
+            label="계좌주"
+            required={true}
+            placeholder="계좌주를 입력해 주세요"
+            onChange={(value) =>
+              setApplyForm({ ...applyForm, bankOwner: value })
+            }
+            value={applyForm.bankOwner}
+          />
         </div>
         <div className="input-line">
           <label htmlFor="">
@@ -168,10 +159,8 @@ const ApplyForm = () => {
           </label>
         </div>
       </div>
-      <div className="btn-box">
-        <button className="reg-btn" onClick={submitForm}>
-          등록하기
-        </button>
+      <div className="btn-box flex justify-center m-5">
+        <Button color="Primary" value="등록하기" onClick={submitForm} />
       </div>
     </div>
   );

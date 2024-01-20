@@ -204,7 +204,7 @@
 interface InputProps {
   value: string;
   placeholder: string;
-  onChange: () => void;
+  onChange: any;
   type?: string;
   readonly?: boolean;
   disabled?: boolean;
@@ -213,16 +213,15 @@ interface InputProps {
 export const Input = (props: InputProps) => {
   return (
     <div>
-
-    <input
-      className="border border-gray-400 rounded py-2 px-2"
-      type={props.type}
-      placeholder={props.placeholder}
-      value={props.value}
-      onChange={props.onChange}
+      <input
+        className="border border-gray-400 rounded py-2 px-2"
+        type={props.type}
+        placeholder={props.placeholder}
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value)}
       />
       <div>*에러메세지입니다. 이거 왜 안했어요..</div>
-      </div>
+    </div>
   );
 };
 export default Input;
