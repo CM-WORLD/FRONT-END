@@ -54,7 +54,6 @@ export class ApiClient {
         break;
     }
 
-    console.log(resp.data);
     if (resp.data.newAtk) {
       this.setAccessToken(`${resp.data.newAtk}`); // atk 재발급
     }
@@ -64,23 +63,16 @@ export class ApiClient {
         success(resp.data);
       }
     } else {
-      if (resp.data.error) {
+      if (resp.data) {
         error(resp.data);
       }
     }
 
-    // } else if (resp.data.status === 410 ){
     //   if (redirect) {
     //     localStorage.setItem("referer", window.location.pathname);
     //     alert("로그인이 필요합니다.");
     //     window.location.href = "/sign/in";
     //   }
-    // } else {
-    //   //400일 경우 어쩔건데 (errorcallback을 해야지, error callback 넣을 자리와 로그인 만료는 엄연히 구별할 것.)
-    //   if (resp.data.error) {
-    //     errorCallback(resp.data);
-    //   }
-    // }
   }
 
   public get(url: string, params: {}, success: Function, error: Function) {

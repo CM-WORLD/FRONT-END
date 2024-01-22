@@ -31,15 +31,17 @@ const InquiryForm = () => {
       formData.append("imgList", imgList[i]);
     }
 
-    ApiClient.getInstance().request(
-      "POST",
+    ApiClient.getInstance().post(
       "/bbs/form",
       formData,
       (data) => {
-          alert("등록이 완료되었습니다.");
-          window.location.href = "/mypage/inquiry";
+        console.log("bbs.inquiry", data);
+        alert("등록이 완료되었습니다.");
+        window.location.href = "/mypage/inquiry";
       },
-      (data) => {console.log("error... ", data)}
+      (data) => {
+        console.log("error", data);
+      }
     );
   };
 
@@ -52,7 +54,7 @@ const InquiryForm = () => {
   const form = (
     <div className="inquiry-form">
       <div className="form-box">
-          <InputLine
+        <InputLine
           label="문의 제목"
           required={true}
           placeholder="제목을 입력해 주세요."
