@@ -27,8 +27,7 @@ const SlideShow = () => {
       (data) => {
         if (data) setData(data.data);
       },
-      "public",
-      false
+      (data) => {}
     );
   }, []);
 

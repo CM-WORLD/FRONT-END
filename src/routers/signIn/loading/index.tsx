@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import CommonLoading from "../../../components/loading";
-import "./style.scss";
+// import "./style.scss";
 import axios from "axios";
 import { HOST_URL } from "../../../libs/Const";
 

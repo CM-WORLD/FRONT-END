@@ -5,7 +5,7 @@ import CommonLoading from "../../components/loading";
 import { getAtk, getRtk } from "../../libs/request";
 import { HOST_URL } from "../../libs/Const";
 
-import "./style.scss";
+// import "./style.scss";
 import CmsApplyComplete from "./complete";
 import Input from "../../components/input";
 import InputLine from "../../components/inputLine";
@@ -70,22 +70,7 @@ const ApplyForm = () => {
     }
   };
 
-  useEffect(() => {
-    // AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
-    //   if (resp.data.status === 200 || resp.data.staus === 205) {
-    //     // 파라미터로 온 신청 아이디가 없을 경우 400
-    //     axios
-    //       .get(HOST_URL + "/cms/check/id", { params: { id: cmsId } })
-    //       .then((resp) => {
-    //         if (resp.data) {
-    //           if (resp.data.status === 404) {
-    //             setIsError(true);
-    //           }
-    //         }
-    //       });
-    //   }
-    // });
-  }, []);
+  useEffect(() => {}, []);
 
   const form = (
     <div className="w-9/12 relative m-auto my-5 border border-gray-300 rounded p-5">
