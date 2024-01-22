@@ -218,9 +218,8 @@ export const Input = (props: InputProps) => {
         type={props.type}
         placeholder={props.placeholder}
         value={props.value}
-        onChange={(e) => props.onChange(e.target.value)}
+        onChange={props.onChange}
       />
-      <div>*에러메세지입니다. 이거 왜 안했어요..</div>
     </div>
   );
 };

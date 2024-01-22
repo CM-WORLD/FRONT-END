@@ -4,6 +4,7 @@ import { globalCode } from "../../../libs/Const";
 import MyCommonContent from "../../myPage/common";
 import { ApiClient } from "../../../libs/ApiClient";
 import { checkToken } from "../../../libs/request";
+import InputLine from "../../../components/inputLine";
 
 const InquiryForm = () => {
   const [inqForm, setInqForm] = useState({
@@ -15,7 +16,7 @@ const InquiryForm = () => {
 
   useEffect(() => {
     checkToken();
-  }, []); 
+  }, []);
 
   const submitForm = () => {
     let formData = new FormData();
@@ -30,12 +31,16 @@ const InquiryForm = () => {
       formData.append("imgList", imgList[i]);
     }
 
-    ApiClient.getInstance().request("POST", "/bbs/form", formData, (data: any) => {
-      if (data.status === 200) {
-        alert("등록이 완료되었습니다.");
-        window.location.href = "/mypage/inquiry";
-      }
-    }, "private", false);
+    ApiClient.getInstance().request(
+      "POST",
+      "/bbs/form",
+      formData,
+      (data) => {
+          alert("등록이 완료되었습니다.");
+          window.location.href = "/mypage/inquiry";
+      },
+      (data) => {console.log("error... ", data)}
+    );
   };
 
   const storeFiles = (e: any) => {
@@ -47,17 +52,13 @@ const InquiryForm = () => {
   const form = (
     <div className="inquiry-form">
       <div className="form-box">
-        <div className="input-line">
-          <label htmlFor="">
-            제목<span className="astrik">*</span>
-          </label>
-          <input
-            className="input"
-            type="text"
-            placeholder="제목을 입력해 주세요."
-            onChange={(e) => setInqForm({ ...inqForm, title: e.target.value })}
-          />
-        </div>
+          <InputLine
+          label="문의 제목"
+          required={true}
+          placeholder="제목을 입력해 주세요."
+          onChange={(e) => setInqForm({ ...inqForm, title: e.target.value })}
+          value={inqForm.title}
+        />
         <div className="input-line">
           <label htmlFor="">
             내용<span className="astrik">*</span>

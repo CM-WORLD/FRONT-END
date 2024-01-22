@@ -4,7 +4,7 @@ interface InputLineProps {
   required?: boolean;
   placeholder: string;
   value: string;
-  onChange: (value: string) => void;
+  onChange: any;
 }
 
 export const InputLine = (props: InputLineProps) => {
@@ -18,7 +18,7 @@ export const InputLine = (props: InputLineProps) => {
         <Input
           placeholder={props.placeholder}
           value={props.value}
-          onChange={(e) => props.onChange(e.target.value)}
+          onChange={props.onChange}
         />
       </div>
     </>
