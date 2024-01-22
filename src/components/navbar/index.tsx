@@ -1,49 +1,20 @@
 import { useEffect, useState } from "react";
 
-import { REQUEST_GET, getNick } from "../../libs/request";
+import { getNick } from "../../libs/request";
+import { ApiClient } from "../../libs/ApiClient";
 
 const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
 
-  // const validateTk = () => {
-  //   axios
-  //     .create({
-  //       headers: {
-  //         withCredentials: true,
-  //         Authorization: `Bearer ${getAtk()}`,
-  //         RefreshToken: getRtk(),
-  //       },
-  //     })
-  //     .get(HOST_URL + "/validate/token")
-  //     .then((resp) => {
-  //       const status = resp.data.status;
-  //       if (status === 205) {
-  //         localStorage.setItem("atk", resp.data.newAtk);
-  //         setIsLogined(true);
-  //       } else if (status === 200) {
-  //         setIsLogined(true);
-  //       } else setIsLogined(false);
-  //     })
-  //     .catch((error) => setIsLogined(false));
-  // };
-
   const redirectUrl = import.meta.env.VITE_REACT_APP_KAKAO_LOGOUT_URL_LOCAL;
   const clientId = import.meta.env.VITE_REACT_APP_KAKAO_CLIENT_ID;
 
-  const loginCheck = (status) => {
-    if (status === 200 || status === 205) setIsLogined(true);
-    else setIsLogined(false);
-  };
-
   useEffect(() => {
-    REQUEST_GET(
+    ApiClient.getInstance().get(
       "/login/check",
       {},
-      (data) => {
-        loginCheck(data.status);
-      },
-      "private",
-      false
+      () => setIsLogined(true),
+      () => setIsLogined(false)
     );
   }, []);
   return (

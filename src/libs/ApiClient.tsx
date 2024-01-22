@@ -54,6 +54,7 @@ export class ApiClient {
         break;
     }
 
+    console.log(resp.data);
     if (resp.data.newAtk) {
       this.setAccessToken(`${resp.data.newAtk}`); // atk 재발급
     }
