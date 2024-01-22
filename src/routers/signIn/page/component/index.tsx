@@ -1,36 +1,69 @@
 import Button from "../../../../components/button";
-import Input from "../../../../components/input";
-import InputLine from "../../../../components/inputLine";
+import Locale, { getLocaleToString } from "../../../../components/locale";
+import { EAccountType } from "../../../../defines/account";
+import { AssetsRoot } from "../../../../libs/Const";
 import "./style.scss";
 
 const LoginBtnsComponent = () => {
+  const kakaoId = import.meta.env.VITE_REACT_APP_KAKAO_CLIENT_ID;
+  const kakaoRedirectUrl = import.meta.env.VITE_REACT_APP_KAKAO_LOGIN_REDIRECT_URL_LOCAL;
+
+  const loginButtonHandler = (type: EAccountType) => {
+    switch (type) {
+      case EAccountType.Kakao:
+        const url = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoId}&redirect_uri=${kakaoRedirectUrl}&response_type=code&scope=talk_message&email`;
+        window.location.href = url;
+        return;
+      case EAccountType.Twitter:
+        // TODO:: 트위터 로그인 api 적용
+        return;
+      case EAccountType.Naver:
+        // TODO:: 네이버 로그인 api 적용
+        return;
+      default:
+        // 사용되지않습니다.
+        return;
+    }
+  }
+
   return (
-    <>
-      <div className="sign-in-base">
-        <div className="w-1/2 relative m-auto my-5 border border-gray-300 rounded p-5">
-          <h1 className="font-bold text-center ">로그인</h1>
-          <InputLine
-            label="이메일"
-            placeholder="이메일을 입력하세요"
-            value="email"
-            onChange={() => {}}
-          />
-          <div className="flex justify-center">
-            <Button
-              value="카카로 로그인"
-              color="Primary"
-              onClick={() => {
-                const clientId = import.meta.env.VITE_REACT_APP_KAKAO_CLIENT_ID;
-                const redUrl = import.meta.env
-                  .VITE_REACT_APP_KAKAO_LOGIN_REDIRECT_URL_LOCAL;
-                const url = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redUrl}&response_type=code&scope=talk_message&email`;
-                window.location.href = url;
-              }}
-            />
-          </div>
+    <div className="sign-in-base">
+      <div className="w-1/2 relative m-auto my-5 border border-gray-300 rounded p-5">
+        <h1 className="font-bold text-center "><Locale k="login" /></h1>
+        <div className="flex justify-center flex-col gap-3">
+          <Button
+            className="cursor-pointer bg-kakao "
+            onClick={() => loginButtonHandler(EAccountType.Kakao)}
+          >
+            <div className="relative flex justify-center items-center text-black">
+              <img
+                className="absolute left-0"
+                src={`${AssetsRoot}/images/kakao.png`}
+                alt="kakao login"
+                onClick={() => loginButtonHandler(EAccountType.Kakao)}
+              />
+              <span><Locale k="kakao_login" /></span>
+            </div>
+          </Button>
+
+          <Button
+            className="cursor-pointer bg-twitter"
+            color="Primary"
+            onClick={() => loginButtonHandler(EAccountType.Kakao)}
+          >
+            <div className="relative flex justify-center items-center">
+              <img
+                className="absolute left-0"
+                src={`${AssetsRoot}/images/twitter.png`}
+                alt="twitter login"
+                onClick={() => loginButtonHandler(EAccountType.Twitter)}
+              />
+              <span><Locale k="twitter_login" /></span>
+            </div>
+          </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

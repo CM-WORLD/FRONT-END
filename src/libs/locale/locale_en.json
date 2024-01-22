@@ -1,4 +1,8 @@
 {
     "confirm": "confirm", 
-    "cancel": "cancel"
+    "cancel": "cancel",
+    "login": "Sign in",
+    "logout": "Sign up",
+    "twitter": "Twitter",
+    "kakao": "Kakao"
 }

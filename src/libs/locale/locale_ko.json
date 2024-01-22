@@ -1,4 +1,8 @@
 {
     "confirm": "확인", 
-    "cancel": "취소"
+    "cancel": "취소",
+    "login": "로그인",
+    "logout": "로그아웃",
+    "twitter_login": "트위터 로그인",
+    "kakao_login": "카카오 로그인"
 }

@@ -72,3 +72,9 @@ export interface PageObj {
   empty: boolean;
   number: number;
 }
+
+/** API 통신 Status Code */
+export enum EApiStatus {
+  Success = 200, // 성공
+  Reissuance = 205, // 토큰 재발급
+}

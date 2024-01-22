@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import { getNick } from "../../libs/request";
 import { ApiClient } from "../../libs/ApiClient";
+import Locale from "../locale";
+import { AssetsRoot } from "../../libs/Const";
 
 const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
@@ -35,7 +37,7 @@ const NavBar = () => {
                   <a
                     href={`https://kauth.kakao.com/oauth/logout?client_id=${clientId}&logout_redirect_uri=${redirectUrl}`}
                   >
-                    로그아웃
+                    <Locale k="logout" />
                   </a>
                 </li>
               </>
@@ -47,7 +49,7 @@ const NavBar = () => {
                     localStorage.setItem("referer", window.location.pathname);
                   }}
                 >
-                  로그인
+                  <Locale k="login" />
                 </a>
               </li>
             )}
@@ -59,9 +61,9 @@ const NavBar = () => {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="https://flowbite.com/docs/images/logo.svg"
+              src={`${AssetsRoot}/images/logo.svg`}
               className="h-8"
-              alt="Flowbite Logo"
+              alt="Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               jinvicky

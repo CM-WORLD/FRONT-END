@@ -2,16 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/** MaruBuri */
+@font-face {
+  font-family: "MaruBuri";
+  src: url("../public/assets/fonts/MaruBuri-Bold.otf") format("opentype");
+  font-weight: bold;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "MaruBuri";
+  src: url("../public/assets/fonts/MaruBuri-ExtraLight.otf") format("opentype");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "MaruBuri";
+  src: url("../public/assets/fonts/MaruBuri-Light.otf") format("opentype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "MaruBuri";
+  src: url("../public/assets/fonts/MaruBuri-Regular.otf") format("opentype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "MaruBuri";
+  src: url("../public/assets/fonts/MaruBuri-SemiBold.otf") format("opentype");
+  font-weight: 600;
+}
+
+/** Pretendard */
+@font-face {
+  font-family: "Pretendard";
+  src: url("../public/assets/fonts/Pretendard-Bold.otf") format("opentype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("../public/assets/fonts/Pretendard-ExtraLight.otf") format("opentype");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("../public/assets/fonts/Pretendard-Light.otf") format("opentype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("../public/assets/fonts/Pretendard-Regular.otf") format("opentype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("../public/assets/fonts/Pretendard-SemiBold.otf") format("opentype");
+  font-weight: 600;
+}
+
+/**
+* 디폴트: font-size 20px
+* desc: 17px;
+*/
+
+
+body {
+  margin: 0;
+  font-family: "Pretendard", 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 20px;
 }

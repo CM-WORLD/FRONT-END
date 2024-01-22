@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { ReactDOM, MouseEventHandler } from "react";
 import "./style.scss";
 import { buildClass, getColorByType } from "../../defines/twColors";
 
@@ -35,20 +35,20 @@ import { buildClass, getColorByType } from "../../defines/twColors";
 export interface ButtonProps {
   type?: "button" | "submit";
   size?:
-    | "xl"
-    | "lg"
-    | "md"
-    | "sm"
-    | "fixed"
-    | "alert"
-    | "popup"
-    | "icon"
-    | "none";
+  | "xl"
+  | "lg"
+  | "md"
+  | "sm"
+  | "fixed"
+  | "alert"
+  | "popup"
+  | "icon"
+  | "none";
   color: string;
   radius: "round" | "square" | "pill" | "circle";
   disabled?: boolean;
-  value?: string | number;
   className?: string;
+  children?: JSX.Element;
   onClick?: MouseEventHandler;
 }
 
@@ -81,7 +81,7 @@ export const Button = (props: ButtonProps) => {
         )}
       onClick={props.onClick}
     >
-      {props.value}
+      {props.children}
     </button>
   );
 };
