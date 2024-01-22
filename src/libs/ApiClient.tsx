@@ -1,8 +1,6 @@
 import axios from "axios";
 import { HOST_URL } from "./Const";
 
-import Cookies from "js-cookie";
-
 export class ApiClient {
   private static instance: ApiClient;
   private accessToken: string = localStorage.getItem("atk") || "";
@@ -59,24 +57,15 @@ export class ApiClient {
     }
 
 
-    // const testCookie = Cookies.get("test");
-    // const test2 = Cookies.get("myCookie");
-    // console.log("test2", test2)
-    // console.log("쿠키!!!!", testCookie); // 쿠키 'test'의 값 출력
-
-    console.log("???", resp);
-
-    if (resp.data.status === 200) {
-      // console.log("redirect??", redirect);
+    if (resp.data.status === 200 || resp.data.status === 205) {
       if (resp.data) callback(resp.data);
       if (resp.data.newAtk) this.setAccessToken(`${resp.data.newAccessToken}`); // atk 재발급
     } else {
-      // if (redirect) {
-      // localStorage.setItem("referer", window.location.pathname);
-      // alert("로그인이 필요합니다.");
-      // window.location.href = "/sign/in";
-      // }
-      // 415, 500, 505 ::login required
+      if (redirect) {
+      localStorage.setItem("referer", window.location.pathname);
+      alert("로그인이 필요합니다.");
+      window.location.href = "/sign/in";
+      }
     }
   }
 

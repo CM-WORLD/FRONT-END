@@ -1,31 +1,41 @@
-import { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+
+import { globalCode } from "../../../libs/Const";
 import MyCommonContent from "../../myPage/common";
-import { HOST_URL } from "../../../libs/Const";
+import { ApiClient } from "../../../libs/ApiClient";
+import { checkToken } from "../../../libs/request";
+
 const InquiryForm = () => {
   const [inqForm, setInqForm] = useState({
     title: "",
     content: "",
-    bbsCode: "",
-    nickName: "user_011007", //추후 로그인 반영
+    bbsCode: globalCode.bbs.inquiry,
     imgList: [],
   });
 
-  const submitForm = async () => {
+  useEffect(() => {
+    checkToken();
+  }, []); 
+
+  const submitForm = () => {
     let formData = new FormData();
 
-    const { title, content, nickName, imgList } = inqForm;
+    const { title, content, imgList, bbsCode } = inqForm;
 
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("bbsCode", "BS02"); //문의는 BS02로 픽스
-    formData.append("nickName", nickName);
+    formData.append("bbsCode", bbsCode);
 
     for (let i = 0; i < imgList.length; i++) {
       formData.append("imgList", imgList[i]);
     }
 
-    axios.post(HOST_URL + "/bbs/form", formData);
+    ApiClient.getInstance().request("POST", "/bbs/form", formData, (data: any) => {
+      if (data.status === 200) {
+        alert("등록이 완료되었습니다.");
+        window.location.href = "/mypage/inquiry";
+      }
+    }, "private", false);
   };
 
   const storeFiles = (e: any) => {

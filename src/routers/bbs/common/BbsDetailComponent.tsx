@@ -78,7 +78,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
           <ReplyForm bbsId={idx} />
           <div className="">
             <div className="font-bold">댓글</div>
-            <ReplyList idx={idx} isPublic={props.isPublic} />
+            {/* <ReplyList idx={idx} isPublic={props.isPublic} /> */}
           </div>
         </div>
       </>

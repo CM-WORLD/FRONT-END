@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
-import { HOST_URL } from "../../libs/Const";
-import { REQUEST_GET, getAtk, getNick, getRtk } from "../../libs/request";
+import { REQUEST_GET, getNick } from "../../libs/request";
 
 const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
@@ -35,10 +33,18 @@ const NavBar = () => {
   const loginCheck = (status) => {
     if (status === 200 || status === 205) setIsLogined(true);
     else setIsLogined(false);
-  }
+  };
 
   useEffect(() => {
-    REQUEST_GET("/login/check", {}, (data) => {loginCheck(data.status)}, "private", false);
+    REQUEST_GET(
+      "/login/check",
+      {},
+      (data) => {
+        loginCheck(data.status);
+      },
+      "private",
+      false
+    );
   }, []);
   return (
     <>
@@ -64,7 +70,14 @@ const NavBar = () => {
               </>
             ) : (
               <li>
-                <a href="/sign/in">로그인</a>
+                <a
+                  href="/sign/in"
+                  onClick={() => {
+                    localStorage.setItem("referer", window.location.pathname);
+                  }}
+                >
+                  로그인
+                </a>
               </li>
             )}
           </ul>

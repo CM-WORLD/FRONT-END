@@ -20,17 +20,16 @@ interface BannerItem {
 const SlideShow = () => {
   const [data, setData] = useState([]);
 
-  const callback = (data: any)=> {
-    console.log("test/token", data);
-
-  }
-  
   useEffect(() => {
-  ApiClient.getInstance().get("/test/token", {}, (data) => {callback(data)}, "public", false);
-    // axios.get(HOST_URL + "/bnr/list").then(resp => {
-    //   if (resp.data) setData(resp.data);
-    // })
-
+    ApiClient.getInstance().get(
+      "/bnr/list",
+      {},
+      (data) => {
+        if (data) setData(data.data);
+      },
+      "public",
+      false
+    );
   }, []);
 
   const settings = {
@@ -45,16 +44,16 @@ const SlideShow = () => {
   };
 
   const imgList = data.map((item: BannerItem, idx) => {
-    return <a key={`banner-${idx}`} href={`${item.hrefUrl}`}>
-      <img src={item.imgUrl} alt="banner_img" />
-    </a>
-  })
+    return (
+      <a key={`banner-${idx}`} href={`${item.hrefUrl}`}>
+        <img src={item.imgUrl} alt="banner_img" />
+      </a>
+    );
+  });
 
   return (
     <div className="slide-gallery">
-      <Slider {...settings}>
-        {imgList}
-      </Slider>
+      <Slider {...settings}>{imgList}</Slider>
     </div>
   );
 };

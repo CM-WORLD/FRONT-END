@@ -4,7 +4,7 @@ export const AssetsRoot = "https://localhost:3000/assets";
 
 export const globalCode = {
     bbs: {
-        cmsHistory: "BS01", 
+        notice: "BS01", 
         inquiry: "BS02"
     }
 }

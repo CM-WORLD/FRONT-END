@@ -1,5 +1,6 @@
 import axios from "axios";
 import qs from "qs";
+
 import { HOST_URL } from "./Const";
 
 axios.defaults.paramsSerializer = (params) => {
@@ -24,6 +25,17 @@ export const getNick = () => {
 export const setAccessToken = (atk: string) => {
   localStorage.setItem("atk", atk);
 };
+
+/* local */
+export const checkToken = () => {
+  if (getAtk() === null || getAtk().replace(" ", "") === "") {
+    // alert("로그인 후 이용해 주세요");
+    // ALERT 2번 중복 발생 TODO:: 리팩토링 필요
+    window.location.href = "/sign/in";
+  } 
+};
+
+// 밑에 다 필요없음. 
 
 /* TODO:: 리팩토링 이후 삭제 */
 export const AUTH_ITC = axios.create({

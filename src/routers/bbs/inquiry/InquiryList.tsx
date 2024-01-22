@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import MyCommonContent from "../../myPage/common";
-import { HOST_URL } from "../../../libs/const";
-import { AUTH_ITC, getAtk, getRtk } from "../../../libs/request";
+import { HOST_URL } from "../../../libs/Const";
 
 // import "./style.scss";
 
@@ -26,23 +25,23 @@ const MyInquiryList = () => {
   };
 
   useEffect(() => {
-    AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
-      if (resp.data.status === 200 || resp.data.staus === 205) {
-        axios
-          .get(HOST_URL + "/bbs/inquiry/member", {
-            params,
-            headers: {
-              Authorization: `Bearer ${getAtk()}`,
-              RefreshToken: getRtk(),
-            },
-          })
-          .then((resp) => {
-            if (resp.data.data) {
-              setData(resp.data.data.content);
-            }
-          });
-      }
-    });
+    // AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
+    //   if (resp.data.status === 200 || resp.data.staus === 205) {
+    //     axios
+    //       .get(HOST_URL + "/bbs/inquiry/member", {
+    //         params,
+    //         headers: {
+    //           Authorization: `Bearer ${getAccessToken()}`,
+    //           RefreshToken: getRefreshToken(),
+    //         },
+    //       })
+    //       .then((resp) => {
+    //         if (resp.data.data) {
+    //           setData(resp.data.data.content);
+    //         }
+    //       });
+    //   }
+    // });
   }, []);
 
   const content = (
@@ -81,7 +80,7 @@ const MyInquiryList = () => {
       <MyCommonContent
         title="1:1 문의"
         content={inquiryList()}
-        btnLink="/inquiry/form"
+        btnLink="/mypage/inquiry/form"
         btnTxt="신규 문의하기"
       />
     </>
