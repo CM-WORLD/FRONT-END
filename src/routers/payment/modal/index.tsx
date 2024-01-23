@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import "./style.scss";
+import Modal from "../../../components/modal";
 
 interface PaymentModalProps {
   paymentData: ReactNode;
@@ -30,11 +31,13 @@ const PaymentModal = (props: PaymentModalProps) => {
   );
   return (
     <>
-      {/* <Modal
+      <Modal
         title="결제 정보"
         display={props.display}
         content={paymentContent}
-      /> */}
+        onClose={props.onClick}
+        onSubmit={() => {}}
+      />
     </>
   );
 };

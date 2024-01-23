@@ -2,12 +2,13 @@ import SideNav from "../sideNav";
 import { ReactNode } from "react";
 
 import Button from "../../../components/button";
+import { JsxElement } from "typescript";
 
 interface ContentProps {
-  title?: string;
-  content: ReactNode;
+  title: JSX.Element; // Update the type of the title prop
+  content: JSX.Element;
   btnLink?: string;
-  btnTxt?: string;
+  btnTxt: JSX.Element;
 }
 
 const MyCommonContent = (props: ContentProps) => {
@@ -23,12 +24,11 @@ const MyCommonContent = (props: ContentProps) => {
               <div className="text-3xl font-bold">{props.title}</div>
               {props.btnLink && (
                 <Button
-                  value={props.btnTxt ? props.btnTxt : "신규 바로 가기"}
-                  color="Rose"
+                  color="Primary"
                   onClick={() => {
                     if (props.btnLink) window.location.href = props.btnLink;
                   }}
-                />
+                 >{props.btnTxt}</Button>
               )}
             </div>
           )}

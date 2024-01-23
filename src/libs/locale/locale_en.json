@@ -4,5 +4,9 @@
     "login": "Sign in",
     "logout": "Sign up",
     "twitter": "Twitter",
-    "kakao": "Kakao"
+    "kakao": "Kakao", 
+    "cms_history": "Commission Applications", 
+    "cms_apply": "Apply for Commission",
+    "payment": "Payment", 
+    "review": "Review"
 }

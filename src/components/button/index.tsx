@@ -45,6 +45,8 @@ export interface ButtonProps {
   | "icon"
   | "none";
   color: string;
+  textColor?: string;
+  borderless?: boolean;
   radius: "round" | "square" | "pill" | "circle";
   disabled?: boolean;
   className?: string;
@@ -74,10 +76,13 @@ export const Button = (props: ButtonProps) => {
         buildClass(
           getColorByType(props.color, "bg"),
           getColorByType(props.color, "bgHover"),
+          getColorByType(props.textColor, "txt"),
           getRoundType(props.radius),
           props.disabled ? "cursor-not-allowed" : "",
           "text-white font-bold py-2 px-4",
+          props.borderless ? "" : "border border-gray-300",
           props.className ? props.className : "",
+          "focus:ring-4 focus:outline-none focus:ring-blue-300"
         )}
       onClick={props.onClick}
     >
@@ -92,5 +97,6 @@ Button.defaultProps = {
   color: "blue",
   radius: "round",
   className: "",
+  borderless: true,
 };
 export default Button;

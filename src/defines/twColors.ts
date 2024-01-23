@@ -5,17 +5,20 @@ type ClassType = {
 export const BgColors: ClassType ={
   Rose: "bg-rose-500",
   Blue: "bg-blue-500",
-  Primary: "bg-primary"
+  Primary: "bg-primary",
+  White: "bg-white"
 }
 
 export const BgHoverColors: ClassType ={
   Rose: "hover:bg-rose-700",
   Blue: "hover:bg-blue-700",
+  White: "hover:bg-gray-100"
 };
 
 export const TxtColors: ClassType ={
   Rose: "text-rose-500",
   Blue: "text-blue-500",
+  Dark: "text-gray-700",
 }
 
 export const getColorByType = (color: keyof ClassType, type: string): string  => {

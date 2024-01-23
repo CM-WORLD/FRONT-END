@@ -4,5 +4,9 @@
     "login": "로그인",
     "logout": "로그아웃",
     "twitter_login": "트위터 로그인",
-    "kakao_login": "카카오 로그인"
+    "kakao_login": "카카오 로그인",
+    "cms_apply_history": "커미션 신청 내역", 
+    "cms_apply": "커미션 신청",
+    "payment": "결제", 
+    "review": "리뷰"
 }

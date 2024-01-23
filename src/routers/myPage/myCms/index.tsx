@@ -7,7 +7,8 @@ import Pagination from "../../../components/pagnation";
 import Button from "../../../components/button";
 
 import { CmsApplyDetail, CmsPayDetail } from "../../../defines/api";
-import { REQUEST_GET} from "../../../libs/request";
+import Locale from "../../../components/locale";
+import { ApiClient } from "../../../libs/ApiClient";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);
@@ -40,13 +41,22 @@ const MyCmsList = () => {
         empty: respData.empty,
       });
     }
-  }
+  };
 
   useEffect(() => {
-    REQUEST_GET("/apply/history",  {params: {
-      page: pageObj.number,
-      size: 10,
-    }}, (data) => {cmsHistoryCallback(data)}, "private", true);
+    ApiClient.getInstance().get(
+      "/apply/history",
+      {
+        params: {
+          page: pageObj.number,
+          size: 10,
+        },
+      },
+      (data) => {
+        cmsHistoryCallback(data);
+      },
+      (data) => {}
+    );
   }, [pageObj.number]);
 
   const updatePage = (page: number) => {
@@ -62,13 +72,12 @@ const MyCmsList = () => {
           <ul className="bg-white shadow overflow-hidden sm:rounded-md mx-auto w-xl">
             {data.map((item: CmsApplyDetail, idx) => {
               return (
-                <>
                   <li
                     className="border-t border-gray-200"
                     key={`cms-history-${idx}`}
                   >
                     <a href={`/mypage/cms/${item.id}`}>
-                      <div className="p-3 sm:px-6">
+                      <div className="w-full p-3 sm:px-6">
                         <div className="flex items-center justify-between py-2">
                           <h3 className="text-lg leading-6 font-medium text-gray-900">
                             {item.title}
@@ -85,34 +94,35 @@ const MyCmsList = () => {
                             </span>
                           </p>
                           <div>
-                            {item.status === "CM02" && (
+                            {item.status !== "CM02" && (
                               <Button
-                                value="결제"
-                                color="blue"
+                                color="Blue"
                                 onClick={(e) => {
                                   setPaymentData(item.cmsPayDto);
                                   e.preventDefault();
                                   setPayMdDisplay(!payMdDisplay);
                                 }}
-                              />
+                              >
+                                <Locale k="payment" />
+                              </Button>
                             )}
                             {item.status === "CM08" && (
                               <Button
-                                value="리뷰"
-                                color="rose"
+                                color="Rose"
                                 className="ml-3"
                                 onClick={(e) => {
                                   e.preventDefault();
                                   serRvwMdDisplay(!rvwMdDisplay);
                                 }}
-                              />
+                              >
+                                <Locale k="review" />
+                              </Button>
                             )}
                           </div>
                         </div>
                       </div>
                     </a>
                   </li>
-                </>
               );
             })}
           </ul>
@@ -154,10 +164,10 @@ const MyCmsList = () => {
         onSubmit={submitForm}
       />
       <MyCommonContent
-        title="커미션 신청 내역"
+        title={<Locale k="cms_apply_history" />}
         content={content}
         btnLink="/commissions"
-        btnTxt="커미션 신청하기"
+        btnTxt={<Locale k="cms_apply" />}
       />
     </>
   );
