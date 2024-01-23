@@ -9,6 +9,7 @@ import Button from "../../../components/button";
 import { CmsApplyDetail, CmsPayDetail } from "../../../defines/api";
 import Locale from "../../../components/locale";
 import { ApiClient } from "../../../libs/ApiClient";
+import { CommissionStatus } from "../../../defines/globalCode";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);
@@ -82,19 +83,19 @@ const MyCmsList = () => {
                           <h3 className="text-lg leading-6 font-medium text-gray-900">
                             {item.title}
                           </h3>
-                          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                          <p className="max-w-2xl text-sm text-gray-500">
                             {item.regDate}
                           </p>
                         </div>
                         <div className="flex items-center justify-between">
-                          <p className="text-md font-medium text-gray-500">
+                          <p className="text-base text-gray-500">
                             Status:
                             <span className="pl-1 text-yellow-600">
                               {item.statusNm}
                             </span>
                           </p>
                           <div>
-                            {item.status !== "CM02" && (
+                            {item.status !== CommissionStatus.PaymentPending && (
                               <Button
                                 color="Blue"
                                 onClick={(e) => {
@@ -106,7 +107,7 @@ const MyCmsList = () => {
                                 <Locale k="payment" />
                               </Button>
                             )}
-                            {item.status === "CM08" && (
+                            {item.status === CommissionStatus.Completed && (
                               <Button
                                 color="Rose"
                                 className="ml-3"

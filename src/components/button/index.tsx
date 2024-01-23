@@ -1,5 +1,4 @@
-import { ReactDOM, MouseEventHandler } from "react";
-import "./style.scss";
+import {  MouseEventHandler } from "react";
 import { buildClass, getColorByType } from "../../defines/twColors";
 
 // export const Button = function <T extends string | number>({
@@ -82,7 +81,7 @@ export const Button = (props: ButtonProps) => {
           "text-white font-bold py-2 px-4",
           props.borderless ? "" : "border border-gray-300",
           props.className ? props.className : "",
-          "focus:ring-4 focus:outline-none focus:ring-blue-300"
+          "text-base focus:ring-4 focus:outline-none focus:ring-blue-300" // 기본 
         )}
       onClick={props.onClick}
     >

@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import "./style.scss";
 import Modal from "../../../components/modal";
 
 interface PaymentModalProps {
@@ -23,9 +22,6 @@ const PaymentModal = (props: PaymentModalProps) => {
         <a className="social-link toss" href="/">
           토스로 결제
         </a>
-        <button className="social-link cancel" onClick={props.onClick}>
-          결제 취소
-        </button>
       </div>
     </>
   );
