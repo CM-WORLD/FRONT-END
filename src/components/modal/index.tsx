@@ -56,7 +56,7 @@ const Modal = (props: ModalProps) => {
             {/* Modal footer */}
             <div className="flex justify-center items-center gap-4 p-4 md:p-5 border-t  border-gray-200 rounded-b dark:border-gray-600">
               <Button
-                color="Blue"
+                color="Primary"
                 onClick={() => {
                   props.onSubmit();
                   props.onClose();

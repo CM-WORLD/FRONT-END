@@ -95,7 +95,7 @@ const MyCmsList = () => {
                             </span>
                           </p>
                           <div>
-                            {item.status !== CommissionStatus.PaymentPending && (
+                            {item.status === CommissionStatus.PaymentPending && (
                               <Button
                                 color="Blue"
                                 onClick={(e) => {

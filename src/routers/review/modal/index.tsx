@@ -1,3 +1,4 @@
+import Modal from "../../../components/modal";
 import "./style.scss";
 
 interface ReviewModalProps {
@@ -25,18 +26,18 @@ const WriteRvwModal = (props: ReviewModalProps) => {
             이미지 선택
           </label>
         </div>
-        <div className="btn-box">
-          <button className="confirm-btn" onClick={props.onSubmit}>리뷰 등록</button>
-          <button className="cancel-btn" onClick={props.onClick}>
-            닫기
-          </button>
-        </div>
       </div>
     </>
   );
   return (
     <>
-      {/* <Modal title="리뷰 작성하기" display={props.display} content={content} /> */}
+      <Modal
+        title="리뷰 작성하기"
+        display={props.display}
+        content={content}
+        onClose={props.onClick}
+        onSubmit={props.onSubmit}
+      />
     </>
   );
 };
