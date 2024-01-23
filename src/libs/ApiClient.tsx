@@ -1,5 +1,6 @@
 import axios from "axios";
 import { HOST_URL } from "./Const";
+import { EApiStatus } from "../defines/api";
 
 export class ApiClient {
   private static instance: ApiClient;
@@ -58,7 +59,7 @@ export class ApiClient {
       this.setAccessToken(`${resp.data.newAtk}`); // atk 재발급
     }
 
-    if (resp.data.status === 200 || resp.data.status === 205) {
+    if (resp.data.status === EApiStatus.Success || resp.data.status === EApiStatus.Reissuance) {
       if (resp.data) {
         success(resp.data);
       }
