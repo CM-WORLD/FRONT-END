@@ -1,8 +1,6 @@
 import SideNav from "../sideNav";
-import { ReactNode } from "react";
 
 import Button from "../../../components/button";
-import { JsxElement } from "typescript";
 
 interface ContentProps {
   title: JSX.Element; // Update the type of the title prop
@@ -18,7 +16,7 @@ const MyCommonContent = (props: ContentProps) => {
         <div className="">
           <SideNav />
         </div>
-        <div className="p-3">
+        <div className="m-5 w-full">
           {props.title && (
             <div className="flex justify-between align-center mt-5 mb-12">
               <div className="text-3xl font-bold">{props.title}</div>
@@ -32,7 +30,6 @@ const MyCommonContent = (props: ContentProps) => {
               )}
             </div>
           )}
-
           {props.content}
         </div>
       </div>

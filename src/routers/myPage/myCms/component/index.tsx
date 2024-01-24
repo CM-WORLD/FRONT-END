@@ -107,7 +107,7 @@ const MyCmsDetailComponent = () => {
                     / 남궁진
                   </div>
                   <div className="flex gap-2">
-                    <Button color="Blue" value="토스로 결제" />
+                    <Button color="Blue" value="토스로 결제" ></Button>
                     <Button color="Rose" value="계좌이체" />
                   </div>
                   <p className="pt-3 text-stone-500">

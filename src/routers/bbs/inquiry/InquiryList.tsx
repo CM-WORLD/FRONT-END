@@ -3,6 +3,9 @@ import axios from "axios";
 
 import MyCommonContent from "../../myPage/common";
 import { HOST_URL } from "../../../libs/Const";
+import Locale from "../../../components/locale";
+import { ApiClient } from "../../../libs/ApiClient";
+import Pagination from "../../../components/pagnation";
 
 // import "./style.scss";
 
@@ -15,34 +18,47 @@ interface bbsItem {
 
 const MyInquiryList = () => {
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(0);
-  const [size, setSize] = useState(10);
-
-  //useMemo hook으로 감싸라는데 당체 무슨 소리인지...
-  const params = {
-    page: 0,
+  const [pageObj, setPageObj] = useState({
+    number: 0,
+    first: true,
+    last: true,
     size: 10,
+    totalPages: 1,
+    totalElements: 1,
+    empty: true,
+  });
+
+  const bbsListCallback = (data: any) => {
+    const respData = data.data;
+    
+    if (respData) {
+      setData(respData.content);
+      setPageObj({
+        first: respData.first,
+        last: respData.last,
+        number: respData.number,
+        size: respData.size,
+        totalPages: respData.totalPages,
+        totalElements: respData.totalElements,
+        empty: respData.empty,
+      });
+    }
   };
 
+
   useEffect(() => {
-    // AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
-    //   if (resp.data.status === 200 || resp.data.staus === 205) {
-    //     axios
-    //       .get(HOST_URL + "/bbs/inquiry/member", {
-    //         params,
-    //         headers: {
-    //           Authorization: `Bearer ${getAccessToken()}`,
-    //           RefreshToken: getRefreshToken(),
-    //         },
-    //       })
-    //       .then((resp) => {
-    //         if (resp.data.data) {
-    //           setData(resp.data.data.content);
-    //         }
-    //       });
-    //   }
-    // });
-  }, []);
+    ApiClient.getInstance().get(
+      "/bbs/inquiry/member",
+      {params: {page: pageObj.number, size: pageObj.size}},
+      (data) => {bbsListCallback(data)},
+      (data) => {console.log(data)}
+    );
+  }, [pageObj.number]);
+
+  const updatePage = (page: number) => {
+    setPageObj({ ...pageObj, number: page });
+  };
+
 
   const content = (
     <div className="">
@@ -71,6 +87,10 @@ const MyInquiryList = () => {
           <div className="p-2 w-1/3 text-center">작성일</div>
         </div>
         <div>{content}</div>
+        <Pagination
+        pageObj={pageObj}
+        onClick={(page: number) => updatePage(page)}
+      />
       </>
     );
   };
@@ -78,10 +98,10 @@ const MyInquiryList = () => {
   return (
     <>
       <MyCommonContent
-        title="1:1 문의"
+        title={<Locale k="inquiry" />}
         content={inquiryList()}
         btnLink="/mypage/inquiry/form"
-        btnTxt="신규 문의하기"
+        btnTxt={<Locale k="inquiry_write" />}
       />
     </>
   );
