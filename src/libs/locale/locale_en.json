@@ -8,5 +8,9 @@
     "cms_history": "Commission Applications", 
     "cms_apply": "Apply for Commission",
     "payment": "Payment", 
-    "review": "Review"
+    "review": "Review",
+    "review_create": "Write a Review",
+    "content": "Content", 
+    "content_placeholder": "Please enter the content"
+
 }

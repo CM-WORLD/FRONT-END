@@ -8,5 +8,8 @@
     "cms_apply_history": "커미션 신청 내역", 
     "cms_apply": "커미션 신청",
     "payment": "결제", 
-    "review": "리뷰"
+    "review": "리뷰", 
+    "review_create": "리뷰 작성",
+    "content": "내용",
+    "content_placeholder": "내용을 입력해주세요."
 }
