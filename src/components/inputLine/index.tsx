@@ -1,6 +1,6 @@
 import Input from "../input";
 interface InputLineProps {
-  label: string;
+  label: JSX.Element;
   required?: boolean;
   placeholder: string;
   value: string;

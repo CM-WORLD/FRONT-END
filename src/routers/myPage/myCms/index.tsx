@@ -13,6 +13,7 @@ import { CommissionStatus } from "../../../defines/globalCode";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);
+  const [cmsApplyId, setCmsApplyId] = useState<string>("");
   const [paymentData, setPaymentData] = useState<CmsPayDetail>();
   const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
   const [payMdDisplay, setPayMdDisplay] = useState(false);
@@ -109,10 +110,11 @@ const MyCmsList = () => {
                             )}
                             {item.status === CommissionStatus.Completed && (
                               <Button
-                                color="Rose"
+                                color="Green"
                                 className="ml-3"
                                 onClick={(e) => {
                                   e.preventDefault();
+                                  setCmsApplyId(item.id);
                                   serRvwMdDisplay(!rvwMdDisplay);
                                 }}
                               >
@@ -160,9 +162,9 @@ const MyCmsList = () => {
         onClick={() => setPayMdDisplay(!payMdDisplay)}
       />
       <WriteRvwModal
+        cmsApplyId={cmsApplyId}
         display={rvwMdDisplay}
         onClick={() => serRvwMdDisplay(!rvwMdDisplay)}
-        onSubmit={submitForm}
       />
       <MyCommonContent
         title={<Locale k="cms_apply_history" />}

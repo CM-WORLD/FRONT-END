@@ -3,7 +3,7 @@ import Locale from "../../components/locale";
 import Button from "../button";
 
 interface ModalProps {
-  title: string;
+  title: JSX.Element;
   display: boolean;
   content: ReactNode;
   onClose: () => void;
@@ -57,10 +57,7 @@ const Modal = (props: ModalProps) => {
             <div className="flex justify-center items-center gap-4 p-4 md:p-5 border-t  border-gray-200 rounded-b dark:border-gray-600">
               <Button
                 color="Primary"
-                onClick={() => {
-                  props.onSubmit();
-                  props.onClose();
-                }}
+                onClick={props.onSubmit}
               >
                 <Locale k="confirm" />
               </Button>
