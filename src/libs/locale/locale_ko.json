@@ -11,5 +11,7 @@
     "review": "리뷰", 
     "review_create": "리뷰 작성",
     "content": "내용",
-    "content_placeholder": "내용을 입력해주세요."
+    "content_placeholder": "내용을 입력해주세요.",
+    "private": "비공개",
+    "public": "공개"
 }

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+
 import { ApiClient } from "../../libs/ApiClient";
+import { ReviewDetail } from "../../defines/api";
+
 import Button from "../../components/button";
 import Locale from "../../components/locale";
 
@@ -16,7 +19,7 @@ const MyReviewList = () => {
     empty: true,
   });
 
-  useEffect(() => {
+  const fetchReviews = () => {
     ApiClient.getInstance().get(
       "/review/member/list",
       { params: { page: pageObj.number, size: pageObj.size } },
@@ -39,18 +42,44 @@ const MyReviewList = () => {
         console.log("error", data);
       }
     );
+  };
+  useEffect(() => {
+    fetchReviews();
   }, []);
+
+  const toggleReviewStatus = (id: number) => {
+    ApiClient.getInstance().put(
+      "/review/toggle/" + id,
+      {},
+      (data) => {
+        alert("리뷰 상태가 변경되었습니다.");
+        fetchReviews();
+      },
+      (data) => {}
+    );
+  };
 
   const myReviews = () => {
     if (data.length < 1) return <>현재 작성하신 리뷰가 없습니다.</>;
     else {
-      return data.map((item: any, idx) => (
-        <div>
-            <Button color="Primary">
-                <Locale k="review"/>
-                </Button>
+      return data.map((item: ReviewDetail, idx) => (
+        <div className="border border-gray-400">
+          {item.displayYn === "Y" ? (
+            <Button
+              color="Blue"
+              data-idx={idx}
+              onClick={() => toggleReviewStatus(item.id)}
+            >
+              <Locale k="public" />
+            </Button>
+          ) : (
+            <Button color="Rose" onClick={() => toggleReviewStatus(item.id)}>
+              <Locale k="private" />
+            </Button>
+          )}
           <div>{item.id}</div>
           <div>{item.content}</div>
+          <div>{item.regDate}</div>
         </div>
       ));
     }

@@ -27,6 +27,7 @@ export class ApiClient {
     success: Function,
     error: Function
   ) {
+    
     const initAxios = axios.create({
       baseURL: HOST_URL,
       headers: {
@@ -44,9 +45,9 @@ export class ApiClient {
       case "POST":
         resp = await initAxios.post(url, params);
         break;
-      // case "PUT":
-      //   resp = await initAxios.put(url, params);
-      //   break;
+      case "PUT":
+        resp = await initAxios.put(url, params);
+        break;
       // case "DELETE":
       //   resp = await initAxios.delete(url, params);
       //   break;
@@ -82,5 +83,9 @@ export class ApiClient {
 
   public post(url: string, params: {}, success: Function, error: Function) {
     return this.request("POST", url, params, success, error);
+  }
+
+  public put(url: string, params: {}, success: Function, error: Function) {
+    return this.request("PUT", url, params, success, error);
   }
 }
