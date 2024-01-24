@@ -73,6 +73,16 @@ export interface PageObj {
   number: number;
 }
 
+export interface ReviewDetail {
+    id: number;
+    applyDto: CmsApplyDetail;
+    content: string;
+    displayYn: string;
+    nickName: string;
+    regDate: string;
+    cmsName: string;
+}
+
 /** API 통신 Status Code */
 export enum EApiStatus {
   Success = 200, // 성공

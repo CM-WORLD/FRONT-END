@@ -1,17 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { CmsApplyDetail } from "../../../defines/api";
+import { CmsApplyDetail, ReviewDetail } from "../../../defines/api";
 import { ApiClient } from "../../../libs/ApiClient";
-
-interface ReviewItem {
-  id: number;
-  applyDto: CmsApplyDetail;
-  content: string;
-  displayYn: string;
-  nickName: string;
-  regDate: string;
-  cmsName: string;
-}
 
 const ReviewPage = () => {
   const [data, setData] = useState([]);
@@ -52,31 +42,37 @@ const ReviewPage = () => {
   }, []);
 
   const reviewList = () => {
-    return data.map((item: ReviewItem, idx) => (
-      <>
-      {console.log(item)}
-        <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border border-gray-200 rounded dark:bg-gray-800 dark:border-gray-700">
-          <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {item.cmsName}
-            </h3>
-            <p className="my-4">{item.content}</p>
-          </blockquote>
-          <figcaption className="flex items-center justify-center ">
-            <img
-              className="rounded-full w-9 h-9"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-              alt="profile picture"
-            />
-            <div className="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
-              <div>{item.nickName}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                {item.regDate}
+    return data.map((item: ReviewDetail, idx) => (
+      <figure
+        className="flex flex-col items-center justify-center p-8 text-center bg-white border border-gray-200 rounded dark:bg-gray-800 dark:border-gray-700"
+        key={`review-all-${idx}`}
+      >
+        {item.displayYn === "Y" ? (
+          <>
+            <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                {item.cmsName}
+              </h3>
+              <p className="my-4">{item.content}</p>
+            </blockquote>
+            <figcaption className="flex items-center justify-center ">
+              <img
+                className="rounded-full w-9 h-9"
+                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
+                alt="profile picture"
+              />
+              <div className="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
+                <div>{item.nickName}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {item.regDate}
+                </div>
               </div>
-            </div>
-          </figcaption>
-        </figure>
-      </>
+            </figcaption>
+          </>
+        ) : (
+          <div>사용자가 비공개 처리한 후기입니다.</div>
+        )}
+      </figure>
     ));
   };
 
@@ -92,7 +88,6 @@ const ReviewPage = () => {
           ) : (
             <div className="m-5 text-center">아직 작성된 후기가 없습니다.</div>
           )}
-          {data.length}
         </div>
       </div>
     </>

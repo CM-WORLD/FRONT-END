@@ -14,6 +14,7 @@ import NotFound from "../components/error/notFound";
 import MyCmsApplyDetail from ".//myPage/myCms/detail";
 import NoticeDetail from ".//bbs/notice/NoticeDetail";
 import InquiryDetail from ".//bbs/inquiry/InquiryDetail";
+import MyReviewList from "./review/MyReviewList";
 
 const Router = () => {
   return (
@@ -30,6 +31,7 @@ const Router = () => {
         <Route path="/mypage/inquiry" element={<MyInquiryList />} />
         <Route path="/mypage/inquiry/form" element={<InquiryForm />} />
         <Route path="/mypage/inquiry/:inqId" element={<InquiryDetail />} />
+        <Route path="/mypage/reviews" element={<MyReviewList />} />
         <Route path="/notice/:noticeId" element={<NoticeDetail />} />
         <Route path="/login/kakao" element={<KakaoLoginLoading />} />
         <Route path="/logout/kakao" element={<SignOutLoading />} />
