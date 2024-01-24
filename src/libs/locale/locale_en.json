@@ -13,6 +13,8 @@
     "content": "Content", 
     "content_placeholder": "Please enter the content",
     "private": "Private",
-    "public": "Public"
+    "public": "Public",
+    "inquiry": "1:1 Inquiry",
+    "inquiry_write": "New Inquiry"
 
 }
