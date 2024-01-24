@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { BbsDetail } from "../../../defines/api";
-import ReplyForm from "../../bbs/common/reply/ReplyForm";
+import { ApiClient } from "../../../libs/ApiClient";
 
-import ReplyList from "../../bbs/common/reply/ReplyList";
-import { REQUEST_GET } from "../../../libs/request";
+import ReplyForm from "../../bbs/common/reply/ReplyForm";
 
 interface BbsDetailProps {
   breadCrumb: string;
@@ -20,12 +19,13 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
   const [data, setData] = useState<BbsDetail>();
 
   useEffect(() => {
-    REQUEST_GET(
-      `/bbs/${props.bbsCode}/` + idx,
+    ApiClient.getInstance().get(
+      "/bbs/inquiry/" + idx,
       {},
-      (data) => setData(data.data),
-      "public",
-      false
+      (data) => {
+        setData(data.data);
+      },
+      (data) => {}
     );
   }, []);
 
@@ -53,7 +53,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
                 stroke-linejoin="round"
                 stroke-width="2"
                 d="m1 9 4-4-4-4"
-                />
+              />
             </svg>
             {props.breadCrumb}
           </div>
