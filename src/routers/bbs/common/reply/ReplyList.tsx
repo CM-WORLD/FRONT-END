@@ -34,37 +34,35 @@ const ReplyList = (props: ReplyListProps) => {
     return <div className="py-4 text-center">아직 작성한 댓글이 없습니다.</div>;
   return props.replyList.map((item: ReplyDetail, idx) => {
     return (
-      <>
-        <div
-          key={`inq-reply-${idx}`}
-          className={
-            "border-b border-gray-200 py-3" + ` ${getMlByVal(item.levelId - 1)}`
-          }
-        >
-          <div className="flex items-center gap-3">
-            <div className="">
-              <img
-                className="w-10 h-10 rounded-full"
-                src={
-                  "https://jvk-world.s3.ap-northeast-2.amazonaws.com/apply/1705024099133_test_01.jpg"
-                }
-              />
-            </div>
-            <div className="font-bold text-gray-900">
-              {item.boardDto.memberDto.nickName}
-            </div>
+      <div
+        key={`inq-reply-${idx}`}
+        className={
+          "border-b border-gray-200 py-3" + ` ${getMlByVal(item.levelId - 1)}`
+        }
+      >
+        <div className="flex items-center gap-3">
+          <div className="">
+            <img
+              className="w-10 h-10 rounded-full"
+              src={
+                "https://jvk-world.s3.ap-northeast-2.amazonaws.com/apply/1705024099133_test_01.jpg"
+              }
+            />
           </div>
-          <div className="pt-3">{item.content}</div>
-          <div className="flex gap-3 pt-1 text-gray-500 text-sm">
-            <div>{item.regDate}</div>
-            <button
-              onClick={() => {
-                props.setFormIdx(item.id);
-                setReplyStatus(globalCode.reply.new);
-              }}
-            >
-              답글 쓰기
-            </button>
+          <div className="font-bold text-gray-900">{item.nickName}</div>
+        </div>
+        <div className="pt-3">{item.content}</div>
+        <div className="flex gap-3 pt-1 text-gray-500 text-sm">
+          <div>{item.regDate}</div>
+          <button
+            onClick={() => {
+              props.setFormIdx(item.id);
+              setReplyStatus(globalCode.reply.new);
+            }}
+          >
+            답글 쓰기
+          </button>
+          {item.myReply && (
             <div>
               <button
                 className="text-blue-600"
@@ -82,18 +80,18 @@ const ReplyList = (props: ReplyListProps) => {
                 <Locale k="delete" />
               </button>
             </div>
-          </div>
-          {props.formIdx === item.id && (
-            <div className="pt-5">
-              <ReplyForm
-                bbsId={"idx"}
-                status={replyStatus}
-                reply={replyStatus === globalCode.reply.update ? item : null}
-              />
-            </div>
-          )}
+          ) }
         </div>
-      </>
+        {props.formIdx === item.id && (
+          <div className="pt-5">
+            <ReplyForm
+              bbsId={"idx"}
+              status={replyStatus}
+              reply={replyStatus === globalCode.reply.update ? item : null}
+            />
+          </div>
+        )}
+      </div>
     );
   });
 };

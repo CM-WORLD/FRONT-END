@@ -21,6 +21,8 @@ export interface ReplyDetail {
   groupId: number;
   sequenceId: number;
   levelId: number;
+  nickName: string;
+  myReply: boolean;
   regDate: string;
 }
 
