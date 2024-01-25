@@ -2,6 +2,7 @@ import axios from "axios";
 import qs from "qs";
 
 import { HOST_URL } from "./Const";
+import { EApiStatus } from "../defines/api";
 
 axios.defaults.paramsSerializer = (params) => {
   return qs.stringify(params);
@@ -32,10 +33,17 @@ export const checkToken = () => {
     // alert("로그인 후 이용해 주세요");
     // ALERT 2번 중복 발생 TODO:: 리팩토링 필요
     window.location.href = "/sign/in";
-  } 
+  }
 };
 
-// 밑에 다 필요없음. 
+/* 비로그인 시 콜백 */
+export const NoAuthRedirect = () => {
+    alert("로그인 후 이용해 주세요");
+    localStorage.setItem("referer", window.location.pathname);
+    window.location.href = "/sign/in";
+};
+
+// 밑에 다 필요없음.
 
 /* TODO:: 리팩토링 이후 삭제 */
 export const AUTH_ITC = axios.create({
@@ -63,7 +71,6 @@ AUTH_ITC.interceptors.response.use((resp) => {
 
   return resp;
 });
-/* end of TODO:: 리팩토링 이후 삭제 */
 
 // refactoring .....
 const AUTH_HEADER = {
@@ -71,7 +78,13 @@ const AUTH_HEADER = {
   RefreshToken: getRtk(),
 };
 
-export const REQUEST_GET = async (url: string, params: {}, callback: Function, type: string, redirect?: boolean) => {
+export const REQUEST_GET = async (
+  url: string,
+  params: {},
+  callback: Function,
+  type: string,
+  redirect?: boolean
+) => {
   const resp = await axios
     .create({
       baseURL: HOST_URL,
@@ -87,7 +100,7 @@ export const REQUEST_GET = async (url: string, params: {}, callback: Function, t
     if (resp.data) callback(resp.data);
     if (resp.data.newAtk) setAccessToken(`${resp.data.newAtk}`); // atk 재발급
   } else {
-    if (redirect)  {
+    if (redirect) {
       localStorage.setItem("referer", window.location.pathname);
       alert("로그인이 필요합니다.");
       window.location.href = "/sign/in";
@@ -96,7 +109,13 @@ export const REQUEST_GET = async (url: string, params: {}, callback: Function, t
   }
 };
 
-export const REQUEST = async (url: string, params: {}, callback: Function, type: string, redirect?: boolean) => {
+export const REQUEST = async (
+  url: string,
+  params: {},
+  callback: Function,
+  type: string,
+  redirect?: boolean
+) => {
   const resp = await axios
     .create({
       baseURL: HOST_URL,
@@ -112,7 +131,7 @@ export const REQUEST = async (url: string, params: {}, callback: Function, type:
     if (resp.data) callback(resp.data);
     if (resp.data.newAtk) setAccessToken(`${resp.data.newAtk}`); // atk 재발급
   } else {
-    if (redirect)  {
+    if (redirect) {
       localStorage.setItem("referer", window.location.pathname);
       alert("로그인이 필요합니다.");
       window.location.href = "/sign/in";

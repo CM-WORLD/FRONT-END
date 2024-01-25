@@ -17,5 +17,6 @@
     "inquiry": "1:1 Inquiry",
     "inquiry_write": "New Inquiry", 
     "update": "Update",
+    "delete": "Delete",
     "reply": "Reply"
 }

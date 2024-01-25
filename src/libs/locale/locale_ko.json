@@ -18,5 +18,6 @@
     "inquiry_write": "신규 문의하기",
     "register": "등록", 
     "update": "수정",
+    "delete": "삭제",
     "reply": "댓글"
 }

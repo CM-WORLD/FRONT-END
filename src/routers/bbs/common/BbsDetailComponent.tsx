@@ -3,42 +3,21 @@ import { useEffect, useState } from "react";
 import { BbsDetail } from "../../../defines/api";
 import { ApiClient } from "../../../libs/ApiClient";
 
-import ReplyForm from "../../bbs/common/reply/ReplyForm";
-import ReplyList from "./reply/ReplyList";
-import { globalCode } from "../../../libs/Const";
-
 interface BbsDetailProps {
   breadCrumb: string;
   style?: string;
   bbsId: string; // 게시글 번호
   bbsCode: string; // 게시판 코드
-  isPublic: boolean; // 전체공개인지 회원공개인지
+  replyList?: JSX.Element; // 댓글이 있는지
 }
 
 const BbsDetailComponent = (props: BbsDetailProps) => {
   const idx = props.bbsId;
 
-  const fetchReplyList = () => {
-    ApiClient.getInstance().get(
-      "/reply/" + props.bbsId,
-      {},
-      (data) => {
-        console.log(data);
-        setReplyList(data.data);
-      },
-      (data) => {
-        alert("댓글 조회 중 오류가 발생했습니다");
-      }
-    );
-  };
-
   const [data, setData] = useState<BbsDetail>();
-  const [replyList, setReplyList] = useState([]);
-  const [replyFormIdx, setReplyFormIdx] = useState<number>(0);
-
   useEffect(() => {
     ApiClient.getInstance().get(
-      "/bbs/inquiry/" + idx,
+      "/bbs/"+ props.bbsCode + "/" + idx,
       {},
       (data) => {
         setData(data.data);
@@ -47,7 +26,6 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
         alert("게시글 조회 중 오류가 발생했습니다");
       }
     );
-    fetchReplyList();
   }, []);
 
   const page = () => {
@@ -96,16 +74,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
             </div>
           </div>
           <div className="min-h-60 py-5">{data.content}</div>
-          {/* 신규 루트 댓글 작성 */}
-          <ReplyForm bbsId={idx} status={globalCode.reply.new} />
-          <div className="">
-            <div className="font-bold">댓글</div>
-            <ReplyList
-              replyList={replyList}
-              formIdx={replyFormIdx}
-              setFormIdx={(formIdx) => setReplyFormIdx(formIdx)}
-            />
-          </div>
+          {data && props.replyList ? props.replyList : <></>}
         </div>
       </>
     );
@@ -114,7 +83,6 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
   return (
     <>
       {page()}
-      {/* <MyCommonContent title="" content={page()} /> */}
     </>
   );
 };

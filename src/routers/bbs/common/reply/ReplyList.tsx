@@ -5,6 +5,8 @@ import { getMlByVal } from "../../../../components/tailwind/margin";
 import { useState } from "react";
 import { globalCode } from "../../../../libs/Const";
 
+import Locale from "../../../../components/locale";
+
 interface ReplyListProps {
   replyList: ReplyDetail[];
   formIdx: number;
@@ -29,7 +31,7 @@ const ReplyList = (props: ReplyListProps) => {
   };
 
   if (props.replyList.length < 1)
-    return <div className="py-4">댓글이 존재하지 않습니다.</div>;
+    return <div className="py-4 text-center">아직 작성한 댓글이 없습니다.</div>;
   return props.replyList.map((item: ReplyDetail, idx) => {
     return (
       <>
@@ -71,13 +73,13 @@ const ReplyList = (props: ReplyListProps) => {
                   setReplyStatus(globalCode.reply.update);
                 }}
               >
-                수정
+                <Locale k="update" />
               </button>
               <button
                 className="ml-2 text-rose-600"
                 onClick={() => deleteReply(item.id)}
               >
-                삭제
+                <Locale k="delete" />
               </button>
             </div>
           </div>
@@ -90,7 +92,6 @@ const ReplyList = (props: ReplyListProps) => {
               />
             </div>
           )}
-          {/* 수정을 할 경우에  */}
         </div>
       </>
     );
