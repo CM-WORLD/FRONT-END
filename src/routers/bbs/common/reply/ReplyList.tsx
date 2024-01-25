@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { HOST_URL } from "../../../../libs/const";
 import { ReplyDetail } from "../../../../defines/api";
-import { AUTH_ITC } from "../../../../libs/request";
+import { ApiClient } from "../../../../libs/ApiClient";
+import ReplyForm from "./ReplyForm";
 
 interface ReplyListProps {
-  idx: string;
+  replyList: ReplyDetail[];
+  formIdx: number;
+  setFormIdx: (formIdx: number) => void;
 }
 
 const ReplyList = (props: ReplyListProps) => {
@@ -17,50 +18,33 @@ const ReplyList = (props: ReplyListProps) => {
     return "";
   };
 
-  const fetchReplyList = () => {
-    axios.get(HOST_URL + "/reply/list/" + props.idx).then((resp) => {
-      if (resp.status === 200 && resp.data) {
-        setReplyList(resp.data.data);
-        console.log(resp.data.data);
-      }
-    });
-  };
-
-  useEffect(() => {
-    AUTH_ITC.get(HOST_URL + "/validate/token").then((resp) => {
-      if (resp.data.status === 200 || resp.data.staus === 205) {
-        fetchReplyList();
-      }
-    });
-  }, []);
-
   const deleteReply = (id: number) => {
-    if (confirm("삭제 후에는 되돌릴 수 없습니다. 정말 삭제하시겠습니까?")) {
-      axios
-        .delete(HOST_URL + `/reply/${id}`, { data: { replyId: id } })
-        .then((resp) => {
-          if (resp.data.status === 200) {
-            alert("댓글이 삭제되었습니다");
-            fetchReplyList();
-          }
-        });
-    }
+    // if (confirm("삭제 후에는 되돌릴 수 없습니다. 정말 삭제하시겠습니까?")) {
+    //   axios
+    //     .delete(HOST_URL + `/reply/${id}`, { data: { replyId: id } })
+    //     .then((resp) => {
+    //       if (resp.data.status === 200) {
+    //         alert("댓글이 삭제되었습니다");
+    //         fetchReplyList();
+    //       }
+    //     });
+    // }
   };
 
-  if (!replyList) return <div className="py-4">댓글이 존재하지 않습니다.</div>;
-  return replyList.map((item: ReplyDetail, idx) => {
+  if (props.replyList.length < 1)
+    return <div className="py-4">댓글이 존재하지 않습니다.</div>;
+  return props.replyList.map((item: ReplyDetail, idx) => {
     return (
       <>
         <div
           key={`inq-reply-${idx}`}
           className={
-            "border-b border-gray-200 py-2" +
+            "border-b border-gray-200 py-3" +
             ` ${getInlineDepth(item.depthPath)}`
           }
         >
           <div className="flex items-center gap-3">
             <div className="">
-              <div>{item.id}</div>
               <img
                 className="w-10 h-10 rounded-full"
                 src={
@@ -75,7 +59,7 @@ const ReplyList = (props: ReplyListProps) => {
           <div className="pt-3">{item.content}</div>
           <div className="flex gap-3 pt-1 text-gray-500 text-sm">
             <div>{item.regDate}</div>
-            <button>답글 쓰기</button>
+            <button onClick={() => props.setFormIdx(item.id)}>답글 쓰기</button>
             <div>
               <button className="text-blue-600">수정</button>
               <button
@@ -86,6 +70,11 @@ const ReplyList = (props: ReplyListProps) => {
               </button>
             </div>
           </div>
+          {props.formIdx === item.id && (
+            <div className="pt-5">
+              <ReplyForm bbsId={"idx"} />
+            </div>
+          )}
         </div>
       </>
     );

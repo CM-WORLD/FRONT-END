@@ -4,6 +4,7 @@ import { BbsDetail } from "../../../defines/api";
 import { ApiClient } from "../../../libs/ApiClient";
 
 import ReplyForm from "../../bbs/common/reply/ReplyForm";
+import ReplyList from "./reply/ReplyList";
 
 interface BbsDetailProps {
   breadCrumb: string;
@@ -16,7 +17,16 @@ interface BbsDetailProps {
 const BbsDetailComponent = (props: BbsDetailProps) => {
   const idx = props.bbsId;
 
+  const fetchReplyList = () => {
+    ApiClient.getInstance().get("/reply/" + props.bbsId, {}, (data) => {
+      console.log(data);
+      setReplyList(data.data);
+    }, (data) => { alert("댓글 조회 중 오류가 발생했습니다")});
+  };
+
   const [data, setData] = useState<BbsDetail>();
+  const [replyList, setReplyList] = useState([]);
+  const [replyFormIdx, setReplyFormIdx] = useState<number>(0);
 
   useEffect(() => {
     ApiClient.getInstance().get(
@@ -25,8 +35,9 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
       (data) => {
         setData(data.data);
       },
-      (data) => {}
+      (data) => { alert("게시글 조회 중 오류가 발생했습니다")}
     );
+    fetchReplyList();
   }, []);
 
   const page = () => {
@@ -78,7 +89,11 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
           <ReplyForm bbsId={idx} />
           <div className="">
             <div className="font-bold">댓글</div>
-            {/* <ReplyList idx={idx} isPublic={props.isPublic} /> */}
+            <ReplyList 
+            replyList={replyList} 
+            formIdx={replyFormIdx} 
+            setFormIdx={(formIdx) => setReplyFormIdx(formIdx)}
+            />
           </div>
         </div>
       </>
