@@ -2,6 +2,8 @@ import ReplyForm from "./ReplyForm";
 
 import { ReplyDetail } from "../../../../defines/api";
 import { getMlByVal } from "../../../../components/tailwind/margin";
+import { useState } from "react";
+import { globalCode } from "../../../../libs/Const";
 
 interface ReplyListProps {
   replyList: ReplyDetail[];
@@ -10,6 +12,7 @@ interface ReplyListProps {
 }
 
 const ReplyList = (props: ReplyListProps) => {
+  const [replyStatus, setReplyStatus] = useState<string>("");
 
   const deleteReply = (id: number) => {
     confirm("삭제 후에는 되돌릴 수 없습니다. 정말 삭제하시겠습니까?");
@@ -33,8 +36,7 @@ const ReplyList = (props: ReplyListProps) => {
         <div
           key={`inq-reply-${idx}`}
           className={
-            "border-b border-gray-200 py-3" +
-            ` ${getMlByVal(item.levelId -1 )}`
+            "border-b border-gray-200 py-3" + ` ${getMlByVal(item.levelId - 1)}`
           }
         >
           <div className="flex items-center gap-3">
@@ -53,9 +55,24 @@ const ReplyList = (props: ReplyListProps) => {
           <div className="pt-3">{item.content}</div>
           <div className="flex gap-3 pt-1 text-gray-500 text-sm">
             <div>{item.regDate}</div>
-            <button onClick={() => props.setFormIdx(item.id)}>답글 쓰기</button>
+            <button
+              onClick={() => {
+                props.setFormIdx(item.id);
+                setReplyStatus(globalCode.reply.new);
+              }}
+            >
+              답글 쓰기
+            </button>
             <div>
-              <button className="text-blue-600">수정</button>
+              <button
+                className="text-blue-600"
+                onClick={() => {
+                  props.setFormIdx(item.id);
+                  setReplyStatus(globalCode.reply.update);
+                }}
+              >
+                수정
+              </button>
               <button
                 className="ml-2 text-rose-600"
                 onClick={() => deleteReply(item.id)}
@@ -66,7 +83,11 @@ const ReplyList = (props: ReplyListProps) => {
           </div>
           {props.formIdx === item.id && (
             <div className="pt-5">
-              <ReplyForm bbsId={"idx"} type=""/>
+              <ReplyForm
+                bbsId={"idx"}
+                status={replyStatus}
+                reply={replyStatus === globalCode.reply.update ? item : null}
+              />
             </div>
           )}
           {/* 수정을 할 경우에  */}

@@ -5,6 +5,7 @@ import { ApiClient } from "../../../libs/ApiClient";
 
 import ReplyForm from "../../bbs/common/reply/ReplyForm";
 import ReplyList from "./reply/ReplyList";
+import { globalCode } from "../../../libs/Const";
 
 interface BbsDetailProps {
   breadCrumb: string;
@@ -18,10 +19,17 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
   const idx = props.bbsId;
 
   const fetchReplyList = () => {
-    ApiClient.getInstance().get("/reply/" + props.bbsId, {}, (data) => {
-      console.log(data);
-      setReplyList(data.data);
-    }, (data) => { alert("댓글 조회 중 오류가 발생했습니다")});
+    ApiClient.getInstance().get(
+      "/reply/" + props.bbsId,
+      {},
+      (data) => {
+        console.log(data);
+        setReplyList(data.data);
+      },
+      (data) => {
+        alert("댓글 조회 중 오류가 발생했습니다");
+      }
+    );
   };
 
   const [data, setData] = useState<BbsDetail>();
@@ -35,7 +43,9 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
       (data) => {
         setData(data.data);
       },
-      (data) => { alert("게시글 조회 중 오류가 발생했습니다")}
+      (data) => {
+        alert("게시글 조회 중 오류가 발생했습니다");
+      }
     );
     fetchReplyList();
   }, []);
@@ -86,13 +96,14 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
             </div>
           </div>
           <div className="min-h-60 py-5">{data.content}</div>
-          <ReplyForm bbsId={idx} type="new" />
+          {/* 신규 루트 댓글 작성 */}
+          <ReplyForm bbsId={idx} status={globalCode.reply.new} />
           <div className="">
             <div className="font-bold">댓글</div>
-            <ReplyList 
-            replyList={replyList} 
-            formIdx={replyFormIdx} 
-            setFormIdx={(formIdx) => setReplyFormIdx(formIdx)}
+            <ReplyList
+              replyList={replyList}
+              formIdx={replyFormIdx}
+              setFormIdx={(formIdx) => setReplyFormIdx(formIdx)}
             />
           </div>
         </div>

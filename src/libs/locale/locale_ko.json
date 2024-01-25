@@ -16,5 +16,7 @@
     "public": "공개", 
     "inquiry": "1:1 문의",
     "inquiry_write": "신규 문의하기",
-    "register": "등록"
+    "register": "등록", 
+    "update": "수정",
+    "reply": "댓글"
 }
