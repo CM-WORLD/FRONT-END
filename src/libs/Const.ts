@@ -6,5 +6,12 @@ export const globalCode = {
     bbs: {
         notice: "BS01", 
         inquiry: "BS02"
+    }, 
+
+    reply: {
+        new: "1", 
+        reReply: "2", 
+        update: "3"
+
     }
 }

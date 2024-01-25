@@ -86,7 +86,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
             </div>
           </div>
           <div className="min-h-60 py-5">{data.content}</div>
-          <ReplyForm bbsId={idx} />
+          <ReplyForm bbsId={idx} type="new" />
           <div className="">
             <div className="font-bold">댓글</div>
             <ReplyList 

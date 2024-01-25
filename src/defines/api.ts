@@ -17,9 +17,10 @@ export interface MemberDetail {
 export interface ReplyDetail {
   id: number;
   content: string;
-  depthPath: string;
-  parentId: number;
   boardDto: BbsDetail;
+  groupId: number;
+  sequenceId: number;
+  levelId: number;
   regDate: string;
 }
 
