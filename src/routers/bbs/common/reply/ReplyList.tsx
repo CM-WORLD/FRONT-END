@@ -32,13 +32,6 @@ const ReplyList = (props: ReplyListProps) => {
     // }
   };
 
-  // useEffect(() => {
-  //   //action이 끝난뒤에는 대댓글창 닫기
-  //   if (!props.callFetch) {
-  //     props.setFormIdx(-1);
-  //   }
-  // }, [props.callFetch]);           
-
   if (props.replyList.length < 1)
     return <div className="py-4 text-center">아직 작성한 댓글이 없습니다.</div>;
   return props.replyList.map((item: ReplyDetail, idx) => {
@@ -66,7 +59,7 @@ const ReplyList = (props: ReplyListProps) => {
           <button
             onClick={() => {
               props.setFormIdx(item.id);
-              setReplyStatus(globalCode.reply.new);
+              setReplyStatus(globalCode.reply.reReply);
             }}
           >
             답글 쓰기
@@ -94,6 +87,7 @@ const ReplyList = (props: ReplyListProps) => {
         {props.formIdx === item.id && (
           <div className="pt-5">
             <ReplyForm
+              parentReplyId={item.id}
               hideForm={() => props.setFormIdx(-1)}
               callFetch={props.callFetch}
               bbsId={item.boardDto.id}
