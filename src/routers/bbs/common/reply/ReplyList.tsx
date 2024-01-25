@@ -75,12 +75,14 @@ const ReplyList = (props: ReplyListProps) => {
               >
                 <Locale k="update" />
               </button>
-              <button
-                className="ml-2 text-rose-600"
-                onClick={() => deleteReply(item.id)}
-              >
-                <Locale k="delete" />
-              </button>
+              {!item.hasChildren && (
+                <button
+                  className="ml-2 text-rose-600"
+                  onClick={() => deleteReply(item.id)}
+                >
+                  <Locale k="delete" />
+                </button>
+              )}
             </div>
           )}
         </div>

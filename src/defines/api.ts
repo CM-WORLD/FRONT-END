@@ -21,9 +21,11 @@ export interface ReplyDetail {
   boardDto: BbsDetail;
   groupId: number;
   sequenceId: number;
+  parentReplyId: number;
   levelId: number;
   nickName: string;
   myReply: boolean;
+  hasChildren: boolean;
   regDate: string;
 }
 

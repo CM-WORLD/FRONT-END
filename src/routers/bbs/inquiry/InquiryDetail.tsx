@@ -24,7 +24,8 @@ const InquiryDetail = () => {
         setReplyList(data.data);
       },
       (data) => {
-        alert("댓글 조회 중 오류가 발생했습니다");
+        console.log(data);
+        // alert("댓글 조회 중 오류가 발생했습니다");
       }
     );
   };
