@@ -1,48 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "../../../../components/button";
 import Locale from "../../../../components/locale";
 import TextArea from "../../../../components/textarea";
+
 import { globalCode } from "../../../../libs/Const";
 import { EApiStatus, ReplyDetail } from "../../../../defines/api";
 import { ApiClient } from "../../../../libs/ApiClient";
 import { NoAuthRedirect } from "../../../../libs/request";
 
 interface ReplyFormProps {
-  bbsId: string;
+  bbsId: number;
   status: string;
   reply?: ReplyDetail;
+  hideForm: () => void;
+  callFetch: () => void;
 }
 
 const ReplyForm = (props: ReplyFormProps) => {
-  const [form, setForm] = useState({
-    bbsId: props.bbsId,
-    content: "",
-    groupId: 0,
-    sequenceId: 0,
-    levelId: 0,
-  });
+  const [form, setForm] = useState<ReplyDetail>();
+
+  useEffect(() => {
+    if (props.reply) {
+      setForm({ ...props.reply });
+    }
+  }, []);
 
   const submitForm = () => {
     const formData = new FormData();
-    formData.append("bbsId", form.bbsId);
+    formData.append("id", `${form.id}`); //댓글 id
+    formData.append("bbsId", `${props.bbsId}`);
     formData.append("content", form.content);
+    formData.append("groupId", `${form.groupId}`);
+    formData.append("levelId", `${form.levelId}`);
+    formData.append("sequenceId", `${form.sequenceId}`);
 
-    ApiClient.getInstance().post(
-      "/reply/",
-      formData,
-      (data) => {
-        
-        
-      },
-      (data) => {
-        if (data.status === EApiStatus.NoAuth) {
-          console.log("error : 410")
-          NoAuthRedirect(); // 로그인 페이지로 리다이렉트
+    if (props.status === globalCode.reply.update) {
+      ApiClient.getInstance().put(
+        "/reply/",
+        formData,
+        (data) => {
+          alert("댓글이 성공적으로 수정되었습니다.");
+          props.callFetch();
+          props.hideForm();
+        },
+        (data) => {
+          if (data.status === EApiStatus.NoAuth) {
+            NoAuthRedirect();
+          }
         }
-      }
-    );
-
+      );
+    }
   };
 
   const localeByStatus = () => {
@@ -63,7 +71,11 @@ const ReplyForm = (props: ReplyFormProps) => {
           <TextArea
             placeholder={"댓글 내용을 입력해 주세요"}
             className="w-full min-h-20 border-none focus:outline-none"
-            value={props.reply ? props.reply.content : form.content}
+            value={
+              props.status === globalCode.reply.update && form
+                ? form.content
+                : ""
+            }
             onChange={(e) => setForm({ ...form, content: e.target.value })}
           />
           <Button className="w-20" color="Primary" onClick={submitForm}>

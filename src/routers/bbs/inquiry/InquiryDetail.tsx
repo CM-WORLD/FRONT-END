@@ -43,10 +43,16 @@ const InquiryDetail = () => {
           breadCrumb="문의 상세"
           replyList={
             <>
-              <ReplyForm bbsId={idx} status={globalCode.reply.new} />
+              <ReplyForm
+                hideForm={() => setReplyFormIdx(-1)}
+                bbsId={Number(idx)}
+                status={globalCode.reply.new}
+                callFetch={() => setFetchReply(true)}
+              />
               <div className="">
                 <div className="font-bold">댓글</div>
                 <ReplyList
+                  callFetch={() => setFetchReply(true)}
                   replyList={replyList}
                   formIdx={replyFormIdx}
                   setFormIdx={(formIdx) => setReplyFormIdx(formIdx)}

@@ -1,4 +1,5 @@
 export interface BbsDetail {
+  id: number;
   title: string;
   content: string;
   bbsCode: string;

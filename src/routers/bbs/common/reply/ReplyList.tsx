@@ -1,13 +1,15 @@
+import { useEffect, useState } from "react";
+
 import ReplyForm from "./ReplyForm";
 
 import { ReplyDetail } from "../../../../defines/api";
 import { getMlByVal } from "../../../../components/tailwind/margin";
-import { useState } from "react";
 import { globalCode } from "../../../../libs/Const";
 
 import Locale from "../../../../components/locale";
 
 interface ReplyListProps {
+  callFetch: () => void;
   replyList: ReplyDetail[];
   formIdx: number;
   setFormIdx: (formIdx: number) => void;
@@ -29,6 +31,13 @@ const ReplyList = (props: ReplyListProps) => {
     //     });
     // }
   };
+
+  // useEffect(() => {
+  //   //action이 끝난뒤에는 대댓글창 닫기
+  //   if (!props.callFetch) {
+  //     props.setFormIdx(-1);
+  //   }
+  // }, [props.callFetch]);           
 
   if (props.replyList.length < 1)
     return <div className="py-4 text-center">아직 작성한 댓글이 없습니다.</div>;
@@ -80,12 +89,14 @@ const ReplyList = (props: ReplyListProps) => {
                 <Locale k="delete" />
               </button>
             </div>
-          ) }
+          )}
         </div>
         {props.formIdx === item.id && (
           <div className="pt-5">
             <ReplyForm
-              bbsId={"idx"}
+              hideForm={() => props.setFormIdx(-1)}
+              callFetch={props.callFetch}
+              bbsId={item.boardDto.id}
               status={replyStatus}
               reply={replyStatus === globalCode.reply.update ? item : null}
             />
