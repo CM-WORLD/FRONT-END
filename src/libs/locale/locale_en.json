@@ -18,5 +18,6 @@
     "inquiry_write": "New Inquiry", 
     "update": "Update",
     "delete": "Delete",
-    "reply": "Reply"
+    "reply": "Reply", 
+    "go_list": "Go to List"
 }

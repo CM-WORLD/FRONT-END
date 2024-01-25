@@ -19,5 +19,6 @@
     "register": "등록", 
     "update": "수정",
     "delete": "삭제",
-    "reply": "댓글"
+    "reply": "댓글", 
+    "go_list": "목록으로"
 }

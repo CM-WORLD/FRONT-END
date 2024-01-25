@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import { BbsDetail } from "../../../defines/api";
 import { ApiClient } from "../../../libs/ApiClient";
+import Button from "../../../components/button";
+import Locale from "../../../components/locale";
 
 interface BbsDetailProps {
   breadCrumb: string;
@@ -17,7 +19,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
   const [data, setData] = useState<BbsDetail>();
   useEffect(() => {
     ApiClient.getInstance().get(
-      "/bbs/"+ props.bbsCode + "/" + idx,
+      "/bbs/" + props.bbsCode + "/" + idx,
       {},
       (data) => {
         setData(data.data);
@@ -56,7 +58,19 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
             </svg>
             {props.breadCrumb}
           </div>
-          <div className="text-2xl mb-3">{data.title}</div>
+          <div className="flex items-center justify-between text-2xl mb-3">
+            <div>{data.title}</div>
+            <div>
+              <Button
+                color="White"
+                textColor="Dark"
+                borderless={false}
+                onClick={() => history.back()}
+              >
+                <Locale k="go_list" />
+              </Button>
+            </div>
+          </div>
           <div className="flex items-center gap-4">
             <div className="">
               <img
@@ -80,11 +94,7 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
     );
   };
 
-  return (
-    <>
-      {page()}
-    </>
-  );
+  return <>{page()}</>;
 };
 
 export default BbsDetailComponent;
