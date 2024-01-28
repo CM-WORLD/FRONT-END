@@ -20,19 +20,23 @@ interface ReplyFormProps {
 
 const ReplyForm = (props: ReplyFormProps) => {
   const [form, setForm] = useState<ReplyDetail>();
+  const [updateForm, setUpdateForm] = useState<ReplyDetail>();
 
   useEffect(() => {
-    if (props.status === globalCode.reply.update && props.reply) {
-      setForm(props.reply);
-    } else {
-      setForm({ ...props.reply, content: "" });
-    }
+    setUpdateForm({ ...updateForm, content: props.reply?.content });
+
+    console.log("form: ", form?.content);
+    console.log("updateForm", updateForm?.content);
   }, [props.status]);
 
   const submitForm = () => {
     const formData = new FormData();
     formData.append("bbsId", `${props.bbsId}`);
-    formData.append("content", form.content);
+
+    formData.append(
+      "content",
+      props.status === globalCode.reply.new ? form.content : updateForm?.content
+    );
 
     if (props.status === globalCode.reply.update) {
       formData.append("id", `${form.id}`); //댓글 id
@@ -79,6 +83,13 @@ const ReplyForm = (props: ReplyFormProps) => {
     else return <Locale k="register" />;
   };
 
+  const onChangeForm = (e: any) => {
+    console.log(props.status, e.target.value);
+    if (props.status === globalCode.reply.update) {
+      setUpdateForm({ ...form, content: e.target.value });
+    } else setForm({ ...form, content: e.target.value });
+  };
+
   return (
     <div>
       <div className="border-t border-gray-200 py-5">
@@ -92,10 +103,10 @@ const ReplyForm = (props: ReplyFormProps) => {
             className="w-full min-h-20 border-none focus:outline-none"
             value={
               props.status === globalCode.reply.update
-                ? props.reply.content
+                ? updateForm?.content
                 : form?.content
             }
-            onChange={(e) => setForm({ ...form, content: e.target.value })}
+            onChange={(e) => onChangeForm(e)}
           />
           <Button className="w-20" color="Primary" onClick={submitForm}>
             {localeByStatus()}

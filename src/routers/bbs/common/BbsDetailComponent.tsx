@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { BbsDetail } from "../../../defines/api";
+import { BbsDetail, EApiStatus } from "../../../defines/api";
 import { ApiClient } from "../../../libs/ApiClient";
 import Button from "../../../components/button";
 import Locale from "../../../components/locale";
+import { NoAuthRedirect } from "../../../libs/request";
 
 interface BbsDetailProps {
   breadCrumb: string;
@@ -25,7 +26,9 @@ const BbsDetailComponent = (props: BbsDetailProps) => {
         setData(data.data);
       },
       (data) => {
-        alert("게시글 조회 중 오류가 발생했습니다");
+        if (data.status === EApiStatus.NoAuth) {
+          NoAuthRedirect();
+        }
       }
     );
   }, []);

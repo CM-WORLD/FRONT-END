@@ -8,6 +8,7 @@ import BbsDetailComponent from "../common/BbsDetailComponent";
 import MyCommonContent from "../../myPage/common";
 import ReplyForm from "../common/reply/ReplyForm";
 import ReplyList from "../common/reply/ReplyList";
+import { EApiStatus } from "../../../defines/api";
 
 const InquiryDetail = () => {
   const idx = useParams().inqId;
@@ -24,7 +25,12 @@ const InquiryDetail = () => {
         setReplyList(data.data);
       },
       (data) => {
-        console.log(data);
+        // console.log(data);
+        if (data.status === EApiStatus.NoAuth) {
+          // NoAuthRedirect();
+          setReplyList([]);
+        }
+
         // alert("댓글 조회 중 오류가 발생했습니다");
       }
     );
