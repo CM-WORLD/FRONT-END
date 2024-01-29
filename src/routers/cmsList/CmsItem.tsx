@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 
-import { REQUEST_GET } from "../../../../libs/request";
-import { CommissionDetail } from "../../../../defines/api";
+import Button from "../../components/button";
+import Locale from "../../components/locale";
 
-import Button from "../../../../components/button";
+import { ApiClient } from "../../libs/ApiClient";
+import { CommissionDetail } from "../../defines/api";
 
 const CmsItems = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    REQUEST_GET("/cms/list", {}, (data) => setData(data.data), "public", false);
+    ApiClient.getInstance().get(
+      "/cms/list",
+      {},
+      (data) => {
+        console.log(data.data);
+        setData(data.data);
+      },
+      () => {}
+    );
   }, []);
 
   const renderItems = () => {
@@ -21,7 +30,7 @@ const CmsItems = () => {
       );
     return data.map((item: CommissionDetail, idx) => {
       return (
-        <div key={`${item.id}-${idx}`}>
+        <div key={`${item.id}-${idx}`} className="border-t border-gray-200">
           <a
             className="cms-item flex items-center my-16 text-dark"
             href={`/apply/${item.id}`}
@@ -44,7 +53,9 @@ const CmsItems = () => {
                   예약 대기자 <b className="text-cyan-500">{item.rsvCnt}</b>명
                 </div>
               </div>
-              <Button color="Primary" value="신청 & 예약하기" />
+              <Button color="Primary">
+                <Locale k="cms_apply" />
+              </Button>
             </div>
           </a>
         </div>

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import Pagination from "../../../../components/pagnation";
-import { HOST_URL } from "../../../../libs/Const";
-import { REQUEST_GET } from "../../../../libs/request";
+
+import Pagination from "../../components/pagnation";
+import { ApiClient } from "../../libs/ApiClient";
 
 interface bbsItem {
   id: number;
@@ -14,9 +13,6 @@ interface bbsItem {
 }
 const ApplyNoticeBbs = () => {
   const [data, setData] = useState([]);
-  // 페이징 처리
-  const [page, setPage] = useState(0);
-  const [size, setSize] = useState(10);
 
   const [pageObj, setPageObj] = useState({
     number: 0,
@@ -30,7 +26,7 @@ const ApplyNoticeBbs = () => {
 
   const bbsListCallback = (data: any) => {
     const respData = data.data;
-    
+
     if (respData) {
       setData(respData.content);
       setPageObj({
@@ -46,18 +42,7 @@ const ApplyNoticeBbs = () => {
   };
 
   useEffect(() => {
-    REQUEST_GET(
-      "/bbs/aply/cms",
-      {
-        params: {
-          page: pageObj.number,
-          size: 10,
-        },
-      },
-      (data) => bbsListCallback(data),
-      "public",
-      false
-    );
+    ApiClient.getInstance().get("/bbs/aply/cms", {}, bbsListCallback, () => {});
   }, []);
 
   const updatePage = (page: number) => {
@@ -100,7 +85,7 @@ const ApplyNoticeBbs = () => {
   };
   return (
     <>
-      <h1 className="font-bold text-2xl">공지사항</h1>
+      <h1 className="font-bold text-2xl text-center">공지사항</h1>
       <table className="bbs-table">
         <colgroup>
           <col width="15%" />
