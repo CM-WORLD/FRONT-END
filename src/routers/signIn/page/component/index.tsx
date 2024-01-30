@@ -1,7 +1,8 @@
 import Button from "../../../../components/button";
-import Locale, { getLocaleToString } from "../../../../components/locale";
+import Locale from "../../../../components/locale";
 import { EAccountType } from "../../../../defines/account";
-import { AssetsRoot } from "../../../../libs/Const";
+import { AssetsRoot, HOST_URL } from "../../../../libs/Const";
+
 import "./style.scss";
 
 const LoginBtnsComponent = () => {
@@ -15,7 +16,7 @@ const LoginBtnsComponent = () => {
         window.location.href = url;
         return;
       case EAccountType.Twitter:
-        // TODO:: 트위터 로그인 api 적용
+        window.location.href = `${HOST_URL}/sign/in/twitter`;
         return;
       case EAccountType.Naver:
         // TODO:: 네이버 로그인 api 적용
@@ -49,7 +50,7 @@ const LoginBtnsComponent = () => {
           <Button
             className="cursor-pointer bg-twitter"
             color="Primary"
-            onClick={() => loginButtonHandler(EAccountType.Kakao)}
+            onClick={() => loginButtonHandler(EAccountType.Twitter)}
           >
             <div className="relative flex justify-center items-center">
               <img

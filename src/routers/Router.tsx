@@ -15,6 +15,7 @@ import MyCmsApplyDetail from ".//myPage/myCms/detail";
 import NoticeDetail from ".//bbs/notice/NoticeDetail";
 import InquiryDetail from ".//bbs/inquiry/InquiryDetail";
 import MyReviewList from "./review/MyReviewList";
+import SigninTwitterLoading from "./signIn/loading/SigninTwitterLoading";
 
 const Router = () => {
   return (
@@ -34,6 +35,7 @@ const Router = () => {
         <Route path="/mypage/reviews" element={<MyReviewList />} />
         <Route path="/notice/:noticeId" element={<NoticeDetail />} />
         <Route path="/login/kakao" element={<KakaoLoginLoading />} />
+        <Route path="/login/twitter" element={<SigninTwitterLoading />} />
         <Route path="/logout/kakao" element={<SignOutLoading />} />
         {/* 404 error page */}
         <Route path="/*" element={<NotFound />} />
