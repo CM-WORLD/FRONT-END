@@ -81,7 +81,7 @@ export const Button = (props: ButtonProps) => {
           "text-white font-bold py-2 px-4",
           props.borderless ? "" : "border border-gray-300",
           props.className ? props.className : "",
-          "text-base focus:ring-4 focus:outline-none focus:ring-blue-300" // 기본 
+          "text-base focus:outline-none" // 기본 
         )}
       onClick={props.onClick}
     >
