@@ -62,7 +62,7 @@ const LoginBtnsComponent = () => {
         <Button
           className="cursor-pointer bg-twitter"
           color="Primary"
-          onClick={() => loginButtonHandler(EAccountType.Kakao)}
+          onClick={() => loginButtonHandler(EAccountType.Twitter)}
         >
           <div className="relative flex justify-center items-center">
             <img
