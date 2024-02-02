@@ -16,6 +16,8 @@ import NoticeDetail from ".//bbs/notice/NoticeDetail";
 import InquiryDetail from ".//bbs/inquiry/InquiryDetail";
 import MyReviewList from "./review/MyReviewList";
 import SigninTwitterLoading from "./signIn/loading/SigninTwitterLoading";
+import TossTest from "./payment/tossTest";
+import TossSuccess from "./payment/tossSuccess";
 
 const Router = () => {
   return (
@@ -37,6 +39,9 @@ const Router = () => {
         <Route path="/login/kakao" element={<KakaoLoginLoading />} />
         <Route path="/login/twitter" element={<SigninTwitterLoading />} />
         <Route path="/logout/kakao" element={<SignOutLoading />} />
+        <Route path="/toss/test" element={<TossTest />} />
+        <Route path="/toss/success" element={<TossSuccess />} />
+
         {/* 404 error page */}
         <Route path="/*" element={<NotFound />} />
       </Routes>

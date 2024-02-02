@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@tosspayments/payment-sdk": "^1.7.0",
+    "@tosspayments/payment-widget-sdk": "^0.10.2",
     "@types/node": "^20.9",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
@@ -13,6 +15,7 @@
     "classnames": "^2.3.3",
     "http-proxy-middleware": "^2.0.6",
     "js-cookie": "^3.0.5",
+    "nanoid": "^5.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",

@@ -4,9 +4,10 @@ import qs from "qs";
 import { HOST_URL } from "./Const";
 import { EApiStatus } from "../defines/api";
 
-axios.defaults.paramsSerializer = (params) => {
-  return qs.stringify(params);
-};
+// PROB:: @RequestBody 객체 타입 선언이 null이 되었던 원인
+// axios.defaults.paramsSerializer = (params) => {
+//   return qs.stringify(params);
+// };
 
 axios.defaults.withCredentials = true;
 
