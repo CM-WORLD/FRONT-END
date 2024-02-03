@@ -8,8 +8,16 @@ import { AssetsRoot } from "../../libs/Const";
 const NavBar = () => {
   const [isLogined, setIsLogined] = useState(false);
 
-  const redirectUrl = import.meta.env.VITE_REACT_APP_KAKAO_LOGOUT_URL_LOCAL;
-  const clientId = import.meta.env.VITE_REACT_APP_KAKAO_CLIENT_ID;
+  // TODO:: 소셜 타입별 로그아웃 분기처리 필요.
+  // const redirectUrl = import.meta.env.VITE_REACT_APP_KAKAO_LOGOUT_URL_LOCAL;
+  // const clientId = import.meta.env.VITE_REACT_APP_KAKAO_CLIENT_ID;
+
+  /** active style 처리 */
+  const activeStyle = (url: string) => {
+    if (url === window.location.pathname) {
+      return "text-blue-700";
+    } else return "text-gray-900";
+  };
 
   useEffect(() => {
     ApiClient.getInstance().get(
@@ -21,15 +29,8 @@ const NavBar = () => {
   }, []);
   return (
     <nav className="flex justify-between p-4 border-b">
-      <a
-        href="/"
-        className="flex items-center space-x-3 rtl:space-x-reverse"
-      >
-        <img
-          src={`${AssetsRoot}/images/logo.svg`}
-          className="h-8"
-          alt="Logo"
-        />
+      <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src={`${AssetsRoot}/images/logo.svg`} className="h-8" alt="Logo" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
           jinvicky
         </span>
@@ -69,7 +70,9 @@ const NavBar = () => {
             <li>
               <a
                 href="/posts"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={`block py-2 px3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${activeStyle(
+                  "/posts"
+                )}`}
               >
                 Illust
               </a>
@@ -77,7 +80,9 @@ const NavBar = () => {
             <li>
               <a
                 href="/commissions"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={`block py-2 px3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${activeStyle(
+                  "/commissions"
+                )}`}
               >
                 Commission
               </a>
@@ -85,7 +90,9 @@ const NavBar = () => {
             <li>
               <a
                 href="/reviews"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${activeStyle(
+                  "/reviews"
+                )}`}
               >
                 Review
               </a>
@@ -105,7 +112,7 @@ const NavBar = () => {
               </li>
               <li className="ml-5">
                 <a
-                  href={`https://kauth.kakao.com/oauth/logout?client_id=${clientId}&logout_redirect_uri=${redirectUrl}`}
+                // href={`https://kauth.kakao.com/oauth/logout?client_id=${clientId}&logout_redirect_uri=${redirectUrl}`}
                 >
                   <Locale k="logout" />
                 </a>
