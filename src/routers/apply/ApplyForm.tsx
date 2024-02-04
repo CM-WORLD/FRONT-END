@@ -1,17 +1,16 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+
 import CommonLoading from "../../components/loading";
 import { getAtk, getRtk } from "../../libs/request";
 import { HOST_URL } from "../../libs/Const";
 
-// import "./style.scss";
 import CmsApplyComplete from "./complete";
-import Input from "../../components/input";
 import InputLine from "../../components/inputLine";
 import Button from "../../components/button";
-import FileUpload from "../../components/fileUpload";
 import Locale from "../../components/locale";
+import FileUploadPreview from "../../components/fileUpload";
 const BadRequest = React.lazy(
   () => import("../../components/error/badRequest")
 );
@@ -132,7 +131,7 @@ const ApplyForm = () => {
           />
         </div>
 
-        <FileUpload />
+        <FileUploadPreview />
 
         {/* <div className="input-line">
           <label htmlFor="">
