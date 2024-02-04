@@ -10,6 +10,8 @@ import CmsApplyComplete from "./complete";
 import Input from "../../components/input";
 import InputLine from "../../components/inputLine";
 import Button from "../../components/button";
+import FileUpload from "../../components/fileUpload";
+import Locale from "../../components/locale";
 const BadRequest = React.lazy(
   () => import("../../components/error/badRequest")
 );
@@ -129,7 +131,10 @@ const ApplyForm = () => {
             value={applyForm.bankOwner}
           />
         </div>
-        <div className="input-line">
+
+        <FileUpload />
+
+        {/* <div className="input-line">
           <label htmlFor="">
             첨부 이미지<span className="astrik">*</span>
           </label>
@@ -142,10 +147,12 @@ const ApplyForm = () => {
           <label className="file-label" htmlFor="img">
             이미지 선택
           </label>
-        </div>
+        </div> */}
       </div>
       <div className="btn-box flex justify-center m-5">
-        <Button color="Primary" value="등록하기" onClick={submitForm} />
+        <Button color="Primary" onClick={submitForm}>
+          <Locale k="apply" />
+        </Button>
       </div>
     </div>
   );
