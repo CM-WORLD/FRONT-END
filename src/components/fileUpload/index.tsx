@@ -55,18 +55,20 @@ function FileUploadPreview() {
               </p>
             </label>
           </div>
-          <div className="flex items-center justify-center border border-gray-200">
-            <div className="grid grid-cols-3 gap-4">
-              {filesPreview.map((file, index) => (
-                <img
-                  key={index}
-                  src={file}
-                  alt={`preview ${index}`}
-                  className="max-h-48 rounded-lg "
-                />
-              ))}
+          {filesPreview.length > 0 && (
+            <div className="flex items-center justify-center border border-gray-200">
+              <div className="grid grid-cols-3 gap-4">
+                {filesPreview.map((file, index) => (
+                  <img
+                    key={index}
+                    src={file}
+                    alt={`preview ${index}`}
+                    className="max-h-48 rounded-lg "
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

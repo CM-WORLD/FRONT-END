@@ -1,25 +1,28 @@
-import { buildClass } from "../../defines/twColors";
-import { getLocaleToString } from "../locale";
-
 interface TextAreaProps {
-  placeholder: string;
+  label: JSX.Element;
+  required?: boolean;
   value: string;
-  onChange: (e) => void;
-  className?: string;
+  onChange: any;
+  placeholder?: string;
 }
 
 const TextArea = (props: TextAreaProps) => {
   return (
-    <textarea
-      className={buildClass(
-        "border border-gray-400 rounded py-2 px-2 resize-none text-base min-h-40",
-        props.className
-      )}
-      placeholder={props.placeholder}
-      value={props.value}
-      onChange={props.onChange}
-    />
+    <div className="p-2 flex">
+      <label htmlFor="" className="mr-5 text-dark">
+        {props.label}{" "}
+        {props.required && <span className="text-red-500">*</span>}
+      </label>
+      <textarea
+        id="message"
+        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white resize-none focus:outline-none"
+        placeholder={
+          props.placeholder ? props.placeholder : "내용을 입력해 주세요"
+        }
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value)}
+      ></textarea>
+    </div>
   );
 };
-
 export default TextArea;

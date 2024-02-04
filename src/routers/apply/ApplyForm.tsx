@@ -11,6 +11,7 @@ import InputLine from "../../components/inputLine";
 import Button from "../../components/button";
 import Locale from "../../components/locale";
 import FileUploadPreview from "../../components/fileUpload";
+import TextArea from "../../components/textarea";
 const BadRequest = React.lazy(
   () => import("../../components/error/badRequest")
 );
@@ -108,7 +109,7 @@ const ApplyForm = () => {
           }}
           value={applyForm.title}
         />
-        <div className="input-line">
+        {/* <div className="input-line">
           <label htmlFor="">
             내용<span className="astrik">*</span>
           </label>
@@ -120,37 +121,25 @@ const ApplyForm = () => {
               setApplyForm({ ...applyForm, content: e.target.value })
             }
           />
-          <InputLine
-            label="계좌주"
-            required={true}
-            placeholder="계좌주를 입력해 주세요"
-            onChange={(value) =>
-              setApplyForm({ ...applyForm, bankOwner: value })
-            }
-            value={applyForm.bankOwner}
-          />
-        </div>
-
-        <FileUploadPreview />
-
-        {/* <div className="input-line">
-          <label htmlFor="">
-            첨부 이미지<span className="astrik">*</span>
-          </label>
-          <input
-            multiple={true}
-            type="file"
-            id="img"
-            onChange={(e) => storeFiles(e)}
-          />
-          <label className="file-label" htmlFor="img">
-            이미지 선택
-          </label>
         </div> */}
+        <TextArea
+          label={<Locale k="register" />}
+          required={true}
+          value={applyForm.content}
+          onChange={(value) => setApplyForm({ ...applyForm, content: value })}
+        />
+        <InputLine
+          label="계좌주"
+          required={true}
+          placeholder="계좌주를 입력해 주세요"
+          onChange={(value) => setApplyForm({ ...applyForm, bankOwner: value })}
+          value={applyForm.bankOwner}
+        />
+        <FileUploadPreview />
       </div>
       <div className="btn-box flex justify-center m-5">
         <Button color="Primary" onClick={submitForm}>
-          <Locale k="apply" />
+          <Locale k="cms_apply" />
         </Button>
       </div>
     </div>
