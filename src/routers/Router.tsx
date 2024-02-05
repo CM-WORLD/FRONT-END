@@ -18,6 +18,7 @@ import MyReviewList from "./review/MyReviewList";
 import SigninTwitterLoading from "./signIn/loading/SigninTwitterLoading";
 import TossTest from "./payment/tossTest";
 import TossSuccess from "./payment/tossSuccess";
+import SigninNaverLoading from "./signIn/loading/SigninNaverLoading";
 
 const Router = () => {
   return (
@@ -37,6 +38,7 @@ const Router = () => {
         <Route path="/mypage/reviews" element={<MyReviewList />} />
         <Route path="/notice/:noticeId" element={<NoticeDetail />} />
         <Route path="/login/kakao" element={<KakaoLoginLoading />} />
+        <Route path="/login/naver" element={<SigninNaverLoading />} />
         <Route path="/login/twitter" element={<SigninTwitterLoading />} />
         <Route path="/logout/kakao" element={<SignOutLoading />} />
         <Route path="/toss/test" element={<TossTest />} />
