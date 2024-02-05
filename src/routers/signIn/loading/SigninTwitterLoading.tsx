@@ -19,6 +19,16 @@ const SigninTwitterLoading = () => {
       },
       (data) => {
         console.log("success", data);
+
+        window.location.href = "/";
+        // const referer = localStorage.getItem("referer");
+      // if (
+      //   referer === null ||
+      //   referer === "/login/kakao" ||
+      //   referer === "/sign/in"
+      // ) {
+      //   window.location.href = "/";
+      // } else window.location.href = referer;
       },
       (data) => {
         console.log("error: ", data);

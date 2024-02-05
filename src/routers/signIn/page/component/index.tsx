@@ -56,7 +56,9 @@ const LoginBtnsComponent = () => {
           </div>
         </Button>
 
-        <Button onClick={() => loginButtonHandler(EAccountType.Naver)}>
+        <Button 
+          className="cursor-pointer bg-naver"
+        onClick={() => loginButtonHandler(EAccountType.Naver)}>
           <Locale k="naver_login" />
         </Button>
         <Button
