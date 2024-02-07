@@ -218,7 +218,7 @@ export const Input = (props: InputProps) => {
         type={props.type}
         placeholder={props.placeholder}
         value={props.value}
-        onChange={props.onChange}
+        onChange={(e) => props.onChange(e.target.value)}
       />
     </div>
   );
