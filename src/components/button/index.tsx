@@ -75,10 +75,10 @@ export const Button = (props: ButtonProps) => {
         buildClass(
           getColorByType(props.color, "bg"),
           getColorByType(props.color, "bgHover"),
-          getColorByType(props.textColor, "txt"),
           getRoundType(props.radius),
+          getColorByType(props.textColor, "txt"),
           props.disabled ? "cursor-not-allowed" : "",
-          "text-white font-bold py-2 px-4",
+          "font-bold py-2 px-4",
           props.borderless ? "" : "border border-gray-300",
           props.className ? props.className : "",
           "text-base focus:outline-none" // 기본 

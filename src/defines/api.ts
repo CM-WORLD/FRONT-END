@@ -94,4 +94,5 @@ export enum EApiStatus {
   Success = 200, // 성공
   Reissuance = 205, // 토큰 재발급
   NoAuth = 410, // 권한 없음
+  BadRequest = 400, // 잘못된 요청
 }

@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 
-function FileUploadPreview() {
+interface FileUploadPreviewProps {
+  onChange: (files: []) => void;
+}
+
+// 목표 applyVo에 fileList 추가할것 
+
+const FileUploadPreview = (props: FileUploadPreviewProps) => {
   const [filesPreview, setFilesPreview] = useState([]);
 
   const handleFileChange = (event) => {
     const files = event.target.files;
     const previewFiles = [];
+    props.onChange(files); // 파일정보 갱신
 
     Array.from(files).forEach((file: any) => {
       const reader = new FileReader();

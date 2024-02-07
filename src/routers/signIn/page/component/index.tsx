@@ -1,5 +1,5 @@
 import Button from "../../../../components/button";
-import Locale, { getLocaleToString } from "../../../../components/locale";
+import Locale from "../../../../components/locale";
 import { EAccountType } from "../../../../defines/account";
 import { AssetsRoot, HOST_URL } from "../../../../libs/Const";
 import "./style.scss";
@@ -21,10 +21,8 @@ const LoginBtnsComponent = () => {
         return;
       case EAccountType.Twitter:
         window.location.href = `${HOST_URL}/sign/in/twitter`;
-        // TODO:: 트위터 로그인 api 적용
         return;
       case EAccountType.Naver:
-        // TODO:: 네이버 로그인 api 적용
         window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverId}&redirect_uri=${naverRedirectUrl}`;
         return;
       default:

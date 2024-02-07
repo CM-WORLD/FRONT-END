@@ -8,6 +8,8 @@ export const BgColors: ClassType ={
   Primary: "bg-primary",
   White: "bg-white", 
   Green: "bg-green-500",
+  LightGray: "bg-gray-200",
+  Gray: "bg-gray-500"
 }
 
 export const BgHoverColors: ClassType ={
@@ -15,12 +17,15 @@ export const BgHoverColors: ClassType ={
   Blue: "hover:bg-blue-700",
   White: "hover:bg-gray-100", 
   Green: "hover:bg-green-700",
+  LightGray: "hover:bg-gray-300",
+  Gray: "hover:bg-gray-700",
 };
 
 export const TxtColors: ClassType ={
   Rose: "text-rose-500",
   Blue: "text-blue-500",
   Dark: "text-gray-700",
+  White: "text-white",
 }
 
 export const getColorByType = (color: keyof ClassType, type: string): string  => {
@@ -30,6 +35,7 @@ export const getColorByType = (color: keyof ClassType, type: string): string  =>
     case "bgHover":
       return BgHoverColors[color];
     case "txt" :
+      if (color === null || color === undefined) return "text-white";
       return TxtColors[color];
     default:
       return BgColors[color];
@@ -42,7 +48,7 @@ export const buildClass = (...args: string[]) => {
 }
 
 
-// get style by type disabled and active
+/** 페이징, 버튼 상태에 따른 스타일 */
 export const getStyleByStatus = (disabled: string) => {
   const disabledStyle = "pointer-events-none cursor-not-allowed bg-gray-100 text-gray-300";
   const activeStyle = "bg-white hover:bg-gray-100 text-gray-500 hover:text-gray-600 ";

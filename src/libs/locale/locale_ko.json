@@ -40,6 +40,9 @@
 
     "read_required": "필독", 
     "notice": "공지사항", 
+    "cms_application_form": "커미션 신청서",
+    "title": "제목",
+    "bank_owner": "예금주",
 
     "review_not_found": "현재 작성된 리뷰가 없습니다."
 }
