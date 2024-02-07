@@ -1,5 +1,5 @@
 import CmsItems from "./CmsItem";
-import ApplyNoticeBbs from "./CmsNoticeLIST";
+import ApplyNoticeBbs from "./CmsNoticeList";
 
 const CmsList = () => {
   return (

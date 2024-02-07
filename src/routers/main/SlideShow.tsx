@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { ApiClient } from "../../libs/ApiClient";
-import "./style.scss";
 
 interface BannerItem {
   id: number;
@@ -25,6 +24,7 @@ const SlideShow = () => {
       "/bnr/list",
       {},
       (data) => {
+        console.log(data.data);
         if (data) setData(data.data);
       },
       (data) => {}
