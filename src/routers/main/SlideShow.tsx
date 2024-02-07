@@ -3,8 +3,8 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ApiClient } from "../../../../libs/ApiClient";
 
+import { ApiClient } from "../../libs/ApiClient";
 import "./style.scss";
 
 interface BannerItem {
@@ -44,7 +44,7 @@ const SlideShow = () => {
 
   const imgList = data.map((item: BannerItem, idx) => {
     return (
-      <a key={`banner-${idx}`} href={`${item.hrefUrl}`}>
+      <a key={`banner-${idx}`} href={`${item.hrefUrl}`} className="relative h-56 overflow-hidden rounded-lg md:h-96 border border-gray-300">
         <img src={item.imgUrl} alt="banner_img" />
       </a>
     );
