@@ -44,7 +44,7 @@ const SlideShow = () => {
 
   const imgList = data.map((item: BannerItem, idx) => {
     return (
-      <a key={`banner-${idx}`} href={`${item.hrefUrl}`} className="relative h-56 overflow-hidden rounded-lg md:h-96 border border-gray-300">
+      <a key={`banner-${idx}`} href={`${item.hrefUrl}`} className="relative h-56 overflow-hidden md:h-96 border border-gray-300">
         <img src={item.imgUrl} alt="banner_img" />
       </a>
     );
