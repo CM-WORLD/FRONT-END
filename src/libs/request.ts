@@ -1,15 +1,5 @@
 import axios from "axios";
-import qs from "qs";
-
 import { HOST_URL } from "./Const";
-import { EApiStatus } from "../defines/api";
-
-// PROB:: @RequestBody 객체 타입 선언이 null이 되었던 원인
-// axios.defaults.paramsSerializer = (params) => {
-//   return qs.stringify(params);
-// };
-
-axios.defaults.withCredentials = true;
 
 /* 토큰 조회 */
 export const getAtk = () => {
@@ -26,6 +16,26 @@ export const getNick = () => {
 
 export const setAccessToken = (atk: string) => {
   localStorage.setItem("atk", atk);
+};
+
+export const setNickName = (nick: string) => {
+  localStorage.setItem("nick", nick);
+}
+
+export const setRefreshToken = (rtk: string) => {
+  localStorage.setItem("rtk", rtk);
+}
+
+/** 로그인 성공 시 콜백 함수 */
+export const signinCallback = (accessToken, refreshToken, nickName) => {
+  setAccessToken(accessToken);
+  setNickName(nickName);
+  setRefreshToken(refreshToken);
+
+  const referer = localStorage.getItem("referer");
+        if (referer === null || referer === "/sign/in")
+          window.location.href = "/";
+        else window.location.href = referer;
 };
 
 /* local */
@@ -46,38 +56,6 @@ export const NoAuthRedirect = () => {
 
 // 밑에 다 필요없음.
 
-/* TODO:: 리팩토링 이후 삭제 */
-export const AUTH_ITC = axios.create({
-  baseURL: HOST_URL,
-  headers: {
-    withCredentials: true,
-    Authorization: `Bearer ${getAtk()}`,
-    RefreshToken: getRtk(),
-  },
-});
-
-AUTH_ITC.interceptors.response.use((resp) => {
-  const status = resp.data.status;
-  if (status === 200) return resp;
-  else if (status === 205) {
-    // atk 재발급
-    if (resp.data.newAtk) {
-      localStorage.setItem("atk", resp.data.newAtk);
-    }
-  } else {
-    //415, 500, 505
-    localStorage.setItem("referer", window.location.pathname);
-    window.location.href = "/sign/in";
-  }
-
-  return resp;
-});
-
-// refactoring .....
-const AUTH_HEADER = {
-  Authorization: `Bearer ${getAtk()}`,
-  RefreshToken: getRtk(),
-};
 
 export const REQUEST_GET = async (
   url: string,

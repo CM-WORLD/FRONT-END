@@ -8,7 +8,7 @@ import MyCmsList from ".//myPage/myCms";
 import InquiryForm from ".//bbs/inquiry/InquiryForm";
 import ApplyCms from "./apply/ApplyForm";
 import ReviewPage from ".//review/page";
-import KakaoLoginLoading from ".//signIn/loading";
+import SigninKakaoLoading from "./signIn/loading/SigninKakaoLoading";
 import SignOutLoading from ".//signIn/signOut";
 import NotFound from "../components/error/notFound";
 import MyCmsApplyDetail from ".//myPage/myCms/detail";
@@ -37,7 +37,7 @@ const Router = () => {
         <Route path="/mypage/inquiry/:inqId" element={<InquiryDetail />} />
         <Route path="/mypage/reviews" element={<MyReviewList />} />
         <Route path="/notice/:noticeId" element={<NoticeDetail />} />
-        <Route path="/login/kakao" element={<KakaoLoginLoading />} />
+        <Route path="/login/kakao" element={<SigninKakaoLoading />} />
         <Route path="/login/naver" element={<SigninNaverLoading />} />
         <Route path="/login/twitter" element={<SigninTwitterLoading />} />
         <Route path="/logout/kakao" element={<SignOutLoading />} />

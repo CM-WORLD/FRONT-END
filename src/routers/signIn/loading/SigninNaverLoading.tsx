@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import CommonLoading from "../../../components/loading";
 import { ApiClient } from "../../../libs/ApiClient";
+import { signinCallback } from "../../../libs/request";
 
 const SigninNaverLoading = () => {
   useEffect(() => {
@@ -18,17 +19,10 @@ const SigninNaverLoading = () => {
         state: state,
       },
       (data) => {
-        console.log("success", data);
+        console.log(data);
 
-        window.location.href = "/";
-        // const referer = localStorage.getItem("referer");
-      // if (
-      //   referer === null ||
-      //   referer === "/login/kakao" ||
-      //   referer === "/sign/in"
-      // ) {
-      //   window.location.href = "/";
-      // } else window.location.href = referer;
+        const { nick, tokens: { accessToken, refreshToken } } = data.data;
+        signinCallback(accessToken, refreshToken, nick);
       },
       (data) => {
         console.log("error: ", data);

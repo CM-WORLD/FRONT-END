@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import CommonLoading from "../../../components/loading";
 import { ApiClient } from "../../../libs/ApiClient";
+import { signinCallback } from "../../../libs/request";
 
 const SigninTwitterLoading = () => {
   useEffect(() => {
@@ -18,25 +19,15 @@ const SigninTwitterLoading = () => {
         oauthVerifier: oauthVerifier,
       },
       (data) => {
-        console.log("success", data);
+        console.log(data);
 
-        window.location.href = "/";
-        // const referer = localStorage.getItem("referer");
-      // if (
-      //   referer === null ||
-      //   referer === "/login/kakao" ||
-      //   referer === "/sign/in"
-      // ) {
-      //   window.location.href = "/";
-      // } else window.location.href = referer;
+        const { nick, tokens: { accessToken, refreshToken } } = data.data;
+        signinCallback(accessToken, refreshToken, nick);
       },
       (data) => {
         console.log("error: ", data);
       }
     );
-
-    // my id : 773090135688687600, id별 고유
-
   }, []);
   return <CommonLoading desc="로그인 처리 중입니다." />;
 };
