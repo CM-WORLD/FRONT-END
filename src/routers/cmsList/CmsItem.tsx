@@ -14,7 +14,6 @@ const CmsItems = () => {
       "/cms/list",
       {},
       (data) => {
-        console.log(data.data);
         setData(data.data);
       },
       () => {}

@@ -26,6 +26,7 @@ const ApplyNoticeBbs = () => {
 
   const bbsListCallback = (data: any) => {
     const respData = data.data;
+    console.log(respData);
 
     if (respData) {
       setData(respData.content);
