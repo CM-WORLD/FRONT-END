@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import Pagination from "../../components/pagnation";
 import { ApiClient } from "../../libs/ApiClient";
+import Locale from "../../components/locale";
 
 interface bbsItem {
   id: number;
@@ -63,9 +64,15 @@ const ApplyNoticeBbs = () => {
       <>
         <tr key={`cms-notice-${idx}`}>
           <td className="">
-            <span className="px-6 py-2 rounded border-red-500 font-bold text-red-600 bg-rose-200">
-              필독
-            </span>
+            {/* <div className="inline px-6 py-2 rounded border-red-500 font-bold text-red-600 bg-rose-200">
+              <Locale k="read_required" />
+            </div> */}
+
+<div className="border border-gray-100">
+
+<Locale k="read_required" />
+</div>
+
           </td>
           <td>
             <a href={`/notice/${item.id}`}>
@@ -86,7 +93,7 @@ const ApplyNoticeBbs = () => {
   };
   return (
     <>
-      <h1 className="font-bold text-2xl text-center">공지사항</h1>
+      <h1 className="font-bold text-2xl text-center"><Locale k="notice" /></h1>
       <table className="bbs-table">
         <colgroup>
           <col width="15%" />

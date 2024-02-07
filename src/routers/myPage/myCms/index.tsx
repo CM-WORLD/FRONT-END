@@ -47,7 +47,7 @@ const MyCmsList = () => {
 
   useEffect(() => {
     ApiClient.getInstance().get(
-      "/apply/history",
+      "/apply/member/history",
       {
         params: {
           page: pageObj.number,

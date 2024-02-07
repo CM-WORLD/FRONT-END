@@ -60,7 +60,7 @@ const MyReviewList = () => {
   };
 
   const myReviews = () => {
-    if (data.length < 1) return <>현재 작성하신 리뷰가 없습니다.</>;
+    if (data.length < 1) return <><Locale k="review_not_found" /></>;
     else {
       return data.map((item: ReviewDetail, idx) => (
         <div className="border border-gray-400">
