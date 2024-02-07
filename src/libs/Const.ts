@@ -13,5 +13,11 @@ export const globalCode = {
         reReply: "2", 
         update: "3"
 
+    }, 
+    post: {
+        all : "ALL", 
+        single: "TY01", 
+        couple: "TY02",
+        group: "TY03"
     }
 }

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BlogList from "./blog/BlogList";
+import BlogList from "./post/BlogList";
 import CmsList from ".//cmsList/CmsList";
 import MainPage from ".//main/MainPage";
 import SignInPage from ".//signIn/page";
