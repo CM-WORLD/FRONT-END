@@ -1,3 +1,4 @@
+import Locale from "../../components/locale";
 import SlideShow from "./SlideShow";
 
 const MainPage = () => {
@@ -8,7 +9,7 @@ const MainPage = () => {
       <div>
         <h1 className="text-2xl font-bold py-3">DEVELOPERS</h1>
         <div className="border-t border-gray-700 py-5 pr-9">
-          <h3 className="font-bold">jinvicky</h3>
+          <h3 className="font-bold"><Locale k="jinvicky" /></h3>
           <div>
             <a href="">Github</a> / <a href="">Velog</a> / <a href="">Notion</a>
           </div>
@@ -20,7 +21,9 @@ const MainPage = () => {
       </div>
       {/* 고객센터 문의  */}
       <div className="">
-        <h1 className="text-2xl font-bold py-3">고객센터</h1>
+        <h1 className="text-2xl font-bold py-3">
+          <Locale k="customer_center" />
+        </h1>
         <div className="border-t border-gray-700 py-5 px-9">
           <div className="flex items-center gap-10">
             <div className="font-bold">카카오톡으로 문의하기</div>
@@ -34,9 +37,11 @@ const MainPage = () => {
           </div>
           <div>
             <p className="text-md pt-2">
-              문의 후 답변까지 1~2일이 소요될 수 있습니다.
+              <Locale k="ask_question_desc1" />
             </p>
-            <p className="text-md">am 9시 ~ pm 12시 | 연중무휴</p>
+            <p className="text-md">
+              <Locale k="ask_question_desc2" />
+            </p>
           </div>
         </div>
       </div>
@@ -66,15 +71,15 @@ const MainPage = () => {
                 <div className="border-t border-gray-700 pt-3 pr-9"></div>
                 <div className="text-lg text-gray-500">
                   <div className="">
-                    안녕하세요. SD 캐릭터를 그리는 웹 개발자 걍진입니다.
+                    <Locale k="profile_desc1" />
                   </div>
                   <div>
-                    현재 카페, 트위터, 인스타 등을 통해서 SD 일러스트 작업을
-                    하고 있습니다.
+                    <Locale k="profile_desc2" />
                   </div>
                   <div className="pt-3 font-bold text-gray-600">SNS</div>
                   <div>
-                    <a href="">Twitter</a> / <a href="">Cafe</a> / <a href="">Instagram</a>
+                    <a href="">Twitter</a> / <a href="">Cafe</a> /{" "}
+                    <a href="">Instagram</a>
                   </div>
                 </div>
               </div>
