@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ApiClient } from "../../libs/ApiClient";
 import { globalCode } from "../../libs/Const";
+import { postJsonArr } from "../../testJson/testData";
 
 interface Post {
   id: number;
@@ -17,7 +18,8 @@ const BlogList = () => {
   const [currentTab, setCurrentTab] = useState(globalCode.post.all);
 
   useEffect(() => {
-    fetchData(currentTab);
+    // fetchData(currentTab);
+    setData(postJsonArr); //TODO:: test 임시 데이터
   }, [currentTab]);
 
   const fetchData = (type: string) => {
