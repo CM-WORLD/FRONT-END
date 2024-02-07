@@ -40,7 +40,7 @@ const Router = () => {
         <Route path="/login/kakao" element={<SigninKakaoLoading />} />
         <Route path="/login/naver" element={<SigninNaverLoading />} />
         <Route path="/login/twitter" element={<SigninTwitterLoading />} />
-        <Route path="/logout/kakao" element={<SignOutLoading />} />
+        <Route path="/sign/out" element={<SignOutLoading />} />
         <Route path="/toss/test" element={<TossTest />} />
         <Route path="/toss/success" element={<TossSuccess />} />
 

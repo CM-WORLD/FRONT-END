@@ -20,11 +20,11 @@ export const setAccessToken = (atk: string) => {
 
 export const setNickName = (nick: string) => {
   localStorage.setItem("nick", nick);
-}
+};
 
 export const setRefreshToken = (rtk: string) => {
   localStorage.setItem("rtk", rtk);
-}
+};
 
 /** 로그인 성공 시 콜백 함수 */
 export const signinCallback = (accessToken, refreshToken, nickName) => {
@@ -33,9 +33,8 @@ export const signinCallback = (accessToken, refreshToken, nickName) => {
   setRefreshToken(refreshToken);
 
   const referer = localStorage.getItem("referer");
-        if (referer === null || referer === "/sign/in")
-          window.location.href = "/";
-        else window.location.href = referer;
+  if (referer === null || referer === "/sign/in") window.location.href = "/";
+  else window.location.href = referer;
 };
 
 /* local */
@@ -49,13 +48,12 @@ export const checkToken = () => {
 
 /* 비로그인 시 콜백 */
 export const NoAuthRedirect = () => {
-    alert("로그인 후 이용해 주세요");
-    localStorage.setItem("referer", window.location.pathname);
-    window.location.href = "/sign/in";
+  alert("로그인 후 이용해 주세요");
+  localStorage.setItem("referer", window.location.pathname);
+  window.location.href = "/sign/in";
 };
 
 // 밑에 다 필요없음.
-
 
 export const REQUEST_GET = async (
   url: string,

@@ -19,6 +19,27 @@ const NavBar = () => {
     } else return "text-gray-900";
   };
 
+  const logoutHandler = (e: any) => {
+    e.preventDefault();
+    // 요청을 보내서 로그아웃 url을 전달받는다. //백단은 로그아웃 url을 주기 전에 디비에서 토큰을 삭제한다.
+
+    ApiClient.getInstance().get(
+      "/sign/out",
+      {},
+      (data) => {
+        const url = data.data;
+
+        localStorage.removeItem("atk");
+        localStorage.removeItem("rtk");
+        localStorage.removeItem("nick");
+        localStorage.removeItem("referer");
+
+        window.location.href = url;
+      },
+      (data) => {}
+    );
+  };
+
   useEffect(() => {
     ApiClient.getInstance().get(
       "/login/check",
@@ -111,9 +132,7 @@ const NavBar = () => {
                 <a href="/mypage/cms">내 커미션 정보</a>
               </li>
               <li className="ml-5">
-                <a
-                // href={`https://kauth.kakao.com/oauth/logout?client_id=${clientId}&logout_redirect_uri=${redirectUrl}`}
-                >
+                <a href="/sign/out">
                   <Locale k="logout" />
                 </a>
               </li>
