@@ -51,7 +51,11 @@ const NavBar = () => {
   return (
     <nav className="flex justify-between p-4 border-b">
       <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src={`${AssetsRoot}/images/logo.svg`} className="h-8" alt="Logo" />
+        <img
+          src={`${AssetsRoot}/images/logo_white.jpeg`}
+          className="h-10"
+          alt="Logo"
+        />
         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
           jinvicky
         </span>
