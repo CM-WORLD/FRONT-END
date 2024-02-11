@@ -10,6 +10,7 @@ import Select from "../../components/select";
 
 import { ApiClient } from "../../libs/ApiClient";
 import { EApiStatus } from "../../defines/api";
+import Input from "../../components/input";
 
 interface ApplyCmsForm {
   status: string;
@@ -18,6 +19,8 @@ interface ApplyCmsForm {
   imgList: [];
   nickName: string;
   bankOwner: string;
+  sendAlert: boolean;
+  phoneNum?: string;
 }
 
 const ApplyForm = () => {
@@ -29,6 +32,8 @@ const ApplyForm = () => {
     imgList: [],
     nickName: "",
     bankOwner: "",
+    sendAlert: true,
+    phoneNum: "",
   });
 
   const submitForm = async () => {
@@ -55,7 +60,7 @@ const ApplyForm = () => {
       },
       (data) => {
         console.log(data);
-        if (data.status === EApiStatus.BadRequest){
+        if (data.status === EApiStatus.BadRequest) {
           alert(data.message);
         } else alert("요청에 문제가 발생했습니다. 재시도해 주세요");
       }
@@ -104,12 +109,63 @@ const ApplyForm = () => {
               if (files) setApplyForm({ ...applyForm, imgList: files });
             }}
           />
+          <div className="flex items-center mb-4">
+            <input
+              checked={applyForm.sendAlert}
+              id="default-radio-1"
+              type="radio"
+              value=""
+              name="default-radio"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+              onChange={(e) => {
+                setApplyForm({ ...applyForm, sendAlert: true });
+              }}
+            />
+            <label
+              htmlFor="default-radio-1"
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              수신 동의
+            </label>
+          </div>
+          {applyForm.sendAlert && (
+            <div>
+              <Input
+                placeholder={"-제외 숫자로만 입력해 주세요"}
+                value={applyForm.phoneNum}
+                onChange={undefined}
+              />
+            </div>
+          )}
+          <div className="flex items-center">
+            <input
+              checked={!applyForm.sendAlert}
+              id="default-radio-2"
+              type="radio"
+              value=""
+              name="default-radio"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+              onChange={(e) => {
+                setApplyForm({ ...applyForm, sendAlert: false });
+              }}
+            />
+            <label
+              htmlFor="default-radio-2"
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              수신 거부
+            </label>
+          </div>
         </div>
         <div className="btn-box flex justify-center m-5 gap-5">
           <Button color="Primary" onClick={submitForm}>
             <Locale k="cms_apply" />
           </Button>
-          <Button color="LightGray" textColor="Dark" onClick={() => history.back()}>
+          <Button
+            color="LightGray"
+            textColor="Dark"
+            onClick={() => history.back()}
+          >
             <Locale k="cancel" />
           </Button>
         </div>
