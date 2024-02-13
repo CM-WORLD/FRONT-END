@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Button from "../../components/button";
@@ -11,6 +11,7 @@ import { ApiClient } from "../../libs/ApiClient";
 import { EApiStatus } from "../../defines/api";
 import Input from "../../components/input";
 import { CommissionStatus } from "../../defines/globalCode";
+import { NoAuthRedirect } from "../../libs/request";
 
 interface ApplyCmsForm {
   status: string;
@@ -72,6 +73,17 @@ const ApplyForm = () => {
       }
     );
   };
+
+  useEffect(() => {
+    ApiClient.getInstance().get(
+      "/login/check",
+      {},
+      () => {},
+      () => {
+        NoAuthRedirect()
+      }
+    );
+  }, []);
 
   return (
     <>

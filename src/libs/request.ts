@@ -1,7 +1,6 @@
 import axios from "axios";
 import { HOST_URL } from "./Const";
 
-/* 토큰 조회 */
 export const getAtk = () => {
   return localStorage.getItem("atk");
 };
@@ -47,15 +46,6 @@ export const signOutCallback = () => {
   window.location.href = "/";
 }
 
-/* local */
-export const checkToken = () => {
-  if (getAtk() === null || getAtk().replace(" ", "") === "") {
-    // alert("로그인 후 이용해 주세요");
-    // ALERT 2번 중복 발생 TODO:: 리팩토링 필요
-    window.location.href = "/sign/in";
-  }
-};
-
 /* 비로그인 시 콜백 */
 export const NoAuthRedirect = () => {
   alert("로그인 후 이용해 주세요");
@@ -64,6 +54,14 @@ export const NoAuthRedirect = () => {
 };
 
 // 밑에 다 필요없음.
+/* local */
+// export const checkToken = () => {
+//   if (getAtk() === null || getAtk().replace(" ", "") === "") {
+//     // alert("로그인 후 이용해 주세요");
+//     // ALERT 2번 중복 발생 TODO:: 리팩토링 필요
+//     window.location.href = "/sign/in";
+//   }
+// };
 
 export const REQUEST_GET = async (
   url: string,

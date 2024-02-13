@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { globalCode } from "../../../libs/Const";
 import MyCommonContent from "../../myPage/common";
 import { ApiClient } from "../../../libs/ApiClient";
-import { checkToken } from "../../../libs/request";
+// import { checkToken } from "../../../libs/request";
 import InputLine from "../../../components/inputLine";
 
 const InquiryForm = () => {
@@ -15,7 +15,7 @@ const InquiryForm = () => {
   });
 
   useEffect(() => {
-    checkToken();
+    // checkToken();
   }, []);
 
   const submitForm = () => {

@@ -99,7 +99,7 @@ const NavBar = () => {
                   "/posts"
                 )}`}
               >
-                Illust
+                <Locale k="illust" />
               </a>
             </li>
             <li>
@@ -109,7 +109,7 @@ const NavBar = () => {
                   "/commissions"
                 )}`}
               >
-                Commission
+                <Locale k="cms_apply" />
               </a>
             </li>
             <li>
@@ -119,7 +119,7 @@ const NavBar = () => {
                   "/reviews"
                 )}`}
               >
-                Review
+                <Locale k="review" />
               </a>
             </li>
           </ul>
