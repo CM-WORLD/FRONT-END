@@ -8,22 +8,22 @@ const SignOutLoading = () => {
   const [isLogOut, setIsLogOut] = useState(true);
 
   useEffect(() => {
-    ApiClient.getInstance().post(
-      "/invalidate/token",
-      {},
-      () => {
-        localStorage.removeItem("atk");
-        localStorage.removeItem("rtk");
-        localStorage.removeItem("referer");
-        localStorage.removeItem("nick");
-        
-        window.location.href = "/"; //최종적으로 메인으로 이동
-        
-      },
-      () => { 
-        setIsLogOut(false);
-      }
-    );
+    ApiClient.getInstance().post("/sign/out", {}, (data) => {}, (data) => {});
+    // ApiClient.getInstance().post(
+    //   "/invalidate/token",
+    //   {},
+    //   () => {
+    //     localStorage.removeItem("atk");
+    //     localStorage.removeItem("rtk");
+    //     localStorage.removeItem("referer");
+    //     localStorage.removeItem("nick");
+
+    //     window.location.href = "/"; //최종적으로 메인으로 이동
+    //   },
+    //   () => {
+    //     setIsLogOut(false);
+    //   }
+    // );
   }, []);
 
   return (

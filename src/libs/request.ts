@@ -27,15 +27,25 @@ export const setRefreshToken = (rtk: string) => {
 };
 
 /** 로그인 성공 시 콜백 함수 */
-export const signinCallback = (accessToken, refreshToken, nickName) => {
+export const signinCallback = (accessToken, refreshToken, nickName, provider) => {
   setAccessToken(accessToken);
   setNickName(nickName);
   setRefreshToken(refreshToken);
+  localStorage.setItem("provider", provider);
 
   const referer = localStorage.getItem("referer");
   if (referer === null || referer === "/sign/in") window.location.href = "/";
   else window.location.href = referer;
 };
+
+/** 로그아웃 콜백 함수 */
+export const signOutCallback = () => {
+  localStorage.removeItem("atk");
+  localStorage.removeItem("rtk");
+  localStorage.removeItem("nick");
+  localStorage.removeItem("provider");
+  window.location.href = "/";
+}
 
 /* local */
 export const checkToken = () => {

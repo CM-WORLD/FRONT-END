@@ -19,10 +19,8 @@ const SigninTwitterLoading = () => {
         oauthVerifier: oauthVerifier,
       },
       (data) => {
-        console.log(data);
-
-        const { nick, tokens: { accessToken, refreshToken } } = data.data;
-        signinCallback(accessToken, refreshToken, nick);
+        const { nick, provider,  tokens: { accessToken, refreshToken } } = data.data;
+        signinCallback(accessToken, refreshToken, nick, provider);
       },
       (data) => {
         console.log("error: ", data);

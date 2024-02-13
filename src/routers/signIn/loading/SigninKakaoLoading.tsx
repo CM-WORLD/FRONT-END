@@ -34,11 +34,8 @@ const SigninKakaoLoading = () => {
       "/process/kakao",
       { code: code },
       (data) => {
-        console.log(data);
-        const { nick } = data.data;
-        const { accessToken, refreshToken } = data.data.tokens;
-
-        signinCallback(accessToken, refreshToken, nick);
+        const { nick, provider,  tokens: { accessToken, refreshToken } } = data.data;
+        signinCallback(accessToken, refreshToken, nick, provider);
       },
       (data) => {
         console.log(data);
