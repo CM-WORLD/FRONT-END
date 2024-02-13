@@ -4,6 +4,9 @@
 // import { BuildClass } from "toonation-library";
 // import { PropBase } from "../utils";
 
+import { useEffect, useState } from "react";
+import Locale, { getLocaleToString } from "../locale";
+
 // /**
 //  * `Input` 컴포넌트 공통 `Props` 입니다.
 //  */
@@ -211,12 +214,14 @@ interface InputProps {
 }
 
 export const Input = (props: InputProps) => {
+  const placeholder = getLocaleToString(props.placeholder);
+
   return (
     <div>
       <input
-        className="border border-gray-400 rounded py-2 px-2"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 "
         type={props.type}
-        placeholder={props.placeholder}
+        placeholder={placeholder}
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
       />

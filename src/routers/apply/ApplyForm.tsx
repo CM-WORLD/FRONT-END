@@ -1,7 +1,6 @@
-import React, { Suspense, useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-import InputLine from "../../components/inputLine";
 import Button from "../../components/button";
 import Locale from "../../components/locale";
 import FileUploadPreview from "../../components/fileUpload";
@@ -11,6 +10,7 @@ import Select from "../../components/select";
 import { ApiClient } from "../../libs/ApiClient";
 import { EApiStatus } from "../../defines/api";
 import Input from "../../components/input";
+import { CommissionStatus } from "../../defines/globalCode";
 
 interface ApplyCmsForm {
   status: string;
@@ -19,22 +19,27 @@ interface ApplyCmsForm {
   imgList: [];
   nickName: string;
   bankOwner: string;
-  sendAlert: boolean;
+  sendAlert: string;
   phoneNum?: string;
 }
 
 const ApplyForm = () => {
   const cmsId = useParams().cmsId; //참조할 커미션 타입 id
   const [applyForm, setApplyForm] = useState<ApplyCmsForm>({
-    status: "",
+    status: CommissionStatus.Applied,
     title: "",
     content: "",
     imgList: [],
     nickName: "",
     bankOwner: "",
-    sendAlert: true,
+    sendAlert: "Y",
     phoneNum: "",
   });
+
+  const optionList = [
+    { locale: "apply", value: CommissionStatus.Applied },
+    { locale: "reserve", value: CommissionStatus.Reserve },
+  ];
 
   const submitForm = async () => {
     let formData = new FormData();
@@ -57,6 +62,7 @@ const ApplyForm = () => {
       (data) => {
         alert("신청이 완료되었습니다.");
         window.location.href = "/myPage/cms";
+        // 신청 시 mypage로 이동
       },
       (data) => {
         console.log(data);
@@ -69,93 +75,136 @@ const ApplyForm = () => {
 
   return (
     <>
-      <div className="w-9/12 relative m-auto my-5 border border-gray-300 rounded p-5">
+      <div className="w-9/12 relative m-auto my-9 border border-gray-300 rounded p-5">
         <h1 className="py-5 text-2xl font-bold text-center">
           <Locale k="cms_application_form" />
         </h1>
-        <div className="flex items-center flex-col">
-          <Select
-            label="신청 상태"
-            options={[{ locale: "신청", value: "TP01" }]}
-            selectedValue={"TP01"}
-            onChange={(value) => setApplyForm({ ...applyForm, status: value })}
-          />
-          <InputLine
-            label={<Locale k="title" />}
-            value={applyForm.title}
-            required={true}
-            placeholder="제목을 입력해 주세요"
-            onChange={(value) => {
-              setApplyForm({ ...applyForm, title: value });
-            }}
-          />
-          <TextArea
-            label={<Locale k="content" />}
-            required={true}
-            value={applyForm.content}
-            onChange={(value) => setApplyForm({ ...applyForm, content: value })}
-          />
-          <InputLine
-            label={<Locale k="bank_owner" />}
-            required={true}
-            placeholder="계좌주를 입력해 주세요"
-            onChange={(value) =>
-              setApplyForm({ ...applyForm, bankOwner: value })
-            }
-            value={applyForm.bankOwner}
-          />
-          <FileUploadPreview
-            onChange={(files) => {
-              if (files) setApplyForm({ ...applyForm, imgList: files });
-            }}
-          />
-          <div className="flex items-center mb-4">
-            <input
-              checked={applyForm.sendAlert}
-              id="default-radio-1"
-              type="radio"
-              value=""
-              name="default-radio"
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-              onChange={(e) => {
-                setApplyForm({ ...applyForm, sendAlert: true });
+        <div className="flex items-center flex-col p-3 gap-4">
+          <div className="w-full grid grid-cols-[0.7fr,3fr] gap-3 items-center">
+            <div className="text-dark flex">
+              <Locale k="apply_type" />
+              <span className="text-red-500 ml-2">*</span>
+            </div>
+            <Select
+              options={optionList}
+              selectedValue={applyForm.status}
+              onChange={(value) =>
+                setApplyForm({ ...applyForm, status: value })
+              }
+            />
+          </div>
+          <div className="w-full grid grid-cols-[0.7fr,3fr] gap-3 items-center">
+            <div className="text-dark flex">
+              <Locale k="title" />
+              <span className="text-red-500 ml-2">*</span>
+            </div>
+            <Input
+              placeholder="title_placeholder"
+              onChange={(value) => {
+                setApplyForm({ ...applyForm, title: value });
+              }}
+              value={applyForm.title}
+            />
+          </div>
+          <div className="w-full grid grid-cols-[0.7fr,3fr] gap-3">
+            <div className="text-dark flex">
+              <Locale k="content" />
+              <span className="text-red-500 ml-2">*</span>
+            </div>
+            <TextArea
+              value={applyForm.content}
+              onChange={(value) =>
+                setApplyForm({ ...applyForm, content: value })
+              }
+            />
+          </div>
+          <div className="w-full grid grid-cols-[0.7fr,3fr] gap-3 items-center">
+            <div className="text-dark flex">
+              <Locale k="account_holder" />
+              <span className="text-red-500 ml-2">*</span>
+            </div>
+            <Input
+              placeholder="account_holder_placeholder"
+              onChange={(value) =>
+                setApplyForm({ ...applyForm, bankOwner: value })
+              }
+              value={applyForm.bankOwner}
+            />
+          </div>
+          <div className="w-full grid grid-cols-[0.7fr,3fr] gap-3">
+            <div className="text-dark flex">
+              <Locale k="file_image" />
+              <span className="text-red-500 ml-2">*</span>
+            </div>
+            <FileUploadPreview
+              onChange={(files) => {
+                if (files) setApplyForm({ ...applyForm, imgList: files });
               }}
             />
-            <label
-              htmlFor="default-radio-1"
-              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              수신 동의
-            </label>
           </div>
-          {applyForm.sendAlert && (
-            <div>
+          <div className="w-full grid grid-cols-[0.7fr,3fr] gap-3 ">
+            <div className="text-dark flex">
+              <Locale k="send_alert" />
+              <span className="text-red-500 ml-2">*</span>
+            </div>
+            <div className="flex gap-6">
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  checked={applyForm.sendAlert === "Y"}
+                  value={"Y"}
+                  className="w-5 h-5 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                  onChange={(e) => {
+                    setApplyForm({ ...applyForm, sendAlert: "Y" });
+                  }}
+                />
+                <label
+                  htmlFor="default-radio-1"
+                  className="ms-2 font-medium text-gray-900 dark:text-gray-300"
+                >
+                  <Locale k="receive_agree" />
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  checked={applyForm.sendAlert === "N"}
+                  type="radio"
+                  value={"N"}
+                  className="w-5 h-5 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                  onChange={(e) => {
+                    setApplyForm({ ...applyForm, sendAlert: "N" });
+                  }}
+                />
+                <label
+                  htmlFor="default-radio-2"
+                  className="ms-2 font-medium text-gray-900 dark:text-gray-300"
+                >
+                  <Locale k="receive_disagree" />
+                </label>
+              </div>
+            </div>
+          </div>
+          {applyForm.sendAlert === "N" && (
+            <div className="w-full text-sm text-red-500">
+              <Locale k="receive_disagree_warn" />
+            </div>
+          )}
+          {applyForm.sendAlert === "Y" && (
+            <div className="w-full grid grid-cols-[0.7fr,3fr] gap-3 items-center">
+              <div className="text-dark flex">
+                <Locale k="phone_number" />
+                <span className="text-red-500 ml-2">*</span>
+              </div>
               <Input
-                placeholder={"-제외 숫자로만 입력해 주세요"}
+                type="number"
+                placeholder="phone_number_placeholder"
+                onChange={(value) =>
+                  setApplyForm({ ...applyForm, phoneNum: value })
+                }
                 value={applyForm.phoneNum}
-                onChange={undefined}
               />
             </div>
           )}
-          <div className="flex items-center">
-            <input
-              checked={!applyForm.sendAlert}
-              id="default-radio-2"
-              type="radio"
-              value=""
-              name="default-radio"
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
-              onChange={(e) => {
-                setApplyForm({ ...applyForm, sendAlert: false });
-              }}
-            />
-            <label
-              htmlFor="default-radio-2"
-              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              수신 거부
-            </label>
-          </div>
         </div>
         <div className="btn-box flex justify-center m-5 gap-5">
           <Button color="Primary" onClick={submitForm}>

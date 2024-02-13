@@ -27,8 +27,8 @@ const FileUploadPreview = (props: FileUploadPreviewProps) => {
   return (
     <div className="container mx-auto py-0">
       <div className="bg-white rounded-lg overflow-hidden">
-        <div className="px-0 py-6">
-          <div className="p-6 mb-4 bg-gray-50 border-dashed border-2 border-gray-300 rounded-lg text-center cursor-pointer mx-auto">
+        <div className="">
+          <div className="p-3 mb-4 bg-gray-50 border-dashed border-2 border-gray-300 rounded-lg text-center cursor-pointer mx-auto">
             <input
               id="upload"
               type="file"
