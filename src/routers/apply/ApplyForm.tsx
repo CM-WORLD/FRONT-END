@@ -20,8 +20,8 @@ interface ApplyCmsForm {
   imgList: [];
   nickName: string;
   bankOwner: string;
-  sendAlert: string;
-  phoneNum?: string;
+  sendAlertYn: string;
+  phoneNumber?: string;
 }
 
 const ApplyForm = () => {
@@ -33,8 +33,8 @@ const ApplyForm = () => {
     imgList: [],
     nickName: "",
     bankOwner: "",
-    sendAlert: "Y",
-    phoneNum: "",
+    sendAlertYn: "Y",
+    phoneNumber: "",
   });
 
   const optionList = [
@@ -52,6 +52,8 @@ const ApplyForm = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("bankOwner", applyForm.bankOwner);
+    formData.append("sendAlertYn", applyForm.sendAlertYn);
+    formData.append("phoneNumber", applyForm.phoneNumber || "");
 
     for (let i = 0; i < imgList.length; i++) {
       formData.append("imgList", imgList[i]);
@@ -66,10 +68,8 @@ const ApplyForm = () => {
         // 신청 시 mypage로 이동
       },
       (data) => {
-        console.log(data);
-        if (data.status === EApiStatus.BadRequest) {
-          alert(data.message);
-        } else alert("요청에 문제가 발생했습니다. 재시도해 주세요");
+        /** 에러시 한글 에러 메세지 출력 */
+        alert(data.message);
       }
     );
   };
@@ -163,11 +163,11 @@ const ApplyForm = () => {
               <div className="flex items-center">
                 <input
                   type="radio"
-                  checked={applyForm.sendAlert === "Y"}
+                  checked={applyForm.sendAlertYn === "Y"}
                   value={"Y"}
                   className="w-5 h-5 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                   onChange={(e) => {
-                    setApplyForm({ ...applyForm, sendAlert: "Y" });
+                    setApplyForm({ ...applyForm, sendAlertYn: "Y" });
                   }}
                 />
                 <label
@@ -179,12 +179,12 @@ const ApplyForm = () => {
               </div>
               <div className="flex items-center">
                 <input
-                  checked={applyForm.sendAlert === "N"}
+                  checked={applyForm.sendAlertYn === "N"}
                   type="radio"
                   value={"N"}
                   className="w-5 h-5 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
                   onChange={(e) => {
-                    setApplyForm({ ...applyForm, sendAlert: "N" });
+                    setApplyForm({ ...applyForm, sendAlertYn: "N" });
                   }}
                 />
                 <label
@@ -196,12 +196,12 @@ const ApplyForm = () => {
               </div>
             </div>
           </div>
-          {applyForm.sendAlert === "N" && (
+          {applyForm.sendAlertYn === "N" && (
             <div className="w-full text-sm text-red-500">
               <Locale k="receive_disagree_warn" />
             </div>
           )}
-          {applyForm.sendAlert === "Y" && (
+          {applyForm.sendAlertYn === "Y" && (
             <div className="w-full grid grid-cols-[0.7fr,3fr] gap-3 items-center">
               <div className="text-dark flex">
                 <Locale k="phone_number" />
@@ -211,9 +211,9 @@ const ApplyForm = () => {
                 type="number"
                 placeholder="phone_number_placeholder"
                 onChange={(value) =>
-                  setApplyForm({ ...applyForm, phoneNum: value })
+                  setApplyForm({ ...applyForm, phoneNumber: value })
                 }
-                value={applyForm.phoneNum}
+                value={applyForm.phoneNumber}
               />
             </div>
           )}
