@@ -11,8 +11,10 @@ import Locale from "../../../components/locale";
 import { ApiClient } from "../../../libs/ApiClient";
 import { CommissionStatus } from "../../../defines/globalCode";
 import { NoAuthRedirect } from "../../../libs/request";
+import { useNavigate } from "react-router-dom";
 
 const MyCmsList = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [cmsApplyId, setCmsApplyId] = useState<string>("");
   const [paymentData, setPaymentData] = useState<CmsPayDetail>();
@@ -108,9 +110,8 @@ const MyCmsList = () => {
                               <Button
                                 color="Blue"
                                 onClick={(e) => {
-                                  setPaymentData(item.cmsPayDto);
                                   e.preventDefault();
-                                  setPayMdDisplay(!payMdDisplay);
+                                  navigate("/payment", {state: {cmsApplyId: item.id}});
                                 }}
                               >
                                 <Locale k="payment" />
@@ -146,22 +147,7 @@ const MyCmsList = () => {
     </>
   );
 
-  const payData = () => {
-    if (!paymentData) return <></>;
-    else
-      return (
-        <>
-          <div>
-            <div>결제 금액: </div>
-            <div>{paymentData.payAmt}</div>
-          </div>
-          <div>
-            <div>코멘트: </div>
-            <div>{paymentData.comment}</div>
-          </div>
-        </>
-      );
-  };
+
   return (
     <>
       <PaymentModal

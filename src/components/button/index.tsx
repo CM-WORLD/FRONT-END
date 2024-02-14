@@ -1,36 +1,6 @@
 import {  MouseEventHandler } from "react";
 import { buildClass, getColorByType } from "../../defines/twColors";
 
-// export const Button = function <T extends string | number>({
-//   type,
-//   color,
-//   size,
-//   radius,
-//   value,
-//   onClick,
-//   className,
-//   disabled,
-//   borderless,
-//   style,
-
-//   children,
-// }: RenderableProps<ButtonProps<T>>) {
-//   return createElement("button", {
-//     className: BuildClass(
-//       "button",
-//       `button-${color}`,
-//       `button-${size}`,
-//       `button-${radius}`,
-//       borderless && "borderless",
-//       className),
-//     type,
-//     disabled: disabled,
-//     style: style,
-//     value,
-//     onClick: onClick,
-//   }, children);
-// };
-
 export interface ButtonProps {
   type?: "button" | "submit";
   size?:
