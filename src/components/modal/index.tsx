@@ -52,7 +52,7 @@ const Modal = (props: ModalProps) => {
               </button>
             </div>
             {/* Modal body */}
-            <div className="p-4 md:p-5 space-y-4 overflow-y-scroll max-h-80">
+            <div className="p-4 md:p-5 overflow-y-scroll max-h-80">
               {props.content}
             </div>
             {/* Modal footer */}

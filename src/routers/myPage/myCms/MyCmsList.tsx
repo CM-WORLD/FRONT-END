@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import WriteRvwModal from "../../review/modal";
-import PaymentModal from "../../payment/modal";
+import { ApiClient } from "../../../libs/ApiClient";
+import { NoAuthRedirect } from "../../../libs/request";
+import { CommissionStatus } from "../../../defines/globalCode";
+import { CmsApplyDetail, EApiStatus } from "../../../defines/api";
+
 import MyCommonContent from "../common";
 import Pagination from "../../../components/pagnation";
 import Button from "../../../components/button";
-
-import { CmsApplyDetail, CmsPayDetail, EApiStatus } from "../../../defines/api";
 import Locale from "../../../components/locale";
-import { ApiClient } from "../../../libs/ApiClient";
-import { CommissionStatus } from "../../../defines/globalCode";
-import { NoAuthRedirect } from "../../../libs/request";
-import { useNavigate } from "react-router-dom";
+
+import WriteRvwModal from "../../review/modal";
 
 const MyCmsList = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [cmsApplyId, setCmsApplyId] = useState<string>("");
   const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
-  const [payMdDisplay, setPayMdDisplay] = useState(false);
 
   const [pageObj, setPageObj] = useState({
     number: 0,
@@ -149,11 +148,6 @@ const MyCmsList = () => {
 
   return (
     <>
-      {/* <PaymentModal
-        paymentData={paymentData}
-        display={payMdDisplay}
-        onClick={() => setPayMdDisplay(!payMdDisplay)}
-      /> */}
       <WriteRvwModal
         cmsApplyId={cmsApplyId}
         display={rvwMdDisplay}
