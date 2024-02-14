@@ -9,7 +9,8 @@ export const BgColors: ClassType ={
   White: "bg-white", 
   Green: "bg-green-500",
   LightGray: "bg-gray-200",
-  Gray: "bg-gray-500"
+  Gray: "bg-gray-500", 
+  Emerald: "bg-emerald-400",
 }
 
 export const BgHoverColors: ClassType ={
@@ -19,6 +20,8 @@ export const BgHoverColors: ClassType ={
   Green: "hover:bg-green-700",
   LightGray: "hover:bg-gray-300",
   Gray: "hover:bg-gray-700",
+  Emerald: "hover:bg-emerald-500",
+
 };
 
 export const TxtColors: ClassType ={

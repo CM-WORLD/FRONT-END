@@ -6,10 +6,11 @@ import MyCommonContent from "../common";
 import Pagination from "../../../components/pagnation";
 import Button from "../../../components/button";
 
-import { CmsApplyDetail, CmsPayDetail } from "../../../defines/api";
+import { CmsApplyDetail, CmsPayDetail, EApiStatus } from "../../../defines/api";
 import Locale from "../../../components/locale";
 import { ApiClient } from "../../../libs/ApiClient";
 import { CommissionStatus } from "../../../defines/globalCode";
+import { NoAuthRedirect } from "../../../libs/request";
 
 const MyCmsList = () => {
   const [data, setData] = useState([]);
@@ -57,7 +58,13 @@ const MyCmsList = () => {
       (data) => {
         cmsHistoryCallback(data);
       },
-      (data) => {}
+      (data) => {
+        if (data.status === EApiStatus.NoAuth) { //로그인 필요
+          NoAuthRedirect();
+        } else {
+          alert(data.message); // 에러 메세지 alert
+        }
+      }
     );
   }, [pageObj.number]);
 
@@ -67,6 +74,7 @@ const MyCmsList = () => {
 
   /** 리뷰 작성 제출 */
   const submitForm = () => {};
+
   const content = (
     <>
       <div className="">
@@ -89,8 +97,8 @@ const MyCmsList = () => {
                           </p>
                         </div>
                         <div className="flex items-center justify-between">
-                          <p className="text-base text-gray-500">
-                            Status:
+                          <p className="flex text-base text-gray-500">
+                            <Locale k="status" /> :
                             <span className="pl-1 text-yellow-600">
                               {item.statusNm}
                             </span>
@@ -157,7 +165,7 @@ const MyCmsList = () => {
   return (
     <>
       <PaymentModal
-        paymentData={payData()}
+        paymentData={paymentData}
         display={payMdDisplay}
         onClick={() => setPayMdDisplay(!payMdDisplay)}
       />

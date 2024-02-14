@@ -133,7 +133,9 @@ const NavBar = () => {
                 <a href="/mypage/cms">안녕하세요! {getNick()}님</a>
               </li>
               <li className="ml-5">
-                <a href="/mypage/cms">내 커미션 정보</a>
+                <a href="/mypage/cms">
+                  <Locale k="mypage" />
+                </a>
               </li>
               <li className="ml-5">
                 <a href="/sign/out">

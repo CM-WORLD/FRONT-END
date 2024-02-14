@@ -8,7 +8,6 @@ import TextArea from "../../components/textarea";
 import Select from "../../components/select";
 
 import { ApiClient } from "../../libs/ApiClient";
-import { EApiStatus } from "../../defines/api";
 import Input from "../../components/input";
 import { CommissionStatus } from "../../defines/globalCode";
 import { NoAuthRedirect } from "../../libs/request";
@@ -79,7 +78,7 @@ const ApplyForm = () => {
       "/login/check",
       {},
       () => {},
-      () => {
+      (data) => {
         NoAuthRedirect()
       }
     );

@@ -3,7 +3,7 @@ import Locale from "../../components/locale";
 import Button from "../button";
 
 interface ModalProps {
-  title: JSX.Element;
+  title?: JSX.Element;
   display: boolean;
   content: ReactNode;
   onClose: () => void;
@@ -24,7 +24,7 @@ const Modal = (props: ModalProps) => {
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full">
             {/* Modal header */}
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold text-dark dark:text-white">
                 {props.title}
               </h3>
               <button
@@ -52,13 +52,12 @@ const Modal = (props: ModalProps) => {
               </button>
             </div>
             {/* Modal body */}
-            <div className="p-4 md:p-5 space-y-4">{props.content}</div>
+            <div className="p-4 md:p-5 space-y-4 overflow-y-scroll max-h-80">
+              {props.content}
+            </div>
             {/* Modal footer */}
             <div className="flex justify-center items-center gap-4 p-4 md:p-5 border-t  border-gray-200 rounded-b dark:border-gray-600">
-              <Button
-                color="Primary"
-                onClick={props.onSubmit}
-              >
+              <Button color="Primary" onClick={props.onSubmit}>
                 <Locale k="confirm" />
               </Button>
               <Button

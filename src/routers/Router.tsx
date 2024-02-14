@@ -4,7 +4,7 @@ import CmsList from ".//cmsList/CmsList";
 import MainPage from ".//main/MainPage";
 import SignInPage from ".//signIn/page";
 import MyInquiryList from ".//bbs/inquiry/InquiryList";
-import MyCmsList from ".//myPage/myCms";
+import MyCmsList from "./myPage/myCms/MyCmsList";
 import InquiryForm from ".//bbs/inquiry/InquiryForm";
 import ApplyCms from "./apply/ApplyForm";
 import ReviewPage from ".//review/page";

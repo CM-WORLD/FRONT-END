@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Locale from "../../../components/locale";
 
 const SideNav = () => {
   useEffect(() => {
@@ -18,30 +19,28 @@ const SideNav = () => {
   }, []);
   return (
     <>
-      <aside className="sticky sticky-top md:block m-5 py-4 ">
-        <span
-          className="font-semibold text-center mx-2 my-8"
-        >
-          마이페이지
-        </span>
+      <aside className="sticky sticky-top md:block m-5 py-4">
+        <div className="font-semibold text-center">
+          <Locale k="mypage" />
+        </div>
         <div className="flex flex-col items mt-3">
           <a
             href="/myPage/inquiry"
             className="opacity-90 hover:bg-gray-50 p-3"
           >
-            1 : 1 문의
+          <Locale k="inquiry" />
           </a>
           <a
             href="/myPage/cms"
             className="opacity-90 hover:bg-gray-50 p-3"
-          >
-            신청 내역
+            >
+          <Locale k="cms_apply_history" />
           </a>
           <a
             href="/myPage/reviews"
             className="opacity-90 hover:bg-gray-50 p-3"
           >
-            내가 쓴 리뷰
+            <Locale k="my_review" />
           </a>
         </div>
       </aside>

@@ -59,5 +59,16 @@
     "apply_type": "신청 유형",
     "illust": "일러스트",
 
-    "review_not_found": "현재 작성된 리뷰가 없습니다."
+    "review_not_found": "현재 작성된 리뷰가 없습니다.", 
+    "my_review": "마이 리뷰", 
+    "mypage": "마이페이지", 
+
+    "toss_payment": "토스 결제",
+    "bank_transfer": "계좌이체",
+    "payment_detail": "결제 상세 정보", 
+    "payment_type": "결제 유형",
+    "payment_amount": "결제 금액",
+    "status": "상태", 
+
+    "total_count": "전체 갯수"
 }
