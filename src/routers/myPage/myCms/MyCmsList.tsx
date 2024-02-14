@@ -17,7 +17,6 @@ const MyCmsList = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [cmsApplyId, setCmsApplyId] = useState<string>("");
-  const [paymentData, setPaymentData] = useState<CmsPayDetail>();
   const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
   const [payMdDisplay, setPayMdDisplay] = useState(false);
 
@@ -150,11 +149,11 @@ const MyCmsList = () => {
 
   return (
     <>
-      <PaymentModal
+      {/* <PaymentModal
         paymentData={paymentData}
         display={payMdDisplay}
         onClick={() => setPayMdDisplay(!payMdDisplay)}
-      />
+      /> */}
       <WriteRvwModal
         cmsApplyId={cmsApplyId}
         display={rvwMdDisplay}

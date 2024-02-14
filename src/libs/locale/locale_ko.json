@@ -70,5 +70,6 @@
     "payment_amount": "결제 금액",
     "status": "상태", 
 
-    "total_count": "전체 갯수"
+    "total_count": "전체 갯수", 
+    "go_back": "이전으로"
 }
