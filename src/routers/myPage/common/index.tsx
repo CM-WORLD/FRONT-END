@@ -13,7 +13,7 @@ const MyCommonContent = (props: ContentProps) => {
   return (
     <>
       <div className="flex">
-        <div className="">
+        <div className="w-1/3">
           <SideNav />
         </div>
         <div className="m-5 w-full">
