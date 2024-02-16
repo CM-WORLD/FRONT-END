@@ -94,8 +94,7 @@ const MyCmsDetailComponent = () => {
           <div className="pb-8">{data.applyDto.content}</div>
           {/* <div className="flex gap-3">{renderImgList(applyImgList)}</div> */}
         </div>
-        <Stepper />
-
+        <Stepper timeLineList={data.stepperList} />
       </div>
 
         {/* {cmsPayDto && (
