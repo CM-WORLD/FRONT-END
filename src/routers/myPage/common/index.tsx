@@ -12,11 +12,11 @@ interface ContentProps {
 const MyCommonContent = (props: ContentProps) => {
   return (
     <>
-      <div className="flex h-full">
+      <div className="flex min-h-screen">
         <div className="w-1/3">
           <SideNav />
         </div>
-        <div className="mx-10 my-5 w-full">
+        <div className="mx-10 my-5 w-full min-h-screen">
           {props.title && (
             <div className="flex justify-between align-center mt-5 mb-12">
               <div className="text-3xl font-bold">{props.title}</div>

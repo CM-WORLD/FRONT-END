@@ -8,10 +8,20 @@ import { CmsApplyDetail, ImgDetail } from "../../../defines/api";
 
 import { REQUEST_GET } from "../../../libs/request";
 import Locale from "../../../components/locale";
+import { ApiClient } from "../../../libs/ApiClient";
+import Stepper from "../../../components/stepper";
+
+interface MyCmsDetail {
+  appliedImageList: ImgDetail[];
+  applyDto: CmsApplyDetail;
+  completeImageList: ImgDetail[];
+  invoiceList: any[];
+  stepperList: any[];
+}
 
 const MyCmsDetailComponent = () => {
   const applyId = useParams().cmsApplyId || "";
-  const [data, setData] = useState<CmsApplyDetail | null>(null);
+  const [data, setData] = useState<MyCmsDetail>(null);
 
   const [completImgList, setCompleteImgList] = useState([]);
   const [applyImgList, setApplyImgList] = useState([]);
@@ -20,31 +30,26 @@ const MyCmsDetailComponent = () => {
     if (data) {
       console.log(data, "test");
       setData(data.data);
-      setCompleteImgList(data.completeImgList);
-      setApplyImgList(data.applyImgList);
     }
   };
 
   useEffect(() => {
-    REQUEST_GET(
+    ApiClient.getInstance().get(
       "/apply/detail",
-      {
-        params: {
-          cmsApplyId: applyId,
-        },
-      },
+      {params: {cmsApplyId: applyId}},
       (data) => {
         applyHistoryCallback(data);
       },
-      "private",
-      true
+      (data) => {
+        console.log("error: ", data);
+      }
     );
   }, []);
 
   const content = () => {
     if (!data) return <></>;
 
-    const { cmsPayDto } = data;
+    // const { cmsPayDto } = data;
 
     const renderImgList = (imgList) => {
       if (imgList.length < 1) return <></>;
@@ -61,18 +66,20 @@ const MyCmsDetailComponent = () => {
 
     return (
       <>
+      <div className="min-f-full">
+
         <div className="py-4">
-          <div className="font-bold text-lg text-rose-400">{data.cmsName}</div>
+          <div className="font-bold text-lg text-rose-400">{data.applyDto.cmsName}</div>
           <div className="mt-1 flex items-center">
-            <div className="font-bold text-2xl">{data.title}</div>
+            <div className="font-bold text-2xl">{data.applyDto.title}</div>
             <div className="ml-5 px-3 py-2 bg-teal-100 rounded-md">
-              <div className="font-bold text-teal-500">{data.statusNm}</div>
+              <div className="font-bold text-teal-500">{data.applyDto.statusNm}</div>
             </div>
           </div>
-          <p className="pt-3 text-gray-500">신청 ID: {data.id}</p>
-          <p className="pt-1 text-gray-500">신청일: {data.regDate}</p>
+          <p className="pt-3 text-gray-500">신청 ID: {data.applyDto.id}</p>
+          <p className="pt-1 text-gray-500">신청일: {data.applyDto.regDate}</p>
         </div>
-        {completImgList.length > 0 && (
+        {/* {completImgList.length > 0 && (
           <div className="my-5 mb-8">
             <div className="pt-3 pb-3 font-bold text-md">완성 이미지</div>
             <div className="px-4 py-8 bg-gray-100 rounded-sm">
@@ -81,13 +88,17 @@ const MyCmsDetailComponent = () => {
               <div className="flex gap-3">{renderImgList(completImgList)}</div>
             </div>
           </div>
-        )}
+        )} */}
         <div className="pt-3 pb-3 font-bold text-md">요청사항</div>
         <div className="px-4 py-8 bg-gray-100 rounded-sm">
-          <div className="pb-8">{data.content}</div>
-          <div className="flex gap-3">{renderImgList(applyImgList)}</div>
+          <div className="pb-8">{data.applyDto.content}</div>
+          {/* <div className="flex gap-3">{renderImgList(applyImgList)}</div> */}
         </div>
-        {cmsPayDto && (
+        <Stepper />
+
+      </div>
+
+        {/* {cmsPayDto && (
           <>
             <div className="my-10">
               <div className="font-bold text-2xl">결제 요청서 </div>
@@ -127,8 +138,7 @@ const MyCmsDetailComponent = () => {
               </div>
             </div>
           </>
-        )}
-        {/* TODO:: 추후 타임라인을 최상단 또는 최하단에 추가해야 함. */}
+        )} */}
       </>
     );
   };
