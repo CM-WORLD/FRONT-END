@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ApiClient } from "../../../libs/ApiClient";
@@ -17,7 +17,7 @@ const MyCmsList = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [cmsApplyId, setCmsApplyId] = useState<string>("");
-  const [rvwMdDisplay, serRvwMdDisplay] = useState(false);
+  const [rvwMdDisplay, setRvwMdDisplay] = useState(false);
 
   const [pageObj, setPageObj] = useState({
     number: 0,
@@ -59,7 +59,8 @@ const MyCmsList = () => {
         cmsHistoryCallback(data);
       },
       (data) => {
-        if (data.status === EApiStatus.NoAuth) { //로그인 필요
+        if (data.status === EApiStatus.NoAuth) {
+          //로그인 필요
           NoAuthRedirect();
         } else {
           alert(data.message); // 에러 메세지 alert
@@ -82,57 +83,59 @@ const MyCmsList = () => {
           <ul className="bg-white shadow overflow-hidden sm:rounded-md mx-auto w-xl">
             {data.map((item: CmsApplyDetail, idx) => {
               return (
-                  <li
-                    className="border-t border-gray-200"
-                    key={`cms-history-${idx}`}
-                  >
-                    <a href={`/mypage/cms/${item.id}`}>
-                      <div className="w-full p-3 sm:px-6">
-                        <div className="flex items-center justify-between py-2">
-                          <h3 className="text-lg leading-6 font-medium text-gray-900">
-                            {item.title}
-                          </h3>
-                          <p className="max-w-2xl text-sm text-gray-500">
-                            {item.regDate}
-                          </p>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <p className="flex text-base text-gray-500">
-                            <Locale k="status" /> :
-                            <span className="pl-1 text-yellow-600">
-                              {item.statusNm}
-                            </span>
-                          </p>
-                          <div>
-                            {item.status === CommissionStatus.PaymentPending && (
-                              <Button
-                                color="Blue"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  navigate("/payment", {state: {cmsApplyId: item.id}});
-                                }}
-                              >
-                                <Locale k="payment" />
-                              </Button>
-                            )}
-                            {item.status === CommissionStatus.Completed && (
-                              <Button
-                                color="Green"
-                                className="ml-3"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setCmsApplyId(item.id);
-                                  serRvwMdDisplay(!rvwMdDisplay);
-                                }}
-                              >
-                                <Locale k="review" />
-                              </Button>
-                            )}
-                          </div>
+                <li
+                  className="border-t border-gray-200"
+                  key={`cms-history-${idx}`}
+                >
+                  <a href={`/mypage/cms/${item.id}`}>
+                    <div className="w-full p-3 sm:px-6">
+                      <div className="flex items-center justify-between py-2">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">
+                          {item.title}
+                        </h3>
+                        <p className="max-w-2xl text-sm text-gray-500">
+                          {item.regDate}
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <p className="flex text-base text-gray-500">
+                          <Locale k="status" /> :
+                          <span className="pl-1 text-yellow-600">
+                            {item.statusNm}
+                          </span>
+                        </p>
+                        <div>
+                          {/* {item.status === CommissionStatus.PaymentPending && (
+                            <Button
+                              color="Blue"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                navigate("/payment", {
+                                  state: { cmsApplyId: item.id },
+                                });
+                              }}
+                            >
+                              <Locale k="payment" />
+                            </Button>
+                          )} */}
+                          {item.status === CommissionStatus.Completed && (
+                            <Button
+                              color="Green"
+                              className="ml-3"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setCmsApplyId(item.id);
+                                setRvwMdDisplay(!rvwMdDisplay);
+                              }}
+                            >
+                              <Locale k="review" />
+                            </Button>
+                          )}
                         </div>
                       </div>
-                    </a>
-                  </li>
+                    </div>
+                  </a>
+                </li>
               );
             })}
           </ul>
@@ -145,13 +148,17 @@ const MyCmsList = () => {
     </>
   );
 
-
   return (
     <>
+      {/* <InvoiceListModal
+        display={invoiceMdDisplay}
+        cmsApplyId={cmsApplyId}        
+        onClose={() => setInvoiceMdDisplay(!invoiceMdDisplay)}
+      /> */}
       <WriteRvwModal
         cmsApplyId={cmsApplyId}
         display={rvwMdDisplay}
-        onClick={() => serRvwMdDisplay(!rvwMdDisplay)}
+        onClick={() => setRvwMdDisplay(!rvwMdDisplay)}
       />
       <MyCommonContent
         title={<Locale k="cms_apply_history" />}

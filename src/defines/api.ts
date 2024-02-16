@@ -96,3 +96,11 @@ export enum EApiStatus {
   NoAuth = 410, // 권한 없음
   BadRequest = 400, // 잘못된 요청
 }
+
+
+/** 인보이스  */
+export interface Invoice {
+  id: number;
+  name: string;
+  regDate: string;
+}

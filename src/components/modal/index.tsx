@@ -7,7 +7,7 @@ interface ModalProps {
   display: boolean;
   content: ReactNode;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit?: () => void;
 }
 
 const Modal = (props: ModalProps) => {
