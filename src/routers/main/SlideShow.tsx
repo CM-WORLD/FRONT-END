@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import { ApiClient } from "../../libs/ApiClient";
+import { AssetsRoot } from "../../libs/Const";
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import { ApiClient } from "../../libs/ApiClient";
 
 interface BannerItem {
   id: number;
@@ -19,6 +18,42 @@ interface BannerItem {
 const SlideShow = () => {
   const [data, setData] = useState([]);
 
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 500,
+    dots: true,
+  };
+
+  // TODO:: 테스트 종료 후 제거해야함.
+  const bannerData = [
+    {
+      id: 1,
+      url: `${AssetsRoot}/images/banner_1.png`,
+    },
+    {
+      id: 1,
+      url: `${AssetsRoot}/images/banner_1.png`,
+    },
+    {
+      id: 1,
+      url: `${AssetsRoot}/images/banner_1.png`,
+    },
+    {
+      id: 1,
+      url: `${AssetsRoot}/images/banner_1.png`,
+    },
+    {
+      id: 1,
+      url: `${AssetsRoot}/images/banner_1.png`,
+    },
+  ]
+
   useEffect(() => {
     ApiClient.getInstance().get(
       "/bnr/list",
@@ -27,32 +62,23 @@ const SlideShow = () => {
         console.log(data.data);
         if (data) setData(data.data);
       },
-      (data) => {}
+      (data) => { }
     );
   }, []);
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    pauseOnHover: true,
+  const bannerList = () => {
+    return bannerData.map((item, idx) => {
+      return <a key={`banner-item-${item.id}-${idx}`} className="relative overflow-hidden">
+        <img className="w-auto h-full" src={`${AssetsRoot}/images/banner_1.png`} alt="banner_img" />
+      </a>
+    });
   };
 
-  const imgList = data.map((item: BannerItem, idx) => {
-    return (
-      <a key={`banner-${idx}`} href={`${item.hrefUrl}`} className="relative h-56 overflow-hidden md:h-96 border border-gray-300">
-        <img src={item.imgUrl} alt="banner_img" />
-      </a>
-    );
-  });
-
   return (
-    <div className="slide-gallery">
-      <Slider {...settings}>{imgList}</Slider>
+    <div className="slider-container py-8">
+      <Slider {...settings}>
+        {bannerList()}
+      </Slider>
     </div>
   );
 };

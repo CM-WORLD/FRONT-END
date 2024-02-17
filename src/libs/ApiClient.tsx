@@ -2,6 +2,7 @@ import axios from "axios";
 import { HOST_URL } from "./Const";
 import { EApiStatus } from "../defines/api";
 
+// TODO:: axios api 호출 로직 전부 수정 예정
 export class ApiClient {
   private static instance: ApiClient;
   private accessToken: string = localStorage.getItem("atk") || "";
