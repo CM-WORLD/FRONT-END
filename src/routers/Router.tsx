@@ -11,7 +11,6 @@ import ReviewPage from ".//review/page";
 import SigninKakaoLoading from "./signIn/loading/SigninKakaoLoading";
 import SignOutLoading from ".//signIn/signOut";
 import NotFound from "../components/error/notFound";
-import MyCmsApplyDetail from ".//myPage/myCms/detail";
 import NoticeDetail from ".//bbs/notice/NoticeDetail";
 import InquiryDetail from ".//bbs/inquiry/InquiryDetail";
 import MyReviewList from "./review/MyReviewList";
@@ -20,6 +19,7 @@ import TossTest from "./payment/tossTest";
 import TossSuccess from "./payment/tossSuccess";
 import SigninNaverLoading from "./signIn/loading/SigninNaverLoading";
 import PaymentInvoice from "./payment";
+import MyCmsDetail from "./myPage/myCms/MyCmsDetail";
 
 const Router = () => {
   return (
@@ -32,7 +32,7 @@ const Router = () => {
         <Route path="/sign/in" element={<SignInPage />} />
         <Route path="/apply/:cmsId" element={<ApplyCms />} />
         <Route path="/mypage/cms" element={<MyCmsList />} />
-        <Route path="/mypage/cms/:cmsApplyId" element={<MyCmsApplyDetail />} />
+        <Route path="/mypage/cms/:cmsApplyId" element={<MyCmsDetail />} />
         <Route path="/mypage/inquiry" element={<MyInquiryList />} />
         <Route path="/mypage/inquiry/form" element={<InquiryForm />} />
         <Route path="/mypage/inquiry/:inqId" element={<InquiryDetail />} />
