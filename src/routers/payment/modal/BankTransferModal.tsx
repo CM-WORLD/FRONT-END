@@ -1,7 +1,12 @@
 import Locale from "../../../components/locale";
 import Modal from "../../../components/modal";
 
-const BankTransferModal = () => {
+interface BankTransferModalProps {
+  display: boolean;
+  onClose: () => void;
+}
+
+const BankTransferModal = (props: BankTransferModalProps) => {
   const bankTransferContent = (
     <>
       <div className="text-center">하나은행 / 남궁진</div>
@@ -32,10 +37,10 @@ const BankTransferModal = () => {
     <>
       <Modal
         title={<Locale k="bank_transfer" />}
-        display={true}
+        display={props.display}
         content={bankTransferContent}
-        onClose={() => {}}
-        onSubmit={() => {}}
+        onClose={props.onClose}
+        onSubmit={props.onClose}
       />
     </>
   );

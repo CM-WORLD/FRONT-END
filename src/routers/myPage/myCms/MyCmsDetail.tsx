@@ -10,6 +10,7 @@ import Locale from "../../../components/locale";
 import Stepper from "../../../components/stepper";
 import ApplyInfoModal from "../../apply/ApplyInfoModal";
 import Button from "../../../components/button";
+import BankTransferModal from "../../payment/modal/BankTransferModal";
 
 export interface MyCmsDetailType {
   appliedImageList: ImgDetail[];
@@ -24,6 +25,7 @@ const MyCmsDetail = () => {
   const [data, setData] = useState<MyCmsDetailType>(null);
 
   const [infoMdDisplay, setInfoMdDisplay] = useState(false);
+  const [bankModalDisplay, setBankModalDisplay] = useState(false);
 
   const applyHistoryCallback = (data: any) => {
     if (data) {
@@ -63,7 +65,7 @@ const MyCmsDetail = () => {
 
     const { applyDto, completeImageList, paymentList } = data;
 
-    const renderPaymentList = (paymentList) => {
+    const renderPaymentList = () => {
       if (paymentList.length < 1) {
         return (
           <>
@@ -73,11 +75,40 @@ const MyCmsDetail = () => {
       }
       return paymentList.map((item, idx) => {
         return (
-          <div key={`cms-apply-payment-${idx}`}>
-            <div>{item.payAmt}</div>
-            <div>{item.regDate}</div>
-            <div>{item.comment}</div>
-          </div>
+          // <div key={`cms-apply-payment-${idx}`}>
+          //   <div>{item.payAmt}</div>
+
+          //   <div>{item.regDate}</div>
+          //   <div>{item.comment}</div>
+          // </div>
+          <>
+            {/* content */}
+            <div key={`cms-apply-payment-${idx}`}>
+              <Locale k="payment_amount" />:{" "}
+              <span className="font-bold text-rose-600">
+                {/* {cmsPayDto.payAmt}원 */}
+                {item.payAmt}
+              </span>
+            </div>
+            <div className="flex gap-2">
+              <Button color="Blue">
+                <Locale k="toss_payment" />
+              </Button>
+              <Button
+                color="Emerald"
+                onClick={() => {
+                  setBankModalDisplay(true);
+                }}
+              >
+                <Locale k="bank_transfer" />
+              </Button>
+            </div>
+            <div className="pb-3 font-bold text-md">결제 메세지</div>
+            <div className="px-4 py-8 bg-gray-100 rounded-sm">
+              {/* {cmsPayDto.comment} ({cmsPayDto.regDate}) */}
+              걍진이 2024.02.16
+            </div>
+          </>
         );
       });
     };
@@ -105,7 +136,7 @@ const MyCmsDetail = () => {
                 <div className="font-bold text-primary">신청서 보기</div>
               </button>
             </div>
-            {/* <p className="pt-3 text-gray-500">신청 ID: {data.applyDto.id}</p> */}
+            <p className="pt-3 text-gray-500">신청 ID: {data.applyDto.id}</p>
             <p className="pt-1 text-gray-500">
               신청일: {data.applyDto.regDate}
             </p>
@@ -121,47 +152,15 @@ const MyCmsDetail = () => {
               </div>
             </div>
           )}
-          {!paymentList && (
+          {paymentList && (
             <>
               <div className="">
-                {/* <div className="font-bold text-2xl">결제 요청서 </div> */}
                 <div className="py-5">
                   <div className="pb-3 font-bold text-md">
-                    {/* 결제 정보 */}
                     <Locale k="payment" />
                   </div>
                   <div className="px-4 py-8 bg-gray-100 rounded-sm">
-                    <div>
-                      <Locale k="payment_amount" />:{" "}
-                      <span className="font-bold text-rose-600">
-                        {/* {cmsPayDto.payAmt}원 */}
-                        9000
-                      </span>
-                    </div>
-                    {/* <div className="py-5">
-                    하나은행{" "}
-                    <span className="font-bold text-gray-800">
-                      32591038729807
-                    </span>{" "}
-                    / 남궁진
-                  </div> */}
-                    <div className="flex gap-2">
-                      <Button color="Blue">
-                        <Locale k="toss_payment" />
-                      </Button>
-                      <Button color="Emerald" onClick={() => {}}>
-                        <Locale k="bank_transfer" />
-                      </Button>
-                    </div>
-                    {/* <p className="pt-3 text-stone-500">
-                    *토스 결제가 어려우신 분들은 위 계좌로 이체 후 계좌이체
-                    버튼을 눌러주세요.
-                  </p> */}
-                    <div className="pb-3 font-bold text-md">결제 메세지</div>
-                    <div className="px-4 py-8 bg-gray-100 rounded-sm">
-                      {/* {cmsPayDto.comment} ({cmsPayDto.regDate}) */}
-                      걍진이 2024.02.16
-                    </div>
+                    {renderPaymentList()}
                   </div>
                 </div>
               </div>
@@ -185,6 +184,10 @@ const MyCmsDetail = () => {
           }}
         />
       )}
+      <BankTransferModal
+        display={bankModalDisplay}
+        onClose={() => setBankModalDisplay(false)}
+      />
       <MyCommonContent content={content()} />
     </>
   );
