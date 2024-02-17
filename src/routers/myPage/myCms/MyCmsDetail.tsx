@@ -36,7 +36,7 @@ const MyCmsDetailComponent = () => {
   useEffect(() => {
     ApiClient.getInstance().get(
       "/apply/detail",
-      {params: {cmsApplyId: applyId}},
+      { params: { cmsApplyId: applyId } },
       (data) => {
         applyHistoryCallback(data);
       },
@@ -66,20 +66,31 @@ const MyCmsDetailComponent = () => {
 
     return (
       <>
-      <div className="min-f-full">
-
-        <div className="py-4">
-          <div className="font-bold text-lg text-rose-400">{data.applyDto.cmsName}</div>
-          <div className="mt-1 flex items-center">
-            <div className="font-bold text-2xl">{data.applyDto.title}</div>
-            <div className="ml-5 px-3 py-2 bg-teal-100 rounded-md">
-              <div className="font-bold text-teal-500">{data.applyDto.statusNm}</div>
+        <div className="min-f-full">
+          <div className="py-4">
+            <div className="font-bold text-lg text-rose-400">
+              {data.applyDto.cmsName}
             </div>
+            <div className="mt-1 flex items-center">
+              <div className="font-bold text-2xl">{data.applyDto.title}</div>
+              <div className="ml-5 px-3 py-2 bg-teal-100 rounded-md">
+                <div className="font-bold text-teal-500">
+                  {data.applyDto.statusNm}
+                </div>
+              </div>
+              <button
+                className="ml-5 px-3 py-2 bg-white border border-primary rounded-md"
+                onClick={() => {}}
+              >
+                <div className="font-bold text-primary">신청서 보기</div>
+              </button>
+            </div>
+            <p className="pt-3 text-gray-500">신청 ID: {data.applyDto.id}</p>
+            <p className="pt-1 text-gray-500">
+              신청일: {data.applyDto.regDate}
+            </p>
           </div>
-          <p className="pt-3 text-gray-500">신청 ID: {data.applyDto.id}</p>
-          <p className="pt-1 text-gray-500">신청일: {data.applyDto.regDate}</p>
-        </div>
-        {/* {completImgList.length > 0 && (
+          {/* {completImgList.length > 0 && (
           <div className="my-5 mb-8">
             <div className="pt-3 pb-3 font-bold text-md">완성 이미지</div>
             <div className="px-4 py-8 bg-gray-100 rounded-sm">
@@ -89,13 +100,19 @@ const MyCmsDetailComponent = () => {
             </div>
           </div>
         )} */}
-        <div className="pt-3 pb-3 font-bold text-md">요청사항</div>
-        <div className="px-4 py-8 bg-gray-100 rounded-sm">
-          <div className="pb-8">{data.applyDto.content}</div>
-          {/* <div className="flex gap-3">{renderImgList(applyImgList)}</div> */}
+          {/* <div className="pt-3 pb-3 font-bold text-md">요청사항</div>
+          <div className="px-4 py-8 bg-gray-100 rounded-sm">
+            <div className="pb-8">{data.applyDto.content}</div>
+            <div className="flex gap-3">{renderImgList(applyImgList)}</div>
+          </div> */}
+          <div className="py-4">
+            <div className="pt-3 pb-3 font-bold text-md">
+              <Locale k="payment" />
+            </div>
+            <div>결제 정보가 존재하지 않습니다.</div>
+          </div>
+          <Stepper timeLineList={data.stepperList} />
         </div>
-        <Stepper timeLineList={data.stepperList} />
-      </div>
 
         {/* {cmsPayDto && (
           <>

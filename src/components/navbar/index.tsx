@@ -130,10 +130,10 @@ const NavBar = () => {
           {isLogined ? (
             <>
               <li>
-                <a href="/mypage/cms">안녕하세요! {getNick()}님</a>
+                <a href="/myPage/cms">안녕하세요! {getNick()}님</a>
               </li>
               <li className="ml-5">
-                <a href="/mypage/cms">
+                <a href="/myPage/cms">
                   <Locale k="mypage" />
                 </a>
               </li>
