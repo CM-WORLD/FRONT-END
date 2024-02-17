@@ -41,11 +41,7 @@ const Locale = (props: LocaleProps): JSX.Element => {
         fetchData();
     }, [props]);
 
-    return (
-        <Suspense fallback={<div></div>}>
-            <div>{text}</div>
-        </Suspense>
-    );
+    return <span>{text}</span>;
 };
 
 /** Locale element를 string으로 변환합니다. */
