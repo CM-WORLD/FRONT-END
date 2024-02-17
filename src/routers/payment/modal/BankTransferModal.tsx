@@ -4,6 +4,7 @@ import Modal from "../../../components/modal";
 interface BankTransferModalProps {
   display: boolean;
   onClose: () => void;
+  onSubmit: () => void;
 }
 
 const BankTransferModal = (props: BankTransferModalProps) => {
@@ -40,7 +41,7 @@ const BankTransferModal = (props: BankTransferModalProps) => {
         display={props.display}
         content={bankTransferContent}
         onClose={props.onClose}
-        onSubmit={props.onClose}
+        onSubmit={props.onSubmit}
       />
     </>
   );

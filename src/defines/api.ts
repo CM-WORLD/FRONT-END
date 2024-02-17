@@ -32,7 +32,7 @@ export interface ReplyDetail {
 /* 커미션 신청 상세 */
 export interface CmsApplyDetail {
   cmsName: string;
-  cmsPayDto: CmsPayDetail;
+  cmsPayDto: PaymentDetail;
   cmsImgDtoList: ImgDetail[];
   id: string;
   title: string;
@@ -63,9 +63,14 @@ export interface ImgDetail {
   regDate?: string;
 }
 
-export interface CmsPayDetail {
-  comment: string;
-  payAmt: number;
+export interface PaymentDetail {
+  id: number;
+  title: string;
+  amount: number;
+  status: string;
+  paymentMethod: string;
+  message: string;
+  memberId: string;
   regDate: string;
 }
 

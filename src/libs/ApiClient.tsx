@@ -27,7 +27,6 @@ export class ApiClient {
     success: Function,
     error: Function
   ) {
-    
     const initAxios = axios.create({
       baseURL: HOST_URL,
       headers: {
@@ -60,7 +59,10 @@ export class ApiClient {
       this.setAccessToken(`${resp.data.newAtk}`); // atk 재발급
     }
 
-    if (resp.data.status === EApiStatus.Success || resp.data.status === EApiStatus.Reissuance) {
+    if (
+      resp.data.status === EApiStatus.Success ||
+      resp.data.status === EApiStatus.Reissuance
+    ) {
       if (resp.data) {
         success(resp.data);
       }
