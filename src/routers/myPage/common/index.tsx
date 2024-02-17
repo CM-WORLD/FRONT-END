@@ -3,7 +3,7 @@ import SideNav from "../sideNav";
 import Button from "../../../components/button";
 
 interface ContentProps {
-  title?: JSX.Element; // Update the type of the title prop
+  title?: JSX.Element | string; // Update the type of the title prop
   content: JSX.Element;
   btnLink?: string;
   btnTxt?: JSX.Element;
