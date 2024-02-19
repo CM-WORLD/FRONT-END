@@ -1,14 +1,19 @@
 import { Suspense, useEffect, useState } from "react";
 
 import CommonLoading from "../../../components/loading";
-import BadRequest from "../../../components/error/badRequest";
+import BadRequest from "../../../error/badRequest";
 import { ApiClient } from "../../../libs/ApiClient";
 
 const SignOutLoading = () => {
   const [isLogOut, setIsLogOut] = useState(true);
 
   useEffect(() => {
-    ApiClient.getInstance().post("/sign/out", {}, (data) => {}, (data) => {});
+    ApiClient.getInstance().post(
+      "/sign/out",
+      {},
+      (data) => {},
+      (data) => {}
+    );
     // ApiClient.getInstance().post(
     //   "/invalidate/token",
     //   {},

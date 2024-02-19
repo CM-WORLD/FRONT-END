@@ -41,6 +41,7 @@ export interface CmsApplyDetail {
   cmsTypeNm: string | null;
   status: string;
   statusNm: string;
+  bankOwner: string;
   regDate: string;
 }
 
@@ -68,6 +69,7 @@ export interface PaymentDetail {
   title: string;
   amount: number;
   status: string;
+  statusNm: string;
   paymentMethod: string;
   message: string;
   memberId: string;

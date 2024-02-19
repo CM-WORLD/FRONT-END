@@ -10,14 +10,13 @@ import ApplyCms from "./apply/ApplyForm";
 import ReviewPage from ".//review/page";
 import SigninKakaoLoading from "./signIn/loading/SigninKakaoLoading";
 import SignOutLoading from ".//signIn/signOut";
-import NotFound from "../components/error/notFound";
+import NotFound from "../error/notFound";
 import NoticeDetail from ".//bbs/notice/NoticeDetail";
 import InquiryDetail from ".//bbs/inquiry/InquiryDetail";
 import MyReviewList from "./review/MyReviewList";
 import SigninTwitterLoading from "./signIn/loading/SigninTwitterLoading";
 import TossSuccess from "./payment/tossSuccess";
 import SigninNaverLoading from "./signIn/loading/SigninNaverLoading";
-import PaymentInvoice from "./payment";
 import MyCmsDetail from "./myPage/myCms/MyCmsDetail";
 
 const Router = () => {
@@ -42,7 +41,6 @@ const Router = () => {
         <Route path="/login/twitter" element={<SigninTwitterLoading />} />
         <Route path="/sign/out" element={<SignOutLoading />} />
         <Route path="/toss/success" element={<TossSuccess />} />
-        <Route path="/payment" element={<PaymentInvoice />} />
 
         {/* 404 error page */}
         <Route path="/*" element={<NotFound />} />
