@@ -8,9 +8,11 @@ import { ApiClient } from "../../../libs/ApiClient";
 
 import Locale from "../../../components/locale";
 import Stepper from "../../../components/stepper";
-import ApplyInfoModal from "../../apply/ApplyInfoModal";
 import Button from "../../../components/button";
+
+import ApplyInfoModal from "../../apply/ApplyInfoModal";
 import BankTransferModal from "../../payment/modal/BankTransferModal";
+import TossPaymentModal from "../../payment/TossPaymentModal";
 
 export interface MyCmsDetailType {
   appliedImageList: ImgDetail[];
@@ -23,6 +25,7 @@ export interface MyCmsDetailType {
 const MyCmsDetail = () => {
   const applyId = useParams().cmsApplyId || "";
   const [data, setData] = useState<MyCmsDetailType>(null);
+  const [tossMdDisplay, setTossMdDisplay] = useState(false);
 
   const [infoMdDisplay, setInfoMdDisplay] = useState(false);
   const [bankModalDisplay, setBankModalDisplay] = useState(false);
@@ -93,7 +96,12 @@ const MyCmsDetail = () => {
               {item.message} ({item.regDate})
             </div>
             <div className="flex gap-2 py-3">
-              <Button color="Blue">
+              <Button
+                color="Blue"
+                onClick={() => {
+                  setTossMdDisplay(true);
+                }}
+              >
                 <Locale k="toss_payment" />
               </Button>
               <Button
@@ -198,6 +206,12 @@ const MyCmsDetail = () => {
           onClose={() => {
             setInfoMdDisplay(false);
           }}
+        />
+      )}
+      {data && (
+        <TossPaymentModal
+          display={tossMdDisplay}
+          onClose={() => setTossMdDisplay(false)}
         />
       )}
       <BankTransferModal

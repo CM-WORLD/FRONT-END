@@ -15,7 +15,6 @@ import NoticeDetail from ".//bbs/notice/NoticeDetail";
 import InquiryDetail from ".//bbs/inquiry/InquiryDetail";
 import MyReviewList from "./review/MyReviewList";
 import SigninTwitterLoading from "./signIn/loading/SigninTwitterLoading";
-import TossTest from "./payment/tossTest";
 import TossSuccess from "./payment/tossSuccess";
 import SigninNaverLoading from "./signIn/loading/SigninNaverLoading";
 import PaymentInvoice from "./payment";
@@ -42,7 +41,6 @@ const Router = () => {
         <Route path="/login/naver" element={<SigninNaverLoading />} />
         <Route path="/login/twitter" element={<SigninTwitterLoading />} />
         <Route path="/sign/out" element={<SignOutLoading />} />
-        <Route path="/toss/test" element={<TossTest />} />
         <Route path="/toss/success" element={<TossSuccess />} />
         <Route path="/payment" element={<PaymentInvoice />} />
 
