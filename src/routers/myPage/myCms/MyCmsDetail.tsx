@@ -14,6 +14,7 @@ import ApplyInfoModal from "../../apply/ApplyInfoModal";
 import BankTransferModal from "../../payment/modal/BankTransferModal";
 import TossPaymentModal from "../../payment/TossPaymentModal";
 import { PaymentStatus } from "../../../defines/payment";
+import { useNavigate } from "react-router-dom";
 
 export interface MyCmsDetailType {
   appliedImageList: ImgDetail[];
@@ -24,6 +25,7 @@ export interface MyCmsDetailType {
 }
 
 const MyCmsDetail = () => {
+  const navigate = useNavigate();
   const applyId = useParams().cmsApplyId || "";
   const [data, setData] = useState<MyCmsDetailType>(null);
   const [tossMdDisplay, setTossMdDisplay] = useState(false);
@@ -124,6 +126,7 @@ const MyCmsDetail = () => {
                 <Button
                   color="Blue"
                   onClick={() => {
+                    navigate(`/toss/payment`, { state: { data: item } });
                     setTossMdDisplay(true);
                   }}
                 >
@@ -234,12 +237,12 @@ const MyCmsDetail = () => {
           }}
         />
       )}
-      {data && (
+      {/* {data && (
         <TossPaymentModal
           display={tossMdDisplay}
           onClose={() => setTossMdDisplay(false)}
         />
-      )}
+      )} */}
       <BankTransferModal
         display={bankModalDisplay}
         onSubmit={() => sendBankTransferAlert()}

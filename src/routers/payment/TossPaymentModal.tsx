@@ -6,6 +6,8 @@ import {
 } from "@tosspayments/payment-widget-sdk";
 
 import Modal from "../../components/modal";
+import Locale from "../../components/locale";
+import Button from "../../components/button";
 
 interface TossPaymentProps {
   display: boolean;
@@ -30,43 +32,48 @@ const TossPaymentModal = (props: TossPaymentProps) => {
   }, []);
 
   const modalContent = (
-    <>
-      <div className="mt-11">
-        <div className="App">
-          <h1>주문서</h1>
-          <div id="payment-widget" />
-          <button
-            onClick={async () => {
-              const paymentWidget = paymentWidgetRef.current;
+    <div id="App" className="fixed w-full h-full inset-0 z-50 bg-white">
+      {/* <div id="App"> */}
+      <div className="text-center font-bold py-5 text-2xl">주문서</div>
+      가격은?{price}
+      <div id="payment-widget" />
+      <Button
+        color="Primary"
+        onClick={async () => {
+          const paymentWidget = paymentWidgetRef.current;
 
-              try {
-                await paymentWidget?.requestPayment({
-                  orderId: nanoid(),
-                  orderName: "토스 티셔츠 외 2건",
-                  customerName: "김토스",
-                  customerEmail: "customer123@gmail.com",
-                  successUrl: `http://localhost:3000/toss/success`,
-                  failUrl: `${window.location.origin}/fail`,
-                });
-              } catch (err) {
-                console.log(err);
-              }
-            }}
-          >
-            결제하기
-          </button>
-        </div>
-      </div>
-    </>
+          try {
+            await paymentWidget?.requestPayment({
+              orderId: nanoid(),
+              orderName: "토스 티셔츠 외 2건",
+              customerName: "김토스",
+              customerEmail: "customer123@gmail.com",
+              successUrl: `http://localhost:3000/toss/success`,
+              failUrl: `${window.location.origin}/fail`,
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        }}
+      >
+        <Locale k="payment" />
+        {/* 결제하기 */}
+      </Button>
+      <Button color="LightGray" textColor="Dark" onClick={props.onClose}>
+        <Locale k="cancel" />
+      </Button>
+    </div>
   );
 
-  return (
-    <Modal
-      display={props.display}
-      content={modalContent}
-      onClose={props.onClose}
-    />
-  );
+  // return (
+  //   // <Modal
+  //   //   title={<Locale k="toss_payment" />}
+  //   //   display={props.display}
+  //   //   content={modalContent}
+  //   //   onClose={props.onClose}
+  //   // />
+  // );
+  return <>{modalContent}</>;
 };
 
 export default TossPaymentModal;

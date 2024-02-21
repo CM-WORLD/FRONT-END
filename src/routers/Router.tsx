@@ -18,6 +18,7 @@ import SigninTwitterLoading from "./signIn/loading/SigninTwitterLoading";
 import TossSuccess from "./payment/tossSuccess";
 import SigninNaverLoading from "./signIn/loading/SigninNaverLoading";
 import MyCmsDetail from "./myPage/myCms/MyCmsDetail";
+import TossPayment from "./payment/TossPayment";
 
 const Router = () => {
   return (
@@ -41,6 +42,7 @@ const Router = () => {
         <Route path="/login/twitter" element={<SigninTwitterLoading />} />
         <Route path="/sign/out" element={<SignOutLoading />} />
         <Route path="/toss/success" element={<TossSuccess />} />
+        <Route path="/toss/payment" element={<TossPayment />} />
 
         {/* 404 error page */}
         <Route path="/*" element={<NotFound />} />

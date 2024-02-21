@@ -19,7 +19,7 @@ const Modal = (props: ModalProps) => {
         aria-hidden="true"
         className="bg-gray-900 bg-opacity-50 fixed inset-0 z-50 flex justify-center"
       >
-        <div className="relative p-4 max-w-2xl max-h-2xl flex m-auto">
+        <div className="relative p-4 max-h-2xl flex m-auto">
           {/* Modal content */}
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full">
             {/* Modal header */}
