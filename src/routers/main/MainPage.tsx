@@ -2,14 +2,15 @@ import Locale from "../../components/locale";
 import SlideShow from "./SlideShow";
 
 const MainPage = () => {
-  /** 개발자, 컨텍트 정보 */
   const contact = (
     <div className="flex gap-5 justify-center my-10">
       {/* developers profile  */}
       <div>
         <h1 className="text-2xl font-bold py-3">DEVELOPERS</h1>
         <div className="border-t border-gray-700 py-5 pr-9">
-          <h3 className="font-bold"><Locale k="jinvicky" /></h3>
+          <h3 className="font-bold">
+            <Locale k="jinvicky" />
+          </h3>
           <div>
             <a href="">Github</a> / <a href="">Velog</a> / <a href="">Notion</a>
           </div>
@@ -27,13 +28,6 @@ const MainPage = () => {
         <div className="border-t border-gray-700 py-5 px-9">
           <div className="flex items-center gap-10">
             <div className="font-bold">카카오톡으로 문의하기</div>
-            <div className="w-20 h-10">
-              <img
-                className="w-full h-full border border-rose-300"
-                src="https://jvk-world.s3.ap-northeast-2.amazonaws.com/test_01.jpg"
-                alt="kakao"
-              />
-            </div>
           </div>
           <div>
             <p className="text-md pt-2">
