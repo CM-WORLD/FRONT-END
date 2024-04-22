@@ -40,7 +40,7 @@ const ApplyInfoModal = (props: ApplyInfoModalProps) => {
         content={
           <>
             <div className="min-w-96">
-              <div className="pt-3 pb-3 font-bold text-md">
+              <div className="pb-3 font-bold text-md">
                 <Locale k="content" />
               </div>
               <div className="px-4 py-8 bg-gray-100 rounded-sm">
@@ -48,6 +48,12 @@ const ApplyInfoModal = (props: ApplyInfoModalProps) => {
                 <div className="flex gap-3">
                   {renderImgList(appliedImageList)}
                 </div>
+              </div>
+              <div className="pt-3 pb-3 font-bold text-md">
+                <Locale k="account_holder" />
+              </div>
+              <div className="px-4 py-4 bg-gray-100 rounded-sm">
+                <div className="">{applyDto.bankOwner}</div>
               </div>
             </div>
           </>

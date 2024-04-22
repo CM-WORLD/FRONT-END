@@ -1,6 +1,7 @@
 import axios from "axios";
 import { HOST_URL } from "./Const";
 import { EApiStatus } from "../defines/api";
+import { Answer } from "../declare/api.type";
 
 // TODO:: axios api 호출 로직 전부 수정 예정
 export class ApiClient {
@@ -17,7 +18,7 @@ export class ApiClient {
     return ApiClient.instance;
   }
 
-  private setAccessToken(atk: string) {
+  private setAccessToken(atk: string): void {
     localStorage.setItem("atk", atk);
   }
 
@@ -36,7 +37,7 @@ export class ApiClient {
       },
     });
 
-    let resp = null;
+    let resp: Answer | null = null;
 
     switch (httpMethod) {
       case "GET":
@@ -80,15 +81,30 @@ export class ApiClient {
     //   }
   }
 
-  public get(url: string, params: {}, success: Function, error: Function) {
-    return this.request("GET", url, params, success, error);
+  public async get(
+    url: string,
+    params: {},
+    success: Function,
+    error: Function
+  ): Promise<void> {
+    return await this.request("GET", url, params, success, error);
   }
 
-  public post(url: string, params: {}, success: Function, error: Function) {
+  public post(
+    url: string,
+    params: {},
+    success: Function,
+    error: Function
+  ): Promise<void> {
     return this.request("POST", url, params, success, error);
   }
 
-  public put(url: string, params: {}, success: Function, error: Function) {
+  public put(
+    url: string,
+    params: {},
+    success: Function,
+    error: Function
+  ): Promise<void> {
     return this.request("PUT", url, params, success, error);
   }
 }

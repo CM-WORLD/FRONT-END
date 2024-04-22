@@ -79,7 +79,7 @@ const ApplyForm = () => {
       {},
       () => {},
       (data) => {
-        NoAuthRedirect()
+        NoAuthRedirect();
       }
     );
   }, []);
@@ -224,7 +224,7 @@ const ApplyForm = () => {
           <Button
             color="LightGray"
             textColor="Dark"
-            onClick={() => history.back()}
+            onClick={() => window.history.back()}
           >
             <Locale k="cancel" />
           </Button>

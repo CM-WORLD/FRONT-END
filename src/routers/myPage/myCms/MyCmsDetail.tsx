@@ -8,9 +8,13 @@ import { ApiClient } from "../../../libs/ApiClient";
 
 import Locale from "../../../components/locale";
 import Stepper from "../../../components/stepper";
-import ApplyInfoModal from "../../apply/ApplyInfoModal";
 import Button from "../../../components/button";
+
+import ApplyInfoModal from "../../apply/ApplyInfoModal";
 import BankTransferModal from "../../payment/modal/BankTransferModal";
+import TossPaymentModal from "../../payment/TossPaymentModal";
+import { PaymentStatus } from "../../../defines/payment";
+import { useNavigate } from "react-router-dom";
 
 export interface MyCmsDetailType {
   appliedImageList: ImgDetail[];
@@ -21,8 +25,10 @@ export interface MyCmsDetailType {
 }
 
 const MyCmsDetail = () => {
+  const navigate = useNavigate();
   const applyId = useParams().cmsApplyId || "";
   const [data, setData] = useState<MyCmsDetailType>(null);
+  const [tossMdDisplay, setTossMdDisplay] = useState(false);
 
   const [infoMdDisplay, setInfoMdDisplay] = useState(false);
   const [bankModalDisplay, setBankModalDisplay] = useState(false);
@@ -80,32 +86,63 @@ const MyCmsDetail = () => {
           </>
         );
       }
+      const statusStyle = (status) => {
+        switch (status) {
+          case PaymentStatus.PAYMENT_PENDING:
+            return "bg-orange-100 text-orange-600 border-orange-600";
+          case PaymentStatus.PAYMENT_COMPLETE:
+            return "bg-green-100 text-green-600 border-green-600";
+          case PaymentStatus.PAYMENT_CANCEL:
+            return "bg-gray-100 text-gray-600 border-gray-600";
+          case PaymentStatus.PAYMENT_REFUND:
+            return "bg-red-100 text-red-600 border-red-600";
+
+          default:
+            return "bg-gray-100 text-gray-600 border-gray-600";
+        }
+      };
       return paymentList.map((item, idx) => {
         return (
           <div>
-            <div key={`cms-apply-payment-${idx}`} className="flex">
+            <div key={`cms-apply-payment-${idx}`} className="flex items-center">
               <div>
-                <span className="font-bold">{item.title}</span>
+                <div className="text-base text-gray-600">{item.regDate}</div>
+                <span className="font-bold pt-1">{item.title}</span>
+                <span
+                  className={`ml-3 bg-white border border-blue-600 px-3 py-1 rounded-full ${statusStyle(
+                    item.status
+                  )}`}
+                >
+                  {item.statusNm}
+                </span>
               </div>
-              <span className="ml-5">{item.amount} 원</span>
             </div>
-            <div className=" bg-gray-100 rounded-sm">
-              {item.message} ({item.regDate})
-            </div>
-            <div className="flex gap-2 py-3">
-              <Button color="Blue">
-                <Locale k="toss_payment" />
-              </Button>
-              <Button
-                color="Emerald"
-                onClick={() => {
-                  setCurrentPaymentId(item.id);
-                  setBankModalDisplay(true);
-                }}
-              >
-                <Locale k="bank_transfer" />
-              </Button>
-            </div>
+            <span className="">
+              <span className="font-bold">{item.amount}</span>원
+            </span>
+            <div className=" bg-gray-100 rounded-sm">{item.message}</div>
+            {item.status === PaymentStatus.PAYMENT_PENDING && (
+              <div className="flex gap-2 py-3">
+                <Button
+                  color="Blue"
+                  onClick={() => {
+                    navigate(`/toss/payment`, { state: { data: item } });
+                    setTossMdDisplay(true);
+                  }}
+                >
+                  <Locale k="toss_payment" />
+                </Button>
+                <Button
+                  color="Emerald"
+                  onClick={() => {
+                    setCurrentPaymentId(item.id);
+                    setBankModalDisplay(true);
+                  }}
+                >
+                  <Locale k="bank_transfer" />
+                </Button>
+              </div>
+            )}
           </div>
         );
       });
@@ -200,6 +237,12 @@ const MyCmsDetail = () => {
           }}
         />
       )}
+      {/* {data && (
+        <TossPaymentModal
+          display={tossMdDisplay}
+          onClose={() => setTossMdDisplay(false)}
+        />
+      )} */}
       <BankTransferModal
         display={bankModalDisplay}
         onSubmit={() => sendBankTransferAlert()}
