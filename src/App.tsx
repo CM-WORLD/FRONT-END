@@ -1,15 +1,31 @@
-import Footer from "./components/footer/Footer";
-import NavBar from "./components/navbar";
-import Router from "./routers/Router";
+import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { pageRoutes } from "./routers/routes";
+import BadRequest from "./components/error/badRequest";
+import Layout from "@views/global/Layout";
 
-function App() {
+
+// function App() {
+//   return (
+//     <>
+//       <NavBar />
+//       <Router />
+//       <Footer />
+//     </>
+//   );
+// }
+
+function App () {
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      errorElement: <BadRequest />, // 404에러페이지
+      children: pageRoutes
+    },
+  ])
+
   return (
-    <>
-      <NavBar />
-      <Router />
-      <Footer />
-    </>
-  );
+    <RouterProvider router={router} />
+  )
 }
 
 export default App;
