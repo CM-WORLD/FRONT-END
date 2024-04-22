@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { pageRoutes } from "./routers/routes";
-import BadRequest from "./components/error/badRequest";
 import Layout from "@views/global/Layout";
+import BadRequest from './error/badRequest';
 
 
 // function App() {
