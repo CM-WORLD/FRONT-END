@@ -1,27 +1,19 @@
-import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
 import { pageRoutes } from "./routers/routes";
-import Layout from "@views/global/Layout";
-import BadRequest from './error/badRequest';
-
-
-// function App() {
-//   return (
-//     <>
-//       <NavBar />
-//       <Router />
-//       <Footer />
-//     </>
-//   );
-// }
+import Layout from "@components/global/Layout";
+import NotFound from '@views/NotFound';
 
 function App () {
   const router = createBrowserRouter([
     {
       element: <Layout />,
-      errorElement: <BadRequest />, // 404에러페이지
-      children: pageRoutes
+      errorElement: <NotFound />,
+      children: pageRoutes,
     },
   ])
+
 
   return (
     <RouterProvider router={router} />

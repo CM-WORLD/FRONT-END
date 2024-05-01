@@ -1,25 +1,30 @@
 
 import React, { lazy } from 'react';
+import { RouteObject } from 'react-router-dom';
 
-const EntryPage = lazy(() => import('@views/entry/EntryPage'));
+interface RouteLeave {
+    ignoreConfirm?: boolean;
+}
+
+export type RouteRecord = RouteObject & RouteLeave;
 
 /**
  * 진입페이지
  */
-const entryRoutes = [
-    {path: "/", component: EntryPage,}
+const entryRoutes: RouteRecord[] = [
+    { path: "/", Component: lazy(() => import('@views/EntryPage')), ignoreConfirm: false }
 ];
 
-const myPageRoutes = [
-    // { path: "/myPage/:id"}
+const statsRoutes: RouteObject[] = [
+    {path: "/stats", Component: lazy(() => import('@views/MonthlyStats'))}
 ]
 
 /**
  * 모든 라우팅 
  */
-const pageRoutes = [
+const pageRoutes: RouteRecord[] = [
     ...entryRoutes,
-    ...myPageRoutes
+    ...statsRoutes
 ]
 
 export {
