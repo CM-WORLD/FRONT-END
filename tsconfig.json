@@ -18,15 +18,10 @@
     "strict": false,
     "baseUrl": ".",
     "paths": {
-      "@router/*": [
-        "src/router/*"
-      ],
-      "@views/*": [
-        "src/views/*"
-      ], 
-      "@components/*":[
-        "src/components/*"
-      ]
+      "@router/*": ["src/router/*"],
+      "@views/*": ["src/views/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src"],

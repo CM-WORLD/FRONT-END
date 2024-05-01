@@ -1,14 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@router': '/src/router',
-      '@views': '/src/views',
-      '@components': '/src/components'
-    }
+      "@router": "/src/router",
+      "@views": "/src/views",
+      "@components": "/src/components",
+      "@utils": "/src/utils",
+    },
   },
   css: {
     preprocessorOptions: {
@@ -17,4 +18,4 @@ export default defineConfig({
       },
     },
   },
-})
+});
