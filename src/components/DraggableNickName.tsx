@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface DraggableNickNameProps {
   text: string;
@@ -6,8 +6,61 @@ interface DraggableNickNameProps {
 
 function DraggableNickName(props: DraggableNickNameProps) {
   const [isDragging, setIsDragging] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const nicknameRef = useRef(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (nicknameRef.current?.contains(e.target as Node)) {
+        setIsFocused(true);
+      } else {
+        setIsFocused(false);
+      }
+    };
+
+    const handleArrowKeys = (event) => {
+      if (isFocused) {
+        switch (event.key) {
+          case "ArrowUp":
+            setPosition((prevPosition) => ({
+              ...prevPosition,
+              y: prevPosition.y - 10,
+            }));
+            break;
+          case "ArrowDown":
+            setPosition((prevPosition) => ({
+              ...prevPosition,
+              y: prevPosition.y + 10,
+            }));
+            break;
+          case "ArrowLeft":
+            setPosition((prevPosition) => ({
+              ...prevPosition,
+              x: prevPosition.x - 10,
+            }));
+            break;
+          case "ArrowRight":
+            setPosition((prevPosition) => ({
+              ...prevPosition,
+              x: prevPosition.x + 10,
+            }));
+            break;
+          default:
+            break;
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleArrowKeys);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleArrowKeys);
+    };
+  }, [isFocused]);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -51,31 +104,58 @@ function DraggableNickName(props: DraggableNickNameProps) {
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        left: position.x,
-        top: position.y,
-        cursor: isDragging ? "grabbing" : "grab",
-      }}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-    >
-      <button onClick={increaseFontSize}>키우자</button>
-      <button onClick={decreaseFontSize}>줄이자</button>
+    <>
       <div
-        style={{
-          zIndex: 100,
-          width: "100px",
-          height: "100px",
-          background: "lightblue",
-          padding: "10px",
-        }}
+        ref={nicknameRef}
+        style={{ position: "relative", outline: "none" }}
+        tabIndex={0} // 키보드 이벤트를 위해 포커스 설정
       >
-        <div id="nickname">{props.text}</div>
+        <div
+          style={{
+            position: "absolute",
+            border: isFocused ? "1px solid red" : "none",
+            left: position.x,
+            top: position.y,
+            cursor: isDragging ? "grabbing" : "grab",
+          }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onFocus={() => setIsFocused(true)} // 포커스 이벤트 처리
+          onBlur={() => setIsFocused(false)} // 포커스 이벤트 처리
+        >
+          {isFocused && (
+            <div style={{ position: "absolute", top: -30 }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  increaseFontSize();
+                }}
+              >
+                +
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  decreaseFontSize();
+                }}
+              >
+                -
+              </button>
+            </div>
+          )}
+          <div
+            id="nickname"
+            style={{
+              zIndex: 100,
+              padding: "10px",
+            }}
+          >
+            {props.text}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
