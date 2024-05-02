@@ -7,27 +7,27 @@ interface RouteLeave {
 
 export type RouteRecord = RouteObject & RouteLeave;
 
-/**
- * 진입페이지
- */
 const entryRoutes: RouteRecord[] = [
-  { path: "/", Component: lazy(() => import("@views/EntryPage")) },
+  {
+    path: "/",
+    Component: lazy(() => import("@views/Entry")),
+  },
 ];
 
 const statsRoutes: RouteObject[] = [
-  { path: "/stats", Component: lazy(() => import("@views/MonthlyStats")) },
+  {
+    path: "/stats",
+    Component: lazy(() => import("@views/MonthlyStats")),
+  },
 ];
 
 const textStickerRoutes: RouteObject[] = [
   {
     path: "/text-sticker",
-    Component: lazy(() => import("@views/TextSticker")),
+    Component: lazy(() => import("@views/EditImage")),
   },
 ];
 
-/**
- * 모든 라우팅
- */
 const pageRoutes: RouteRecord[] = [
   ...entryRoutes,
   ...statsRoutes,

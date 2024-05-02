@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import html2canvas from "html2canvas";
+import { SketchPicker } from "react-color";
 
-import DraggableNickName from "@components/DraggableNickName";
+import DraggableNickName from "@components/NicknameEditor";
+import ColorPicker from "@components/ColorPicker";
 
 const imgStyle = {
   width: "auto",
@@ -21,6 +23,7 @@ function TextSticker() {
   const [font, setFont] = useState<string>("Arial");
   const [fontList, setFontList] = useState<string[]>([]);
   const canvasRef = React.useRef<HTMLDivElement>(null);
+  const [fontColor, setFontColor] = useState<string>("#000000");
 
   const initFontList = async () => {
     await document.fonts.ready;
@@ -54,36 +57,6 @@ function TextSticker() {
   };
 
   const onSaveImage = () => {
-    // 캔버스 생성
-    // const canvas = document.createElement("canvas");
-    // const ctx = canvas.getContext("2d");
-    // if (!ctx) return;
-
-    // // 이미지와 닉네임 요소 가져오기
-    // const img = document.getElementById("img") as HTMLImageElement;
-    // const nicknameElement = document.getElementById(
-    //   "nickname"
-    // ) as HTMLDivElement;
-
-    // // 캔버스 크기 설정
-    // canvas.width = img.width; // 이미지의 너비
-    // canvas.height = img.height; // 이미지의 높이 + 닉네임의 높이
-
-    // // 이미지 그리기
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.drawImage(img, 0, 0, canvas.width, img.height);
-
-    // // 닉네임 그리기
-    // ctx.font = "30px" + font;
-    // ctx.fillStyle = "white";
-    // ctx.fillText(nicknameElement.innerText, 10, 10); // 이미지 아래에 위치
-
-    // // 이미지로 저장
-    // const a = document.createElement("a");
-    // a.href = canvas.toDataURL("image/png");
-    // a.download = "image.png";
-    // a.click();
-
     if (!canvasRef.current) return;
     html2canvas(canvasRef.current).then((canvas) => {
       const a = document.createElement("a");
@@ -110,9 +83,16 @@ function TextSticker() {
     }
   };
 
+  const onChangeFontColor = (color) => {
+    setFontColor(color.hex);
+  };
+
   return (
     <>
       <div>
+        <SketchPicker color={fontColor} onChangeComplete={onChangeFontColor} />
+        <ColorPicker />
+        <div style={{ color: fontColor }}>this is jinvicky</div>
         <select onChange={onFontChange}>
           {fontList.map((font) => (
             <option key={font}>{font}</option>
@@ -129,7 +109,7 @@ function TextSticker() {
           style={{ position: "relative", ...canvasStyle }}
           ref={canvasRef}
         >
-          {nickname && <DraggableNickName text={nickname} />}
+          {nickname && <DraggableNickName text={nickname} color={fontColor} />}
           {imgSrc && (
             <img
               id="img"

@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface DraggableNickNameProps {
   text: string;
+  color: string;
 }
 
-function DraggableNickName(props: DraggableNickNameProps) {
+function NicknameEditor(props: DraggableNickNameProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -149,6 +150,7 @@ function DraggableNickName(props: DraggableNickNameProps) {
             style={{
               zIndex: 100,
               padding: "10px",
+              color: props.color,
             }}
           >
             {props.text}
@@ -159,4 +161,4 @@ function DraggableNickName(props: DraggableNickNameProps) {
   );
 }
 
-export default DraggableNickName;
+export default NicknameEditor;
