@@ -10,7 +10,7 @@ import { Action, createBrowserHistory } from "history";
 
 import { pageRoutes } from "./routers/routes";
 import Layout from "@components/global/Layout";
-import NotFound from "@views/NotFound";
+import NotFound from "@views/error/NotFound";
 
 function App() {
   const router = createBrowserRouter([

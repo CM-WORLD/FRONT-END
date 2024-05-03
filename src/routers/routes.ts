@@ -1,13 +1,7 @@
 import React, { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
-interface RouteLeave {
-  ignoreConfirm?: boolean;
-}
-
-export type RouteRecord = RouteObject & RouteLeave;
-
-const entryRoutes: RouteRecord[] = [
+const entryRoutes: RouteObject[] = [
   {
     path: "/",
     Component: lazy(() => import("@views/Entry")),
@@ -24,11 +18,11 @@ const statsRoutes: RouteObject[] = [
 const textStickerRoutes: RouteObject[] = [
   {
     path: "/text-sticker",
-    Component: lazy(() => import("@views/EditImage")),
+    Component: lazy(() => import("@views/ImageEditor")),
   },
 ];
 
-const pageRoutes: RouteRecord[] = [
+const pageRoutes: RouteObject[] = [
   ...entryRoutes,
   ...statsRoutes,
   ...textStickerRoutes,
